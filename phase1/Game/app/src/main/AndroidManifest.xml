@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.group0578.hpgame.StartupActivity">
+        <activity android:name=".CreateUser"></activity>
+        <activity android:name="com.example.hpgame.CreateUser" />
+        <activity android:name=".StartupActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

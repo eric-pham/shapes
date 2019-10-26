@@ -39,6 +39,7 @@
         android:id="@+id/create_account_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="CreateAccount"
         android:text="@string/Create_Account_Button"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"

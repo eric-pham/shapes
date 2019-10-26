@@ -3,4 +3,7 @@
     <string name="Login_Button">Login</string>
     <string name="Create_Account_Button">Create Account</string>
     <string name="Harry_Potter_Game">Harry Potter Game</string>
+    <string name="Username_hint">Enter a username</string>
+    <string name="Password_hint">Enter a password</string>
+    <string name="Confirm">Confirm</string>
 </resources>
