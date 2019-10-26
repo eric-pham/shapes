@@ -1,4 +1,4 @@
-package com.example.domain;
+package com.group0578.domain;
 
 public class MyClass {
 }

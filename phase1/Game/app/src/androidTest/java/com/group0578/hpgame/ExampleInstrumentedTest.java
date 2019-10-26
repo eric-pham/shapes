@@ -1,4 +1,4 @@
-package com.example.hpgame;
+package com.group0578.hpgame;
 
 import android.content.Context;
 
