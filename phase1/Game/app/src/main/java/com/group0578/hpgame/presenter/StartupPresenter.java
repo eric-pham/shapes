@@ -2,8 +2,8 @@ package com.group0578.hpgame.presenter;
 
 import android.content.Intent;
 
-import com.group0578.hpgame.CreateUserActivity;
-import com.group0578.hpgame.LoginActivity;
+import com.group0578.hpgame.view.CreateUserActivity;
+import com.group0578.hpgame.view.LoginActivity;
 import com.group0578.hpgame.view.Startup;
 import com.group0578.hpgame.view.StartupActivity;
 
@@ -15,23 +15,31 @@ public class StartupPresenter implements Startup.Presenter {
 
     private Startup.View startupView;
 
+    /**
+     * The constructor for the Presenter associated with the StartupActivity view.
+     * @param startupView the variable that represents the StartupActivity.
+     */
     public StartupPresenter(Startup.View startupView) {
         this.startupView = startupView;
     }
 
+    /**
+     * Creates the Intent to switch to the LoginActivity.
+     */
     public void createLoginScreen() {
         // I think im violating dependency rule right here by casting
         Intent loginIntent = new Intent((StartupActivity) this.startupView, LoginActivity.class);
         System.out.println("Method reached");
-//        (StartupActivity) startupView.startActivity(loginIntent);
         startupView.goToLoginScreen(loginIntent);
     }
 
+     /**
+     * Creates the Intent to switch to the CreateUserActivity.
+     */
     public void createNewAccountScreen() {
         // I think im violating dependency rule right here by casting
-        Intent createUserAccount = new Intent((StartupActivity) this.startupView, CreateUserActivity.class);
+        Intent createUserIntent = new Intent((StartupActivity) this.startupView, CreateUserActivity.class);
         System.out.println("Method reached 2");
-//        (StartupActivity) startupView.startActivity(loginIntent);
-        startupView.goToCreateUserScreen(createUserAccount);
+        startupView.goToCreateUserScreen(createUserIntent);
     }
 }

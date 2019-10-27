@@ -1,6 +1,6 @@
-package com.group0578.hpgame;
+package com.group0578.hpgame.presenter;
 
-import android.content.Intent;
+import com.group0578.hpgame.view.CreateUser;
 
 /**
  * Responsible for handling actions associated with the View for CreateUserActivity
@@ -17,7 +17,7 @@ public class CreateUserPresenter implements CreateUser.Presenter {
      * Initializes this class
      * @param createUserView the View responsible for CreateUserActivity
      */
-    CreateUserPresenter(CreateUser.View createUserView) {
+    public CreateUserPresenter(CreateUser.View createUserView) {
         // Initialized to instance of CreateUserActivity object
         this.createUserView = createUserView;
     }
