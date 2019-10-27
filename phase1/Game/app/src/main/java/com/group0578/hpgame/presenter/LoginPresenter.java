@@ -2,6 +2,7 @@ package com.group0578.hpgame.presenter;
 
 import com.group0578.hpgame.view.Login;
 
+
 public class LoginPresenter implements Login.Presenter {
 
     private Login.View loginView;
@@ -14,4 +15,11 @@ public class LoginPresenter implements Login.Presenter {
         this.loginView = loginView;
     }
 
+    public boolean checkLogin(String username, String password){
+        //Given username and password check if valid key value pair
+        //do something
+        System.out.println(username);
+        System.out.println(password);
+        return true;
+    }
 }
