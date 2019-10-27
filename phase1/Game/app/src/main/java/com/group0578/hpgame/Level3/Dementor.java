@@ -26,11 +26,11 @@ public class Dementor {
         this.y = y;
     }
 
-    private int getRow(){
+    int getRow(){
         return this.y;
     }
 
-    private int getColumn(){
+    int getColumn(){
         return this.x;
     }
 
@@ -42,12 +42,12 @@ public class Dementor {
         this.isAlive = false;
     }
 
-    private void draw(Canvas canvas) {
+    void draw(Canvas canvas) {
 
         drawString(canvas, appearance, getRow(), getColumn());
     }
 
-    private void drawString(Canvas canvas, String appearance, int x, int y) {
+    void drawString(Canvas canvas, String appearance, int x, int y) {
 
         canvas.drawText(appearance, y * ScreenView.getCharWidth(),
                 x * ScreenView.getCharHeight(), paintText);
