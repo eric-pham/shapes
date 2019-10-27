@@ -8,7 +8,7 @@ import android.graphics.Typeface;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder;
 
-public class RoomView extends SurfaceView implements SurfaceHolder.Callback {
+public class ScreenView extends SurfaceView implements SurfaceHolder.Callback {
 
     /** Screen width. */
     private int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
@@ -30,7 +30,7 @@ public class RoomView extends SurfaceView implements SurfaceHolder.Callback {
      *
      * @param context the environment.
      */
-    public RoomView(Context context) {
+    public ScreenView(Context context) {
         super(context);
         getHolder().addCallback(this);
         thread = new MainThread(getHolder(), this);
