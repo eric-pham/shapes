@@ -2,7 +2,7 @@ package com.group0578.hpgame.presenter;
 
 import android.content.Intent;
 
-import com.group0578.hpgame.CreateAccountActivity;
+import com.group0578.hpgame.CreateUserActivity;
 import com.group0578.hpgame.LoginActivity;
 import com.group0578.hpgame.view.Startup;
 import com.group0578.hpgame.view.StartupActivity;
@@ -29,9 +29,9 @@ public class StartupPresenter implements Startup.Presenter {
 
     public void createNewAccountScreen() {
         // I think im violating dependency rule right here by casting
-        Intent createAccountIntent = new Intent((StartupActivity) this.startupView, CreateAccountActivity.class);
+        Intent createUserAccount = new Intent((StartupActivity) this.startupView, CreateUserActivity.class);
         System.out.println("Method reached 2");
 //        (StartupActivity) startupView.startActivity(loginIntent);
-        startupView.goToCreateAccountScreen(createAccountIntent);
+        startupView.goToCreateUserScreen(createUserAccount);
     }
 }

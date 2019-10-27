@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.group0578.hpgame.CreateAccountActivity;
+import com.group0578.hpgame.CreateUserActivity;
 import com.group0578.hpgame.R;
 import com.group0578.hpgame.presenter.StartupPresenter;
 
@@ -33,13 +33,13 @@ public class StartupActivity extends AppCompatActivity implements Startup.View {
         startActivity(loginIntent);
     }
 
-    public void onClickCreateAccountButton(View view){
+    public void onClickCreateUserButton(View view) {
         startupPresenter.createNewAccountScreen();
     }
 
-    public void goToCreateAccountScreen(Intent createAccountIntent) {
+    public void goToCreateUserScreen(Intent createUserIntent) {
         System.out.println("Method reached 2");
-        startActivity(createAccountIntent);
+        startActivity(createUserIntent);
     }
 
 

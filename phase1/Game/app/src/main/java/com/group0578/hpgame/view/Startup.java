@@ -11,7 +11,7 @@ import com.group0578.hpgame.presenter.StartupPresenter;
 public interface Startup {
     interface View {
         void goToLoginScreen(Intent loginIntent);
-        void goToCreateAccountScreen(Intent createAccountIntent);
+        void goToCreateUserScreen(Intent createAccountIntent);
     }
 
     interface Model {
