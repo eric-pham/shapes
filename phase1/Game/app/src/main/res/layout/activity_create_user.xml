@@ -7,7 +7,7 @@
     tools:context="com.group0578.hpgame.view.CreateUserActivity">
 
     <EditText
-        android:id="@+id/userName"
+        android:id="@+id/userNameCreate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/userPassword"
+        android:id="@+id/userPasswordCreate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -30,13 +30,13 @@
         android:importantForAutofill="no"
         android:inputType="textPassword"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/userName" />
+        app:layout_constraintTop_toBottomOf="@id/userNameCreate" />
 
     <Button
         android:id="@+id/confirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onClickConfirmButton"
+        android:onClick="onClickCreate"
         android:layout_marginStart="35dp"
         android:layout_marginTop="52dp"
         android:layout_marginEnd="300dp"
@@ -45,5 +45,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/userPasswordCreate" />
 </androidx.constraintlayout.widget.ConstraintLayout>

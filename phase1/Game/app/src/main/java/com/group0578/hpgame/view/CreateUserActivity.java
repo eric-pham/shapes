@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.group0578.hpgame.presenter.CreateUserPresenter;
@@ -30,6 +31,7 @@ public class CreateUserActivity extends AppCompatActivity implements CreateUser.
 
     /**
      * Called when the 'confirm' button is clicked
+     *
      * @param view the View of the 'Create Account' screen (activity_create_userl)
      */
     public void onClickConfirmButton(View view) {
@@ -43,25 +45,42 @@ public class CreateUserActivity extends AppCompatActivity implements CreateUser.
      */
 
 
-    public void confirmAccount() {
-        String username = ((TextView) findViewById(R.id.userName)).getText().toString();
-        String password = ((TextView) findViewById(R.id.userPassword)).getText().toString();
+    /**
+     *  When create user button is clicked add information to data
+     */
+    public void onClickCreate(View v){
+        //Get username and password from user inputted EditText
+        final EditText userNameCreate = findViewById(R.id.userNameCreate);
+        String username = userNameCreate.getText().toString();
 
-        /*if (username.equals("") || password.equals("")) {
+        final EditText userPasswordCreate = findViewById(R.id.userPasswordCreate);
+        String password = userPasswordCreate.getText().toString();
 
-        } else if (userExists(username, password)) {
+        //Debug purposes you can remove this later
+        System.out.println(username);
+        System.out.println(password);
 
-        } else {
-
-        }*/
-
-        addAccount(username, password);
+        //Call CreateUserPresenter method here you can pass in the local variables
+        //username and password
     }
+//    public void confirmAccount() {
+//        String username = ((TextView) findViewById(R.id.userName)).getText().toString();
+//        String password = ((TextView) findViewById(R.id.userPassword)).getText().toString();
+//
+//        /*if (username.equals("") || password.equals("")) {
+//
+//        } else if (userExists(username, password)) {
+//
+//        } else {
+//
+//        }*/
+//
+//        addAccount(username, password);
+//    }
 
 //    private boolean userExists(String userName, String userPassword) {
 //
 //    }
-
     private void addAccount(String userName, String userPassword) {
 
     }

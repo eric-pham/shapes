@@ -31,7 +31,10 @@ public class LoginActivity extends AppCompatActivity implements Login.View {
 
     }
 
-    public void onClickLogin(View v){
+    /**
+     * When login button is clicked, check if username and password are valid
+     */
+    public void onClickLogin(View v) {
         //Get username and password from user inputted EditText
         final EditText loginUser = findViewById(R.id.loginUser);
         String username = loginUser.getText().toString();

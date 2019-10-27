@@ -9,13 +9,14 @@ public class LoginPresenter implements Login.Presenter {
 
     /**
      * The constructor for the Presenter associated with the LoginActivity view.
+     *
      * @param loginView the variable that represents the StartupActivity.
      */
     public LoginPresenter(Login.View loginView) {
         this.loginView = loginView;
     }
 
-    public boolean checkLogin(String username, String password){
+    public boolean checkLogin(String username, String password) {
         //Given username and password check if valid key value pair
         //do something
         System.out.println(username);
