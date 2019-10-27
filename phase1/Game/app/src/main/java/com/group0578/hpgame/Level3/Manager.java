@@ -5,23 +5,25 @@ import android.graphics.Canvas;
 import java.util.ArrayList;
 
 public class Manager {
-
-    /** List of all dementors. */
-    private ArrayList<Dementor> myLittleDementors;
-    /** The wand. */
-    private Wand myWand;
-    /** The width of myLittleFishes. */
+    /**
+     * List of all tank items.
+     */
+    private ArrayList<Dementor> myLittledementors;
+    private Wand wand;
     private int gridWidth;
-    /** The height of myLittleFishes. */
     private int gridHeight;
-
+    private ArrayList<Blast> bullets;
 
 
     Manager(int width, int height) {
-        myLittleDementors = new ArrayList<>();
-        gridHeight = height;
         gridWidth = width;
-        myWand = new Wand(width / 2, height);
+        gridHeight = height;
+        myLittledementors = new ArrayList<>();
+        wand = new Wand(gridWidth / 2, gridHeight);
+    }
+
+    ArrayList<Dementor> getMyLittledementors() {
+        return myLittledementors;
     }
 
     /**
@@ -42,19 +44,34 @@ public class Manager {
         return gridHeight;
     }
 
-    ArrayList<Dementor> getMyLittledementors() {
-        return myLittleDementors;
-    }
-
     void draw(Canvas canvas) {
-        for (int a = 0; a != myLittleDementors.size(); a++) {
-            myLittleDementors.get(a).draw(canvas);
+        wand.draw(canvas);
+        for (int a = 0; a != myLittledementors.size(); a++) {
+            myLittledementors.get(a).draw(canvas);
         }
     }
 
-    void update() {
+    void updateDementor() {
+        for (int i = 0; i < myLittledementors.size(); i++) {
+            if (myLittledementors.get(i).getRow() + 4 >= gridHeight) {
+                EndGame();
+            }
+            myLittledementors.get(i).move();
+        }
     }
 
-    void createDementor() {
+    void createDementors() {
+        int i = myLittledementors.size();
+        for (int j = 1; j <= i + 1; j++) {
+            Dementor d = new Dementor();
+            d.setLocation(gridWidth * j / (i + 2), 0);
+            this.myLittledementors.add(d);
+        }
+
+    }
+
+    void EndGame() {
+        // Game over. Display stats.
     }
 }
+

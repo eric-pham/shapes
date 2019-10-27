@@ -53,6 +53,4 @@ public class Dementor {
                 x * ScreenView.getCharHeight(), paintText);
     }
 
-
-
 }
