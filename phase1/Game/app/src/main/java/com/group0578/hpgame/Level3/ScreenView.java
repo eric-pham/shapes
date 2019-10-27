@@ -69,17 +69,19 @@ public class ScreenView extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-        boolean retry = true;
-        while (retry) {
-            try {
-                thread.setRunning(false);
-                thread.join();
-
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            retry = false;
-        }
+        /**
+         * boolean retry = true;
+         *         while (retry) {
+         *             try {
+         *                 thread.setRunning(false);
+         *                 thread.join();
+         *
+         *             } catch (InterruptedException e) {
+         *                 e.printStackTrace();
+         *             }
+         *             retry = false;
+         *         }
+         */
     }
 
     /** Update the fish tank. */
