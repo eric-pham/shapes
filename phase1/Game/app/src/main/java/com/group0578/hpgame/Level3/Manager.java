@@ -6,45 +6,25 @@ import java.util.ArrayList;
 
 public class Manager {
 
-    /** List of all tank items. */
-    private ArrayList<Dementor> myLittledementors;
-    /** The width of myLittleFishes. */
-    private int gridWidth;
-    /** The height of myLittleFishes. */
-    private int gridHeight;
+    /** List of all dementors. */
+    private ArrayList<Dementor> myLittleDementors;
+    /** The wand. */
+    private Wand myWand;
 
 
-    Manager(int height, int width) {
-        gridHeight = height;
-        gridWidth = width;
-        myLittledementors = new ArrayList<>();
+
+    Manager(int width, int height) {
+        myLittleDementors = new ArrayList<>();
+        myWand = new Wand(width / 2, height);
     }
 
     ArrayList<Dementor> getMyLittledementors() {
-        return myLittledementors;
-    }
-
-    /**
-     * Return the width of a row of locations.
-     *
-     * @return the width of a column of locations.
-     */
-    public int getGridWidth() {
-        return gridWidth;
-    }
-
-    /**
-     * Return the height of a column of locations.
-     *
-     * @return the height of a column of locations.
-     */
-    public int getGridHeight() {
-        return gridHeight;
+        return myLittleDementors;
     }
 
     void draw(Canvas canvas) {
-        for (int a = 0; a != myLittledementors.size(); a++) {
-            myLittledementors.get(a).draw(canvas);
+        for (int a = 0; a != myLittleDementors.size(); a++) {
+            myLittleDementors.get(a).draw(canvas);
         }
     }
 

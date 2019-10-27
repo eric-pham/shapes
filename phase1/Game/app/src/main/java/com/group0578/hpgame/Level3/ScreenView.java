@@ -57,7 +57,7 @@ public class ScreenView extends SurfaceView implements SurfaceHolder.Callback {
 
         // Use the letter size and screen height to determine the size of the fish tank.
         roomManager =
-                new Manager((int) (screenHeight / charHeight), (int) (screenWidth / charWidth));
+                new Manager((int) (screenWidth / charWidth), (int) (screenHeight / charHeight));
         roomManager.createDementor();
 
         thread.setRunning(true);
