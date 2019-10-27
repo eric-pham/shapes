@@ -3,8 +3,8 @@ package com.group0578.hpgame.presenter;
 import com.group0578.hpgame.view.CreateUser;
 
 /**
- * Responsible for handling actions associated with the View for CreateUserActivity
- * and updating the screen's visual component.
+ * Responsible for handling actions from the View {@link com.group0578.hpgame.view.CreateUserActivity}
+ * and updating the UI as required.
  */
 public class CreateUserPresenter implements CreateUser.Presenter {
 

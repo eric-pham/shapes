@@ -15,12 +15,12 @@ import com.group0578.hpgame.presenter.LoginPresenter;
 public class LoginActivity extends AppCompatActivity implements Login.View {
 
     /**
-     * Displays the login screen.
+     * The presenter associated with this View that handles the user's interactions with the UI.
      */
     private LoginPresenter loginPresenter;
 
     /**
-     * Behaviour of the StartupActivity.
+     * The constructor for the activity that displays the Login Screen.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {

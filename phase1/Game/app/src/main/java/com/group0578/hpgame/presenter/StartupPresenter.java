@@ -13,6 +13,9 @@ import com.group0578.hpgame.view.StartupActivity;
  */
 public class StartupPresenter implements Startup.Presenter {
 
+    /**
+     * The view associated with this presenter.
+     */
     private Startup.View startupView;
 
     /**

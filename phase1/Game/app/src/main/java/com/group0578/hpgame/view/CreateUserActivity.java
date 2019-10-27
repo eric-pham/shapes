@@ -38,13 +38,6 @@ public class CreateUserActivity extends AppCompatActivity implements CreateUser.
         createUserPresenter.createAccount();
     }
 
-
-    /**
-     * ALL METHODS BELOW:
-     * Must be moved to CreateUserPresenter class -- methods responsible for screen actions
-     */
-
-
     /**
      *  When create user button is clicked add information to data
      */

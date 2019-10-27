@@ -17,7 +17,7 @@ public class StartupActivity extends AppCompatActivity implements Startup.View {
     private StartupPresenter startupPresenter;
 
     /**
-     * The constructor for this View.
+     * The presenter associated with this View that handles the user's interactions with the UI.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
