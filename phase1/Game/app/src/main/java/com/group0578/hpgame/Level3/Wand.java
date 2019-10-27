@@ -39,6 +39,6 @@ public class Wand {
      * @param y the y-coordinate of the string's cursor location.
      */
     void drawString(Canvas canvas, String s, int x, int y) {
-        canvas.drawText(s, y * RoomView.getCharWidth(), x * RoomView.getCharHeight(), paintText);
+        canvas.drawText(s, y * ScreenView.getCharWidth(), x * ScreenView.getCharHeight(), paintText);
     }
 }
