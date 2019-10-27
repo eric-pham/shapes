@@ -1,4 +1,4 @@
-package com.group0578.hpgame.startup;
+package com.group0578.hpgame.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.group0578.hpgame.CreateAccountActivity;
 import com.group0578.hpgame.R;
+import com.group0578.hpgame.presenter.StartupPresenter;
 
 /**
  * Displays the start up screen.
@@ -32,11 +33,14 @@ public class StartupActivity extends AppCompatActivity implements Startup.View {
         startActivity(loginIntent);
     }
 
-    public void CreateAccount(View view){
-        Intent intent = new Intent(this, CreateAccountActivity.class);
-        startActivity(intent);
+    public void onClickCreateAccountButton(View view){
+        startupPresenter.createNewAccountScreen();
     }
 
+    public void goToCreateAccountScreen(Intent createAccountIntent) {
+        System.out.println("Method reached 2");
+        startActivity(createAccountIntent);
+    }
 
 
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:foregroundTint="#FFFFFF"
-    tools:context=".startup.StartupActivity">
+    tools:context=".view.StartupActivity">
 
     <TextView
         android:id="@+id/game_title_textView"
@@ -40,7 +40,7 @@
         android:id="@+id/create_account_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="CreateAccount"
+        android:onClick="onClickCreateAccountButton"
         android:text="@string/Create_Account_Button"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"

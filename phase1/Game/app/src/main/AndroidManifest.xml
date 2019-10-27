@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".CreateAccountActivity"></activity>
         <activity android:name="com.example.hpgame.CreateUser" />
-        <activity android:name=".startup.StartupActivity">
+        <activity android:name=".view.StartupActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
