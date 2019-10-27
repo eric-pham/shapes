@@ -30,6 +30,19 @@ public class Wand {
         this.appearance = "|";
     }
 
+    private void turnAround() {
+        goingRight = !goingRight;
+    }
+
+    /**
+     * Draws this fish tank item.
+     *
+     * @param canvas the canvas on which to draw this item.
+     */
+    void draw(Canvas canvas) {
+        drawString(canvas, appearance, x, y);
+    }
+
     /**
      * Draws the given string in the given graphics context at at the given cursor location.
      *
@@ -40,5 +53,23 @@ public class Wand {
      */
     void drawString(Canvas canvas, String s, int x, int y) {
         canvas.drawText(s, y * ScreenView.getCharWidth(), x * ScreenView.getCharHeight(), paintText);
+    }
+
+    /** Causes this item to take its turn in the fish-tank simulation. */
+    void move(Manager manager) {
+        // Move one spot to the right or left in the direction I'm going. If I bump into a wall,
+        // turn around.
+        if (x == 0 || x == manager.getGridWidth()) {
+            goingRight = !goingRight;
+        }
+
+        if (goingRight) {
+            x += 1;
+        } else {
+            x -= 1;
+        }
+    }
+
+    public void createBlast(Manager manager) {
     }
 }
