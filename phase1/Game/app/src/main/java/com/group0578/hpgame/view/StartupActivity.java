@@ -58,6 +58,15 @@ public class StartupActivity extends AppCompatActivity implements Startup.View {
         startActivity(createUserIntent);
     }
 
+    public void onClickStage1(View view){
+        startupPresenter.createNewStage1Screen();
+    }
+
+    public void goToStage1Screen(Intent stage1Intent) {
+        System.out.println("Method reached 2");
+        startActivity(stage1Intent);
+    }
+
 
 
 }

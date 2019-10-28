@@ -16,6 +16,7 @@ public interface Startup {
     interface View {
         void goToLoginScreen(Intent loginIntent);
         void goToCreateUserScreen(Intent createAccountIntent);
+        void goToStage1Screen(Intent createStage1Intent);
     }
 
     /**
