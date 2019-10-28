@@ -21,6 +21,7 @@
         <activity android:name=".view.LoginActivity" />
         <activity android:name=".Level1.Level1Activity" />
         <activity android:name=".Level2.MazeActivity" />
+        <activity android:name=".Level3.Level3MainActivity" />
     </application>
 
 </manifest>
