@@ -55,6 +55,9 @@ public class Manager {
         for (int a = 0; a != myLittledementors.size(); a++) {
             myLittledementors.get(a).draw(canvas);
         }
+        for (int a = 0; a != myBlasts.size(); a++) {
+            myBlasts.get(a).draw(canvas);
+        }
     }
 
     void updateDementor() {
