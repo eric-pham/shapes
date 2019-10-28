@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 
+import java.util.ArrayList;
+
 public class Wand {
 
     /** How the wand appears on the screen. */
@@ -60,7 +62,7 @@ public class Wand {
         // Move one spot to the right or left in the direction I'm going. If I bump into a wall,
         // turn around.
         if (x == 0 || x == manager.getGridWidth()) {
-            goingRight = !goingRight;
+            turnAround();
         }
 
         if (goingRight) {
@@ -70,6 +72,10 @@ public class Wand {
         }
     }
 
-    public void createBlast(Manager manager) {
+    public void shoot(Manager manager) {
+        Blast b = new Blast(x, y);
+        System.out.println(x + " " + y);
+        ArrayList<Blast> items = manager.getMyBlasts();
+        items.add(b);
     }
 }

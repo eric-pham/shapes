@@ -9,6 +9,7 @@ public class Manager {
      * List of all dementors.
      */
     private ArrayList<Dementor> myLittledementors;
+    private ArrayList<Blast> myBlasts;
     private Wand wand;
     private int gridWidth;
     private int gridHeight;
@@ -19,11 +20,16 @@ public class Manager {
         gridWidth = width;
         gridHeight = height;
         myLittledementors = new ArrayList<>();
+        myBlasts = new ArrayList<>();
         wand = new Wand(gridWidth / 2, gridHeight);
     }
 
     ArrayList<Dementor> getMyLittledementors() {
         return myLittledementors;
+    }
+
+    ArrayList<Blast> getMyBlasts() {
+        return myBlasts;
     }
 
     /**
@@ -58,6 +64,10 @@ public class Manager {
             }
             myLittledementors.get(i).move();
         }
+    }
+
+    void updateBlasts() {
+
     }
 
     void createDementors() {
