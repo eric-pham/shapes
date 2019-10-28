@@ -61,7 +61,7 @@ public class ScreenView extends SurfaceView implements SurfaceHolder.Callback {
         roomManager.createDementors();
 
         thread.setRunning(true);
-        // thread.start();
+        thread.start();
     }
 
     @Override
@@ -69,19 +69,19 @@ public class ScreenView extends SurfaceView implements SurfaceHolder.Callback {
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-        /**
-         * boolean retry = true;
-         *         while (retry) {
-         *             try {
-         *                 thread.setRunning(false);
-         *                 thread.join();
-         *
-         *             } catch (InterruptedException e) {
-         *                 e.printStackTrace();
-         *             }
-         *             retry = false;
-         *         }
-         */
+
+          boolean retry = true;
+                  while (retry) {
+                      try {
+                          thread.setRunning(false);
+                          thread.join();
+
+                      } catch (InterruptedException e) {
+                          e.printStackTrace();
+                      }
+                      retry = false;
+                  }
+
     }
 
     public void update() {
