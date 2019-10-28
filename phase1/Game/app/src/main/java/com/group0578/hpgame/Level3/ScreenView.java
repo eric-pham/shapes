@@ -20,13 +20,13 @@ public class ScreenView extends SurfaceView implements SurfaceHolder.Callback {
     /** The height of a character. */
     private static float charHeight;
 
-    /** The fish tank contents. */
+    /** The screen contents. */
     private Manager roomManager;
     /** The part of the program that manages time. */
     private MainThread thread;
 
     /**
-     * Create a new fish tank in the context environment.
+     * Create a new screen in the context environment.
      *
      * @param context the environment.
      */
@@ -55,7 +55,7 @@ public class ScreenView extends SurfaceView implements SurfaceHolder.Callback {
         charWidth = paintText.measureText("W");
         charHeight = -paintText.ascent() + paintText.descent();
 
-        // Use the letter size and screen height to determine the size of the fish tank.
+        // Use the letter size and screen height to determine the size of the screen.
         roomManager =
                 new Manager((int) (screenWidth / charWidth), (int) (screenHeight / charHeight));
         roomManager.createDementors();

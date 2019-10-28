@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Manager {
     /**
-     * List of all tank items.
+     * List of all dementors.
      */
     private ArrayList<Dementor> myLittledementors;
     private Wand wand;

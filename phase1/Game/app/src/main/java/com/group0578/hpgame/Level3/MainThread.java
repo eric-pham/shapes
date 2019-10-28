@@ -9,8 +9,6 @@ public class MainThread extends Thread{
     private ScreenView level3ActivityView;
     private boolean running;
     public static Canvas canvas;
-    private int targetFPS = 60;
-    private double averageFPS;
 
     public MainThread(SurfaceHolder surfaceHolder, ScreenView level3ActivityView) {
 
