@@ -16,6 +16,6 @@ public class MazeActivity extends AppCompatActivity {
                 .setFlags(
                         WindowManager.LayoutParams.FLAG_FULLSCREEN,
                         WindowManager.LayoutParams.FLAG_FULLSCREEN);
-//        setContentView(new MazeView(this));
+        setContentView(new MazeView(this));
     }
 }
