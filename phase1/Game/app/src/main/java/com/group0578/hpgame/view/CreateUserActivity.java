@@ -32,7 +32,7 @@ public class CreateUserActivity extends AppCompatActivity implements CreateUser.
     /**
      * Called when the 'confirm' button is clicked
      *
-     * @param view the View of the 'Create Account' screen (activity_create_userl)
+     * @param view the View of the 'Create Account' screen (activity_create_user)
      */
     public void onClickConfirmButton(View view) {
         createUserPresenter.createAccount();
