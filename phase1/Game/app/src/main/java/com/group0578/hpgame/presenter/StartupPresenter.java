@@ -3,6 +3,7 @@ package com.group0578.hpgame.presenter;
 import android.content.Intent;
 
 import com.group0578.hpgame.Level1.Level1Activity;
+import com.group0578.hpgame.Level3.MainActivity;
 import com.group0578.hpgame.view.CreateUserActivity;
 import com.group0578.hpgame.view.LoginActivity;
 import com.group0578.hpgame.view.Startup;
@@ -49,7 +50,13 @@ public class StartupPresenter implements Startup.Presenter {
 
     public void createNewStage1Screen() {
         Intent createStage1Intent = new Intent((StartupActivity) this.startupView, Level1Activity.class);
-        System.out.println("Method reached 2");
+        System.out.println("Method reached 3");
         startupView.goToStage1Screen(createStage1Intent);
+    }
+
+    public void createNewStage3Screen() {
+        Intent createStage3Intent = new Intent((StartupActivity) this.startupView, MainActivity.class);
+        System.out.println("Method reached 3");
+        startupView.goToStage3Screen(createStage3Intent);
     }
 }
