@@ -18,6 +18,9 @@ public interface Startup {
         void goToCreateUserScreen(Intent createAccountIntent);
         void goToStage1Screen(Intent createStage1Intent);
         void goToStage3Screen(Intent createStage3Intent);
+
+        // temporary ,method to make testing of level 2 (the maze) easier
+        void goToStage2Screen(Intent createStage2Intent);
     }
 
     /**

@@ -76,6 +76,14 @@ public class StartupActivity extends AppCompatActivity implements Startup.View {
         startActivity(stage3Intent);
     }
 
+    // temporary ,method to make testing of level 2 (the maze) easier
+    public void goToStage2Screen(Intent stage2Intent) {
+        System.out.println("Method reached 2");
+        startActivity(stage2Intent);
+    }
 
-
+    // temporary ,method to make testing of level 2 (the maze) easier
+    public void onClickStage2(View view) {
+        startupPresenter.createNewStage2Screen();
+    }
 }

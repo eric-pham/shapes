@@ -3,6 +3,7 @@ package com.group0578.hpgame.presenter;
 import android.content.Intent;
 
 import com.group0578.hpgame.Level1.Level1Activity;
+import com.group0578.hpgame.Level2.MazeActivity;
 import com.group0578.hpgame.Level3.Level3MainActivity;
 import com.group0578.hpgame.view.CreateUserActivity;
 import com.group0578.hpgame.view.LoginActivity;
@@ -58,5 +59,12 @@ public class StartupPresenter implements Startup.Presenter {
         Intent createStage3Intent = new Intent((StartupActivity) this.startupView, Level3MainActivity.class);
         System.out.println("Method reached 3");
         startupView.goToStage3Screen(createStage3Intent);
+    }
+
+    // temporary ,method to make testing of level 2 (the maze) easier
+    public void createNewStage2Screen() {
+        Intent createStage2Intent = new Intent((StartupActivity) this.startupView, MazeActivity.class);
+        System.out.println("Method reached 3");
+        startupView.goToStage2Screen(createStage2Intent);
     }
 }
