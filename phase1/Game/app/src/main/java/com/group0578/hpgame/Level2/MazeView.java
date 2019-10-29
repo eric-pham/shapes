@@ -9,19 +9,45 @@ import android.view.SurfaceView;
 
 import java.lang.reflect.Array;
 
+/**
+ * The Maze's view or visual appearance on the screen for the user.
+ */
 public class MazeView extends SurfaceView implements SurfaceHolder.Callback, Maze.View {
 
+    /**
+     * The part of the program managing time.
+     */
+    private MainThread thread;
+
+    /**
+     * The Presenter managing actions such as updating this MazeView.
+     */
     private MazePresenter mazePresenter;
+
+    /**
+     * The SurfaceHolder object controls actions of the display surface of this MazeView.
+     */
     private SurfaceHolder surfaceHolder = null;
 
-    // the array representing the maze; is is structured as a grid where each element is a MazeSection.
-    private Array[][] mazeGrid;
-    // the number of rows in the maze
+    /**
+     * The array representing the maze; structured as a grid where each element is a MazeSection.
+     */
+    private MazeSection[][] mazeGrid;
+
+    /**
+     * The number of rows in the maze.
+     */
     private static final int ROWS = 7;
-    // the number of columns in the maze
+
+    /**
+     * The number of columns in the maze.
+     */
     private static final int COLS = 4;
 
-
+    /**
+     * Create a new Maze in the context environment.
+     * @param context the environment in which this Maze must be seen (MazeActivity.java)
+     */
     public MazeView(Context context) {
         super(context);
         setFocusable(true);
@@ -29,8 +55,8 @@ public class MazeView extends SurfaceView implements SurfaceHolder.Callback, Maz
             surfaceHolder = getHolder();
             surfaceHolder.addCallback(this);
         }
+        thread = new MainThread(surfaceHolder, this);
         mazePresenter = new MazePresenter(this);
-
         this.setBackgroundColor(Color.BLACK);
     }
 
