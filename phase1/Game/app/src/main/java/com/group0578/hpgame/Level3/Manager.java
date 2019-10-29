@@ -51,7 +51,9 @@ public class Manager {
     }
 
     void draw(Canvas canvas) {
+        System.out.println("Paul Gries");
         wand.draw(canvas);
+
         for (int a = 0; a != myLittledementors.size(); a++) {
             myLittledementors.get(a).draw(canvas);
         }
@@ -62,10 +64,18 @@ public class Manager {
 
     void updateDementor() {
         for (int i = 0; i < myLittledementors.size(); i++) {
+
             if (myLittledementors.get(i).getRow() + 4 >= gridHeight) {
-                EndGame();
+                myLittledementors.remove(i);
+
             }
-            myLittledementors.get(i).move();
+            else {
+                myLittledementors.get(i).move();
+                if (myLittledementors.get(i).getRow() >= 6) {
+                    createDementors();
+                }
+
+            }
         }
     }
 
@@ -75,16 +85,15 @@ public class Manager {
 
     void createDementors() {
         int i = myLittledementors.size();
-        for (int j = 1; j <= i + 1; j++) {
-            Dementor d = new Dementor();
-            d.setLocation(gridWidth * j / (i + 2), 0);
-            this.myLittledementors.add(d);
+        if (i<10) {
+            for (int j = 1; j <= i + 1; j++) {
+                Dementor d = new Dementor();
+                d.setLocation(gridWidth * j / (i + 2), 0);
+                this.myLittledementors.add(d);
+            }
         }
 
     }
 
-    void EndGame() {
-        // Game over. Display stats.
-    }
 }
 
