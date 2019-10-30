@@ -15,7 +15,7 @@ import com.group0578.hpgame.Level2.MazeEntities.MazeSection;
  * The Maze's view or visual appearance on the screen for the user.
  */
 
-public class MazeView extends SurfaceView implements Runnable{
+public class MazeView extends SurfaceView implements Runnable, Maze.View{
 
     Thread mazeThread = null;
     SurfaceHolder surfaceHolder;
@@ -27,10 +27,6 @@ public class MazeView extends SurfaceView implements Runnable{
     private int screenHeight;
     /** The array representing the maze; structured as a grid where each element is a MazeSection. */
     private MazeSection[][] mazeGrid;
-    /** The number of rows in the maze. */
-    private static final int ROWS = 7;
-    /** The number of columns in the maze. */
-    private static final int COLS = 4;
     /** the paint object used for the maze */
     private Paint mazeBrush;
 
@@ -40,12 +36,15 @@ public class MazeView extends SurfaceView implements Runnable{
 
     private float horizontalMargin;
 
+    private MazePresenter mazePresenter;
+
 
     public MazeView(Context context) {
         super(context);
         surfaceHolder = getHolder();
         screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
         screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
+        mazePresenter = new MazePresenter(this);
     }
 
     /**
@@ -61,7 +60,7 @@ public class MazeView extends SurfaceView implements Runnable{
      */
     @Override
     public void run() {
-        createMazeGrid();
+        mazeGrid = mazePresenter.getMazeGrid();
         prepareMazeBrush();
         determineMazeDimensions();
 
@@ -92,15 +91,6 @@ public class MazeView extends SurfaceView implements Runnable{
         mazeThread.start();
     }
 
-    void createMazeGrid() {
-        mazeGrid = new MazeSection[ROWS][COLS];
-        for (int row = 0; row < ROWS; row++) {
-            for (int col = 0; col < COLS; col++) {
-                this.mazeGrid[row][col] = new MazeSection(row, col);
-            }
-        }
-    }
-
     void prepareMazeBrush() {
         mazeBrush = new Paint(); // maybe instantiate where declared
         mazeBrush.setColor(Color.WHITE);
@@ -111,14 +101,17 @@ public class MazeView extends SurfaceView implements Runnable{
 
         String TAG = "MazeView.determineMazeDimensions";
 
-        if (screenHeight/screenWidth < ROWS/COLS) {
-            mazeSectionLength = screenWidth/(COLS + 1);
-        } else {
-            mazeSectionLength = screenHeight/(ROWS + 1);
+        int rows = mazeGrid.length;
+        int cols = mazeGrid[0].length;
+
+        if (screenHeight <= screenWidth) {
+            mazeSectionLength = screenHeight/(rows + 1);
+        } else {  // screenWidth < screenHeight
+            mazeSectionLength = screenWidth/(cols + 1);
         }
 
-        float mazeWidth = COLS*mazeSectionLength;
-        float mazeHeight = ROWS*mazeSectionLength;
+        float mazeWidth = cols*mazeSectionLength;
+        float mazeHeight = rows*mazeSectionLength;
 
         verticalMargin = (screenHeight - mazeHeight)/2;
         horizontalMargin = (screenWidth - mazeWidth)/2;
@@ -130,8 +123,8 @@ public class MazeView extends SurfaceView implements Runnable{
         String TAG = "MazeView.drawMazeWalls";
         Log.i(TAG, "Trying to draw walls");
         mazeCanvas.translate(horizontalMargin, verticalMargin);
-        for (int row = 0; row < ROWS; row++) {
-            for (int col = 0; col < COLS; col++) {
+        for (int row = 0; row < mazeGrid.length; row++) {
+            for (int col = 0; col < mazeGrid[0].length; col++) {
                 if (mazeGrid[row][col].getHasTopWall()) {
                     drawTopWall(row, col, mazeCanvas);
                 }
