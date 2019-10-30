@@ -13,12 +13,14 @@ public class Dementor {
     private boolean isAlive;
     private Paint paintText = new Paint();
 
-    Dementor(){
+    Dementor(int x, int y){
         this.appearance = "<OO>";
         this.isAlive = true;
         paintText.setTextSize(36);
         paintText.setColor(Color.WHITE);
         paintText.setTypeface(Typeface.DEFAULT_BOLD);
+        this.x = x;
+        this.y = y;
     }
 
     void setLocation(int x, int y){

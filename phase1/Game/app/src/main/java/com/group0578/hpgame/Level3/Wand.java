@@ -23,7 +23,7 @@ public class Wand {
     Paint paintText = new Paint();
 
     public Wand(int x, int y) {
-        paintText.setTextSize(36);
+        paintText.setTextSize(60);
         paintText.setTypeface(Typeface.DEFAULT_BOLD);
         this.x = x;
         this.y = y;
@@ -54,7 +54,7 @@ public class Wand {
      * @param y the y-coordinate of the string's cursor location.
      */
     void drawString(Canvas canvas, String s, int x, int y) {
-        canvas.drawText(s, y * ScreenView.getCharWidth(), x * ScreenView.getCharHeight(), paintText);
+        canvas.drawText(s, x * ScreenView.getCharWidth(), y * ScreenView.getCharHeight(), paintText);
     }
 
     /** Causes this item to take its turn in the fish-tank simulation. */

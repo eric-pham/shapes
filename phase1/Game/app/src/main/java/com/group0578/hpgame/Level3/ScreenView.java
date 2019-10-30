@@ -88,6 +88,7 @@ public class ScreenView extends SurfaceView implements SurfaceHolder.Callback {
     public void update() {
         roomManager.updateDementor();
         roomManager.updateBlasts();
+        roomManager.updateWand();
     }
 
     @Override
