@@ -5,10 +5,10 @@ public class MazeSection {
     /* These variables determine whether a MazeSection has a top, left, right and bottom wall.
      * Set to true if it has a wall; set to false if it doesn't.
      */
-    private boolean hasTopWall;
-    private boolean hasBottomWall;
-    private boolean hasLeftWall;
-    private boolean hasRightWall;
+    private boolean hasTopWall = true;
+    private boolean hasBottomWall = true;
+    private boolean hasLeftWall = true;
+    private boolean hasRightWall = true;
 
     // this MazeSection's grid location, with the top left corner of the maze as the origin (0, 0)
     private int row, col;
