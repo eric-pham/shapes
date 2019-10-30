@@ -1,16 +1,9 @@
 package com.group0578.hpgame.Level3;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
-
-import android.os.Bundle;
-import android.view.Window;
-import android.view.WindowManager;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 
 public class Level3MainActivity extends AppCompatActivity {

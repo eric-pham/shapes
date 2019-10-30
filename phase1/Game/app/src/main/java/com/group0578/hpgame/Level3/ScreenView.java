@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.util.AttributeSet;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder;
 
@@ -25,13 +26,22 @@ public class ScreenView extends SurfaceView implements SurfaceHolder.Callback {
     /** The part of the program that manages time. */
     private MainThread thread;
 
-    /**
-     * Create a new screen in the context environment.
-     *
-     * @param context the environment.
-     */
     public ScreenView(Context context) {
         super(context);
+        init();
+    }
+
+    public ScreenView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        init();
+    }
+
+    public ScreenView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+        init();
+    }
+
+    private void init() {
         getHolder().addCallback(this);
         thread = new MainThread(getHolder(), this);
         setFocusable(true);
