@@ -1,6 +1,5 @@
 package com.group0578.hpgame.Level2;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;

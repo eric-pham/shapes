@@ -72,7 +72,6 @@ public class MazeView extends SurfaceView implements Runnable{
             Canvas mazeCanvas = surfaceHolder.lockCanvas();
             mazeCanvas.drawARGB(255, 100, 30, 250);
             drawMazeWalls(mazeCanvas);
-//            drawLeftWall(0, 0, mazeCanvas);
             surfaceHolder.unlockCanvasAndPost(mazeCanvas);
         }
     }
