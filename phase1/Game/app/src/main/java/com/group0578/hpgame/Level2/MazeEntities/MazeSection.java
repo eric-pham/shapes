@@ -86,4 +86,20 @@ public class MazeSection {
     public void setHasRightWall(boolean hasRightWall) {
         this.hasRightWall = hasRightWall;
     }
+
+    /**
+     * Returns value of row in MazeGrid array for this MazeSection
+     * @return row of this MazeSection
+     */
+    public int getRow() {
+        return row;
+    }
+
+    /**
+     * Returns value of column in MazeGrid array for this MazeSection
+     * @return column of this MazeSection
+     */
+    public int getCol() {
+        return col;
+    }
 }

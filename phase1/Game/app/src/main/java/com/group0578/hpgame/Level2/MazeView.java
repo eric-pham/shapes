@@ -15,7 +15,7 @@ import com.group0578.hpgame.Level2.MazeEntities.MazeSection;
  * The Maze's view or visual appearance on the screen for the user.
  */
 
-public class MazeView extends SurfaceView implements Runnable, Maze.View{
+public class MazeView extends SurfaceView implements Runnable, Maze.View {
 
     Thread mazeThread = null;
     SurfaceHolder surfaceHolder;
@@ -37,6 +37,9 @@ public class MazeView extends SurfaceView implements Runnable, Maze.View{
     private float horizontalMargin;
 
     private MazePresenter mazePresenter;
+
+    private MazeSection player, exitPoint;
+    private Paint playerPaint, exitPointPaint;
 
 
     public MazeView(Context context) {
@@ -61,8 +64,11 @@ public class MazeView extends SurfaceView implements Runnable, Maze.View{
     @Override
     public void run() {
         mazeGrid = mazePresenter.getMazeGrid();
+        setPlayerExitLocations();
         prepareMazeBrush();
         determineMazeDimensions();
+        createPlayer();
+        createExitPoint();
 
         while (isRunning) {
             if (!surfaceHolder.getSurface().isValid()) {
@@ -71,8 +77,11 @@ public class MazeView extends SurfaceView implements Runnable, Maze.View{
             Canvas mazeCanvas = surfaceHolder.lockCanvas();
             mazeCanvas.drawARGB(255, 100, 30, 250);
             drawMazeWalls(mazeCanvas);
+            drawPlayer(mazeCanvas, mazeSectionLength/10);
+            drawExitPoint(mazeCanvas, mazeSectionLength/10);
             surfaceHolder.unlockCanvasAndPost(mazeCanvas);
         }
+
     }
 
     public void pause() {
@@ -89,6 +98,11 @@ public class MazeView extends SurfaceView implements Runnable, Maze.View{
         isRunning = true;
         mazeThread = new Thread(this);
         mazeThread.start();
+    }
+
+    private void setPlayerExitLocations() {
+        player = mazeGrid[0][0];
+        exitPoint = mazeGrid[3][3];     // Can't access MazeUseCases.ROWS and MazeUseCases.COLS
     }
 
     void prepareMazeBrush() {
@@ -117,6 +131,16 @@ public class MazeView extends SurfaceView implements Runnable, Maze.View{
         horizontalMargin = (screenWidth - mazeWidth)/2;
 
         Log.e(TAG, "screen height, screen width: " + screenHeight + ", " + screenWidth);
+    }
+
+    private void createPlayer() {
+        playerPaint = new Paint();
+        playerPaint.setColor(Color.RED);
+    }
+
+    private void createExitPoint() {
+        exitPointPaint = new Paint();
+        exitPointPaint.setColor(Color.GREEN);
     }
 
     void drawMazeWalls(Canvas mazeCanvas) {
@@ -167,6 +191,22 @@ public class MazeView extends SurfaceView implements Runnable, Maze.View{
                 row*mazeSectionLength,
                 (col + 1)*mazeSectionLength,
                 (row + 1)*mazeSectionLength, mazeBrush);
+    }
+
+    private void drawPlayer(Canvas mazeCanvas, float margin) {
+        float left = player.getCol() * mazeSectionLength + margin;
+        float right = (player.getCol() + 1) * mazeSectionLength - margin;
+        float top = player.getRow() * mazeSectionLength + margin;
+        float bottom = (player.getRow() + 1) * mazeSectionLength - margin;
+        mazeCanvas.drawRect(left, top, right, bottom, playerPaint);
+    }
+
+    private void drawExitPoint(Canvas mazeCanvas, float margin) {
+        float left = exitPoint.getCol() * mazeSectionLength + margin;
+        float right = (exitPoint.getCol() + 1) * mazeSectionLength - margin;
+        float top = exitPoint.getRow() * mazeSectionLength + margin;
+        float bottom = (exitPoint.getRow() + 1) * mazeSectionLength - margin;
+        mazeCanvas.drawRect(left, top, right, bottom, exitPointPaint);
     }
 
 //    /**
