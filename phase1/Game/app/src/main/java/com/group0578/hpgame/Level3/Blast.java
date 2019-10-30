@@ -30,6 +30,14 @@ public class Blast {
         appearance = "*";
     }
 
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
     /**
      * Draws the given string in the given graphics context at at the given cursor location.
      *

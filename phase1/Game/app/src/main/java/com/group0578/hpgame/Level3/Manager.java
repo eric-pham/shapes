@@ -64,14 +64,18 @@ public class Manager {
 
     void updateDementor() {
         for (int i = 0; i < myLittledementors.size(); i++) {
-
+            for (int j = 0; j < myBlasts.size(); j++) {
+                if(myBlasts.get(i).getX() == myLittledementors.get(i).getColumn() &&
+                        myBlasts.get(i).getY() == myLittledementors.get(i).getRow()) {
+                    myLittledementors.remove(i);
+                }
+            }
             if (myLittledementors.get(i).getRow() + 4 >= gridHeight) {
                 myLittledementors.remove(i);
-
             }
             else {
                 myLittledementors.get(i).move();
-                if (myLittledementors.get(i).getRow() >= 6) {
+                if (myLittledementors.get(i).getRow() >= 10) {
                     createDementors();
                 }
 
@@ -84,12 +88,14 @@ public class Manager {
     }
 
     void updateBlasts() {
-
+        for (int i = 0; i < myBlasts.size(); i++) {
+            myBlasts.get(i).move();
+        }
     }
 
     void createDementors() {
         int i = myLittledementors.size();
-        if (i<10) {
+        if (i<5) {
             for (int j = 1; j <= i + 1; j++) {
                 Dementor d = new Dementor(gridWidth * j / (i + 2), 0);
                 this.myLittledementors.add(d);

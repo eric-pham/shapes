@@ -10,12 +10,10 @@ public class Dementor {
     private String appearance;
     private int x;
     private int y;
-    private boolean isAlive;
     private Paint paintText = new Paint();
 
     Dementor(int x, int y){
         this.appearance = "<OO>";
-        this.isAlive = true;
         paintText.setTextSize(36);
         paintText.setColor(Color.WHITE);
         paintText.setTypeface(Typeface.DEFAULT_BOLD);
@@ -37,15 +35,11 @@ public class Dementor {
     }
 
     void move(){
-        this.y += 4;
+        this.y += 2;
     }
 
-    void kill(){
-        this.isAlive = false;
-    }
 
     void draw(Canvas canvas) {
-
         drawString(canvas, appearance, getRow(), getColumn());
     }
 
