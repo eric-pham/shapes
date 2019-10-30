@@ -45,6 +45,9 @@ public class Wand {
         drawString(canvas, appearance, x, y);
     }
 
+    boolean getDirection(){
+        return goingRight;
+    }
     /**
      * Draws the given string in the given graphics context at at the given cursor location.
      *
@@ -72,10 +75,31 @@ public class Wand {
         }
     }
 
+    void moveRight(Manager manager){
+        if (x == manager.getGridWidth()) {
+            // Do nothing
+        }
+        else {
+            x += 1;
+        }
+
+    }
+
+    void moveLeft(Manager manager){
+        if (x == 0) {
+            // Do nothing
+        }
+        else {
+            x -= 1;
+        }
+
+    }
+
     public void shoot(Manager manager) {
         Blast b = new Blast(x, y);
         System.out.println(x + " " + y);
         ArrayList<Blast> items = manager.getMyBlasts();
         items.add(b);
     }
+
 }

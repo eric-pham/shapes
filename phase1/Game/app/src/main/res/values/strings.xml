@@ -6,4 +6,7 @@
     <string name="Username_hint">Enter a username</string>
     <string name="Password_hint">Enter a password</string>
     <string name="Confirm">Confirm</string>
+    <string name="button4">L</string>
+    <string name="button5">Shoot</string>
+    <string name="button6">R</string>
 </resources>
