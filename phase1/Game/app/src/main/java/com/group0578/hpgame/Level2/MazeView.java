@@ -104,10 +104,10 @@ public class MazeView extends SurfaceView implements Runnable, Maze.View{
         int rows = mazeGrid.length;
         int cols = mazeGrid[0].length;
 
-        if (screenHeight/screenWidth < rows/cols) {
-            mazeSectionLength = screenWidth/(cols + 1);
-        } else {
+        if (screenHeight <= screenWidth) {
             mazeSectionLength = screenHeight/(rows + 1);
+        } else {  // screenWidth < screenHeight
+            mazeSectionLength = screenWidth/(cols + 1);
         }
 
         float mazeWidth = cols*mazeSectionLength;
