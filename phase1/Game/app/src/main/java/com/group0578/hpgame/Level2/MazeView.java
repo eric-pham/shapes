@@ -6,16 +6,15 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.View;
 
 import com.group0578.hpgame.Level2.MazeEntities.MazeSection;
 
-/**
- * The Maze's view or visual appearance on the screen for the user.
- */
-
-public class MazeView extends SurfaceView implements Runnable, Maze.View {
+/** The Maze's view or visual appearance on the screen for the user. */
+public class MazeView extends SurfaceView implements Runnable, Maze.View, View.OnTouchListener{
 
     Thread mazeThread = null;
     SurfaceHolder surfaceHolder;
@@ -31,16 +30,13 @@ public class MazeView extends SurfaceView implements Runnable, Maze.View {
     private Paint mazeBrush;
 
     private float mazeSectionLength;
-
     private float verticalMargin;
-
     private float horizontalMargin;
-
     private MazePresenter mazePresenter;
-
     private MazeSection player, exitPoint;
     private Paint playerPaint, exitPointPaint;
-
+    private Paint textBrush = new Paint();
+    private float playerX, playerY;
 
     public MazeView(Context context) {
         super(context);
@@ -48,6 +44,10 @@ public class MazeView extends SurfaceView implements Runnable, Maze.View {
         screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
         screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
         mazePresenter = new MazePresenter(this);
+        textBrush.setColor(Color.WHITE);
+        textBrush.setStrokeWidth(10);
+        textBrush.setTextSize(50);
+        playerX = playerY = 0;
     }
 
     /**
@@ -74,8 +74,11 @@ public class MazeView extends SurfaceView implements Runnable, Maze.View {
             if (!surfaceHolder.getSurface().isValid()) {
                 continue;
             }
+
             Canvas mazeCanvas = surfaceHolder.lockCanvas();
             mazeCanvas.drawARGB(255, 100, 30, 250);
+            mazeCanvas.drawText("Player = Circle", 100, 100, textBrush);
+            mazeCanvas.drawText("EndPoint = Square", 100, 160, textBrush);
             drawMazeWalls(mazeCanvas);
             drawPlayer(mazeCanvas, mazeSectionLength/10);
             drawExitPoint(mazeCanvas, mazeSectionLength/10);
@@ -101,7 +104,7 @@ public class MazeView extends SurfaceView implements Runnable, Maze.View {
     }
 
     private void setPlayerExitLocations() {
-        player = mazeGrid[0][0];
+//        player = mazeGrid[0][0];
         exitPoint = mazeGrid[3][3];     // Can't access MazeUseCases.ROWS and MazeUseCases.COLS
     }
 
@@ -194,11 +197,13 @@ public class MazeView extends SurfaceView implements Runnable, Maze.View {
     }
 
     private void drawPlayer(Canvas mazeCanvas, float margin) {
-        float left = player.getCol() * mazeSectionLength + margin;
-        float right = (player.getCol() + 1) * mazeSectionLength - margin;
-        float top = player.getRow() * mazeSectionLength + margin;
-        float bottom = (player.getRow() + 1) * mazeSectionLength - margin;
-        mazeCanvas.drawRect(left, top, right, bottom, playerPaint);
+//        float left = player.getCol() * mazeSectionLength + margin;
+//        float right = (player.getCol() + 1) * mazeSectionLength - margin;
+//        float top = player.getRow() * mazeSectionLength + margin;
+//        float bottom = (player.getRow() + 1) * mazeSectionLength - margin;
+//        mazeCanvas.drawCircle((left+right)/2, (top+bottom)/2,
+//                            mazeSectionLength/3, playerPaint);
+        mazeCanvas.drawCircle(playerX, playerY, mazeSectionLength/3, playerPaint);
     }
 
     private void drawExitPoint(Canvas mazeCanvas, float margin) {
@@ -207,6 +212,22 @@ public class MazeView extends SurfaceView implements Runnable, Maze.View {
         float top = exitPoint.getRow() * mazeSectionLength + margin;
         float bottom = (exitPoint.getRow() + 1) * mazeSectionLength - margin;
         mazeCanvas.drawRect(left, top, right, bottom, exitPointPaint);
+    }
+
+    /**
+     * Called when a touch event is dispatched to a view. This allows listeners to
+     * get a chance to respond before the target view.
+     *
+     * @param v The view the touch event has been dispatched to.
+     * @param event The MotionEvent object containing full information about
+     *              the event.
+     * @return True if the listener has consumed the event, false otherwise.
+     */
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        playerX = event.getX();
+        playerY = event.getY();
+        return false;
     }
 
 //    /**
