@@ -104,5 +104,22 @@ public class Manager {
 
     }
 
+     void createBlast() {
+        wand.shoot(this);
+    }
+
+    void moveWandRight() {
+        if (!wand.getDirection()){
+            wand.moveRight(this);
+        }
+    }
+
+    void moveWandLeft() {
+        if(wand.getDirection()){
+            wand.moveLeft(this);
+        }
+    }
+
+
 }
 

@@ -4,9 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.View;
+
+import com.group0578.hpgame.R;
 
 
 public class Level3MainActivity extends AppCompatActivity {
+
+    Manager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,7 +19,20 @@ public class Level3MainActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(new ScreenView(this) );
+        //setContentView(new ScreenView(this));
+        setContentView(R.layout.level3);
+    }
+
+    void createBlast(View view){
+        manager.createBlast();
+    }
+
+    void moveWandRight(View view){
+        manager.moveWandRight();
+    }
+
+    void moveWandLeft(View view){
+        manager.moveWandLeft();
     }
 
 }
