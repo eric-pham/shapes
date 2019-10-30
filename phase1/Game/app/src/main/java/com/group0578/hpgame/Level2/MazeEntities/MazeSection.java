@@ -13,6 +13,8 @@ public class MazeSection {
     // this MazeSection's grid location, with the top left corner of the maze as the origin (0, 0)
     private int row, col;
 
+    private boolean modified = false;
+
     /**
      * Constructor for a MazeSection, which is a rectangle piece of the maze.
      * @param row the number which represents which row of the maze this MazeSection is in.
@@ -88,18 +90,34 @@ public class MazeSection {
     }
 
     /**
-     * Returns value of row in MazeGrid array for this MazeSection
-     * @return row of this MazeSection
+     * Gets the value of row.
+     * @return row: an integer that represents the row of this MazeSection in the maze.
      */
     public int getRow() {
         return row;
     }
 
     /**
-     * Returns value of column in MazeGrid array for this MazeSection
-     * @return column of this MazeSection
+     * Gets the value of col.
+     * @return col: an integer that represents the column of this MazeSection in the maze.
      */
     public int getCol() {
         return col;
+    }
+
+    /**
+     * Gets the current value of modified.
+     * @return modified: true if this MazeSection has been modified during the creation of the maze
+     */
+    public boolean isModified() {
+        return modified;
+    }
+
+    /**
+     * Sets the value of modified.
+     * @param modified true if it has ever had any of its walls taken down, false otherwise
+     */
+    public void setModified(boolean modified) {
+        this.modified = modified;
     }
 }
