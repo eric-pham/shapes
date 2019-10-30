@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import com.group0578.hpgame.Level2.MazeEntities.MazeSection;
 
 /**
  * The Maze's view or visual appearance on the screen for the user.
