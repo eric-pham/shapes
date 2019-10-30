@@ -39,7 +39,7 @@ public class Wand {
     /**
      * Draws this fish tank item.
      *
-     * @param canvas the canvas on which to draw this item.
+     * @param canvas the mazeCanvas on which to draw this item.
      */
     void draw(Canvas canvas) {
         drawString(canvas, appearance, x, y);
