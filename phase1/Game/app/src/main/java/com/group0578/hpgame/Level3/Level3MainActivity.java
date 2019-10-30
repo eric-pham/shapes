@@ -23,15 +23,15 @@ public class Level3MainActivity extends AppCompatActivity {
         setContentView(R.layout.level3);
     }
 
-    void createBlast(View view){
+    public void createBlast(View view){
         manager.createBlast();
     }
 
-    void moveWandRight(View view){
+    public void moveWandRight(View view){
         manager.moveWandRight();
     }
 
-    void moveWandLeft(View view){
+    public void moveWandLeft(View view){
         manager.moveWandLeft();
     }
 
