@@ -1,8 +1,10 @@
 package com.group0578.hpgame.presenter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.AssetManager;
 
+import com.group0578.hpgame.Level1.Level1Activity;
 import com.group0578.hpgame.view.Login;
 
 import java.io.BufferedReader;
@@ -13,6 +15,9 @@ import java.util.HashMap;
 import java.io.FileReader;
 
 import com.google.gson.Gson;
+import com.group0578.hpgame.view.LoginActivity;
+import com.group0578.hpgame.view.StartupActivity;
+
 import java.io.File;
 
 /**
@@ -21,7 +26,9 @@ import java.io.File;
  */
 public class LoginPresenter implements Login.Presenter {
 
-  /** The view associated with this presenter. */
+  /**
+   * The view associated with this presenter.
+   */
   private Login.View loginView;
 
   /**
@@ -54,7 +61,7 @@ public class LoginPresenter implements Login.Presenter {
 
       //System.out.println(hmap.get("username"));
 
-        //Check HashMap for match
+      //Check HashMap for match
       return hmap.get(username).equals(password);
 
     } catch (FileNotFoundException e) {
@@ -65,5 +72,11 @@ public class LoginPresenter implements Login.Presenter {
       return false;
     }
     return false;
+  }
+
+  public void createNewStage1Screen() {
+    Intent createStage1Intent = new Intent((LoginActivity) this.loginView, Level1Activity.class);
+    System.out.println("Method reached 3");
+    loginView.goToStage1Screen(createStage1Intent);
   }
 }

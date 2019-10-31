@@ -28,5 +28,5 @@ public abstract class SkyItem {
 
     public void draw(Canvas canvas){}
 
-    public void update(int x, int y){}
+    public void update(int x, int y,float width){}
 }

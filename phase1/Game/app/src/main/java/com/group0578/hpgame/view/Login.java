@@ -1,5 +1,7 @@
 package com.group0578.hpgame.view;
 
+import android.content.Intent;
+
 import com.group0578.hpgame.presenter.LoginPresenter;
 
 /**
@@ -12,7 +14,7 @@ public interface Login {
      * Behaviour of the LoginActivity.
      */
     interface View {
-
+        void goToStage1Screen(Intent createStage1Intent);
     }
 
     /**

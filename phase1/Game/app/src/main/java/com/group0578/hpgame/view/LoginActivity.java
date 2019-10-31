@@ -1,14 +1,16 @@
 package com.group0578.hpgame.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
+import com.group0578.hpgame.Level1.Level1Activity;
 import com.group0578.hpgame.R;
 import com.group0578.hpgame.presenter.LoginPresenter;
-
 /**
  * Displays the login screen.
  */
@@ -45,10 +47,15 @@ public class LoginActivity extends AppCompatActivity implements Login.View {
         //Call presenter to verify username and password
         if (loginPresenter.checkLogin(this, username, password)) {
             //If checks out do something
-            System.out.println("Valid");
-        } else{
+            loginPresenter.createNewStage1Screen();
+        } else {
             //if invalid do something
             System.out.println("Invalid");
         }
+    }
+
+    public void goToStage1Screen(Intent stage1Intent) {
+        System.out.println("Method reached 2");
+        startActivity(stage1Intent);
     }
 }
