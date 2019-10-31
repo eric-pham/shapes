@@ -15,4 +15,8 @@ public class MazePresenter implements Maze.Presenter {
     public MazeSection[][] getMazeGrid() {
         return mazeUseCases.buildMazeGrid();
     }
+
+    public int[] getRowColumnAttributes() {
+        return new int[]{mazeUseCases.getROWS(), mazeUseCases.getCOLS()};
+    }
 }
