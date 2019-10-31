@@ -27,7 +27,7 @@ public class Player {
      * Getter for whether this player has moved
      * @return true if this player has moved
      */
-    public boolean isHasMoved() {
+    public boolean hasMoved() {
         return hasMoved;
     }
 
