@@ -23,6 +23,7 @@ public class Manager {
         myBlasts = new ArrayList<>();
         wand = new Wand(gridWidth / 2, gridHeight - 10);
         cnt = 0;
+
     }
 
     ArrayList<Dementor> getMyLittledementors() {
@@ -129,23 +130,21 @@ public class Manager {
     }
 
     void updateBlasts() {
-        ArrayList<Integer> dementors2  = new ArrayList<>();
+        //ArrayList<Integer> dementors2  = new ArrayList<>();
         for (int i = 0; i < myBlasts.size(); i++) {
             myBlasts.get(i).move();
         }
     }
 
-    void createDementors() {
-        int i = myLittledementors.size();
-        if (cnt<15) {
-            for (int j = 1; j <= i + 1; j++) {
-                Dementor d = new Dementor(j * 5, 0);
-                this.myLittledementors.add(d);
-            }
-        }
-        cnt += i+1;
-
+  void createDementors() {
+    int i = myLittledementors.size() + 1;
+    if (cnt < 5) {
+      Dementor d = new Dementor(i * 5, 0);
+      this.myLittledementors.add(d);
     }
+    cnt += 1;
+    }
+
 
     void createBlast() {
         wand.shoot(this);
