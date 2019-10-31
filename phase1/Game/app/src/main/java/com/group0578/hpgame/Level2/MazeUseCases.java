@@ -202,4 +202,20 @@ public class MazeUseCases {
 
     }
 
+    /**
+     * Getter for rows instance attribute
+     * @return number of rows in the Maze Grid
+     */
+    public int getROWS() {
+        return ROWS;
+    }
+
+    /**
+     * Getter for cols instance attribute
+     * @return number of columns in the Maze Grid
+     */
+    public int getCOLS() {
+        return COLS;
+    }
+
 }
