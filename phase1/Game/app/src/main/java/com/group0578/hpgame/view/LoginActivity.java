@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity implements Login.View {
         String password = loginPassword.getText().toString();
 
         //Call presenter to verify username and password
-        if (loginPresenter.checkLogin(username, password)) {
+        if (loginPresenter.checkLogin(this, username, password)) {
             //If checks out do something
             System.out.println("Valid");
         } else{

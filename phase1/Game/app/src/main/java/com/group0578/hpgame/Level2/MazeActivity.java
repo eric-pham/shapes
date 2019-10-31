@@ -1,14 +1,12 @@
 package com.group0578.hpgame.Level2;
 
 import android.os.Bundle;
-import android.view.MotionEvent;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MazeActivity extends AppCompatActivity implements View.OnTouchListener {
+public class MazeActivity extends AppCompatActivity {
 
     private MazeView mazeView;
 
@@ -23,7 +21,7 @@ public class MazeActivity extends AppCompatActivity implements View.OnTouchListe
                         WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         mazeView = new MazeView(this);
-        mazeView.setOnTouchListener(this);
+        mazeView.setOnTouchListener(mazeView);
 
         setContentView(mazeView);
 
@@ -53,20 +51,6 @@ public class MazeActivity extends AppCompatActivity implements View.OnTouchListe
     protected void onResume() {
         super.onResume();
         mazeView.resume();
-    }
-
-    /**
-     * Called when a touch event is dispatched to a view. This allows listeners to
-     * get a chance to respond before the target view.
-     *
-     * @param mazeView The view the touch event has been dispatched to.
-     * @param event The MotionEvent object containing full information about
-     *              the event.
-     * @return True if the listener has consumed the event, false otherwise.
-     */
-    @Override
-    public boolean onTouch(View mazeView, MotionEvent event) {
-        return false;
     }
 
     /**

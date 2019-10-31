@@ -104,7 +104,7 @@ public class Manager {
 
     }
 
-     void createBlast() {
+    void createBlast() {
         wand.shoot(this);
     }
 
