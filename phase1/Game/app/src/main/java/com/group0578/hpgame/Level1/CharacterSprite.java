@@ -21,7 +21,7 @@ public class CharacterSprite extends SkyItem {
         canvas.drawText(appearance,getX(), getY(), paintText);
     }
 
-    public void update(){
+    public void update(int x, int y){
         setLocation(getX(),getY());
     }
 }

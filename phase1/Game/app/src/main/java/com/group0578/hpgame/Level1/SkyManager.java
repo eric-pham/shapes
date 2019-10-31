@@ -3,6 +3,7 @@ package com.group0578.hpgame.Level1;
 import android.graphics.Canvas;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SkyManager {
     /** All the locations where a fish can be. */
@@ -25,12 +26,16 @@ public class SkyManager {
     }
 
     void update(){
+        int xChar = skyItems.get(0).getX();
+        int yChar = skyItems.get(0).getY();
+
         for (SkyItem skyItem: skyItems){
-            skyItem.update();
+            skyItem.update(xChar,yChar);
         }
     }
 
     void createSkyItems(){
+        skyItems.add(new CharacterSprite());
         for (int i = 0; i < 10; i++){
             skyItems.add(new Hoops(gridWidth,gridHeight));
         }
