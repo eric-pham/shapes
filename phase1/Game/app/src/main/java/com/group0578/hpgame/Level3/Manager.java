@@ -13,15 +13,13 @@ public class Manager {
     private Wand wand;
     private int gridWidth;
     private int gridHeight;
-    private ArrayList<Blast> bullets;
-
 
     Manager(int width, int height) {
         gridWidth = width;
         gridHeight = height;
         myLittledementors = new ArrayList<>();
         myBlasts = new ArrayList<>();
-        wand = new Wand(gridWidth / 2, gridHeight - 4);
+        wand = new Wand(gridWidth / 2, gridHeight - 10);
     }
 
     ArrayList<Dementor> getMyLittledementors() {
@@ -63,6 +61,7 @@ public class Manager {
     }
 
     void updateDementor() {
+        int size = myLittledementors.size();
         for (int i = 0; i < myLittledementors.size(); i++) {
             for (int j = 0; j < myBlasts.size(); j++) {
                 if(myBlasts.get(i).getX() == myLittledementors.get(i).getColumn() &&
@@ -70,15 +69,26 @@ public class Manager {
                     myLittledementors.remove(i);
                 }
             }
-            if (myLittledementors.get(i).getRow() + 4 >= gridHeight) {
-                myLittledementors.remove(i);
+            if (myLittledementors.get(i).getRow() + 4 >= gridHeight - 10) {
+                if (size == 7){
+                    for (int j = 0; j < 1; j++){
+                        myLittledementors.remove(0);
+                    }
+                }
+                else if (size == 6){
+                    for(int j = 0; j < 2; j++){
+                        myLittledementors.remove(0);
+                    }
+                }
+                else{
+                    myLittledementors.clear();
+                }
             }
             else {
-                myLittledementors.get(i).move();
-                if (myLittledementors.get(i).getRow() >= 10) {
+                if (myLittledementors.get(i).getRow() >= 4) {
                     createDementors();
                 }
-
+                myLittledementors.get(i).move();
             }
         }
     }

@@ -22,7 +22,7 @@ public class ScreenView extends SurfaceView implements SurfaceHolder.Callback {
     private static float charHeight;
 
     /** The screen contents. */
-    private Manager roomManager;
+    private static Manager roomManager;
     /** The part of the program that manages time. */
     private MainThread thread;
 
@@ -54,6 +54,8 @@ public class ScreenView extends SurfaceView implements SurfaceHolder.Callback {
     public static float getCharHeight() {
         return charHeight;
     }
+
+    public static Manager getRoomManager(){return roomManager;}
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {

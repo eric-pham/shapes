@@ -12,8 +12,6 @@ import com.group0578.hpgame.R;
 public class Level3MainActivity extends AppCompatActivity {
 
 
-    Manager manager;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,14 +23,17 @@ public class Level3MainActivity extends AppCompatActivity {
     }
 
     public void createBlast(View view){
+        Manager manager = ScreenView.getRoomManager();
         manager.createBlast();
     }
 
     public void moveWandRight(View view){
+        Manager manager = ScreenView.getRoomManager();
         manager.moveWandRight();
     }
 
     public void moveWandLeft(View view){
+        Manager manager = ScreenView.getRoomManager();
         manager.moveWandLeft();
     }
 
