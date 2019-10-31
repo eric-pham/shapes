@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.group0578.hpgame.model.SQLiteHelper;
+import com.group0578.hpgame.model.SQLiteManager;
+
 import com.group0578.hpgame.presenter.CreateUserPresenter;
 import com.group0578.hpgame.R;
 
@@ -20,6 +23,8 @@ public class CreateUserActivity extends AppCompatActivity implements CreateUser.
      * The Presenter managing the actions behind this CreateUserActivity View
      */
     private CreateUserPresenter createUserPresenter;
+
+    SQLiteHelper sqlHelper = new SQLiteHelper(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +39,9 @@ public class CreateUserActivity extends AppCompatActivity implements CreateUser.
      *
      * @param view the View of the 'Create Account' screen (activity_create_user)
      */
-    public void onClickConfirmButton(View view) {
-        createUserPresenter.createAccount();
-    }
+    //public void onClickConfirmButton(View view) {
+     //   createUserPresenter.createAccount();
+    ///}
 
     /**
      *  When create user button is clicked add information to data
@@ -55,6 +60,8 @@ public class CreateUserActivity extends AppCompatActivity implements CreateUser.
 
         //Call CreateUserPresenter method here you can pass in the local variables
         //username and password
+        createUserPresenter.createAccount(sqlHelper, username, password);
+
     }
 //    public void confirmAccount() {
 //        String username = ((TextView) findViewById(R.id.userName)).getText().toString();

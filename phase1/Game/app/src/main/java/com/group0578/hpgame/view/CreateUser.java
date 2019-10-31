@@ -1,5 +1,7 @@
 package com.group0578.hpgame.view;
 
+import com.group0578.hpgame.model.SQLiteHelper;
+
 /**
  * Methods responsible for communication between CreateUserPresenter and CreateUserActivity
  */
@@ -20,7 +22,7 @@ public interface CreateUser {
      * Methods implemented by CreateUserPresenter
      */
     interface Presenter {
-        void createAccount();
+        void createAccount(SQLiteHelper sqlHelper, String username, String password);
     }
 
 }
