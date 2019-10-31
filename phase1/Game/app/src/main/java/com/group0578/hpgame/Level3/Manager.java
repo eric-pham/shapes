@@ -95,17 +95,18 @@ public class Manager {
             if ( y + 4 >= gridHeight - 10){
                 for (int i = 0; i < size; i++){
                     if (y == myLittledementors.get(i).getRow()){
-                    dementors.add(i);
+                        dementors.add(i);
                     }
                 }
                 for (int j = 0; j< dementors.size(); j++){
-                    myLittledementors.remove(0);
-                    }
+                    myLittledementors.remove((int) dementors.get(j));
+                }
             }
             // check if more dementors need to be created
-            if (myLittledementors.get(0).getRow() >= 2){
+            if (myLittledementors.get(0).getRow() >= 5){
                 createDementors();
             }
+            updateBlasts();
             for (int i = 0; i < myLittledementors.size(); i++){
                 myLittledementors.get(i).move();
             }
@@ -126,7 +127,7 @@ public class Manager {
                 }
             }
             for(int m = 0; m < dementors2.size(); m++){
-                myLittledementors.remove(m);
+                myLittledementors.remove((int) dementors2.get(m));
             }
             myBlasts.get(i).move();
         }
