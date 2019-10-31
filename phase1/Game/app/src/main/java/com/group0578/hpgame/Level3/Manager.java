@@ -99,14 +99,25 @@ public class Manager {
                     }
                 }
                 for (int j = 0; j< dementors.size(); j++){
-                    myLittledementors.remove((int) dementors.get(j));
+                    myLittledementors.remove(0);
                 }
             }
             // check if more dementors need to be created
             if (myLittledementors.get(0).getRow() >= 5){
                 createDementors();
             }
-            updateBlasts();
+            ArrayList<Integer> dementors2  = new ArrayList<>();
+            for (int i = 0; i < myBlasts.size(); i++) {
+                for (int j = 0; j < myLittledementors.size(); j++){
+                    if (myBlasts.get(i).getX() == myLittledementors.get(j).getColumn()
+                            && myBlasts.get(i).getY() == myLittledementors.get(j).getRow()) {
+                        dementors2.add(j);
+                    }
+                }
+                for(int m = dementors2.size() - 1; m >= 0 ; m--){
+                    myLittledementors.remove((int) dementors2.get(m));
+                }
+            }
             for (int i = 0; i < myLittledementors.size(); i++){
                 myLittledementors.get(i).move();
             }
@@ -120,15 +131,6 @@ public class Manager {
     void updateBlasts() {
         ArrayList<Integer> dementors2  = new ArrayList<>();
         for (int i = 0; i < myBlasts.size(); i++) {
-            for (int j = 0; j < myLittledementors.size(); j++){
-                if (myBlasts.get(i).getX() == myLittledementors.get(j).getColumn()
-                        && myBlasts.get(i).getY() == myLittledementors.get(j).getRow()) {
-                    dementors2.add(j);
-                }
-            }
-            for(int m = 0; m < dementors2.size(); m++){
-                myLittledementors.remove((int) dementors2.get(m));
-            }
             myBlasts.get(i).move();
         }
     }
@@ -137,7 +139,7 @@ public class Manager {
         int i = myLittledementors.size();
         if (cnt<15) {
             for (int j = 1; j <= i + 1; j++) {
-                Dementor d = new Dementor(gridWidth * j / (i + 2), 0);
+                Dementor d = new Dementor(j * 5, 0);
                 this.myLittledementors.add(d);
             }
         }
