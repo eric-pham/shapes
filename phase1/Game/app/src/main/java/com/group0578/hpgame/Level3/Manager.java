@@ -142,9 +142,15 @@ public class Manager {
   void createDementors() {
     int i = myLittledementors.size() + 1;
     if (cnt < 5) {
-      Dementor d = new Dementor(i * 5, 0);
-      this.myLittledementors.add(d);
-    }
+      if (cnt == 3 || cnt == 4) {
+        Dementor d = new Dementor(i * 5 + 1, 0);
+        this.myLittledementors.add(d);
+
+      } else {
+        Dementor d = new Dementor(i * 5, 0);
+        this.myLittledementors.add(d);
+      }
+        }
     cnt += 1;
     }
 
