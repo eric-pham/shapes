@@ -36,6 +36,7 @@ public class MazeView extends SurfaceView implements Runnable, Maze.View, View.O
     private MazeSection exitPoint;
     private Paint playerPaint, exitPointPaint;
     private Paint textBrush = new Paint();
+    private Player player;
 //    private float playerX, playerY;
 
     public MazeView(Context context) {
@@ -63,7 +64,7 @@ public class MazeView extends SurfaceView implements Runnable, Maze.View, View.O
     @Override
     public void run() {
         mazeGrid = mazePresenter.getMazeGrid();
-        Player player = new Player(0,0);
+        player = new Player(0,0);
         setPlayerExitLocations();
         prepareMazeBrush();
         determineMazeDimensions();
@@ -80,7 +81,7 @@ public class MazeView extends SurfaceView implements Runnable, Maze.View, View.O
             mazeCanvas.drawText("Player = Circle", 100, 100, textBrush);
             mazeCanvas.drawText("EndPoint = Square", 100, 160, textBrush);
             drawMazeWalls(mazeCanvas);
-            drawPlayer(mazeCanvas, mazeSectionLength/10, player);
+            drawPlayer(mazeCanvas, mazeSectionLength/10);
             drawExitPoint(mazeCanvas, mazeSectionLength/10);
             surfaceHolder.unlockCanvasAndPost(mazeCanvas);
         }
@@ -197,7 +198,7 @@ public class MazeView extends SurfaceView implements Runnable, Maze.View, View.O
                 (row + 1)*mazeSectionLength, mazeBrush);
     }
 
-    private void drawPlayer(Canvas mazeCanvas, float margin, Player player) {
+    private void drawPlayer(Canvas mazeCanvas, float margin) {
         if (player.hasMoved()) {
             float left = player.getCol() * mazeSectionLength + margin;
             float right = (player.getCol() + 1) * mazeSectionLength - margin;
@@ -233,7 +234,70 @@ public class MazeView extends SurfaceView implements Runnable, Maze.View, View.O
      */
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+        if (!player.hasMoved()) {
+            player.setHasMoved(true);
+        }
+
+        if (event.getAction() == MotionEvent.ACTION_MOVE) {
+            float touchX = event.getX(), touchY = event.getY();
+
+            float currPlayerX = horizontalMargin + (player.getCol()+0.5f) * mazeSectionLength;
+            float currPlayerY = verticalMargin + (player.getRow()+0.5f) * mazeSectionLength;
+
+            float displacementX = touchX - currPlayerX, displacementY = touchY - currPlayerY;
+
+            float absDisplacementX = Math.abs(displacementX),
+                    absDisplacementY = Math.abs(displacementY);
+
+            if (absDisplacementX > mazeSectionLength || absDisplacementY > mazeSectionLength) {
+
+                if (absDisplacementX > absDisplacementY) {  // move horizontally
+                    if (displacementX > 0) {
+                        movePlayerRight();
+                    } else {
+                        movePlayerLeft();
+                    }
+                } else {    // move vertically
+                    if (displacementY > 0) {
+                        movePlayerDown();
+                    } else {
+                        movePlayerUp();
+                    }
+                }
+
+            }
+        }
+
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            return true;
+        }
 
         return true;
     }
+
+    private void movePlayerUp() {
+        if (!mazeGrid[player.getRow()][player.getCol()].getHasTopWall()) {
+            player.setRow(player.getRow() - 1);
+        }
+    }
+
+    private void movePlayerDown() {
+        if (!mazeGrid[player.getRow()][player.getCol()].getHasBottomWall()) {
+            player.setRow(player.getRow() + 1);
+        }
+    }
+
+    private void movePlayerLeft() {
+        if (!mazeGrid[player.getRow()][player.getCol()].getHasLeftWall()) {
+            player.setCol(player.getCol() - 1);
+        }
+    }
+
+    private void movePlayerRight() {
+        if (!mazeGrid[player.getRow()][player.getCol()].getHasRightWall()) {
+            player.setCol(player.getCol() + 1);
+        }
+    }
+
+
 }
