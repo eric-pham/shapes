@@ -36,7 +36,7 @@ public class MazeView extends SurfaceView implements Runnable, Maze.View, View.O
     private MazeSection player, exitPoint;
     private Paint playerPaint, exitPointPaint;
     private Paint textBrush = new Paint();
-    private float playerX, playerY;
+//    private float playerX, playerY;
 
     public MazeView(Context context) {
         super(context);
@@ -47,7 +47,7 @@ public class MazeView extends SurfaceView implements Runnable, Maze.View, View.O
         textBrush.setColor(Color.WHITE);
         textBrush.setStrokeWidth(10);
         textBrush.setTextSize(50);
-        playerX = playerY = 0;
+//        playerX = playerY = 0;
     }
 
     /**
@@ -104,8 +104,10 @@ public class MazeView extends SurfaceView implements Runnable, Maze.View, View.O
     }
 
     private void setPlayerExitLocations() {
-//        player = mazeGrid[0][0];
-        exitPoint = mazeGrid[3][3];     // Can't access MazeUseCases.ROWS and MazeUseCases.COLS
+        int rows = mazePresenter.getRowColumnAttributes()[0];
+        int cols = mazePresenter.getRowColumnAttributes()[1];
+        player = mazeGrid[0][0];
+        exitPoint = mazeGrid[rows-1][cols-1];
     }
 
     void prepareMazeBrush() {
@@ -197,13 +199,13 @@ public class MazeView extends SurfaceView implements Runnable, Maze.View, View.O
     }
 
     private void drawPlayer(Canvas mazeCanvas, float margin) {
-//        float left = player.getCol() * mazeSectionLength + margin;
-//        float right = (player.getCol() + 1) * mazeSectionLength - margin;
-//        float top = player.getRow() * mazeSectionLength + margin;
-//        float bottom = (player.getRow() + 1) * mazeSectionLength - margin;
-//        mazeCanvas.drawCircle((left+right)/2, (top+bottom)/2,
-//                            mazeSectionLength/3, playerPaint);
-        mazeCanvas.drawCircle(playerX, playerY, mazeSectionLength/3, playerPaint);
+        float left = player.getCol() * mazeSectionLength + margin;
+        float right = (player.getCol() + 1) * mazeSectionLength - margin;
+        float top = player.getRow() * mazeSectionLength + margin;
+        float bottom = (player.getRow() + 1) * mazeSectionLength - margin;
+        mazeCanvas.drawCircle((left+right)/2, (top+bottom)/2,
+                            mazeSectionLength/3, playerPaint);
+//        mazeCanvas.drawCircle(positionX, positionY, mazeSectionLength/3, playerPaint);
     }
 
     private void drawExitPoint(Canvas mazeCanvas, float margin) {
@@ -225,117 +227,11 @@ public class MazeView extends SurfaceView implements Runnable, Maze.View, View.O
      */
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        playerX = event.getX();
-        playerY = event.getY();
+//        playerX = event.getX();
+//        playerY = event.getY();
+//        return true;
         return false;
     }
-
-//    /**
-//     * The part of the program managing time.
-//     */
-//    private MainMazeThread thread;
-//    private int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
-//    private int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
-//    private CharacterSprite character;
-//
-//    MazeManager mazeManager = new MazeManager(screenHeight, screenWidth);
-//
-////    /**
-////     * The Presenter managing actions such as updating this MazeView.
-////     */
-////    private MazePresenter mazePresenter;
-//
-//    /**
-//     * The SurfaceHolder object controls actions of the display surface of this MazeView.
-//     */
-//    private SurfaceHolder surfaceHolder = getHolder();
-//
-//    Canvas mazeCanvas;
-//
-//    /**
-//     * Create a new Maze in the context environment.
-//     * @param context the environment in which this Maze must be seen (MazeActivity.java)
-//     */
-//    public MazeView(Context context) {
-//        super(context);
-//        setFocusable(true);
-//        surfaceHolder.addCallback(this);
-//
-//        thread = new MainMazeThread(surfaceHolder, this);
-////        mazePresenter = new MazePresenter(this);
-//        this.setBackgroundColor(Color.BLACK);
-//
-//    }
-//
-//    /**
-//     * This is called immediately after the surface is first created.
-//     * Implementations of this should start up whatever rendering code
-//     * they desire.  Note that only one thread can ever draw into
-//     * a {@link MazeView}, so you should not draw into the Surface here
-//     * if your normal rendering will be in another thread.
-//     *
-//     * @param holder The SurfaceHolder whose surface is being created.
-//     */
-//    @Override
-//    public void surfaceCreated(SurfaceHolder holder) {
-//        character= new CharacterSprite();
-//        mazeManager = new MazeManager(screenHeight, screenWidth);
-//        mazeManager.setUpMaze();  // creates frame structure for maze
-//
-//
-//        thread.setIsRunning(true);
-//        thread.start();
-//    }
-//
-//    /**
-//     * This is called immediately after any structural changes (format or
-//     * size) have been made to the surface.  You should at this point update
-//     * the imagery in the surface.  This method is always called at least
-//     * once, after {@link #surfaceCreated}.
-//     *
-//     * @param holder The SurfaceHolder whose surface has changed.
-//     * @param format The new PixelFormat of the surface.
-//     * @param width  The new width of the surface.
-//     * @param height The new height of the surface.
-//     */
-//    @Override
-//    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
-//
-//    }
-//
-//    /**
-//     * This is called immediately before a surface is being destroyed. After
-//     * returning from this call, you should no longer try to access this
-//     * surface.  If you have a rendering thread that directly accesses
-//     * the surface, you must ensure that thread is no longer touching the
-//     * Surface before returning from this function.
-//     *
-//     * @param holder The SurfaceHolder whose surface is being destroyed.
-//     */
-//    @Override
-//    public void surfaceDestroyed(SurfaceHolder holder) {
-//        boolean retry = true;
-//        while (retry) {
-//            try{
-//                thread.setIsRunning(false);
-//                thread.join();
-//            }
-//            catch (InterruptedException e){
-//                e.printStackTrace();
-//            }
-//            retry = false;
-//        }
-//    }
-//
-//
-//    @Override
-//    public void draw(Canvas canvas) {
-//        super.draw(canvas);
-//
-//        if (canvas != null) {
-//            mazeManager.draw(canvas);
-//        }
-//    }
 
 }
 
