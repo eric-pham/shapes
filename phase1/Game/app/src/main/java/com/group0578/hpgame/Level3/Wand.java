@@ -100,6 +100,7 @@ public class Wand {
     public void shoot(Manager manager) {
         Blast b = new Blast(x, y);
         System.out.println(x + " " + y);
+        //manager.setMyBlasts(b);
         ArrayList<Blast> items = manager.getMyBlasts();
         items.add(b);
     }

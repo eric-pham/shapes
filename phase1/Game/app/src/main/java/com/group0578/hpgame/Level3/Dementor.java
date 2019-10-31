@@ -13,7 +13,7 @@ public class Dementor {
     private Paint paintText = new Paint();
 
     Dementor(int x, int y){
-        this.appearance = "<OO>";
+        this.appearance = "D";
         paintText.setTextSize(36);
         paintText.setColor(Color.WHITE);
         paintText.setTypeface(Typeface.DEFAULT_BOLD);
