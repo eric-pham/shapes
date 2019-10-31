@@ -33,9 +33,9 @@ public class Level1ActivityView extends SurfaceView implements SurfaceHolder.Cal
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        characterSprite = new CharacterSprite();
         skyManager = new SkyManager(screenHeight,screenWidth);
         skyManager.createSkyItems();
+        characterSprite = (CharacterSprite)skyManager.skyItems.get(0);
 
         thread.setRunning(true);
         thread.start();
@@ -59,7 +59,7 @@ public class Level1ActivityView extends SurfaceView implements SurfaceHolder.Cal
     }
 
     public void update(){
-        characterSprite.update();
+//        characterSprite.update(screenWidth,screenHeight);
         skyManager.update();
 
     }
@@ -79,20 +79,23 @@ public class Level1ActivityView extends SurfaceView implements SurfaceHolder.Cal
         int first = (screenHeight/3);
         int second = (screenHeight/3) * 2;
 
-        System.out.println(screenHeight);
-        System.out.println(first);
-        System.out.println(second);
+//        System.out.println(screenHeight);
+//        System.out.println(first);
+//        System.out.println(second);
 
         int x = (int)event.getX();
         int y = (int)event.getY();
 
         if (y>0 && y<first){
+            System.out.println("Character on " + first/2);
             characterSprite.setLocation(100, first/2);
         }
         else if( y>= first && y < second){
+            System.out.println("Character on " + (second -first/2));
             characterSprite.setLocation(100, second - first/2);
         }
         else{
+            System.out.println("Character on " + (screenHeight -first/2));
             characterSprite.setLocation(100, screenHeight - first/2);
         }
 

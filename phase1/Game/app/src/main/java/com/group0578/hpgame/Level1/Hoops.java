@@ -7,9 +7,9 @@ import android.graphics.Typeface;
 
 public class Hoops extends SkyItem {
 
-    private Bitmap hoop;
     private int velocity;
     private static int num = 0;
+    private static int collected = 0;
 
     Hoops(int screenWidth, int screenHeight) {
         super();
@@ -33,10 +33,16 @@ public class Hoops extends SkyItem {
         canvas.drawCircle(getX(),getY(),5,paintText);
     }
 
-    public void update(){
-        setLocation(getX() - velocity,getY());
-        System.out.println(getX());
-        System.out.println(getY());
+    public void update(int x, int y, float width) {
+
+        if (this.getX() > 100 && this.getX() < x + width && this.getY() == y) {
+            setLocation(0, 0);
+            collected++;
+        }
+        else{
+            setLocation(getX() - velocity,getY());
+        }
+        System.out.println(collected);
     }
 }
 
