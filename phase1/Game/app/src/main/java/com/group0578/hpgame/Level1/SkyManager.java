@@ -25,12 +25,16 @@ public class SkyManager {
     }
 
     void update(){
+        int xChar = skyItems.get(0).getX();
+        int yChar = skyItems.get(0).getY();
+
         for (SkyItem skyItem: skyItems){
-            skyItem.update();
+            skyItem.update(xChar,yChar,((CharacterSprite)skyItems.get(0)).getWidth());
         }
     }
 
     void createSkyItems(){
+        skyItems.add(new CharacterSprite());
         for (int i = 0; i < 10; i++){
             skyItems.add(new Hoops(gridWidth,gridHeight));
         }

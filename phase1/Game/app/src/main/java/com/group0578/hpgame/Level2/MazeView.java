@@ -33,7 +33,7 @@ public class MazeView extends SurfaceView implements Runnable, Maze.View, View.O
     private float verticalMargin;
     private float horizontalMargin;
     private MazePresenter mazePresenter;
-    private MazeSection player, exitPoint;
+    private MazeSection exitPoint;
     private Paint playerPaint, exitPointPaint;
     private Paint textBrush = new Paint();
 //    private float playerX, playerY;
@@ -47,7 +47,6 @@ public class MazeView extends SurfaceView implements Runnable, Maze.View, View.O
         textBrush.setColor(Color.WHITE);
         textBrush.setStrokeWidth(10);
         textBrush.setTextSize(50);
-//        playerX = playerY = 0;
     }
 
     /**
@@ -64,6 +63,7 @@ public class MazeView extends SurfaceView implements Runnable, Maze.View, View.O
     @Override
     public void run() {
         mazeGrid = mazePresenter.getMazeGrid();
+        Player player = new Player(0,0);
         setPlayerExitLocations();
         prepareMazeBrush();
         determineMazeDimensions();
@@ -80,7 +80,7 @@ public class MazeView extends SurfaceView implements Runnable, Maze.View, View.O
             mazeCanvas.drawText("Player = Circle", 100, 100, textBrush);
             mazeCanvas.drawText("EndPoint = Square", 100, 160, textBrush);
             drawMazeWalls(mazeCanvas);
-            drawPlayer(mazeCanvas, mazeSectionLength/10);
+            drawPlayer(mazeCanvas, mazeSectionLength/10, player);
             drawExitPoint(mazeCanvas, mazeSectionLength/10);
             surfaceHolder.unlockCanvasAndPost(mazeCanvas);
         }
@@ -106,7 +106,6 @@ public class MazeView extends SurfaceView implements Runnable, Maze.View, View.O
     private void setPlayerExitLocations() {
         int rows = mazePresenter.getRowColumnAttributes()[0];
         int cols = mazePresenter.getRowColumnAttributes()[1];
-        player = mazeGrid[0][0];
         exitPoint = mazeGrid[rows-1][cols-1];
     }
 
@@ -198,14 +197,21 @@ public class MazeView extends SurfaceView implements Runnable, Maze.View, View.O
                 (row + 1)*mazeSectionLength, mazeBrush);
     }
 
-    private void drawPlayer(Canvas mazeCanvas, float margin) {
-        float left = player.getCol() * mazeSectionLength + margin;
-        float right = (player.getCol() + 1) * mazeSectionLength - margin;
-        float top = player.getRow() * mazeSectionLength + margin;
-        float bottom = (player.getRow() + 1) * mazeSectionLength - margin;
-        mazeCanvas.drawCircle((left+right)/2, (top+bottom)/2,
-                            mazeSectionLength/3, playerPaint);
-//        mazeCanvas.drawCircle(positionX, positionY, mazeSectionLength/3, playerPaint);
+    private void drawPlayer(Canvas mazeCanvas, float margin, Player player) {
+        if (player.hasMoved()) {
+            float left = player.getCol() * mazeSectionLength + margin;
+            float right = (player.getCol() + 1) * mazeSectionLength - margin;
+            float top = player.getRow() * mazeSectionLength + margin;
+            float bottom = (player.getRow() + 1) * mazeSectionLength - margin;
+            mazeCanvas.drawCircle((left+right)/2, (top+bottom)/2,
+                    mazeSectionLength/3, playerPaint);
+        } else {  // player has already moved at least once
+            float firstX = mazeSectionLength / 2;
+            float firstY = mazeSectionLength / 2;
+            mazeCanvas.drawCircle(firstX, firstY,
+                    mazeSectionLength/3, playerPaint);
+        }
+
     }
 
     private void drawExitPoint(Canvas mazeCanvas, float margin) {
@@ -227,11 +233,7 @@ public class MazeView extends SurfaceView implements Runnable, Maze.View, View.O
      */
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-//        playerX = event.getX();
-//        playerY = event.getY();
-//        return true;
-        return false;
+
+        return true;
     }
-
 }
-
