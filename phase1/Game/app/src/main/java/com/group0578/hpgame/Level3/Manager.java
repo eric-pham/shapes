@@ -105,7 +105,7 @@ public class Manager {
 
     void createDementors() {
         int i = myLittledementors.size();
-        if (i<5) {
+        if (i<10) {
             for (int j = 1; j <= i + 1; j++) {
                 Dementor d = new Dementor(gridWidth * j / (i + 2), 0);
                 this.myLittledementors.add(d);
