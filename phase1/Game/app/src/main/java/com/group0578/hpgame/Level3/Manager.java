@@ -106,20 +106,8 @@ public class Manager {
             if (myLittledementors.get(0).getRow() >= 2){
                 createDementors();
             }
-            ArrayList<Integer> dementors2  = new ArrayList<>();
             for (int i = 0; i < myLittledementors.size(); i++){
-                // move the dementors down
                 myLittledementors.get(i).move();
-                for (int j = 0; j < myBlasts.size(); j++){
-                    if (myBlasts.get(j).getX() == myLittledementors.get(j).getColumn()
-                            && myBlasts.get(j).getY() == myLittledementors.get(j).getRow()) {
-                        dementors2.add(i);
-                        //myLittledementors.remove(i);
-                    }
-                }
-            }
-            for(int i = 0; i < dementors2.size(); i++){
-                myLittledementors.remove(0);
             }
         }
     }
@@ -129,7 +117,17 @@ public class Manager {
     }
 
     void updateBlasts() {
+        ArrayList<Integer> dementors2  = new ArrayList<>();
         for (int i = 0; i < myBlasts.size(); i++) {
+            for (int j = 0; j < myLittledementors.size(); j++){
+                if (myBlasts.get(i).getX() == myLittledementors.get(j).getColumn()
+                        && myBlasts.get(i).getY() == myLittledementors.get(j).getRow()) {
+                    dementors2.add(j);
+                }
+            }
+            for(int m = 0; m < dementors2.size(); m++){
+                myLittledementors.remove(m);
+            }
             myBlasts.get(i).move();
         }
     }

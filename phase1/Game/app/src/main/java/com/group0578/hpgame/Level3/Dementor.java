@@ -35,7 +35,7 @@ public class Dementor {
     }
 
     void move(){
-        this.y += 2;
+        this.y += 1;
     }
 
 
