@@ -107,17 +107,20 @@ public class Manager {
             if (myLittledementors.get(0).getRow() >= 5){
                 createDementors();
             }
-            ArrayList<Integer> dementors2  = new ArrayList<>();
+            ArrayList<Dementor> killeddementors  = new ArrayList<>();
             for (int i = 0; i < myBlasts.size(); i++) {
                 for (int j = 0; j < myLittledementors.size(); j++){
                     if (myBlasts.get(i).getX() == myLittledementors.get(j).getColumn()
                             && myBlasts.get(i).getY() == myLittledementors.get(j).getRow()) {
-                        dementors2.add(j);
+                        killeddementors.add(myLittledementors.get(j));
                     }
                 }
-                for(int m = dementors2.size() - 1; m >= 0 ; m--){
-                    myLittledementors.remove((int) dementors2.get(m));
+                for (int k = 0; k < killeddementors.size(); k++){
+                    myLittledementors.remove(killeddementors.get(k));
                 }
+                //for(int m = dementors2.size() - 1; m >= 0 ; m--){
+                  //  myLittledementors.remove((int) dementors2.get(m));
+                //}
             }
             for (int i = 0; i < myLittledementors.size(); i++){
                 myLittledementors.get(i).move();
