@@ -80,7 +80,8 @@ public class Wand {
             // Do nothing
         }
         else {
-            x += 1;
+            turnAround();
+            move(manager);
         }
 
     }
@@ -90,7 +91,8 @@ public class Wand {
             // Do nothing
         }
         else {
-            x -= 1;
+            turnAround();
+            move(manager);
         }
 
     }

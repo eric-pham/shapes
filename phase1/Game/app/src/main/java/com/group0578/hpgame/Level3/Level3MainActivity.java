@@ -11,6 +11,7 @@ import com.group0578.hpgame.R;
 
 public class Level3MainActivity extends AppCompatActivity {
 
+
     Manager manager;
 
     @Override
