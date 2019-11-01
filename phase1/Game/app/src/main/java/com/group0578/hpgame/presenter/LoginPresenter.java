@@ -26,9 +26,7 @@ import java.io.File;
  */
 public class LoginPresenter implements Login.Presenter {
 
-  /**
-   * The view associated with this presenter.
-   */
+  /** The view associated with this presenter. */
   private Login.View loginView;
 
   /**
@@ -43,8 +41,8 @@ public class LoginPresenter implements Login.Presenter {
   public boolean checkLogin(Activity act, String username, String password) {
     // Given username and password check if valid key value pair
     // do something
-    //System.out.println(username);
-    //System.out.println(password);
+    // System.out.println(username);
+    // System.out.println(password);
 
     // Create new gson
     Gson gson = new Gson();
@@ -59,9 +57,9 @@ public class LoginPresenter implements Login.Presenter {
       // Create HashMap
       HashMap hmap = gson.fromJson(bf, HashMap.class);
 
-      //System.out.println(hmap.get("username"));
+      // System.out.println(hmap.get("username"));
 
-      //Check HashMap for match
+      // Check HashMap for match
       return hmap.get(username).equals(password);
 
     } catch (FileNotFoundException e) {

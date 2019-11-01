@@ -9,8 +9,7 @@ import android.database.Cursor;
 import com.group0578.hpgame.presenter.CreateUserPresenter;
 
 /**
- * This class was derived from Tech Academy's Tutorial and modified to suit the needs of our
- * project
+ * This class was derived from Tech Academy's Tutorial and modified to suit the needs of our project
  */
 public class SQLiteHelper extends SQLiteOpenHelper {
 
@@ -45,7 +44,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
   }
 
   public void insertUser(SQLiteManager sql) {
-      System.out.println("Inserted");
+    System.out.println("Inserted");
     db = this.getWritableDatabase();
     ContentValues cValues = new ContentValues();
 
@@ -64,15 +63,15 @@ public class SQLiteHelper extends SQLiteOpenHelper {
   }
 
   public String findPassword(String username) {
-      System.out.println("FIndpassword method 1");
+    System.out.println("FIndpassword method 1");
     db = this.getReadableDatabase();
 
-      System.out.println("FIndpassword method 2");
+    System.out.println("FIndpassword method 2");
     String query = "select username, password from " + TABLE_NAME;
     Cursor cursor = db.rawQuery(query, null);
     String user, pass;
 
-      System.out.println("FIndpassword method 3");
+    System.out.println("FIndpassword method 3");
 
     pass = "Cannot find pass";
     if (cursor.moveToFirst()) {
