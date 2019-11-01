@@ -65,13 +65,13 @@ class Manager {
     if (myLittledementors.size() > 0) {
       ArrayList<Integer> dementors = new ArrayList<>();
       // Get the y coordinate of the dementor that is positioned lowest on the screen.
-      int y = myLittledementors.get(0).getRow();
+      int y = myLittledementors.get(0).getY();
       int size = myLittledementors.size();
       // check if the bottommost dementor is at the bottom of the screen. If it is, remove all
       // dementors that are in the same row as this dementor.
       if (y + 4 >= gridHeight - 10) {
         for (int i = 0; i < size; i++) {
-          if (y == myLittledementors.get(i).getRow()) {
+          if (y == myLittledementors.get(i).getY()) {
             dementors.add(i);
           }
         }
@@ -80,14 +80,14 @@ class Manager {
         }
       }
       // check if more dementors need to be created
-      if (myLittledementors.get(0).getRow() >= 5) {
+      if (myLittledementors.get(0).getY() >= 5) {
         createDementors();
       }
       ArrayList<Dementor> killeddementors = new ArrayList<>();
       for (int i = 0; i < myBlasts.size(); i++) {
         for (int j = 0; j < myLittledementors.size(); j++) {
-          if (myBlasts.get(i).getX() == myLittledementors.get(j).getColumn()
-              && myBlasts.get(i).getY() == myLittledementors.get(j).getRow()) {
+          if (myBlasts.get(i).getX() == myLittledementors.get(j).getX()
+              && myBlasts.get(i).getY() == myLittledementors.get(j).getY()) {
             killeddementors.add(myLittledementors.get(j));
           }
         }

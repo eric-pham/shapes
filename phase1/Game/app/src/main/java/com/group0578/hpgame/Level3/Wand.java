@@ -7,18 +7,13 @@ import android.graphics.Typeface;
 
 import java.util.ArrayList;
 
-class Wand {
+class Wand extends Items {
 
   /** How the wand appears on the screen. */
   private String appearance;
 
   /** Indicates whether the wand is moving right. */
   private boolean goingRight;
-
-  /** This wand's first coordinate. row */
-  private int x;
-  /** This wand's second coordinate. col */
-  private int y;
 
   private Paint paintText = new Paint();
 
@@ -29,10 +24,9 @@ class Wand {
    * @param y This wand's second coordinate
    */
   Wand(int x, int y) {
+    super(x, y);
     paintText.setTextSize(60);
     paintText.setTypeface(Typeface.DEFAULT_BOLD);
-    this.x = x;
-    this.y = y;
     paintText.setColor(Color.YELLOW);
     goingRight = true;
     this.appearance = "|";
@@ -43,13 +37,8 @@ class Wand {
     goingRight = !goingRight;
   }
 
-  /**
-   * Draws this wand.
-   *
-   * @param canvas the mazeCanvas on which to draw this item.
-   */
   void draw(Canvas canvas) {
-    drawString(canvas, appearance, x, y);
+    drawString(canvas, appearance, getX(), getY());
   }
 
   boolean getDirection() {
@@ -75,14 +64,15 @@ class Wand {
   void move(Manager manager) {
     // Move one spot to the right or left in the direction I'm going. If I bump into a wall,
     // turn around.
+    int x = getX();
     if (x == 0 || x == manager.getGridWidth()) {
       turnAround();
     }
 
     if (goingRight) {
-      x += 1;
+      setX(x + 1);
     } else {
-      x -= 1;
+      setX(x - 1);
     }
   }
 
@@ -92,7 +82,7 @@ class Wand {
    * @param manager the manager of the screen on which the wand is located.
    */
   void moveRight(Manager manager) {
-    if (!(x == manager.getGridWidth())) {
+    if (!(getX() == manager.getGridWidth())) {
       turnAround();
       move(manager);
     }
@@ -104,7 +94,7 @@ class Wand {
    * @param manager the manager of the screen on which the wand is located.
    */
   void moveLeft(Manager manager) {
-    if (!(x == 0)) {
+    if (!(getX() == 0)) {
       turnAround();
       move(manager);
     }
@@ -116,8 +106,8 @@ class Wand {
    * @param manager the manager of the screen on which the wand is located.
    */
   void shoot(Manager manager) {
-    Blast b = new Blast(x, y);
-    System.out.println(x + " " + y);
+    Blast b = new Blast(getX(), getY());
+    System.out.println(getX() + " " + getY());
     ArrayList<Blast> items = manager.getMyBlasts();
     items.add(b);
   }
