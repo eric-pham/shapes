@@ -27,7 +27,11 @@ public class LoginActivity extends AppCompatActivity implements Login.View {
     loginPresenter = new LoginPresenter(this);
   }
 
-  /** When login button is clicked, check if username and password are valid */
+  /**
+   * When login button is clicked, verify if password is valid with given username, launch level 1
+   * if login succeeds
+   * @param v view
+   */
   public void onClickLogin(View v) {
     // Get username and password from user inputted EditText
     final EditText loginUser = findViewById(R.id.loginUser);
@@ -35,15 +39,6 @@ public class LoginActivity extends AppCompatActivity implements Login.View {
 
     final EditText loginPassword = findViewById(R.id.loginPassword);
     String password = loginPassword.getText().toString();
-
-    //        //Call presenter to verify username and password
-    //        if (loginPresenter.checkLogin(this, username, password)) {
-    //            //If checks out do something
-    //            loginPresenter.createNewStage1Screen();
-    //        } else {
-    //            //if invalid do something
-    //            System.out.println("Invalid");
-    //        }
 
     String returnPass = sqlHelper.findPassword(username);
     if (returnPass.equals(password)) {

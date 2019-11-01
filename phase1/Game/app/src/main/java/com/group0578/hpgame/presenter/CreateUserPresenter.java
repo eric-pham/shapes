@@ -25,8 +25,10 @@ public class CreateUserPresenter implements CreateUser.Presenter {
   }
 
   /**
-   * This method creates a new intent (the next screen after creating a new account) UNFINISHED ---
-   * Decide what to do later.
+   * Creates a new account
+   * @param sqlHelper stores username and password
+   * @param username username for account
+   * @param password password for account
    */
   public void createAccount(SQLiteHelper sqlHelper, String username, String password) {
     SQLiteManager sql = new SQLiteManager();

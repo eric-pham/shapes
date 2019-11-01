@@ -12,30 +12,52 @@ import com.group0578.hpgame.presenter.CreateUserPresenter;
  * This class was derived from Tech Academy's Tutorial and modified to suit the needs of our project
  */
 public class SQLiteHelper extends SQLiteOpenHelper {
-
+  /** Metadata for the Database and table */
   private static final int DB_VERSION = 1;
-  private static final String DB_NAME = "users.db";
 
+  private static final String DB_NAME = "users.db";
   private static final String TABLE_NAME = "users";
+
+  /** Columns of the table */
   private static final String COLUMN_ID = "id";
+
   private static final String COLUMN_USERNAME = "username";
   private static final String COLUMN_PASSWORD = "password";
 
+  /** SQLiteDatabase object */
   SQLiteDatabase db;
 
+  /** String with table with appropriate columns */
   private static final String TABLE_CREATED =
       "create table users (id integer primary key not null , username text not null , password text not null);";
 
+  /**
+   * Constructor for SQLiteHelper
+   *
+   * @param context the current Context used to initialize this object.
+   */
   public SQLiteHelper(Context context) {
     super(context, DB_NAME, null, DB_VERSION);
   }
 
+  /**
+   * Called when the database is initially created
+   *
+   * @param db database passed in
+   */
   @Override
   public void onCreate(SQLiteDatabase db) {
     db.execSQL(TABLE_CREATED);
     this.db = db;
   }
 
+  /**
+   * Called when the database requires updating
+   *
+   * @param sqLiteDatabase database
+   * @param i old version
+   * @param i1 new version
+   */
   @Override
   public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
     String query = "DROP TABLE IF EXISTS " + TABLE_NAME;
@@ -43,6 +65,11 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     this.onCreate(db);
   }
 
+  /**
+   * Insert a new user into the database based on SQLiteManager information
+   *
+   * @param sql contains username and password to be inserted
+   */
   public void insertUser(SQLiteManager sql) {
     System.out.println("Inserted");
     db = this.getWritableDatabase();
@@ -62,6 +89,12 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     System.out.println("Inserted");
   }
 
+  /**
+   * Returns the password with a given username, "Cannot find pass" otherwise.
+   *
+   * @param username username to search for in the table
+   * @return password associated with the username or "Cannot find pass"
+   */
   public String findPassword(String username) {
     System.out.println("FIndpassword method 1");
     db = this.getReadableDatabase();
