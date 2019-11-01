@@ -5,7 +5,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 
-public class Blast {
+class Blast {
     /**
      * How the blast appears on the screen.
      */
@@ -51,7 +51,7 @@ public class Blast {
      * @param x      the x-coordinate of the string's cursor location.
      * @param y      the y-coordinate of the string's cursor location.
      */
-    void drawString(Canvas canvas, String s, int x, int y) {
+    private void drawString(Canvas canvas, String s, int x, int y) {
         canvas.drawText(s, x * ScreenView.getCharWidth(), y * ScreenView.getCharHeight(), paintText);
     }
 
