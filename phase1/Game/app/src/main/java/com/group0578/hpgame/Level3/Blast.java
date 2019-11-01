@@ -19,7 +19,7 @@ public class Blast {
      */
     private int y;
 
-    Paint paintText = new Paint();
+    private Paint paintText = new Paint();
 
     /**
      * The constructor for this blast.
@@ -35,17 +35,11 @@ public class Blast {
         appearance = "*";
     }
 
-    /**
-     * Getter for the x instance variable.
-     */
-    public int getX() {
+    int getX() {
         return x;
     }
 
-    /**
-     * Getter for the y instance variable.
-     */
-    public int getY() {
+    int getY() {
         return y;
     }
 
