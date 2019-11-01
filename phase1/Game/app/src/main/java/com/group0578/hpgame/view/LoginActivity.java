@@ -18,7 +18,9 @@ public class LoginActivity extends AppCompatActivity implements Login.View {
   /** The presenter associated with this View that handles the user's interactions with the UI. */
   private LoginPresenter loginPresenter;
 
+  /** SQL helper associated with this LoginActivity */
   SQLiteHelper sqlHelper = new SQLiteHelper(this);
+
   /** The constructor for the activity that displays the Login Screen. */
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,7 @@ public class LoginActivity extends AppCompatActivity implements Login.View {
   /**
    * When login button is clicked, verify if password is valid with given username, launch level 1
    * if login succeeds
+   *
    * @param v view
    */
   public void onClickLogin(View v) {
@@ -40,12 +43,10 @@ public class LoginActivity extends AppCompatActivity implements Login.View {
     final EditText loginPassword = findViewById(R.id.loginPassword);
     String password = loginPassword.getText().toString();
 
-    String returnPass = sqlHelper.findPassword(username);
-    if (returnPass.equals(password)) {
-      System.out.println("LOGIN!");
+    if (loginPresenter.checkLogin(sqlHelper, username, password)) {
       loginPresenter.createNewStage1Screen();
     } else {
-      System.out.println("FAILED LOGIN");
+      System.out.println("Login Failed!");
     }
   }
 

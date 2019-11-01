@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.AssetManager;
 
 import com.group0578.hpgame.Level1.Level1Activity;
+import com.group0578.hpgame.model.SQLiteHelper;
 import com.group0578.hpgame.view.Login;
 
 import java.io.BufferedReader;
@@ -38,40 +39,23 @@ public class LoginPresenter implements Login.Presenter {
     this.loginView = loginView;
   }
 
-  public boolean checkLogin(Activity act, String username, String password) {
-    // Given username and password check if valid key value pair
-    // do something
-    // System.out.println(username);
-    // System.out.println(password);
+  /**
+   * Verifies the login
+   *
+   * @param sqlHelper SQLiteHelper object
+   * @param username username to check
+   * @param password password to check
+   * @return true if the password associated with the username is correct, false otherwise
+   */
+  public boolean checkLogin(SQLiteHelper sqlHelper, String username, String password) {
+    // Search database for password associated with username
+    String returnPass = sqlHelper.findPassword(username);
 
-    // Create new gson
-    Gson gson = new Gson();
-
-    try {
-      // Create AssetsManager, InputStream and BufferedReader
-      AssetManager am = act.getAssets();
-      String[] asd = am.list("");
-      InputStream is = am.open("userInfo.json");
-      BufferedReader bf = new BufferedReader(new InputStreamReader(is));
-
-      // Create HashMap
-      HashMap hmap = gson.fromJson(bf, HashMap.class);
-
-      // System.out.println(hmap.get("username"));
-
-      // Check HashMap for match
-      return hmap.get(username).equals(password);
-
-    } catch (FileNotFoundException e) {
-      System.out.println("Exception!");
-    } catch (Exception e) {
-      // hmap.get did not work, username is not in userInfo
-      System.out.println("Exception e!");
-      return false;
-    }
-    return false;
+    // Checks whether password is correct
+    return returnPass.equals(password);
   }
 
+  /** Load stage 1 */
   public void createNewStage1Screen() {
     Intent createStage1Intent = new Intent((LoginActivity) this.loginView, Level1Activity.class);
     System.out.println("Method reached 3");
