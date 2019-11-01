@@ -21,6 +21,11 @@ public class Blast {
 
     Paint paintText = new Paint();
 
+    /**
+     * The constructor for this blast.
+     * @param x This blast's first coordinate.
+     * @param y This blast's second coordinate
+     */
     Blast(int x, int y) {
         this.x = x;
         this.y = y;
@@ -30,10 +35,16 @@ public class Blast {
         appearance = "*";
     }
 
+    /**
+     * Getter for the x instance variable.
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     * Getter for the y instance variable.
+     */
     public int getY() {
         return y;
     }
@@ -59,6 +70,8 @@ public class Blast {
         drawString(canvas, appearance, x, y);
     }
 
+    /** Causes this item to move up on the screen.
+     */
     void move() {
         y--;
     }

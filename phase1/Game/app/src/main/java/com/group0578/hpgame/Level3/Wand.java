@@ -22,6 +22,11 @@ public class Wand {
 
     Paint paintText = new Paint();
 
+    /**
+     * The constructor for this wand.
+     * @param x This wand's first coordinate.
+     * @param y This wand's second coordinate
+     */
     public Wand(int x, int y) {
         paintText.setTextSize(60);
         paintText.setTypeface(Typeface.DEFAULT_BOLD);
@@ -32,12 +37,15 @@ public class Wand {
         this.appearance = "|";
     }
 
+    /**
+     * Changes the direction of the wand's horizontal movement.
+     */
     private void turnAround() {
         goingRight = !goingRight;
     }
 
     /**
-     * Draws this fish tank item.
+     * Draws this wand.
      *
      * @param canvas the mazeCanvas on which to draw this item.
      */
@@ -60,7 +68,9 @@ public class Wand {
         canvas.drawText(s, x * ScreenView.getCharWidth(), y * ScreenView.getCharHeight(), paintText);
     }
 
-    /** Causes this item to take its turn in the fish-tank simulation. */
+    /** Causes this item to move horizontally on the screen
+     * @param manager the manager of the screen on which the wand is located.
+     */
     void move(Manager manager) {
         // Move one spot to the right or left in the direction I'm going. If I bump into a wall,
         // turn around.
@@ -75,32 +85,32 @@ public class Wand {
         }
     }
 
+    /** Causes this item to change its direction to the right. If it's already moving right do nothing.
+     * @param manager the manager of the screen on which the wand is located.
+     */
     void moveRight(Manager manager){
-        if (x == manager.getGridWidth()) {
-            // Do nothing
-        }
-        else {
+        if (!(x == manager.getGridWidth())) {
             turnAround();
             move(manager);
         }
-
     }
 
+    /** Causes this item to change its direction to the left. If it's already moving left do nothing.
+     * @param manager the manager of the screen on which the wand is located.
+     */
     void moveLeft(Manager manager){
-        if (x == 0) {
-            // Do nothing
-        }
-        else {
+        if (!(x == 0)) {
             turnAround();
             move(manager);
         }
-
     }
 
+    /** Causes a an instance of the Blast class to be created at the tip of the wand.
+     * @param manager the manager of the screen on which the wand is located.
+     */
     public void shoot(Manager manager) {
         Blast b = new Blast(x, y);
         System.out.println(x + " " + y);
-        //manager.setMyBlasts(b);
         ArrayList<Blast> items = manager.getMyBlasts();
         items.add(b);
     }

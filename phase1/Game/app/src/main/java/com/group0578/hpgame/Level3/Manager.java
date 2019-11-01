@@ -1,8 +1,6 @@
 package com.group0578.hpgame.Level3;
 
 import android.graphics.Canvas;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Manager {
@@ -24,10 +22,6 @@ public class Manager {
         wand = new Wand(gridWidth / 2, gridHeight - 10);
         cnt = 0;
 
-    }
-
-    ArrayList<Dementor> getMyLittledementors() {
-        return myLittledementors;
     }
 
     ArrayList<Blast> getMyBlasts() {
@@ -53,7 +47,6 @@ public class Manager {
     }
 
     void draw(Canvas canvas) {
-        //System.out.println("Paul Gries");
         wand.draw(canvas);
 
         for (int a = 0; a != myLittledementors.size(); a++) {
@@ -63,27 +56,6 @@ public class Manager {
             myBlasts.get(a).draw(canvas);
         }
     }
-
-    //void updateDementor() {
-      //  int size = myLittledementors.size();
-       // for (int i = 0; i < myLittledementors.size(); i++) {
-         //   for (int j = 0; j < myBlasts.size(); j++) {
-           //     if(myBlasts.get(i).getX() == myLittledementors.get(i).getColumn() &&
-             //           myBlasts.get(i).getY() == myLittledementors.get(i).getRow()) {
-               //     myLittledementors.remove(i);
-               // }
-            //}
-            //if (myLittledementors.get(i).getRow() + 4 >= gridHeight - 10) {
-
-            //}
-            //else {
-              //  if (myLittledementors.get(i).getRow() >= 4) {
-                //    createDementors();
-                //}
-                //myLittledementors.get(i).move();
-            //}
-        //}
-    //}
 
     void updateDementor() {
         if (myLittledementors.size() > 0){
@@ -118,9 +90,6 @@ public class Manager {
                 for (int k = 0; k < killeddementors.size(); k++){
                     myLittledementors.remove(killeddementors.get(k));
                 }
-                //for(int m = dementors2.size() - 1; m >= 0 ; m--){
-                  //  myLittledementors.remove((int) dementors2.get(m));
-                //}
             }
             for (int i = 0; i < myLittledementors.size(); i++){
                 myLittledementors.get(i).move();
@@ -133,7 +102,6 @@ public class Manager {
     }
 
     void updateBlasts() {
-        //ArrayList<Integer> dementors2  = new ArrayList<>();
         for (int i = 0; i < myBlasts.size(); i++) {
             myBlasts.get(i).move();
         }
