@@ -35,15 +35,6 @@ public class CreateUserActivity extends AppCompatActivity implements CreateUser.
     }
 
     /**
-     * Called when the 'confirm' button is clicked
-     *
-     * @param view the View of the 'Create Account' screen (activity_create_user)
-     */
-    //public void onClickConfirmButton(View view) {
-     //   createUserPresenter.createAccount();
-    ///}
-
-    /**
      *  When create user button is clicked add information to data
      */
     public void onClickCreate(View v){
@@ -61,27 +52,6 @@ public class CreateUserActivity extends AppCompatActivity implements CreateUser.
         //Call CreateUserPresenter method here you can pass in the local variables
         //username and password
         createUserPresenter.createAccount(sqlHelper, username, password);
-
-    }
-//    public void confirmAccount() {
-//        String username = ((TextView) findViewById(R.id.userName)).getText().toString();
-//        String password = ((TextView) findViewById(R.id.userPassword)).getText().toString();
-//
-//        /*if (username.equals("") || password.equals("")) {
-//
-//        } else if (userExists(username, password)) {
-//
-//        } else {
-//
-//        }*/
-//
-//        addAccount(username, password);
-//    }
-
-//    private boolean userExists(String userName, String userPassword) {
-//
-//    }
-    private void addAccount(String userName, String userPassword) {
 
     }
 
