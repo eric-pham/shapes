@@ -38,12 +38,12 @@
         app:layout_constraintVertical_bias="0.3"/>
 
     <Button
-        android:id="@+id/go_to_level_3_button"
+        android:id="@+id/enterLevelThree"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Level 3"
         android:textSize="30sp"
-        android:onClick="nextLevel"
+        android:onClick="onClickNextLevel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"

@@ -14,7 +14,7 @@ public class MazeBuilder {
   /**
    * The series of instructions to create all the tools and objects needed to draw the maze
    *
-   * @param mazePresenter
+   * @param mazePresenter the MazePresenter responsible for drawing the maze
    */
   void build(MazePresenter mazePresenter) { // might not need mazeView attribute change later
     mazePresenter.setScreenWidth(Resources.getSystem().getDisplayMetrics().widthPixels);
@@ -35,7 +35,7 @@ public class MazeBuilder {
   /**
    * Initializes the exitPoint attribute to last column and last row in the mazeGrid array.
    *
-   * @param mazePresenter
+   * @param mazePresenter the MazePresenter responsible for drawing the maze
    */
   private void setExitLocation(MazePresenter mazePresenter) {
     int rows = mazePresenter.getRowColumnAttributes()[0];
@@ -47,7 +47,7 @@ public class MazeBuilder {
    * Initializes and performs actions on mazeBrush attribute which is used to draw the maze.
    * Initializes and performs actions on textBrush attribute which is used to draw the text.
    *
-   * @param mazePresenter
+   * @param mazePresenter the MazePresenter responsible for drawing the maze
    */
   private void prepareMazeBrushes(MazePresenter mazePresenter) {
     // Prepare the mazeBrush object to draw maze on the screen in run() method of the MazeThread
@@ -70,8 +70,8 @@ public class MazeBuilder {
    * <p>1) How large each mazeSection should be on the screen (setting mazeSectionLength attribute)
    * 2) Vertical and horizontal margins between the maze and edges of the screen
    *
-   * @param mazePresenter
-   * @param mazeGrid
+   * @param mazePresenter the MazePresenter responsible for drawing the maze
+   * @param mazeGrid the grid array on which the maze appears.
    */
   private void determineMazeDimensions(MazePresenter mazePresenter, MazeSection[][] mazeGrid) {
 
@@ -102,7 +102,7 @@ public class MazeBuilder {
   /**
    * Initializes a paint object used to draw the player.
    *
-   * @param mazePresenter
+   * @param mazePresenter the MazePresenter responsible for drawing the maze
    */
   private void makePlayer(MazePresenter mazePresenter) {
     Paint playerPaint = new Paint();
@@ -115,7 +115,7 @@ public class MazeBuilder {
   /**
    * Initializes a paint object used to draw the exit point in the maze.
    *
-   * @param mazePresenter
+   * @param mazePresenter the MazePresenter responsible for drawing the maze
    */
   private void makeExitPoint(MazePresenter mazePresenter) {
     Paint exitPointPaint = new Paint();
