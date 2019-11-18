@@ -16,8 +16,6 @@ public class MazePresenter implements Maze.Presenter {
   /** The height of the screen representing this MazeView. */
   private int screenHeight;
 
-
-
   /** The array representing the maze; structured as a grid where each element is a MazeSection. */
   private MazeSection[][] mazeGrid;
 
@@ -42,140 +40,186 @@ public class MazePresenter implements Maze.Presenter {
   /** The length between the sides of the screen and the Maze. */
   private float horizontalMargin;
 
-  /**
-   * The Paint objects used to draw and distinguish the Player's current location from the exit
-   * point.
-   */
+  /**The Paint objects used to draw and distinguish the Player's current location from the exit
+   * point. */
   private Paint playerPaint, exitPointPaint;
 
   /** The Paint object used to draw text on the screen -- used for creating the legend. */
   private Paint textBrush;
 
-  /** The mazeView interface reference attribute. */
-  private MazeView mazeView;
-
-  /**
-   * Presenter accesses the UseCases to manipulate maze entities/data such as MazeSection to build
-   * the MazeGrid.
-   */
+  /**Presenter accesses the UseCases to manipulate maze entities/data such as MazeSection to build
+   * the MazeGrid. */
   private MazeUseCases mazeUseCases;
 
+  /** Boolean that indicates whether the game's win condition has been reached. */
   private boolean gameWon;
 
-
-  /**
-   * Construct a new MazePresenter object. (called by MazeView class)
-   *
-   * @param mazeView the MazeView accessing this Presenter object.
-   */
-  public MazePresenter(MazeView mazeView) {
-    this.mazeView = mazeView;
+  /**Constructor.
+   * @param mazeView the MazeView accessing this Presenter object. */
+  MazePresenter(MazeView mazeView) {
+    /** The mazeView interface reference attribute. */
     this.mazeUseCases = new MazeUseCases();
     this.gameWon = false;
   }
 
-  public Paint getTextBrush() {
+  /**Gets the paint object that is responsible for the text in the maze game.
+   * @return textBrush: a paint object. */
+  Paint getTextBrush() {
     return textBrush;
   }
 
-  public void setTextBrush(Paint textBrush) {
+  /** Sets the paint object that is responsible for the text in the maze game.
+   * @param textBrush a paint object. */
+  void setTextBrush(Paint textBrush) {
     this.textBrush = textBrush;
   }
 
-  public int getScreenWidth() {
+  /**Gets the width of the screen.
+   * @return screenWidth: an integer representing the width of the screen. */
+  int getScreenWidth() {
     return screenWidth;
   }
 
-  public void setScreenWidth(int screenWidth) {
+  /** Sets the value of the variable representing the width of the screen.
+   * @param screenWidth width of the screen. */
+  void setScreenWidth(int screenWidth) {
     this.screenWidth = screenWidth;
   }
 
-  public int getScreenHeight() {
+  /**Gets the height of the screen.
+   * @return screenHeight: an integer representing the height of the screen. */
+  int getScreenHeight() {
     return screenHeight;
   }
 
-  public void setScreenHeight(int screenHeight) {
+  /** Sets the value of the variable representing the height of the screen. ]
+   * @param screenHeight height of the screen. */
+  void setScreenHeight(int screenHeight) {
     this.screenHeight = screenHeight;
   }
 
-  public MazeSection[][] getMazeGrid() {
+  /**Gets a MazeSection 2D array list representation of the maze.
+   * @return mazeGrid: a MazeSection 2D array list representing the maze. */
+  MazeSection[][] getMazeGrid() {
     return mazeGrid;
   }
 
-  public void setMazeGrid(MazeSection[][] mazeGrid) {
+  /** Sets the value of the MazeSection 2D array list representing the maze.
+   * @param mazeGrid representation of the maze. */
+  void setMazeGrid(MazeSection[][] mazeGrid) {
     this.mazeGrid = mazeGrid;
   }
 
-  public Player getPlayer() {
+  /**Gets the Player object associated with the maze.
+   * @return player: a Player object. */
+  Player getPlayer() {
     return player;
   }
 
-  public void setPlayer(Player player) {
+  /** Sets the Player object that will go through the maze.
+   * @param player a Player object. */
+  void setPlayer(Player player) {
     this.player = player;
   }
 
-  public MazeSection getExitPoint() {
+  /**Gets the MazeSection object associated with the exit point of the maze.
+   * @return exitPoint: a MazeSection object. */
+  MazeSection getExitPoint() {
     return exitPoint;
   }
 
-  public void setExitPoint(MazeSection exitPoint) {
+  /** Sets the value of the MazeSection representing the exit.
+   * @param exitPoint a MazeSection object. */
+  void setExitPoint(MazeSection exitPoint) {
     this.exitPoint = exitPoint;
   }
 
+  /**Gets the paint object that is responsible for the maze outline in the maze game.
+   * @return mazeBrush: a Paint object. */
   public Paint getMazeBrush() {
     return mazeBrush;
   }
 
-  public void setMazeBrush(Paint mazeBrush) {
+  /** Sets the Paint object that is responsible for the maze outline in the maze game.
+   * @param mazeBrush a Paint object. */
+  void setMazeBrush(Paint mazeBrush) {
     this.mazeBrush = mazeBrush;
   }
 
-  public float getMazeSectionLength() {
+  /**Gets the value of the float that represents the length of the walls of the MazeSection.
+   * @return mazeSectionLength: a float. */
+  float getMazeSectionLength() {
     return mazeSectionLength;
   }
 
-  public void setMazeSectionLength(float mazeSectionLength) {
+  /**Sets the float variable that represents the length of the walls of the MazeSection.
+   * @param mazeSectionLength: a float. */
+  void setMazeSectionLength(float mazeSectionLength) {
     this.mazeSectionLength = mazeSectionLength;
   }
 
-  public float getVerticalMargin() {
-    return verticalMargin;
-  }
-
-  public void setVerticalMargin(float verticalMargin) {
+  /**Sets the float variable that represents the length of the vertical margin between the
+   * top/bottom of the screen and the edges of the maze.
+   * @param verticalMargin a float. */
+  void setVerticalMargin(float verticalMargin) {
     this.verticalMargin = verticalMargin;
   }
 
-  public float getHorizontalMargin() {
-    return horizontalMargin;
-  }
-
-  public void setHorizontalMargin(float horizontalMargin) {
+  /**Sets the float variable that represents the length of the horizontal margin between the
+   * sides of the screen and the edges of the maze.
+   * @param horizontalMargin a float. */
+  void setHorizontalMargin(float horizontalMargin) {
     this.horizontalMargin = horizontalMargin;
   }
 
+  /**Gets the Paint object that is responsible for the player in the maze game.
+   * @return playerPaint: a Paint object. */
   public Paint getPlayerPaint() {
     return playerPaint;
   }
 
-  public void setPlayerPaint(Paint playerPaint) {
+  /** Sets the paint object that is responsible for the player in the maze game.
+   * @param playerPaint a paint object. */
+  void setPlayerPaint(Paint playerPaint) {
     this.playerPaint = playerPaint;
   }
 
+  /**Gets the Paint object that is responsible for the exit point in the maze game.
+   * @return exitPointPaint: a Paint object. */
   public Paint getExitPointPaint() {
     return exitPointPaint;
   }
 
-  public void setExitPointPaint(Paint exitPointPaint) {
+  /** Sets the paint object that is responsible for the exit point in the maze game.
+   * @param exitPointPaint a paint object. */
+  void setExitPointPaint(Paint exitPointPaint) {
     this.exitPointPaint = exitPointPaint;
   }
 
-  public boolean isGameWon() {
+  /**Gets the the value of the boolean that represents the state of the game. True means the player
+   * has won while false means the player hasn't yet won.
+   * @return gameWon a boolean object. */
+  boolean isGameWon() {
     return gameWon;
   }
 
-  public void setGameWon(boolean gameWon) {
+  /**Sets the value of the boolean that represents the state of the game. True means the player has
+   * won while false means the player hasn't yet won.
+   * @param gameWon a boolean object. */
+  void setGameWon(boolean gameWon) {
     this.gameWon = gameWon;
+  }
+
+  /**Calls method in mazeUseCases which makes the mazeGrid for the maze.
+   * @return 2-dimensional array of MazeSection objects holding the entire mazeGrid. */
+  MazeSection[][] buildMazeGrid() {
+    return mazeUseCases.buildMazeGrid();
+  }
+
+  /**Gets the number of the rows and columns in the mazeGrid.
+   * @return 2 element integer array representing number of rows, columns in the mazeGrid array. */
+  int[] getRowColumnAttributes() {
+    return new int[] {mazeUseCases.getROWS(), mazeUseCases.getCOLS()};
   }
 
   /**
@@ -195,15 +239,19 @@ public class MazePresenter implements Maze.Presenter {
     // Drawing the walls for each of the mazeSections inside mazeGrid array
     for (int row = 0; row < this.mazeGrid.length; row++) {
       for (int col = 0; col < this.mazeGrid[0].length; col++) {
+        // if there is a top wall
         if (this.mazeGrid[row][col].getHasTopWall()) {
           drawTopWall(row, col, mazeCanvas);
         }
+        // if there is a bottom wall
         if (this.mazeGrid[row][col].getHasBottomWall()) {
           drawBottomWall(row, col, mazeCanvas);
         }
+        // if there is a left wall
         if (this.mazeGrid[row][col].getHasLeftWall()) {
           drawLeftWall(row, col, mazeCanvas);
         }
+        // if there is a right wall
         if (this.mazeGrid[row][col].getHasRightWall()) {
           drawRightWall(row, col, mazeCanvas);
         }
@@ -314,7 +362,13 @@ public class MazePresenter implements Maze.Presenter {
     mazeCanvas.drawRect(left, top, right, bottom, exitPointPaint);
   }
 
-  public void handlePlayerMovement(float touchX, float touchY) {
+  /**
+   * Handles the movement of the player by changing the player's position to correspond with the
+   * dragging events that are cause by the user's interaction with the MazeView.
+   * @param touchX the x coordinate of movement event that was detected.
+   * @param touchY the y coordinate of movement event that was detected.
+   */
+  void handlePlayerMovement(float touchX, float touchY) {
     if (!player.hasMoved()) {
       player.setHasMoved(true); // Action move event detected so player moved.
     }
@@ -348,57 +402,34 @@ public class MazePresenter implements Maze.Presenter {
       }
     }
 
-//    checkExitReached();
   }
 
-//  private void checkExitReached() {
-//    if (player.getRow() == exitPoint.getRow() && player.getCol() == exitPoint.getCol()) {
-//      gameWon = true;
-//    }
-
   /** Moves the player's current location up which means one row higher in the mazeGrid array. */
-  void movePlayerUp() {
+  private void movePlayerUp() {
     if (!mazeGrid[player.getRow()][player.getCol()].getHasTopWall()) {
       player.setRow(player.getRow() - 1);
     }
   }
 
   /** Moves the player's current location down which means one row larger in the mazeGrid array. */
-  void movePlayerDown() {
+  private void movePlayerDown() {
     if (!mazeGrid[player.getRow()][player.getCol()].getHasBottomWall()) {
       player.setRow(player.getRow() + 1);
     }
   }
 
   /** Moves the player's current location left: One column smaller in the mazeGrid array */
-  void movePlayerLeft() {
+  private void movePlayerLeft() {
     if (!mazeGrid[player.getRow()][player.getCol()].getHasLeftWall()) {
       player.setCol(player.getCol() - 1);
     }
   }
 
   /** Moves the player's current location right: One column larger in the mazeGrid array */
-  void movePlayerRight() {
+  private void movePlayerRight() {
     if (!mazeGrid[player.getRow()][player.getCol()].getHasRightWall()) {
       player.setCol(player.getCol() + 1);
     }
   }
 
-  /**
-   * Calls method in mazeUseCases which makes the mazeGrid for the maze.
-   *
-   * @return 2-dimensional array of MazeSection objects holding the entire mazeGrid
-   */
-  public MazeSection[][] buildMazeGrid() {
-    return mazeUseCases.buildMazeGrid();
-  }
-
-  /**
-   * Gets the number of the rows and columns in the mazeGrid.
-   *
-   * @return 2 element integer array representing number of rows, columns in the mazeGrid array.
-   */
-  public int[] getRowColumnAttributes() {
-    return new int[] {mazeUseCases.getROWS(), mazeUseCases.getCOLS()};
-  }
 }
