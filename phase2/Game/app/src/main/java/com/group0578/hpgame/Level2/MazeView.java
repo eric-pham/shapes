@@ -175,12 +175,6 @@ public class MazeView extends SurfaceView implements SurfaceHolder.Callback, Vie
           mazeThread.setRunning(false);
           mazeThread.join();
           setVisibility(GONE);
-          View textView = findViewById(R.id.level2_congrats_message_textView);
-          textView.setVisibility(View.VISIBLE);
-          View button = findViewById(R.id.go_to_level_3_button);
-          button.setVisibility(View.VISIBLE);
-          System.out.println(mazeThread.isAlive());
-          System.out.println("You have won!!!");
         } catch (Exception e) {
           e.printStackTrace();
         }
