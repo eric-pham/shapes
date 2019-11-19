@@ -1,5 +1,6 @@
 package com.group0578.hpgame.Level3;
 
+import android.content.Intent;
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 
@@ -52,6 +53,9 @@ public class MainThread extends Thread {
       } catch (Exception e) {
         e.printStackTrace();
       }
+
     }
+
   }
+
 }
