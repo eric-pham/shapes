@@ -15,6 +15,9 @@ public interface Login {
      */
     interface View {
         void goToStage1Screen(Intent createStage1Intent);
+
+//        void goToProfilePage(Intent profileIntent);
+
     }
 
     /**
