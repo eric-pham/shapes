@@ -23,10 +23,10 @@ public class User {
     private String customColourScheme;
 
     /**
-     * This user's customization preference for how difficult each level of game is.
+     * This user's customization preference for how difficult each level of the game is.
      * Must be "Easy" or "Hard"; default setting is "Easy".
      */
-    private String customLevelDifficulty;
+    private String levelDifficulty;
 
     /**
      * The number of lives remaining for this user's player in the game currently being played.
@@ -52,7 +52,7 @@ public class User {
 
         // Initializing default customization settings
         this.customColourScheme = "Light";
-        this.customLevelDifficulty = "Easy";
+        this.levelDifficulty = "Easy";
         this.numLivesLeft = 10;
     }
 
@@ -87,10 +87,10 @@ public class User {
      * Updating the user's preferences for the level of difficulty customization.
      * @param newLevelDifficulty the level of difficulty "Easy" or "Hard" as selected by this user.
      */
-    public void setCustomLevelDifficulty(String newLevelDifficulty) {
+    public void setLevelDifficulty(String newLevelDifficulty) {
         // Only update if level difficulty is different from previous setting.
-        if (!this.customLevelDifficulty.equals(newLevelDifficulty)) {
-            this.customLevelDifficulty = newLevelDifficulty;
+        if (!this.levelDifficulty.equals(newLevelDifficulty)) {
+            this.levelDifficulty = newLevelDifficulty;
         }
     }
 

@@ -17,6 +17,7 @@ import java.io.FileReader;
 
 import com.google.gson.Gson;
 import com.group0578.hpgame.view.LoginActivity;
+import com.group0578.hpgame.view.ProfilePageActivity;
 import com.group0578.hpgame.view.StartupActivity;
 
 import java.io.File;
@@ -56,9 +57,16 @@ public class LoginPresenter implements Login.Presenter {
   }
 
   /** Load stage 1 */
-  public void createNewStage1Screen() {
+  public void createNewStage1Screen() { // not using anymore -> go to profile screen
     Intent createStage1Intent = new Intent((LoginActivity) this.loginView, Level1Activity.class);
     System.out.println("Method reached 3");
     loginView.goToStage1Screen(createStage1Intent);
   }
+
+  // Not working yet
+//  public void createProfileScreen() {
+//    Intent profileIntent = new Intent((LoginActivity) this.loginView, ProfilePageActivity.class);
+//    System.out.println("createProfileScreen method reached.");
+//    loginView.goToProfilePage(profileIntent);
+//  }
 }

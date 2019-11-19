@@ -50,6 +50,8 @@ public class MazeThread extends Thread {
   /** Method called when MazeThread.start() is executed. */
   @Override
   public void run() {
+    long start = System.currentTimeMillis();
+
     String TAG = "MazeThread.run";
     Log.e(TAG, "test");
 
@@ -85,14 +87,27 @@ public class MazeThread extends Thread {
 
       // Checking if player has reached exit point in the maze.
       checkExitReached();
+      if (!running) {
+        storeTotalTime(start);
+      }
+
     }
+  }
+
+  private void storeTotalTime(long start) {
+    long end = System.currentTimeMillis();
+    mazePresenter.setTotalTime(end - start);
+  }
+
+  boolean isRunning() {
+    return running;
   }
 
   /** Checks if the player's location matches the exitPoint's location. */
   private void checkExitReached() {
     if (mazePresenter.getPlayer().getRow() == mazePresenter.getExitPoint().getRow()
         && mazePresenter.getPlayer().getCol() == mazePresenter.getExitPoint().getCol()) {
-      mazePresenter.setGameWon(true); // player and exitPoint locations match so user has won.
+      running = false; // player and exitPoint locations match so user has won.
     }
   }
 }
