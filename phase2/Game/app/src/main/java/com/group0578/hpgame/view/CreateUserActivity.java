@@ -2,9 +2,11 @@ package com.group0578.hpgame.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -37,7 +39,7 @@ public class CreateUserActivity extends AppCompatActivity implements CreateUser.
     /**
      *  When create user button is clicked add information to data
      */
-    public void onClickCreate(View v){
+    public void onClickConfirm(View v) {
         //Get username and password from user inputted EditText
         final EditText userNameCreate = findViewById(R.id.userNameCreate);
         String username = userNameCreate.getText().toString();
@@ -51,8 +53,29 @@ public class CreateUserActivity extends AppCompatActivity implements CreateUser.
 
         //Call CreateUserPresenter method here you can pass in the local variables
         //username and password
-        createUserPresenter.createAccount(sqlHelper, username, password);
+        if (createUserPresenter.checkDuplicates(sqlHelper, username)) { // there is a duplicate
+            // after button is clicked, hides keyboard
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            assert imm != null;
+            imm.hideSoftInputFromWindow(findViewById(R.id.constraintLayoutCreateUser).getWindowToken(), 0);
+
+            // display error message
+            findViewById(R.id.errorMessageCreateUser).setVisibility(View.VISIBLE);
+        } else {  // there is no duplicate
+            createUserPresenter.createAccount(sqlHelper, username, password);  // create account
+            createUserPresenter.createProfileScreen(username);
+        }
 
     }
 
+    /**
+     * Starts the ProfilePageActivity.
+     *
+     * @param profileIntent the intent for the ProfilePageActivity
+     */
+    @Override
+    public void goToProfilePage(Intent profileIntent) {
+        System.out.println("Testing: Reached method CreateUserActivity.goToProfilePage ");
+        startActivity(profileIntent);
+    }
 }

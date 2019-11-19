@@ -15,6 +15,7 @@ public interface ProfilePage {
          */
         interface View {
 
+                void goToLevel1(Intent levelOne);
         }
 
         /**
@@ -28,6 +29,6 @@ public interface ProfilePage {
          * Behaviour of the StartupPresenter.
          */
         interface Presenter {
-
+                void createLevel1();
         }
 }

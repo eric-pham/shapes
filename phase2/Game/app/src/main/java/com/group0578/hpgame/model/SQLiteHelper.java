@@ -128,6 +128,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         if (user.equals(username)) {
           pass = cursor.getString(1);
+            db.close();
           break;
         }
       } while (cursor.moveToNext());
@@ -135,4 +136,33 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     db.close();
     return pass;
   }
+
+    /**
+     * Checks whether the username is already in the database.
+     *
+     * @param username1 the user's desired username
+     * @return true if the username is already in the database, false otherwise
+     */
+    public boolean checkDuplicates(String username1) {
+        System.out.println("duplicates checked.");
+        db = this.getReadableDatabase();
+
+        String username2;
+
+        String query = "select username from " + TABLE_NAME;
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                username2 = cursor.getString(0);
+
+                if (username2.equals(username1)) {
+                    db.close();
+                    return true;  // there are duplicate user names
+                }
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return false; // there are no duplicate user names
+    }
 }

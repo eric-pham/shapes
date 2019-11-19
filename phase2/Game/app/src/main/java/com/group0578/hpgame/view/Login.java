@@ -14,9 +14,9 @@ public interface Login {
      * Behaviour of the LoginActivity.
      */
     interface View {
-        void goToStage1Screen(Intent createStage1Intent);
+//        void goToStage1Screen(Intent createStage1Intent);
 
-//        void goToProfilePage(Intent profileIntent);
+        void goToProfilePage(Intent profileIntent);
 
     }
 

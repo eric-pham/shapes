@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.group0578.hpgame.view.CreateUserActivity">
+    tools:context="com.group0578.hpgame.view.CreateUserActivity"
+    android:id="@+id/constraintLayoutCreateUser">
 
     <EditText
         android:id="@+id/userNameCreate"
@@ -36,14 +37,30 @@
         android:id="@+id/confirm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="onClickCreate"
         android:layout_marginStart="35dp"
         android:layout_marginTop="52dp"
         android:layout_marginEnd="300dp"
         android:layout_marginBottom="320dp"
+        android:onClick="onClickConfirm"
         android:text="@string/Confirm"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/userPasswordCreate" />
+
+    <TextView
+        android:id="@+id/errorMessageCreateUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:text="Username already exist. \n Please enter a different username."
+        android:visibility="invisible"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/confirm"
+        app:layout_constraintVertical_bias="0.057" />
 </androidx.constraintlayout.widget.ConstraintLayout>
