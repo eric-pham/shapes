@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity implements Login.View {
 
     if (loginPresenter.checkLogin(sqlHelper, username, password)) {
       loginPresenter.createNewStage1Screen();
+//        loginPresenter.createProfileScreen(); // not working yet
     } else {
       System.out.println("Login Failed!");
     }
@@ -54,4 +55,10 @@ public class LoginActivity extends AppCompatActivity implements Login.View {
     System.out.println("Method reached 2");
     startActivity(stage1Intent);
   }
+
+  // Not working yet
+//  public void goToProfilePage(Intent profileIntent) {
+//    System.out.println("Testing: Reached method LoginActivity.goToProfilePage ");
+//    startActivity(profileIntent);
+//  }
 }

@@ -35,6 +35,15 @@ public class CreateUserPresenter implements CreateUser.Presenter {
     sql.setUsername(username);
     sql.setPassword(password);
 
+    // Setting initial default values
+    // This code doesn't work right now
+//    sql.setColourScheme("Light");
+//    sql.setLevelDifficulty("Easy");
+//    sql.setLevelOneTime(0);
+//    sql.setLevelTwoTime(0);
+//    sql.setLevelThreeTime(0);
+//    sql.setCurrLives(10);
+
     sqlHelper.insertUser(sql);
     System.out.println("Inserted!");
   }

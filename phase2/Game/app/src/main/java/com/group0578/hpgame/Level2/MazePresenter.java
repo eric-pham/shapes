@@ -51,15 +51,11 @@ public class MazePresenter implements Maze.Presenter {
    * the MazeGrid. */
   private MazeUseCases mazeUseCases;
 
-  /** Boolean that indicates whether the game's win condition has been reached. */
-  private boolean gameWon;
-
   /**Constructor.
    * @param mazeView the MazeView accessing this Presenter object. */
   MazePresenter(MazeView mazeView) {
     /** The mazeView interface reference attribute. */
     this.mazeUseCases = new MazeUseCases();
-    this.gameWon = false;
   }
 
   /**Gets the paint object that is responsible for the text in the maze game.
@@ -196,19 +192,6 @@ public class MazePresenter implements Maze.Presenter {
     this.exitPointPaint = exitPointPaint;
   }
 
-  /**Gets the the value of the boolean that represents the state of the game. True means the player
-   * has won while false means the player hasn't yet won.
-   * @return gameWon a boolean object. */
-  boolean isGameWon() {
-    return gameWon;
-  }
-
-  /**Sets the value of the boolean that represents the state of the game. True means the player has
-   * won while false means the player hasn't yet won.
-   * @param gameWon a boolean object. */
-  void setGameWon(boolean gameWon) {
-    this.gameWon = gameWon;
-  }
 
   /**Calls method in mazeUseCases which makes the mazeGrid for the maze.
    * @return 2-dimensional array of MazeSection objects holding the entire mazeGrid. */
@@ -432,4 +415,7 @@ public class MazePresenter implements Maze.Presenter {
     }
   }
 
+  public void setTotalTime(long totalTime) {
+
+  }
 }
