@@ -35,20 +35,22 @@ public class CreateUserPresenter implements CreateUser.Presenter {
    * @param password password for account
    */
   public void createAccount(SQLiteHelper sqlHelper, String username, String password) {
-      SQLiteManager sql = new SQLiteManager();
-      sql.setUsername(username);
-      sql.setPassword(password);
+      SQLiteManager sqlManager = new SQLiteManager();
+      sqlManager.setUsername(username);
+      sqlManager.setPassword(password);
 
       // Setting initial default values
       // This code doesn't work right now
-//    sql.setColourScheme("Light");
-//    sql.setLevelDifficulty("Easy");
-//    sql.setLevelOneTime(0);
-//    sql.setLevelTwoTime(0);
-//    sql.setLevelThreeTime(0);
-//    sql.setCurrLives(10);
+      sqlManager.setColourScheme("Light");
+      sqlManager.setLevelDifficulty("Easy");
+      sqlManager.setLevelOneTime(0);
+      sqlManager.setLevelTwoTime(0);
+      sqlManager.setLevelThreeTime(0);
+      sqlManager.setCurrLives(10);
+      sqlManager.setProgress("one");
+      sqlManager.setReturningUser(0); // 0 represents false, 1 represents true
 
-      sqlHelper.insertUser(sql);
+      sqlHelper.insertUser(sqlManager);
       System.out.println("Inserted!");
 
 
