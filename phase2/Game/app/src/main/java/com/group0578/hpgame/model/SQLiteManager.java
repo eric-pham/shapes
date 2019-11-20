@@ -16,6 +16,7 @@ public class SQLiteManager {
   private int currLives;
   private String progress;
   private int returningUser;
+  private String customCharacter;
 
   /**Sets the username.
    * @param username new username to set. */
@@ -181,12 +182,31 @@ public class SQLiteManager {
   }
 
   /**
-   * Sets the value to 0 (if the user has logged in for the fist time) or 1 (if the user is a
+   * Sets the value to 0 (if the user has logged in for the first time) or 1 (if the user is a
    * returning user).
    *
    * @param returningUser whether the user has logged in before.
    */
   public void setReturningUser(int returningUser) {
     this.returningUser = returningUser;
+  }
+
+  /**
+   * Gets the custom character selected by the user who is currently logged in
+   *
+   * @return "A" for character A or "B" for character B
+   */
+  public String getCustomCharacter() {
+    return customCharacter;
+  }
+
+  /**
+   * Sets the value of the character's appearance for the user who is currently logged in.
+   * By default, new users have custom character selection set to option "A"
+   *
+   * @param customCharacter "A" or "B"
+   */
+  public void setCustomCharacter(String customCharacter) {
+    this.customCharacter = customCharacter;
   }
 }
