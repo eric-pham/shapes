@@ -13,6 +13,9 @@ import com.group0578.hpgame.presenter.ProfilePagePresenter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Responsible for handling user interactions (button clicks etc.) with the Profile Page.
+ */
 public class ProfilePageActivity extends AppCompatActivity implements ProfilePage.View {
 
   /**
@@ -20,11 +23,10 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
    */
   ProfilePagePresenter profilePagePresenter;
 
+  /** The username belonging to the user currently logged in and viewing the profile page. */
   private String username;
 
-  /**
-   * Called immediately when the activity is started.
-   */
+  /** Called immediately when the activity is started. */
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -34,6 +36,7 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
     // extracts the information that was passed from the previous activity
     Bundle extras = getIntent().getExtras();
     if (extras != null) {
+      // the username of the user currently logged in
       this.username = extras.getString("username");
     }
 
@@ -68,8 +71,9 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
   }
 
   /**
-   * Called when the user presses the 'Resume Game' button.
-   * Resumes the previous game for the current user playing if they exited the app.
+   * Called when the user presses the 'Resume Game' button. Resumes the previous game for the
+   * current user playing if they exited the app.
+   *
    * @param view the view displaying this activity.
    */
   public void onClickResumeGame(View view) {
@@ -77,8 +81,9 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
   }
 
   /**
-   * Called when the user presses the 'Player Stats' button.
-   * Displays the user's (currently playing) statistics from previous games they have played.
+   * Called when the user presses the 'Player Stats' button. Displays the user's (currently playing)
+   * statistics from previous games they have played.
+   *
    * @param view the view displaying this activity.
    */
   public void onClickPlayerStats(View view) {
@@ -86,12 +91,24 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
   }
 
   /**
-   * Called when the user presses the 'Customize' button.
-   * Changes the user's customization settings for light/dark colour scheme, level difficulty etc.
+   * Called when the user presses the 'Customize' button. Changes the user's customization settings
+   * for light/dark colour scheme, level difficulty etc.
+   *
    * @param view the view displaying this activity.
    */
   public void onClickCustomize(View view) {
     profilePagePresenter.changeUserCustomization();
   }
 
+  /**
+   * Called by the method profilePagePresenter.changeUserCustomization() Starts the new activity to
+   * show the customization page.
+   *
+   * @param createCustomizePage the intent creating the CustomizeActivity class
+   */
+  @Override
+  public void goToCustomizePage(Intent createCustomizePage) {
+    createCustomizePage.putExtra("username", this.username);
+    startActivity(createCustomizePage);
+  }
 }

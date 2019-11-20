@@ -12,7 +12,9 @@ public interface ProfilePage {
 
   /** Behaviour of the StartupActivity. */
   interface View {
-          void goToLevel1(Intent levelOne);
+    void goToLevel1(Intent levelOne);
+
+    void goToCustomizePage(Intent createCustomizePage);
   }
 
   /** Not sure if needed yet. */
@@ -21,8 +23,11 @@ public interface ProfilePage {
   /** Behaviour of the StartupPresenter. */
   interface Presenter {
     void createLevel1();
+
     void resumePreviousGame();
+
     void displayPlayerStats();
+
     void changeUserCustomization();
   }
 }

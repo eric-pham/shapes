@@ -23,6 +23,7 @@
         <activity android:name=".Level2.MazeActivity" />
         <activity android:name=".Level3.Level3MainActivity" />
         <activity android:name=".view.ProfilePageActivity" />
+        <activity android:name=".view.CustomizeActivity" />
     </application>
 
 </manifest>
