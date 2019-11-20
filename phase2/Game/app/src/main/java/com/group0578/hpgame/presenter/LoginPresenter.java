@@ -56,14 +56,10 @@ public class LoginPresenter implements Login.Presenter {
     return returnPass.equals(password);
   }
 
-//  /** Load stage 1 */
-//  public void createNewStage1Screen() { // not using anymore -> go to profile screen
-//    Intent createStage1Intent = new Intent((LoginActivity) this.loginView, Level1Activity.class);
-//    System.out.println("Method reached 3");
-//    loginView.goToStage1Screen(createStage1Intent);
-//  }
-
-  // Not working yet, also ensure they cannot enter duplicate usernames
+  /**
+   * Creates the new intent to go to the profile page screen.
+   * @param username the user's username they typed when logging in
+   */
   public void createProfileScreen(String username) {
     Intent profileIntent = new Intent((LoginActivity) this.loginView, ProfilePageActivity.class);
     profileIntent.putExtra("username", username);

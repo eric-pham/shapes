@@ -10,7 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.group0578.hpgame.R;
 import com.group0578.hpgame.presenter.ProfilePagePresenter;
 
-import java.util.Calendar;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class ProfilePageActivity extends AppCompatActivity implements ProfilePage.View {
 
@@ -42,7 +43,9 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
 
     // displays the date
     final TextView dateTextView = findViewById(R.id.date);
-    dateTextView.setText(String.format("Date: %s/%s/%s", Calendar.DAY_OF_MONTH, Calendar.MONTH, Calendar.YEAR));
+    LocalDate today = LocalDate.now();
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    dateTextView.setText(String.format("Date: %s", today.format(formatter)));
   }
 
   /**
@@ -62,6 +65,33 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
   public void goToLevel1(Intent levelOne) {
     levelOne.putExtra("username", this.username);
     startActivity(levelOne);
+  }
+
+  /**
+   * Called when the user presses the 'Resume Game' button.
+   * Resumes the previous game for the current user playing if they exited the app.
+   * @param view the view displaying this activity.
+   */
+  public void onClickResumeGame(View view) {
+    profilePagePresenter.resumePreviousGame();
+  }
+
+  /**
+   * Called when the user presses the 'Player Stats' button.
+   * Displays the user's (currently playing) statistics from previous games they have played.
+   * @param view the view displaying this activity.
+   */
+  public void onClickPlayerStats(View view) {
+    profilePagePresenter.displayPlayerStats();
+  }
+
+  /**
+   * Called when the user presses the 'Customize' button.
+   * Changes the user's customization settings for light/dark colour scheme, level difficulty etc.
+   * @param view the view displaying this activity.
+   */
+  public void onClickCustomize(View view) {
+    profilePagePresenter.changeUserCustomization();
   }
 
 }
