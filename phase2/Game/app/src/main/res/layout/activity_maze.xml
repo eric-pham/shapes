@@ -10,7 +10,7 @@
     tools:ignore="ExtraText">
 
     <view
-        android:id="@+id/view"
+        android:id="@+id/mazeViewXML"
         class="com.group0578.hpgame.Level2.MazeView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

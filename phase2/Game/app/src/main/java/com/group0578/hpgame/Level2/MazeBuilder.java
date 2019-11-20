@@ -15,8 +15,9 @@ public class MazeBuilder {
    * The series of instructions to create all the tools and objects needed to draw the maze
    *
    * @param mazePresenter the MazePresenter responsible for drawing the maze
+   * @param colourScheme the string representing the colour scheme of the game
    */
-  void build(MazePresenter mazePresenter) { // might not need mazeView attribute change later
+  void build(MazePresenter mazePresenter, String colourScheme) {
     mazePresenter.setScreenWidth(Resources.getSystem().getDisplayMetrics().widthPixels);
     mazePresenter.setScreenHeight(Resources.getSystem().getDisplayMetrics().heightPixels);
     // Receiving mazeGrid from Presenter
@@ -26,10 +27,10 @@ public class MazeBuilder {
     Player player = new Player(0, 0);
     mazePresenter.setPlayer(player);
     setExitLocation(mazePresenter);
-    prepareMazeBrushes(mazePresenter);
+    prepareMazeBrushes(mazePresenter, colourScheme);
     determineMazeDimensions(mazePresenter, mazeGrid);
-    makePlayer(mazePresenter);
-    makeExitPoint(mazePresenter);
+    makePlayer(mazePresenter, colourScheme);
+    makeExitPoint(mazePresenter, colourScheme);
   }
 
   /**
@@ -48,17 +49,24 @@ public class MazeBuilder {
    * Initializes and performs actions on textBrush attribute which is used to draw the text.
    *
    * @param mazePresenter the MazePresenter responsible for drawing the maze
+   * @param colourScheme the string representing the colour scheme of the game
    */
-  private void prepareMazeBrushes(MazePresenter mazePresenter) {
+  private void prepareMazeBrushes(MazePresenter mazePresenter, String colourScheme) {
+    int colour;
+    if (colourScheme.equalsIgnoreCase("Light")) {
+      colour = Color.BLACK;
+    } else {
+      colour = Color.WHITE;
+    }
     // Prepare the mazeBrush object to draw maze on the screen in run() method of the MazeThread
     Paint mazeBrush = new Paint();
-    mazeBrush.setColor(Color.WHITE);
+    mazeBrush.setColor(colour);
     mazeBrush.setStrokeWidth(3);
     mazePresenter.setMazeBrush(mazeBrush);
 
     // Prepare the textBrush object to draw text on the screen in run() method of the MazeThread
     Paint textBrush = new Paint();
-    textBrush.setColor(Color.WHITE);
+    textBrush.setColor(colour);
     textBrush.setStrokeWidth(10);
     textBrush.setTextSize(50);
     mazePresenter.setTextBrush(textBrush);
@@ -103,10 +111,18 @@ public class MazeBuilder {
    * Initializes a paint object used to draw the player.
    *
    * @param mazePresenter the MazePresenter responsible for drawing the maze
+   * @param colourScheme the string representing the colour scheme of the game
    */
-  private void makePlayer(MazePresenter mazePresenter) {
+  private void makePlayer(MazePresenter mazePresenter, String colourScheme) {
+    int colour;
+    if (colourScheme.equalsIgnoreCase("Light")) {
+      colour = Color.argb(255, 0, 191, 230);
+    } else {
+      colour = Color.RED;
+    }
+
     Paint playerPaint = new Paint();
-    playerPaint.setColor(Color.RED);
+    playerPaint.setColor(colour);
     mazePresenter.setPlayerPaint(playerPaint);
     String TAG = "MazeBuilder.makePlayer";
     Log.e(TAG, "test");
@@ -116,10 +132,19 @@ public class MazeBuilder {
    * Initializes a paint object used to draw the exit point in the maze.
    *
    * @param mazePresenter the MazePresenter responsible for drawing the maze
+   * @param colourScheme the string representing the colour scheme of the game
    */
-  private void makeExitPoint(MazePresenter mazePresenter) {
+  private void makeExitPoint(MazePresenter mazePresenter, String colourScheme) {
+    int colour;
+    if (colourScheme.equalsIgnoreCase("Light")) {
+//      colour = Color.argb(255, 230, 190, 170);
+      colour = Color.argb(255, 255, 77, 106);
+    } else {
+      colour = Color.GREEN;
+    }
+
     Paint exitPointPaint = new Paint();
-    exitPointPaint.setColor(Color.GREEN);
+    exitPointPaint.setColor(colour);
     mazePresenter.setExitPointPaint(exitPointPaint);
     String TAG = "MazeBuilder.makeExitPoint";
     Log.e(TAG, "test");

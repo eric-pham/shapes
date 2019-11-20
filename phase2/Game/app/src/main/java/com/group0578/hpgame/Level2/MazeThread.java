@@ -50,10 +50,15 @@ public class MazeThread extends Thread {
   /** Method called when MazeThread.start() is executed. */
   @Override
   public void run() {
-    long start = System.currentTimeMillis();
+    // Creating mazeBuilder to build player and exit point attributes.
+    String colourScheme = mazePresenter.getSQLHelper().findColourScheme(mazePresenter.getUsername());
+    MazeBuilder mazeBuilder = new MazeBuilder();
+    mazeBuilder.build(this.mazePresenter, colourScheme);
 
     String TAG = "MazeThread.run";
     Log.e(TAG, "test");
+
+    long start = System.currentTimeMillis();
 
     // Only draw the Maze when the thread is currently running
     while (running) {
@@ -67,15 +72,7 @@ public class MazeThread extends Thread {
       // Initializing the canvas on which to draw the maze
       mazeCanvas = mazeView.getSurfaceHolder().lockCanvas();
 
-      // Writing the legend on the screen using drawText() method
-      mazeCanvas.drawARGB(255, 100, 30, 250);
-      mazeCanvas.drawText("Player = Circle", 100, 100, mazePresenter.getTextBrush());
-      mazeCanvas.drawText("End Point = Square", 100, 160, mazePresenter.getTextBrush());
-
-      // MazePresenter object handles drawing the maze, player, and exitPoint.
-      mazePresenter.drawMazeWalls(mazeCanvas);
-      mazePresenter.drawPlayer(mazeCanvas, mazePresenter.getMazeSectionLength() / 10);
-      mazePresenter.drawExitPoint(mazeCanvas, mazePresenter.getMazeSectionLength() / 10);
+      drawMaze(colourScheme);
 
       surfaceHolder.unlockCanvasAndPost(mazeCanvas); // canvas updated with drawn changes
 
@@ -99,6 +96,11 @@ public class MazeThread extends Thread {
     mazePresenter.setTotalTime(end - start);
   }
 
+  /**
+   * Returns whether the run method is running or not.
+   *
+   * @return running: a boolean.
+   */
   boolean isRunning() {
     return running;
   }
@@ -106,8 +108,31 @@ public class MazeThread extends Thread {
   /** Checks if the player's location matches the exitPoint's location. */
   private void checkExitReached() {
     if (mazePresenter.getPlayer().getRow() == mazePresenter.getExitPoint().getRow()
-        && mazePresenter.getPlayer().getCol() == mazePresenter.getExitPoint().getCol()) {
+            && mazePresenter.getPlayer().getCol() == mazePresenter.getExitPoint().getCol()) {
       running = false; // player and exitPoint locations match so user has won.
     }
+  }
+
+  /**
+   * Draws the maze depending on the colour scheme.
+   *
+   * @param colourScheme the colour scheme of the game, either 'Light' or 'Dark'.
+   */
+  private void drawMaze(String colourScheme) {
+
+    if (colourScheme.equalsIgnoreCase("Light")) {
+      this.mazeCanvas.drawARGB(255, 204, 212, 255);
+    } else {
+      this.mazeCanvas.drawARGB(255, 100, 30, 250);
+    }
+
+    // Writing the legend on the screen using drawText() method
+    mazeCanvas.drawText("Player = Circle", 100, 100, mazePresenter.getTextBrush());
+    mazeCanvas.drawText("End Point = Square", 100, 160, mazePresenter.getTextBrush());
+
+    // MazePresenter object handles drawing the maze, player, and exitPoint.
+    mazePresenter.drawMazeWalls(mazeCanvas);
+    mazePresenter.drawPlayer(mazeCanvas, mazePresenter.getMazeSectionLength() / 10);
+    mazePresenter.drawExitPoint(mazeCanvas, mazePresenter.getMazeSectionLength() / 10);
   }
 }

@@ -3,6 +3,7 @@ package com.group0578.hpgame.presenter;
 import android.content.Intent;
 
 import com.group0578.hpgame.Level1.Level1Activity;
+import com.group0578.hpgame.Level2.MazeActivity;
 import com.group0578.hpgame.view.CustomizeActivity;
 import com.group0578.hpgame.view.ProfilePage;
 import com.group0578.hpgame.view.ProfilePageActivity;
@@ -27,7 +28,7 @@ public class ProfilePagePresenter implements ProfilePage.Presenter {
 
     /** Creates the intent for the Level1Activity */
     public void createLevel1() {
-        Intent levelOne = new Intent((ProfilePageActivity) this.profilePageView, Level1Activity.class);
+        Intent levelOne = new Intent((ProfilePageActivity) this.profilePageView, MazeActivity.class);  // temporarily changed from level1 to level 2 for testing purposes
         System.out.println("levelOne intent created");
         profilePageView.goToLevel1(levelOne);
     }

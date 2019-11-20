@@ -5,6 +5,7 @@ import android.graphics.Paint;
 import android.util.Log;
 
 import com.group0578.hpgame.Level2.MazeEntities.MazeSection;
+import com.group0578.hpgame.model.SQLiteHelper;
 
 /** The MazePresenter is responsible for implementing actions the user performs on the screen. */
 public class MazePresenter implements Maze.Presenter {
@@ -50,6 +51,7 @@ public class MazePresenter implements Maze.Presenter {
   /**Presenter accesses the UseCases to manipulate maze entities/data such as MazeSection to build
    * the MazeGrid. */
   private MazeUseCases mazeUseCases;
+
 
   /**Constructor.
    * @param mazeView the MazeView accessing this Presenter object. */
@@ -203,6 +205,42 @@ public class MazePresenter implements Maze.Presenter {
    * @return 2 element integer array representing number of rows, columns in the mazeGrid array. */
   int[] getRowColumnAttributes() {
     return new int[] {mazeUseCases.getROWS(), mazeUseCases.getCOLS()};
+  }
+
+  /**
+   * Gets the username of the user currently logged in.
+   *
+   * @return username:a String representing the user currently logged in.
+   */
+  public String getUsername() {
+    return this.mazeUseCases.getUsername();
+  }
+
+  /**
+   * Sets the username of the user currently logged in.
+   *
+   * @param username a String.
+   */
+  public void setUsername(String username) {
+    this.mazeUseCases.setUsername(username);
+  }
+
+  /**
+   * Gets the database helper.
+   *
+   * @return sqlHelper: the database helper.
+   */
+  public SQLiteHelper getSQLHelper() {
+    return this.mazeUseCases.getSQLHelper();
+  }
+
+  /**
+   * Sets the database helper.
+   *
+   * @param sqlHelper the database helper.
+   */
+  public void setSQLHelper(SQLiteHelper sqlHelper) {
+    this.mazeUseCases.setSQLHelper(sqlHelper);
   }
 
   /**
@@ -418,4 +456,5 @@ public class MazePresenter implements Maze.Presenter {
   public void setTotalTime(long totalTime) {
 
   }
+
 }

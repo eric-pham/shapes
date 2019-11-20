@@ -1,6 +1,9 @@
 package com.group0578.hpgame.Level2;
 
+import android.graphics.Canvas;
+
 import com.group0578.hpgame.Level2.MazeEntities.MazeSection;
+import com.group0578.hpgame.model.SQLiteHelper;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -13,6 +16,16 @@ public class MazeUseCases {
   private final int ROWS = 4;
   /** The number of columns in the maze. */
   private final int COLS = 4;
+
+  /**
+   * The username belonging to the user currently logged in and viewing the profile page.
+   */
+  private String username;
+
+  /**
+   * The sql database helper that has methods that can operate on the database.
+   */
+  private SQLiteHelper sqlHelper;
 
   /** An enum for the relative location between two MazeSections. */
   private enum RelativeLocation {
@@ -206,21 +219,52 @@ public class MazeUseCases {
     }
   }
 
-  /**
-   * Getter for rows instance attribute
-   *
-   * @return number of rows in the Maze Grid
-   */
+
+  /**Getter for rows instance attribute.
+   * @return number of rows in the Maze Grid. */
   public int getROWS() {
     return ROWS;
   }
 
-  /**
-   * Getter for cols instance attribute
-   *
-   * @return number of columns in the Maze Grid
-   */
+  /**Getter for cols instance attribute.
+   * @return number of columns in the Maze Grid. */
   public int getCOLS() {
     return COLS;
+  }
+
+  /**
+   * Gets the username of the user currently logged in.
+   *
+   * @return username:a String representing the user currently logged in.
+   */
+  public String getUsername() {
+    return this.username;
+  }
+
+  /**
+   * Sets the username of the user currently logged in.
+   *
+   * @param username s String.
+   */
+  public void setUsername(String username) {
+    this.username = username;
+  }
+
+  /**
+   * Gets the database helper.
+   *
+   * @return sqlHelper: the database helper.
+   */
+  SQLiteHelper getSQLHelper() {
+    return this.sqlHelper;
+  }
+
+  /**
+   * Sets the database helper.
+   *
+   * @param sqlHelper the database helper.
+   */
+  void setSQLHelper(SQLiteHelper sqlHelper) {
+    this.sqlHelper = sqlHelper;
   }
 }
