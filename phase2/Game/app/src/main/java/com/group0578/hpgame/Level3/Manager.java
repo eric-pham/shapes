@@ -149,7 +149,4 @@ class Manager {
       wand.moveLeft(this);
     }
   }
-    public ArrayList getDementors(){
-      return this.myLittledementors;
-    }
 }
