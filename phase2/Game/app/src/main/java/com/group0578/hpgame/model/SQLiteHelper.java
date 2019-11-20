@@ -127,7 +127,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     cValues.put(COLUMN_CURRENT_LIVES, sqlManager.getCurrLives());
     cValues.put(COLUMN_PROGRESS, sqlManager.getProgress());
     cValues.put(COLUMN_RETURNING_USER, sqlManager.getReturningUser());
-      cValues.put(COLUMN_COLOUR_SCHEME, sqlManager.getCustomCharacter());
+      cValues.put(COLUMN_CUSTOM_CHARACTER, sqlManager.getCustomCharacter());
 
     db.insert(TABLE_NAME, null, cValues);
     db.close();
@@ -196,15 +196,17 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     return false; // there are no duplicate user names
   }
 
-  /**
-   * Checks whether the username is already in the database.
+    /**
+     * Finds the colour scheme associated with the logged in user.
    *
    * @param username1 the user's username
-   * @return true if the username is already in the database, false otherwise
+     * @return a String: 'Light' or 'Dark'.
    */
   public String findColourScheme(String username1) {
-      System.out.println("duplicates checked.");
+
+      System.out.println("colour scheme found.");
       db = this.getReadableDatabase();
+
 
       String username2;
 
@@ -226,16 +228,64 @@ public class SQLiteHelper extends SQLiteOpenHelper {
       return colourScheme;
   }
 
-    public void setColourScheme(String username, String colourScheme) {
-        System.out.println("Method SQLiteHelper.setColourScheme() reached");
-        db = this.getWritableDatabase();
-        ContentValues cValues = new ContentValues();
+    /**
+     * Finds the game difficulty associated with the logged in user.
+     *
+     * @param username1 the user's username
+     * @return a String: 'Easy' or 'Hard'.
+     */
+    public String findDifficulty(String username1) {
+        System.out.println("difficulty found");
+        db = this.getReadableDatabase();
 
-//    cValues.put();
+        String username2;
+
+        String query = "select username, levelDifficulty from " + TABLE_NAME;
+        Cursor cursor = db.rawQuery(query, null);
+
+        String difficulty = "Easy";
+
+        cursor.moveToFirst();
+        do {
+            username2 = cursor.getString(0);
+
+            if (username2.equals(username1)) {
+                difficulty = cursor.getString(1); // gets the difficulty: 'Easy' or 'Hard'
+                db.close();
+                break; // difficulty found
+            }
+        } while (cursor.moveToNext());
+        return difficulty;
     }
 
-    public void setDifficulty(String username, String levelDifficulty) {
-    }
+    /**
+     * Finds the game character associated with the logged in user.
+     *
+     * @param username1 the user's username
+     * @return a String: 'A' or 'B'.
+     */
+    public String findCharacter(String username1) {
+        System.out.println("difficulty found");
+        db = this.getReadableDatabase();
 
-    public void setCharacter(String username, String customCharacter) {}
+        String username2;
+
+        String query = "select username, customCharacter from " + TABLE_NAME;
+        Cursor cursor = db.rawQuery(query, null);
+
+        String character = "Easy";
+
+        cursor.moveToFirst();
+        do {
+            username2 = cursor.getString(0);
+
+            if (username2.equals(username1)) {
+                character = cursor.getString(1); // gets the character: 'A' or 'B'
+                db.close();
+                break; // difficulty found
+            }
+        } while (cursor.moveToNext());
+        return character;
+  }
+
 }
