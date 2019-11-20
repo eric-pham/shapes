@@ -2,10 +2,12 @@ package com.group0578.hpgame.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.group0578.hpgame.Level1.Level1Activity;
@@ -43,15 +45,29 @@ public class LoginActivity extends AppCompatActivity implements Login.View {
     final EditText loginPassword = findViewById(R.id.loginPassword);
     String password = loginPassword.getText().toString();
 
-    if (loginPresenter.checkLogin(sqlHelper, username, password)) {
-      loginPresenter.createNewStage1Screen();
-    } else {
+    if (loginPresenter.checkLogin(sqlHelper, username, password)) {  // the login info is correct
+      loginPresenter.createProfileScreen(username);
+    } else {  // the password and username don't match
       System.out.println("Login Failed!");
+
+      // after button is clicked, hides keyboard
+      InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+      assert imm != null;
+      imm.hideSoftInputFromWindow(findViewById(R.id.constraintLayoutLogin).getWindowToken(), 0);
+
+      // makes error message visible
+      findViewById(R.id.errorMessageLogin).setVisibility(View.VISIBLE);
     }
   }
 
-  public void goToStage1Screen(Intent stage1Intent) {
-    System.out.println("Method reached 2");
-    startActivity(stage1Intent);
+
+  /**
+   * Starts the ProfilePageActivity.
+   *
+   * @param profileIntent the intent for ProfilePageActivity
+   */
+  public void goToProfilePage(Intent profileIntent) {
+    System.out.println("Testing: Reached method LoginActivity.goToProfilePage ");
+    startActivity(profileIntent);
   }
 }

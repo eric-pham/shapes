@@ -13,6 +13,7 @@ import com.group0578.hpgame.presenter.CreateUserPresenter;
  */
 public class SQLiteHelper extends SQLiteOpenHelper {
   /** Metadata for the Database and table */
+//  private static final int DB_VERSION = 2;
   private static final int DB_VERSION = 1;
 
   private static final String DB_NAME = "users.db";
@@ -23,13 +24,20 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
   private static final String COLUMN_USERNAME = "username";
   private static final String COLUMN_PASSWORD = "password";
+  // This code doesn't work right now
+//  private static final String COLUMN_LEVEL_DIFFICULTY = "levelDifficulty";
+//  private static final String COLUMN_COLOUR_SCHEME = "colourScheme";
+//  private static final String COLUMN_LEVEL_ONE_TIME = "levelOneTime";
+//  private static final String COLUMN_LEVEL_TWO_TIME = "levelTwoTime";
+//  private static final String COLUMN_LEVEL_THREE_TIME = "levelThreeTime";
+//  private static final String COLUMN_CURRENT_LIVES = "currLives";
 
   /** SQLiteDatabase object */
   SQLiteDatabase db;
 
   /** String with table with appropriate columns */
   private static final String TABLE_CREATED =
-      "create table users (id integer primary key not null , username text not null , password text not null);";
+      "create table users (id integer primary key not null , username text not null , password text not null)";
 
   /**
    * Constructor for SQLiteHelper
@@ -83,6 +91,13 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     cValues.put(COLUMN_ID, count);
     cValues.put(COLUMN_USERNAME, sql.getUsername());
     cValues.put(COLUMN_PASSWORD, sql.getPassword());
+    // This code doesn't work right now
+//    cValues.put(COLUMN_LEVEL_DIFFICULTY, sql.getLevelDifficulty());
+//    cValues.put(COLUMN_COLOUR_SCHEME, sql.getColourScheme());
+//    cValues.put(COLUMN_LEVEL_ONE_TIME, sql.getLevelOneTime());
+//    cValues.put(COLUMN_LEVEL_TWO_TIME, sql.getLevelTwoTime());
+//    cValues.put(COLUMN_LEVEL_THREE_TIME, sql.getLevelThreeTime());
+//    cValues.put(COLUMN_CURRENT_LIVES, sql.getCurrLives());
 
     db.insert(TABLE_NAME, null, cValues);
     db.close();
@@ -113,6 +128,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         if (user.equals(username)) {
           pass = cursor.getString(1);
+            db.close();
           break;
         }
       } while (cursor.moveToNext());
@@ -120,4 +136,33 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     db.close();
     return pass;
   }
+
+    /**
+     * Checks whether the username is already in the database.
+     *
+     * @param username1 the user's desired username
+     * @return true if the username is already in the database, false otherwise
+     */
+    public boolean checkDuplicates(String username1) {
+        System.out.println("duplicates checked.");
+        db = this.getReadableDatabase();
+
+        String username2;
+
+        String query = "select username from " + TABLE_NAME;
+        Cursor cursor = db.rawQuery(query, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                username2 = cursor.getString(0);
+
+                if (username2.equals(username1)) {
+                    db.close();
+                    return true;  // there are duplicate user names
+                }
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return false; // there are no duplicate user names
+    }
 }

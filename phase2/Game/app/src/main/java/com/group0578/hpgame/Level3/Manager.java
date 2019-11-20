@@ -16,7 +16,7 @@ class Manager {
   /** The height of the screen. */
   private int gridHeight;
   /** The number of dementors created. */
-  private int cnt;
+  private int count;
 
   /**
    * The constructor for this manager.
@@ -30,7 +30,7 @@ class Manager {
     myLittledementors = new ArrayList<>();
     myBlasts = new ArrayList<>();
     wand = new Wand(gridWidth / 2, gridHeight - 10);
-    cnt = 0;
+    count = 0;
   }
 
   ArrayList<Blast> getMyBlasts() {
@@ -118,8 +118,8 @@ class Manager {
   /** Creates dementors and stores them in myLittleDementors. */
   void createDementors() {
     int i = myLittledementors.size() + 1;
-    if (cnt < 5) {
-      if (cnt == 3 || cnt == 4) {
+    if (count < 5) {
+      if (count == 3 || count == 4) {
         Dementor d = new Dementor(i * 5 + 1, 0);
         this.myLittledementors.add(d);
 
@@ -128,7 +128,7 @@ class Manager {
         this.myLittledementors.add(d);
       }
     }
-    cnt += 1;
+    count += 1;
   }
 
   /** Creates blasts and stores them in myBlasts. */
@@ -149,4 +149,7 @@ class Manager {
       wand.moveLeft(this);
     }
   }
+    public ArrayList getDementors(){
+      return this.myLittledementors;
+    }
 }

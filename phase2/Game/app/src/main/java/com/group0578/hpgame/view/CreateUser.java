@@ -1,5 +1,7 @@
 package com.group0578.hpgame.view;
 
+import android.content.Intent;
+
 import com.group0578.hpgame.model.SQLiteHelper;
 
 /**
@@ -11,6 +13,7 @@ public interface CreateUser {
      * Methods implemented by CreateUserActivity
      */
     interface View {
+        void goToProfilePage(Intent profileIntent);
     }
 
     // Haven't decided if we need this yet
@@ -23,6 +26,10 @@ public interface CreateUser {
      */
     interface Presenter {
         void createAccount(SQLiteHelper sqlHelper, String username, String password);
+
+        void createProfileScreen(String username);
+
+        boolean checkDuplicates(SQLiteHelper sqlHelper, String username);
     }
 
 }

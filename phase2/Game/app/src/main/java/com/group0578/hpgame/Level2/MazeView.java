@@ -13,8 +13,7 @@ import android.view.View;
 /**
  * The Maze's view or visual appearance on the screen for the user.
  *
- * <p>Implementing interface Runnable -- allows performing actions on Thread objects. Implementing
- * View.OnTouchListener -- for performing actions in response to user clicks
+ * <p>Implementing View.OnTouchListener -- for performing actions in response to user clicks
  */
 public class MazeView extends SurfaceView implements SurfaceHolder.Callback, View.OnTouchListener {
 
@@ -24,9 +23,7 @@ public class MazeView extends SurfaceView implements SurfaceHolder.Callback, Vie
   /** An instance of the mazePresenter responsible for handling user's actions. */
   private MazePresenter mazePresenter;
 
-  /**
-   * The MazeThread created in order to draw the Maze.
-   */
+  /** The MazeThread created in order to draw the Maze. */
   private MazeThread mazeThread;
 
   /**
@@ -41,6 +38,7 @@ public class MazeView extends SurfaceView implements SurfaceHolder.Callback, Vie
 
   /**
    * Construct a new instance of a MazeView.
+   *
    * @param context the environment making this MazeView appear on the screen.
    */
   public MazeView(Context context, AttributeSet attrs) {
@@ -50,6 +48,7 @@ public class MazeView extends SurfaceView implements SurfaceHolder.Callback, Vie
 
   /**
    * Construct a new instance of a MazeView.
+   *
    * @param context the environment making this MazeView appear on the screen.
    */
   public MazeView(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -57,15 +56,13 @@ public class MazeView extends SurfaceView implements SurfaceHolder.Callback, Vie
     init();
   }
 
-  /**
-   * Method called by constructor for initializing instance attributes.
-   */
+  /** Method called by constructor for initializing instance attributes. */
   private void init() {
     surfaceHolder = this.getHolder();
     surfaceHolder.addCallback(this);
     setFocusable(true);
     mazePresenter = new MazePresenter(this);
-    this.mazeThread =  new MazeThread(surfaceHolder, this, mazePresenter);
+    this.mazeThread = new MazeThread(surfaceHolder, this, mazePresenter);
   }
 
   /**
@@ -110,12 +107,11 @@ public class MazeView extends SurfaceView implements SurfaceHolder.Callback, Vie
    * @param holder The SurfaceHolder whose surface is being destroyed.
    */
   @Override
-  public void surfaceDestroyed(SurfaceHolder holder) {
-
-  }
+  public void surfaceDestroyed(SurfaceHolder holder) {}
 
   /**
    * Getter for surfaceHolder instance attribute
+   *
    * @return the surface this view contains.
    */
   public SurfaceHolder getSurfaceHolder() {
@@ -145,16 +141,16 @@ public class MazeView extends SurfaceView implements SurfaceHolder.Callback, Vie
       mazePresenter.handlePlayerMovement(touchX, touchY);
 
       // Checking if player has reached exitPoint
-      if (mazePresenter.isGameWon()) {
-        try{
+      if (!mazeThread.isRunning()) {
+        try {
           // Destroying the thread.
-          mazeThread.setRunning(false);
+//          mazeThread.setRunning(false);
           mazeThread.join();
-          setVisibility(GONE);  // Moving to level 3.
+          setVisibility(GONE); // Moving to level 3.
+
         } catch (Exception e) {
           e.printStackTrace();
         }
-
       }
     }
 

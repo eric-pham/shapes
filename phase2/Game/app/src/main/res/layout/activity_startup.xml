@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:foregroundTint="#FFFFFF"
-    tools:context=".view.StartupActivity">
+    tools:context=".view.StartupActivity"
+    android:id="@+id/constraintLayoutStartup">
 
     <TextView
         android:id="@+id/game_title_textView"
