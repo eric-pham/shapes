@@ -8,10 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.group0578.hpgame.model.SQLiteHelper;
-import com.group0578.hpgame.model.SQLiteManager;
 
 import com.group0578.hpgame.presenter.CreateUserPresenter;
 import com.group0578.hpgame.R;
@@ -77,5 +75,6 @@ public class CreateUserActivity extends AppCompatActivity implements CreateUser.
     public void goToProfilePage(Intent profileIntent) {
         System.out.println("Testing: Reached method CreateUserActivity.goToProfilePage ");
         startActivity(profileIntent);
+        finish();
     }
 }

@@ -40,6 +40,7 @@ public class StartupActivity extends AppCompatActivity implements Startup.View {
     public void goToLoginScreen(Intent loginIntent) {
         System.out.println("Method reached");
         startActivity(loginIntent);
+        finish();
     }
 
     /**
@@ -56,6 +57,7 @@ public class StartupActivity extends AppCompatActivity implements Startup.View {
     public void goToCreateUserScreen(Intent createUserIntent) {
         System.out.println("Method reached 2");
         startActivity(createUserIntent);
+        finish();
     }
 
     public void onClickStage1(View view){

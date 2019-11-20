@@ -69,5 +69,6 @@ public class LoginActivity extends AppCompatActivity implements Login.View {
   public void goToProfilePage(Intent profileIntent) {
     System.out.println("Testing: Reached method LoginActivity.goToProfilePage ");
     startActivity(profileIntent);
+    finish();
   }
 }

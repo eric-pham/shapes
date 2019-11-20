@@ -39,5 +39,6 @@ public class MazeActivity extends AppCompatActivity implements Maze.View {
     // Calling Level3MainActivity class
     Intent nextLevelIntent = new Intent(this, Level3MainActivity.class);
     startActivity(nextLevelIntent);
+    finish();
   }
 }

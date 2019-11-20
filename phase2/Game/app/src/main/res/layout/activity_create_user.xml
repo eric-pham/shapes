@@ -54,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:gravity="center"
-        android:text="Username already exist. \n Please enter a different username."
+        android:text="Username already exists. \n Please enter a different username."
         android:visibility="invisible"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
