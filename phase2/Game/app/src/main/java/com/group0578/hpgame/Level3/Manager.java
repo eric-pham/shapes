@@ -57,6 +57,8 @@ class Manager {
     }
   }
 
+  ArrayList<Dementor> getMyLittledementors() {return myLittledementors;}
+
   /**
    * Updates the dementors in myLittleDementors; if a dementor has reached the bottom of a screen or
    * has been hit with a blast removes the dementor and if not, moves the dementor.
