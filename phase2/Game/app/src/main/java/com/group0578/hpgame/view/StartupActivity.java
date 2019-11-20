@@ -14,11 +14,11 @@ import com.group0578.hpgame.presenter.StartupPresenter;
  */
 public class StartupActivity extends AppCompatActivity implements Startup.View {
 
-    private StartupPresenter startupPresenter;
-
     /**
      * The presenter associated with this View that handles the user's interactions with the UI.
      */
+    private StartupPresenter startupPresenter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +40,6 @@ public class StartupActivity extends AppCompatActivity implements Startup.View {
     public void goToLoginScreen(Intent loginIntent) {
         System.out.println("Method reached");
         startActivity(loginIntent);
-        finish();
     }
 
     /**
@@ -57,7 +56,6 @@ public class StartupActivity extends AppCompatActivity implements Startup.View {
     public void goToCreateUserScreen(Intent createUserIntent) {
         System.out.println("Method reached 2");
         startActivity(createUserIntent);
-        finish();
     }
 
     public void onClickStage1(View view){

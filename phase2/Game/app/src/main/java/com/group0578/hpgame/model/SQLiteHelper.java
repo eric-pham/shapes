@@ -6,43 +6,79 @@ import android.content.Context;
 import android.content.ContentValues;
 import android.database.Cursor;
 
-import com.group0578.hpgame.presenter.CreateUserPresenter;
-
 /**
  * This class was derived from Tech Academy's Tutorial and modified to suit the needs of our project
  */
 public class SQLiteHelper extends SQLiteOpenHelper {
-  /** Metadata for the Database and table */
 
-  private static final int DB_VERSION = 1;
+    /**
+     * Metadata for the table representing the database
+     */
+    private static final int DB_VERSION = 1;
 
   private static final String DB_NAME = "users.db";
   private static final String TABLE_NAME = "users";
 
-  /** Columns of the table */
+    /** Columns of the users database with name of column */
   private static final String COLUMN_ID = "id";
 
-  private static final String COLUMN_USERNAME = "username";
-  private static final String COLUMN_PASSWORD = "password";
+    /** Column for user account username */
+    private static final String COLUMN_USERNAME = "username";
 
+    /** Column for user account password */
+    private static final String COLUMN_PASSWORD = "password";
+
+    /**
+     * Column for a user account's preferred level difficulty
+     */
     private static final String COLUMN_LEVEL_DIFFICULTY = "levelDifficulty";
+
+    /**
+     * Column for a user account's preferred colour scheme
+     */
     private static final String COLUMN_COLOUR_SCHEME = "colourScheme";
+
+    /**
+     * Column for a user account's level one completion time in seconds
+     */
     private static final String COLUMN_LEVEL_ONE_TIME = "levelOneTime";
+
+    /**
+     * Column for a user account's level two completion time in seconds
+     */
     private static final String COLUMN_LEVEL_TWO_TIME = "levelTwoTime";
+
+    /**
+     * Column for a user account's level three completion time in seconds
+     */
     private static final String COLUMN_LEVEL_THREE_TIME = "levelThreeTime";
+
+    /**
+     * Column for a user account's number of lives leftover from the previous game
+     */
     private static final String COLUMN_CURRENT_LIVES = "currLives";
+
+    /**
+     * Column for a user account's most recently completed level
+     */
     private static final String COLUMN_PROGRESS = "progress";
+
+    /**
+     * Column representing a boolean that's true if the user did not just create an account
+     */
     private static final String COLUMN_RETURNING_USER = "returningUser";
 
   /** SQLiteDatabase object */
   SQLiteDatabase db;
 
-  /** String with table with appropriate columns */
-  private static final String TABLE_CREATED =
-          "create table users (id integer primary key not null, username text not null, password text not null," +
-                  "levelDifficulty text not null , colourScheme text not null, levelOneTime integer not null, " +
-                  "levelTwoTime integer not null, levelThreeTime integer not null, currLives integer not null," +
-                  "progress text not null, returningUser integer not null)";
+    /**
+     * String with table with appropriate columns
+     */
+    private static final String TABLE_CREATED =
+            "create table users (id integer primary key not null, username text not null, password text not null,"
+                    + "levelDifficulty text not null , colourScheme text not null, levelOneTime integer not null, "
+                    + "levelTwoTime integer not null, levelThreeTime integer not null, currLives integer not null,"
+          + "progress text not null, returningUser integer not null)";
 
   /**
    * Constructor for SQLiteHelper
@@ -89,11 +125,11 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     ContentValues cValues = new ContentValues();
 
     String query = "select * from users";
-    Cursor cursor = db.rawQuery(query, null);
+      Cursor cursor = db.rawQuery(query, null);
 
-    int count = cursor.getCount();
+      int count = cursor.getCount();
 
-    cValues.put(COLUMN_ID, count);
+      cValues.put(COLUMN_ID, count);
       cValues.put(COLUMN_USERNAME, sqlManager.getUsername());
       cValues.put(COLUMN_PASSWORD, sqlManager.getPassword());
       cValues.put(COLUMN_LEVEL_DIFFICULTY, sqlManager.getLevelDifficulty());
@@ -103,7 +139,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
       cValues.put(COLUMN_LEVEL_THREE_TIME, sqlManager.getLevelThreeTime());
       cValues.put(COLUMN_CURRENT_LIVES, sqlManager.getCurrLives());
       cValues.put(COLUMN_PROGRESS, sqlManager.getProgress());
-      cValues.put(COLUMN_RETURNING_USER, sqlManager.getReturningUser());
+    cValues.put(COLUMN_RETURNING_USER, sqlManager.getReturningUser());
 
     db.insert(TABLE_NAME, null, cValues);
     db.close();
@@ -129,18 +165,18 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
     pass = "Cannot find pass";
     if (cursor.moveToFirst()) {
-      do {
-        user = cursor.getString(0);
+        do {
+            user = cursor.getString(0);
 
         if (user.equals(username)) {
           pass = cursor.getString(1);
             db.close();
-          break;
+            break;
         }
-      } while (cursor.moveToNext());
+        } while (cursor.moveToNext());
     }
-    db.close();
-    return pass;
+      db.close();
+      return pass;
   }
 
     /**
@@ -164,11 +200,11 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
                 if (username2.equals(username1)) {
                     db.close();
-                    return true;  // there are duplicate user names
+                    return true; // there are duplicate user names
                 }
-            } while (cursor.moveToNext());
-        }
-        db.close();
-        return false; // there are no duplicate user names
+      } while (cursor.moveToNext());
     }
+    db.close();
+    return false; // there are no duplicate user names
+  }
 }

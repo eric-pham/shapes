@@ -28,7 +28,8 @@ public class CustomizeActivity extends AppCompatActivity implements Customize.Vi
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_user);
+        setContentView(R.layout.activity_customize);
+        setTitle("Customization");
         // Presenter stores reference of this CustomizeActivity as its View (send 'this')
         customizePresenter = new CustomizePresenter(this);
 

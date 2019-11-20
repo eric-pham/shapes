@@ -52,6 +52,14 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
   }
 
   /**
+   * Called when the user attempts to hit the android device 'back' button
+   * Prevents users from going back to startup page after signing in.
+   */
+  @Override
+  public void onBackPressed() {
+  }
+
+  /**
    * Starts the game by calling the method that will create the intent for the first level.
    *
    * @param view the view
