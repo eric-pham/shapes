@@ -104,11 +104,11 @@ public class ScreenView extends SurfaceView implements SurfaceHolder.Callback {
     if (roomManager.getMyLittledementors().isEmpty()) {
       System.out.println("Rick and Morty");
       try{
-        //thread.setRunning(false);
+        thread.setRunning(false);
         System.out.println("Pringles");
         // thread.join();
         System.out.println("Paul Gries");
-        // setVisibility(GONE);
+        setVisibility(INVISIBLE);
         System.out.println("Harry Potter");
       } catch (Exception e) {
         e.printStackTrace();

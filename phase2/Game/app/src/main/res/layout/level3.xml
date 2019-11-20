@@ -73,7 +73,6 @@
         android:layout_marginBottom="476dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Congratulations"
-        android:visibility="visible" />
+        android:text="Congratulations" />
 
 </RelativeLayout>
