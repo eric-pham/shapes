@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".view.CustomizeActivity">
 
     <TextView
         android:id="@+id/chooseColourSchemeText"
@@ -17,30 +19,33 @@
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_gravity="center"
-        android:layout_marginBottom="25dp"
         android:layout_marginTop="10dp"
-        android:gravity="center">
+        android:layout_marginBottom="25dp"
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <RadioButton
             android:id="@+id/lightButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Light"
-            android:textSize="20sp"
             android:layout_marginHorizontal="10dp"
             android:checked="true"
-            android:gravity="center" />
+            android:gravity="center"
+            android:onClick="onClickLightButton"
+            android:text="Light"
+            android:textSize="20sp" />
 
         <RadioButton
             android:id="@+id/darkButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dark"
-            android:textSize="20sp"
             android:layout_marginHorizontal="10dp"
-            android:gravity="center" />
+            android:checked="false"
+            android:gravity="center"
+            android:onClick="onClickDarkButton"
+            android:text="Dark"
+            android:textSize="20sp" />
     </RadioGroup>
 
     <TextView
@@ -55,30 +60,32 @@
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="25dp"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <RadioButton
             android:id="@+id/easyButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Easy"
-            android:textSize="20sp"
             android:layout_marginHorizontal="10dp"
             android:checked="true"
-            android:gravity="center" />
+            android:gravity="center"
+            android:onClick="onClickEasyButton"
+            android:text="Easy"
+            android:textSize="20sp" />
 
         <RadioButton
             android:id="@+id/hardButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hard"
-            android:textSize="20sp"
             android:layout_marginHorizontal="10dp"
-            android:gravity="center" />
+            android:gravity="center"
+            android:onClick="onClickHardButton"
+            android:text="Hard"
+            android:textSize="20sp" />
     </RadioGroup>
 
     <TextView
@@ -93,30 +100,32 @@
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_gravity="center"
-        android:layout_marginBottom="25dp"
         android:layout_marginTop="10dp"
-        android:gravity="center">
+        android:layout_marginBottom="25dp"
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/char1Button"
+            android:id="@+id/charAButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="A"
-            android:textSize="20sp"
             android:layout_marginHorizontal="10dp"
             android:checked="true"
-            android:gravity="center" />
+            android:gravity="center"
+            android:onClick="onClickCharAButton"
+            android:text="A"
+            android:textSize="20sp" />
 
         <RadioButton
-            android:id="@+id/char2Button"
+            android:id="@+id/charBButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="B"
-            android:textSize="20sp"
             android:layout_marginHorizontal="10dp"
-            android:gravity="center" />
+            android:gravity="center"
+            android:onClick="onClickCharBButton"
+            android:text="B"
+            android:textSize="20sp" />
     </RadioGroup>
 
 </LinearLayout>

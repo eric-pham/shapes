@@ -1,6 +1,10 @@
 package com.group0578.hpgame.presenter;
 
+import android.content.Context;
+
+import com.group0578.hpgame.model.SQLiteHelper;
 import com.group0578.hpgame.view.Customize;
+import com.group0578.hpgame.view.CustomizeActivity;
 
 /**
  * Responsible for handling actions from the View {@link
@@ -23,4 +27,24 @@ public class CustomizePresenter implements Customize.Presenter {
         this.customizeView = customizeView;
     }
 
+    @Override
+    public void changeColourScheme(SQLiteHelper sqlHelper, String username, String colourScheme) {
+        if (!sqlHelper.findColourScheme(username).equals(colourScheme)) {
+            System.out.println("New colour scheme preference detected!");
+            sqlHelper.setColourScheme(username, colourScheme);
+
+        }
+    }
+
+    @Override
+    public void changeLevelDifficulty(SQLiteHelper sqlHelper, String username, String difficulty) {
+        if (!sqlHelper.findDifficulty(username).equals(difficulty)) {
+            // do something
+        }
+    }
+
+    @Override
+    public void changeCustomCharacter(SQLiteHelper sqlHelper, String username, String customChar) {
+
+    }
 }
