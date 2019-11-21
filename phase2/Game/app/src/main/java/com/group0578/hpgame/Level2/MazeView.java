@@ -155,6 +155,7 @@ public class MazeView extends SurfaceView implements SurfaceHolder.Callback, Vie
       try {
         // Destroying the thread.
 //          mazeThread.setRunning(false);
+        mazePresenter.updateProgress();
         mazeThread.join();
         setVisibility(GONE); // Moving to level 3.
 

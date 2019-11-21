@@ -457,4 +457,7 @@ public class MazePresenter implements Maze.Presenter {
 
   }
 
+    public void updateProgress() {
+        mazeUseCases.getSQLHelper().setProgress(mazeUseCases.getUsername(), "two");
+    }
 }

@@ -319,6 +319,36 @@ public class SQLiteHelper extends SQLiteOpenHelper {
   }
 
     /**
+     * Finds the last level completed by the logged in user.
+     *
+     * @param username1 the user's username
+     * @return a String: 'one', 'two' or 'three'.
+     */
+    public String findProgress(String username1) {
+        System.out.println("Progress found");
+        db = this.getReadableDatabase();
+
+        String username2;
+
+        String query = "select username, progress from " + TABLE_NAME;
+        Cursor cursor = db.rawQuery(query, null);
+
+        String progress = "one";
+
+        cursor.moveToFirst();
+        do {
+            username2 = cursor.getString(0);
+
+            if (username2.equals(username1)) {
+                progress = cursor.getString(1); // gets the progress
+                db.close();
+                break; // progress found
+            }
+        } while (cursor.moveToNext());
+        return progress;
+    }
+
+    /**
      * Updates the database by changing the String value representing the logged in user's preferred
      * colour scheme.
      * @param username the logged in user.
@@ -340,7 +370,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * Updates the database by changing the String value representing the logged in user's preferred
      * game difficulty.
      * @param username the logged in user.
-     * @param levelDifficulty the string representing teh user's preferred game difficulty.
+     * @param levelDifficulty the string representing the user's preferred game difficulty.
      */
     public void setDifficulty(String username, String levelDifficulty) {
         System.out.println("Method SQLiteHelper.setColourScheme() reached");
@@ -358,7 +388,26 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * Updates the database by changing the String value representing the logged in user's preferred
      * character.
      * @param username the logged in user.
-     * @param customCharacter the string representing teh user's preferred character.
+     * @param customCharacter the string representing the user's preferred character.
      */
     public void setCharacter(String username, String customCharacter) {}
+
+    /**
+     * Updates the database by changing the String value representing the logged in user's most
+     * recently completed level in the game.
+     *
+     * @param username the logged in user.
+     * @param level    the string representing the user's most recently completed level in the game.
+     */
+    public void setProgress(String username, String level) {
+        System.out.println("Method SQLiteHelper.setColourScheme() reached");
+        int ID = this.findID(username);
+        db = this.getWritableDatabase();
+        ContentValues cValues = new ContentValues();
+
+        cValues.put(COLUMN_PROGRESS, level);
+        db.update(TABLE_NAME, cValues, "id=" + ID, null);
+        db.close();
+        System.out.println("Completed level: " + level);
+    }
 }

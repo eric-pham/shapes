@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.group0578.hpgame.Level2.MazeActivity;
+import com.group0578.hpgame.Level3.Level3MainActivity;
 import com.group0578.hpgame.R;
 import com.group0578.hpgame.model.SQLiteHelper;
 import com.group0578.hpgame.presenter.ProfilePagePresenter;
@@ -100,6 +102,9 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
    * @param view the view
    */
   public void onClickPlayGame(View view) {
+    if (!sqlHelper.findProgress(username).equalsIgnoreCase("one")) {
+      sqlHelper.setProgress(username, "one");
+    }
     profilePagePresenter.createLevel1();
   }
 
@@ -120,7 +125,22 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
    * @param view the view displaying this activity.
    */
   public void onClickResumeGame(View view) {
-    profilePagePresenter.resumePreviousGame();
+    String progress = sqlHelper.findProgress(username);
+
+    if (progress.equalsIgnoreCase("one")) {
+      Intent level2 = new Intent(this, MazeActivity.class);
+      level2.putExtra("username", this.username);
+      startActivity(level2);
+    } else if (progress.equalsIgnoreCase("two")) {
+      Intent level3 = new Intent(this, Level3MainActivity.class);
+      level3.putExtra("username", this.username);
+      startActivity(level3);
+    } else { // progress equals level 3
+//      Intent playerStats = new Intent(this, PlayerStatsActivity.class);
+//      playerStats.putExtra("username", this.username);
+//      startActivity(playerStats);
+    }
+//    profilePagePresenter.resumePreviousGame(progress);
   }
 
   /**

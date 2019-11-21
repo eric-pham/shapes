@@ -2,8 +2,8 @@ package com.group0578.hpgame.presenter;
 
 import android.content.Intent;
 
-import com.group0578.hpgame.Level1.Level1Activity;
 import com.group0578.hpgame.Level2.MazeActivity;
+import com.group0578.hpgame.Level3.Level3MainActivity;
 import com.group0578.hpgame.view.CustomizeActivity;
 import com.group0578.hpgame.view.ProfilePage;
 import com.group0578.hpgame.view.ProfilePageActivity;
@@ -33,9 +33,15 @@ public class ProfilePagePresenter implements ProfilePage.Presenter {
         profilePageView.goToLevel1(levelOne);
     }
 
-    /** Resumes the previous game for the user currently playing. */
+    /**
+     * Resumes the previous game for the user currently playing.
+     *
+     * @param progress
+     */
     @Override
-    public void resumePreviousGame() {}
+    public void resumePreviousGame(String progress) {
+
+    }
 
     /**
      * Shows statistics from game history for the user currently playing. If no previous games played,

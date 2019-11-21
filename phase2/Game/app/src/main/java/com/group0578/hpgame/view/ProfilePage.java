@@ -24,7 +24,7 @@ public interface ProfilePage {
   interface Presenter {
     void createLevel1();
 
-    void resumePreviousGame();
+    void resumePreviousGame(String progress);
 
     void displayPlayerStats();
 
