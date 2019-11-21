@@ -47,6 +47,23 @@ public class CustomizeActivity extends AppCompatActivity implements Customize.Vi
       // the username of the user currently logged in
       this.username = extras.getString("username");
     }
+
+    setButtonsClicked();
+  }
+
+  /**
+   * Checks what the colour scheme is for the user currently logged in, and checks the light and
+   * dark radio buttons accordingly.
+   */
+  private void setButtonsClicked() {
+    String colourScheme = sqlHelper.findColourScheme(username);
+    if (colourScheme.equalsIgnoreCase("Light")) {
+      ((RadioButton) findViewById(R.id.lightButton)).setChecked(true);
+      ((RadioButton) findViewById(R.id.darkButton)).setChecked(false);
+    } else {
+      ((RadioButton) findViewById(R.id.darkButton)).setChecked(true);
+      ((RadioButton) findViewById(R.id.lightButton)).setChecked(false);
+    }
   }
 
   /**

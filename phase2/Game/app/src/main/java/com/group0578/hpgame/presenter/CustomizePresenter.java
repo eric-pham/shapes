@@ -1,10 +1,7 @@
 package com.group0578.hpgame.presenter;
 
-import android.content.Context;
-
 import com.group0578.hpgame.model.SQLiteHelper;
 import com.group0578.hpgame.view.Customize;
-import com.group0578.hpgame.view.CustomizeActivity;
 
 /**
  * Responsible for handling actions from the View {@link
