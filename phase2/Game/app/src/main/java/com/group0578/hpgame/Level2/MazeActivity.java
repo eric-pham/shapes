@@ -27,7 +27,6 @@ public class MazeActivity extends AppCompatActivity implements Maze.View {
      */
     private SQLiteHelper sqlHelper = new SQLiteHelper(this);
 
-
   @Override
   protected void onCreate(Bundle savedInstanceState) {
       super.onCreate(savedInstanceState);
@@ -42,9 +41,7 @@ public class MazeActivity extends AppCompatActivity implements Maze.View {
       if (extras != null) {
           // the username of the user currently logged in
           this.username = extras.getString("username");
-
       }
-
 
       // Sets this activity's display as activity_maze.xml
       setContentView(R.layout.activity_maze);
@@ -55,16 +52,23 @@ public class MazeActivity extends AppCompatActivity implements Maze.View {
       getSupportActionBar().hide();
   }
 
+    /**
+     * Changes the background and text colour depending on the colour scheme.
+     */
     private void setComponentColours() {
         String colourScheme = sqlHelper.findColourScheme(username);
         if (colourScheme.equalsIgnoreCase("Light")) {
             getWindow().getDecorView().setBackgroundColor(Color.argb(255, 204, 212, 255));
-            ((TextView) findViewById(R.id.level2_congrats_message_textView)).setTextColor(Color.argb(255, 68, 0, 102));
+            ((TextView) findViewById(R.id.level2_congrats_message_textView))
+                    .setTextColor(Color.argb(255, 68, 0, 102));
         } else {
             getWindow().getDecorView().setBackgroundColor(Color.argb(255, 100, 30, 250));
-            ((TextView) findViewById(R.id.level2_congrats_message_textView)).setTextColor(Color.argb(255, 255, 77, 106));
-        }
+            ((TextView) findViewById(R.id.level2_congrats_message_textView))
+                    .setTextColor(Color.argb(255, 255, 179, 204));
+//      ((TextView) findViewById(R.id.level2_congrats_message_textView))
+//              .setTextColor(Color.argb(255, 239, 222, 205));
     }
+  }
 
   /**
    * The method called when clicking the enterLevelThree button inside activity_maze.xml
@@ -83,6 +87,6 @@ public class MazeActivity extends AppCompatActivity implements Maze.View {
     }
 
     public SQLiteHelper getSqlHelper() {
-        return this.sqlHelper;
-    }
+    return this.sqlHelper;
+  }
 }

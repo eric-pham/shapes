@@ -204,7 +204,7 @@ public class MazePresenter implements Maze.Presenter {
   /**Gets the number of the rows and columns in the mazeGrid.
    * @return 2 element integer array representing number of rows, columns in the mazeGrid array. */
   int[] getRowColumnAttributes() {
-    return new int[] {mazeUseCases.getROWS(), mazeUseCases.getCOLS()};
+    return new int[]{mazeUseCases.getRows(), mazeUseCases.getCols()};
   }
 
   /**

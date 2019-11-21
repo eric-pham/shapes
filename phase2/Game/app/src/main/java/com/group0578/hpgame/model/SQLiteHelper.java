@@ -52,10 +52,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
   /** Column representing a boolean that's true if the user did not just create an account */
   private static final String COLUMN_RETURNING_USER = "returningUser";
 
-  /**
-   * Column for a user account's custom character appearance.
-   */
-  private static final String COLUMN_CUSTOM_CHARACTER = "customCharacter";
+    /**
+     * Column for a user account's custom character appearance.
+     */
+    private static final String COLUMN_CHARACTER = "character";
 
   /**
    * SQLiteDatabase object
@@ -67,7 +67,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
           "create table users (id integer primary key not null, username text not null, password text not null,"
                   + "levelDifficulty text not null , colourScheme text not null, levelOneTime integer not null, "
           + "levelTwoTime integer not null, levelThreeTime integer not null, currLives integer not null,"
-                  + "progress text not null, returningUser integer not null, customCharacter text not null)";
+                  + "progress text not null, returningUser integer not null, character text not null)";
 
   /**
    * Constructor for SQLiteHelper
@@ -129,8 +129,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     cValues.put(COLUMN_CURRENT_LIVES, sqlManager.getCurrLives());
     cValues.put(COLUMN_PROGRESS, sqlManager.getProgress());
     cValues.put(COLUMN_RETURNING_USER, sqlManager.getReturningUser());
-    cValues.put(COLUMN_CUSTOM_CHARACTER, sqlManager.getCustomCharacter());
-    cValues.put(COLUMN_COLOUR_SCHEME, sqlManager.getCustomCharacter());
+      cValues.put(COLUMN_CHARACTER, sqlManager.getCharacter());
 
     db.insert(TABLE_NAME, null, cValues);
     db.close();
@@ -296,43 +295,70 @@ public class SQLiteHelper extends SQLiteOpenHelper {
    * @return a String: 'A' or 'B'.
    */
   public String findCharacter(String username1) {
-    System.out.println("difficulty found");
-    db = this.getReadableDatabase();
+      System.out.println("character found");
+      db = this.getReadableDatabase();
 
-    String username2;
+      String username2;
 
-    String query = "select username, customCharacter from " + TABLE_NAME;
-    Cursor cursor = db.rawQuery(query, null);
+      String query = "select username, character from " + TABLE_NAME;
+      Cursor cursor = db.rawQuery(query, null);
 
-    String character = "A";
+      String character = "A";
 
-    cursor.moveToFirst();
-    do {
-      username2 = cursor.getString(0);
+      cursor.moveToFirst();
+      do {
+          username2 = cursor.getString(0);
 
-      if (username2.equals(username1)) {
-        character = cursor.getString(1); // gets the character: 'A' or 'B'
+          if (username2.equals(username1)) {
+              character = cursor.getString(1); // gets the character: 'A' or 'B'
+              db.close();
+              break; // character found
+          }
+      } while (cursor.moveToNext());
+      return character;
+  }
+
+    /**
+     * Updates the database by changing the String value representing the logged in user's preferred
+     * colour scheme.
+     * @param username the logged in user.
+     * @param colourScheme the string representing teh user's preferred colour scheme.
+     */
+    public void setColourScheme(String username, String colourScheme) {
+        System.out.println("Method SQLiteHelper.setColourScheme() reached");
+        int ID = this.findID(username);
+        db = this.getWritableDatabase();
+        ContentValues cValues = new ContentValues();
+
+        cValues.put(COLUMN_COLOUR_SCHEME, colourScheme);
+        db.update(TABLE_NAME, cValues, "id=" + ID, null);
         db.close();
-        break; // character found
-      }
-    } while (cursor.moveToNext());
-    return character;
-  }
+        System.out.println("New colour scheme: " + colourScheme);
+    }
 
-  public void setColourScheme(String username, String colourScheme) {
-    System.out.println("Method SQLiteHelper.setColourScheme() reached");
-    int ID = this.findID(username);
-    db = this.getWritableDatabase();
-    ContentValues cValues = new ContentValues();
+    /**
+     * Updates the database by changing the String value representing the logged in user's preferred
+     * game difficulty.
+     * @param username the logged in user.
+     * @param levelDifficulty the string representing teh user's preferred game difficulty.
+     */
+    public void setDifficulty(String username, String levelDifficulty) {
+        System.out.println("Method SQLiteHelper.setColourScheme() reached");
+        int ID = this.findID(username);
+        db = this.getWritableDatabase();
+        ContentValues cValues = new ContentValues();
 
-    cValues.put(COLUMN_COLOUR_SCHEME, colourScheme);
-    db.update(TABLE_NAME, cValues, "id=" + ID, null);
-    db.close();
-    System.out.println("New colour scheme: " + colourScheme);
-  }
+        cValues.put(COLUMN_LEVEL_DIFFICULTY, levelDifficulty);
+        db.update(TABLE_NAME, cValues, "id=" + ID, null);
+        db.close();
+        System.out.println("New difficulty: " + levelDifficulty);
+    }
 
-  public void setDifficulty(String username, String levelDifficulty) {
-  }
-
-  public void setCharacter(String username, String customCharacter) {}
+    /**
+     * Updates the database by changing the String value representing the logged in user's preferred
+     * character.
+     * @param username the logged in user.
+     * @param customCharacter the string representing teh user's preferred character.
+     */
+    public void setCharacter(String username, String customCharacter) {}
 }

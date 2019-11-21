@@ -196,7 +196,7 @@ public class SQLiteManager {
    *
    * @return "A" for character A or "B" for character B
    */
-  public String getCustomCharacter() {
+  public String getCharacter() {
     return customCharacter;
   }
 
@@ -206,7 +206,7 @@ public class SQLiteManager {
    *
    * @param customCharacter "A" or "B"
    */
-  public void setCustomCharacter(String customCharacter) {
+  public void setCharacter(String customCharacter) {
     this.customCharacter = customCharacter;
   }
 }

@@ -1,13 +1,16 @@
 package com.group0578.hpgame.view;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.group0578.hpgame.R;
+import com.group0578.hpgame.model.SQLiteHelper;
 import com.group0578.hpgame.presenter.ProfilePagePresenter;
 
 import java.time.LocalDate;
@@ -25,6 +28,11 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
 
   /** The username belonging to the user currently logged in and viewing the profile page. */
   private String username;
+
+  /**
+   * SQL helper associated with this CustomizeActivity
+   */
+  private SQLiteHelper sqlHelper = new SQLiteHelper(this);
 
   /** Called immediately when the activity is started. */
   @Override
@@ -49,6 +57,33 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
     LocalDate today = LocalDate.now();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
     dateTextView.setText(String.format("Date: %s", today.format(formatter)));
+
+    // there is a bug that needs to be fixed: pressing back button from customize page doesn't
+    // change the colour scheme of the profile page after a new colour scheme is selected
+    setComponentColours();
+
+  }
+
+  /**
+   * Changes the background and text colour depending on the colour scheme.
+   */
+  private void setComponentColours() {
+    String colourScheme = sqlHelper.findColourScheme(username);
+    if (colourScheme.equalsIgnoreCase("Light")) {
+      getWindow().getDecorView().setBackgroundColor(Color.argb(255, 204, 212, 255));
+      ((TextView) findViewById(R.id.date))
+              .setTextColor(Color.argb(255, 68, 0, 102));
+      ((TextView) findViewById(R.id.usernameTextView))
+              .setTextColor(Color.argb(255, 68, 0, 102));
+    } else {
+      getWindow().getDecorView().setBackgroundColor(Color.argb(255, 0, 51, 153));
+//      ((TextView) findViewById(R.id.level2_congrats_message_textView))
+//              .setTextColor(Color.argb(255, 255, 179, 204));
+      ((TextView) findViewById(R.id.date))
+              .setTextColor(Color.argb(255, 239, 222, 205));
+      ((TextView) findViewById(R.id.usernameTextView))
+              .setTextColor(Color.argb(255, 239, 222, 205));
+    }
   }
 
   /**

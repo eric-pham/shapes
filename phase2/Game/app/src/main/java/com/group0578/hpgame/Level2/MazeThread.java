@@ -128,7 +128,7 @@ public class MazeThread extends Thread {
 
     // Writing the legend on the screen using drawText() method
     mazeCanvas.drawText("Player = Circle", 100, 100, mazePresenter.getTextBrush());
-    mazeCanvas.drawText("End Point = Square", 100, 160, mazePresenter.getTextBrush());
+    mazeCanvas.drawText("End Point = Square", 550, 100, mazePresenter.getTextBrush());
 
     // MazePresenter object handles drawing the maze, player, and exitPoint.
     mazePresenter.drawMazeWalls(mazeCanvas);

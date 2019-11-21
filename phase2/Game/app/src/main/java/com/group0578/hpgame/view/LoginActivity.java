@@ -4,11 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.TextView;
 
 import com.group0578.hpgame.Level1.Level1Activity;
 import com.group0578.hpgame.R;
@@ -29,7 +32,9 @@ public class LoginActivity extends AppCompatActivity implements Login.View {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_login);
     loginPresenter = new LoginPresenter(this);
+
   }
+
 
   /**
    * When login button is clicked, verify if password is valid with given username, launch level 1

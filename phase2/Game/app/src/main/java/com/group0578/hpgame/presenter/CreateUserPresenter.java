@@ -49,7 +49,7 @@ public class CreateUserPresenter implements CreateUser.Presenter {
     sqlManager.setCurrLives(10);
     sqlManager.setProgress("one");
     sqlManager.setReturningUser(0); // 0 represents false, 1 represents true
-    sqlManager.setCustomCharacter("A"); // A represents character A, B for character B
+      sqlManager.setCharacter("A"); // A represents character A, B for character B
 
     sqlHelper.insertUser(sqlManager);
     System.out.println("Inserted!");

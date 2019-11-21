@@ -1,7 +1,5 @@
 package com.group0578.hpgame.Level2;
 
-import android.graphics.Canvas;
-
 import com.group0578.hpgame.Level2.MazeEntities.MazeSection;
 import com.group0578.hpgame.model.SQLiteHelper;
 
@@ -13,9 +11,9 @@ import java.util.Stack;
 public class MazeUseCases {
 
   /** The number of rows in the maze. */
-  private final int ROWS = 4;
+  private int rows;
   /** The number of columns in the maze. */
-  private final int COLS = 4;
+  private int cols;
 
   /**
    * The username belonging to the user currently logged in and viewing the profile page.
@@ -45,7 +43,17 @@ public class MazeUseCases {
    * @return A modified mazeGrid (a 2D array of type MazeSection) with random walls.
    */
   public MazeSection[][] buildMazeGrid() {
-    MazeSection[][] mazeGrid = new MazeSection[ROWS][COLS];
+    String difficulty = this.sqlHelper.findDifficulty(this.username);
+
+    if (difficulty.equalsIgnoreCase("Easy")) {  // the difficulty is set to 'Easy'
+      this.rows = 4;
+      this.cols = 4;
+    } else {  // the difficulty is set to 'Hard'
+      this.rows = 8;
+      this.cols = 4;
+    }
+
+    MazeSection[][] mazeGrid = new MazeSection[rows][cols];
     return createMazeGrid(mazeGrid);
   }
 
@@ -63,8 +71,8 @@ public class MazeUseCases {
     MazeSection currSection, nextSection;
 
     // creates the base structure of the maze by populating the mazeGrid with MazeSection objects.
-    for (int row = 0; row < ROWS; row++) {
-      for (int col = 0; col < COLS; col++) {
+    for (int row = 0; row < rows; row++) {
+      for (int col = 0; col < cols; col++) {
         mazeGrid[row][col] = new MazeSection(row, col);
       }
     }
@@ -162,7 +170,7 @@ public class MazeUseCases {
     }
 
     // check section below
-    if (currSection.getRow() < ROWS - 1) {
+    if (currSection.getRow() < rows - 1) {
       MazeSection downSection = mazeGrid[currSection.getRow() + 1][currSection.getCol()];
       if (!downSection.isModified()) {
         candidates.add(downSection);
@@ -178,7 +186,7 @@ public class MazeUseCases {
     }
 
     // check section to the right
-    if (currSection.getCol() < COLS - 1) {
+    if (currSection.getCol() < cols - 1) {
       MazeSection rightSection = mazeGrid[currSection.getRow()][currSection.getCol() + 1];
       if (!rightSection.isModified()) {
         candidates.add(rightSection);
@@ -222,14 +230,14 @@ public class MazeUseCases {
 
   /**Getter for rows instance attribute.
    * @return number of rows in the Maze Grid. */
-  public int getROWS() {
-    return ROWS;
+  public int getRows() {
+    return rows;
   }
 
   /**Getter for cols instance attribute.
    * @return number of columns in the Maze Grid. */
-  public int getCOLS() {
-    return COLS;
+  public int getCols() {
+    return cols;
   }
 
   /**

@@ -29,14 +29,14 @@ public class CustomizePresenter implements Customize.Presenter {
         if (!sqlHelper.findColourScheme(username).equals(colourScheme)) {
             System.out.println("New colour scheme preference detected!");
             sqlHelper.setColourScheme(username, colourScheme);
-
         }
     }
 
     @Override
     public void changeLevelDifficulty(SQLiteHelper sqlHelper, String username, String difficulty) {
         if (!sqlHelper.findDifficulty(username).equals(difficulty)) {
-            // do something
+            System.out.println("New difficulty preference detected!");
+            sqlHelper.setDifficulty(username, difficulty);
         }
     }
 

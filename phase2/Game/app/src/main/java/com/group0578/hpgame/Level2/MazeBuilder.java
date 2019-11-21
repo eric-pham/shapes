@@ -18,17 +18,28 @@ public class MazeBuilder {
    * @param colourScheme the string representing the colour scheme of the game
    */
   void build(MazePresenter mazePresenter, String colourScheme) {
+    // gets the screen height and width
     mazePresenter.setScreenWidth(Resources.getSystem().getDisplayMetrics().widthPixels);
     mazePresenter.setScreenHeight(Resources.getSystem().getDisplayMetrics().heightPixels);
+
     // Receiving mazeGrid from Presenter
     MazeSection[][] mazeGrid = mazePresenter.buildMazeGrid();
     mazePresenter.setMazeGrid(mazeGrid);
+
     // Initializing new Player object with coordinates (0,0) in mazeGrid array
     Player player = new Player(0, 0);
     mazePresenter.setPlayer(player);
+
+    // prepares the exit
     setExitLocation(mazePresenter);
+
+    // prepares the brushes for the maze outline and the text
     prepareMazeBrushes(mazePresenter, colourScheme);
+
+    // calculates the dimensions of the margins and the lengths of the walls
     determineMazeDimensions(mazePresenter, mazeGrid);
+
+    // prepares the Paint objects for the player and exit
     makePlayer(mazePresenter, colourScheme);
     makeExitPoint(mazePresenter, colourScheme);
   }
