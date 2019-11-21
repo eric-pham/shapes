@@ -1,5 +1,7 @@
 package com.group0578.hpgame.view;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -17,24 +19,21 @@ import com.group0578.hpgame.presenter.CustomizePresenter;
  */
 public class CustomizeActivity extends AppCompatActivity implements Customize.View {
 
-  /**
-   * The presenter associated with this View that handles the user's interactions with the UI.
-   */
+  /** The presenter associated with this View that handles the user's interactions with the UI. */
   CustomizePresenter customizePresenter;
 
-  /**
-   * The username belonging to the user currently logged in and viewing the profile page.
-   */
+  /** The username belonging to the user currently logged in and viewing the profile page. */
   private String username;
 
-  /**
-   * SQL helper associated with this CustomizeActivity
-   */
+  /** SQL helper associated with this CustomizeActivity */
   private SQLiteHelper sqlHelper = new SQLiteHelper(this);
 
   /**
-   * Called immediately when the activity is started.
+   * Boolean specifying whether the colour scheme has been changed by selected light/dark buttons
    */
+  private boolean colourSchemeChanged = false;
+
+  /** Called immediately when the activity is started. */
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -51,7 +50,7 @@ public class CustomizeActivity extends AppCompatActivity implements Customize.Vi
     }
 
     setButtonsClicked();
-      setComponentColours();
+    setComponentColours();
   }
 
   /**
@@ -59,66 +58,82 @@ public class CustomizeActivity extends AppCompatActivity implements Customize.Vi
    * dark radio buttons accordingly.
    */
   private void setButtonsClicked() {
-      String colourScheme = sqlHelper.findColourScheme(username);
-      String difficulty = sqlHelper.findDifficulty(username);
-      String character = sqlHelper.findCharacter(username);
+    String colourScheme = sqlHelper.findColourScheme(username);
+    String difficulty = sqlHelper.findDifficulty(username);
+    String character = sqlHelper.findCharacter(username);
 
-      if (colourScheme.equalsIgnoreCase("Light")) {
-          ((RadioButton) findViewById(R.id.lightButton)).setChecked(true);
-          ((RadioButton) findViewById(R.id.darkButton)).setChecked(false);
-      } else {
-          ((RadioButton) findViewById(R.id.darkButton)).setChecked(true);
-          ((RadioButton) findViewById(R.id.lightButton)).setChecked(false);
-      }
+    if (colourScheme.equalsIgnoreCase("Light")) {
+      ((RadioButton) findViewById(R.id.lightButton)).setChecked(true);
+      ((RadioButton) findViewById(R.id.darkButton)).setChecked(false);
+    } else {
+      ((RadioButton) findViewById(R.id.darkButton)).setChecked(true);
+      ((RadioButton) findViewById(R.id.lightButton)).setChecked(false);
+    }
 
-      if (difficulty.equalsIgnoreCase("Easy")) {
-          ((RadioButton) findViewById(R.id.easyButton)).setChecked(true);
-          ((RadioButton) findViewById(R.id.hardButton)).setChecked(false);
-      } else {
-          ((RadioButton) findViewById(R.id.hardButton)).setChecked(true);
-          ((RadioButton) findViewById(R.id.easyButton)).setChecked(false);
-      }
+    if (difficulty.equalsIgnoreCase("Easy")) {
+      ((RadioButton) findViewById(R.id.easyButton)).setChecked(true);
+      ((RadioButton) findViewById(R.id.hardButton)).setChecked(false);
+    } else {
+      ((RadioButton) findViewById(R.id.hardButton)).setChecked(true);
+      ((RadioButton) findViewById(R.id.easyButton)).setChecked(false);
+    }
 
-      if (character.equalsIgnoreCase("A")) {
-          ((RadioButton) findViewById(R.id.charAButton)).setChecked(true);
-          ((RadioButton) findViewById(R.id.charBButton)).setChecked(false);
-      } else {
-          ((RadioButton) findViewById(R.id.charBButton)).setChecked(true);
-          ((RadioButton) findViewById(R.id.charAButton)).setChecked(false);
-      }
+    if (character.equalsIgnoreCase("A")) {
+      ((RadioButton) findViewById(R.id.charAButton)).setChecked(true);
+      ((RadioButton) findViewById(R.id.charBButton)).setChecked(false);
+    } else {
+      ((RadioButton) findViewById(R.id.charBButton)).setChecked(true);
+      ((RadioButton) findViewById(R.id.charAButton)).setChecked(false);
+    }
   }
 
-    /**
-     * Changes the background and text colour depending on the colour scheme.
-     */
-    private void setComponentColours() {
-        String colourScheme = sqlHelper.findColourScheme(username);
-        if (colourScheme.equalsIgnoreCase("Light")) {
-            getWindow().getDecorView().setBackgroundColor(Color.argb(255, 204, 212, 255));
-            ((TextView) findViewById(R.id.chooseColourSchemeText))
-                    .setTextColor(Color.argb(255, 68, 0, 102));
-            ((TextView) findViewById(R.id.chooseDifficultyText))
-                    .setTextColor(Color.argb(255, 68, 0, 102));
-            ((TextView) findViewById(R.id.chooseCharacterText))
-                    .setTextColor(Color.argb(255, 68, 0, 102));
-        } else {
-            getWindow().getDecorView().setBackgroundColor(Color.argb(255, 0, 51, 153));
-//      ((TextView) findViewById(R.id.level2_congrats_message_textView))
-//              .setTextColor(Color.argb(255, 255, 179, 204));
-            ((TextView) findViewById(R.id.chooseColourSchemeText))
-                    .setTextColor(Color.argb(255, 239, 222, 205));
-            ((TextView) findViewById(R.id.chooseDifficultyText))
-                    .setTextColor(Color.argb(255, 239, 222, 205));
-            ((TextView) findViewById(R.id.chooseCharacterText))
-                    .setTextColor(Color.argb(255, 239, 222, 205));
-            ((RadioButton) findViewById(R.id.lightButton)).setTextColor(Color.WHITE);
-            ((RadioButton) findViewById(R.id.darkButton)).setTextColor(Color.WHITE);
-            ((RadioButton) findViewById(R.id.easyButton)).setTextColor(Color.WHITE);
-            ((RadioButton) findViewById(R.id.hardButton)).setTextColor(Color.WHITE);
-            ((RadioButton) findViewById(R.id.charAButton)).setTextColor(Color.WHITE);
-            ((RadioButton) findViewById(R.id.charBButton)).setTextColor(Color.WHITE);
-        }
+  /**
+   * Changes the background and text colour depending on the colour scheme.
+   */
+  private void setComponentColours() {
+    String colourScheme = sqlHelper.findColourScheme(username);
+    if (colourScheme.equalsIgnoreCase("Light")) {
+      getWindow().getDecorView().setBackgroundColor(Color.argb(255, 204, 212, 255));
+      ((TextView) findViewById(R.id.chooseColourSchemeText))
+              .setTextColor(Color.argb(255, 68, 0, 102));
+      ((TextView) findViewById(R.id.chooseDifficultyText))
+              .setTextColor(Color.argb(255, 68, 0, 102));
+      ((TextView) findViewById(R.id.chooseCharacterText)).setTextColor(Color.argb(255, 68, 0, 102));
+    } else {
+      getWindow().getDecorView().setBackgroundColor(Color.argb(255, 0, 51, 153));
+      //      ((TextView) findViewById(R.id.level2_congrats_message_textView))
+      //              .setTextColor(Color.argb(255, 255, 179, 204));
+      ((TextView) findViewById(R.id.chooseColourSchemeText))
+              .setTextColor(Color.argb(255, 239, 222, 205));
+      ((TextView) findViewById(R.id.chooseDifficultyText))
+              .setTextColor(Color.argb(255, 239, 222, 205));
+      ((TextView) findViewById(R.id.chooseCharacterText))
+              .setTextColor(Color.argb(255, 239, 222, 205));
+      ((RadioButton) findViewById(R.id.lightButton)).setTextColor(Color.WHITE);
+      ((RadioButton) findViewById(R.id.darkButton)).setTextColor(Color.WHITE);
+      ((RadioButton) findViewById(R.id.easyButton)).setTextColor(Color.WHITE);
+      ((RadioButton) findViewById(R.id.hardButton)).setTextColor(Color.WHITE);
+      ((RadioButton) findViewById(R.id.charAButton)).setTextColor(Color.WHITE);
+      ((RadioButton) findViewById(R.id.charBButton)).setTextColor(Color.WHITE);
     }
+  }
+
+  /**
+   * Called when the user currently logged in hits their android device 'back' button. Sends the new
+   * colour scheme back to Profile Page activity for updating the light/dark theme
+   */
+  @Override
+  public void onBackPressed() {
+    System.out.println("Method CustomizeActivity.onBackPressed reached");
+    Intent backToProfilePage = new Intent(this, ProfilePageActivity.class);
+    if (colourSchemeChanged) {
+      backToProfilePage.putExtra("colourScheme", sqlHelper.findColourScheme(username));
+    } else {
+      backToProfilePage.putExtra("colourScheme", "not changed");
+    }
+    setResult(Activity.RESULT_OK, backToProfilePage);
+    finish();
+  }
 
   /**
    * Called when the user currently logged in clicks the 'light' button for the colour scheme.
@@ -127,7 +142,13 @@ public class CustomizeActivity extends AppCompatActivity implements Customize.Vi
    * @param view the view displaying this activity.
    */
   public void onClickLightButton(View view) {
-    customizePresenter.changeColourScheme(sqlHelper, username, "Light");
+    // presenter returns true if colour scheme was changed
+    if (customizePresenter.changeColourScheme(sqlHelper, username, "Light")) {
+      colourSchemeChanged = true;
+      setComponentColours(); // changes background colours immediately
+    } else {
+      colourSchemeChanged = false;
+    }
   }
 
   /**
@@ -137,7 +158,13 @@ public class CustomizeActivity extends AppCompatActivity implements Customize.Vi
    * @param view the view displaying this activity.
    */
   public void onClickDarkButton(View view) {
-    customizePresenter.changeColourScheme(sqlHelper, username, "Dark");
+    // presenter returns true if colour scheme was changed
+    if (customizePresenter.changeColourScheme(sqlHelper, username, "Dark")) {
+      colourSchemeChanged = true;
+      setComponentColours(); // changes background colours immediately
+    } else {
+      colourSchemeChanged = false;
+    }
   }
 
   /**

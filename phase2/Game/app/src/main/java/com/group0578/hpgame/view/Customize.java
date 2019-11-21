@@ -23,7 +23,7 @@ public interface Customize {
      * Behaviour of the CustomizePresenter
      */
     interface Presenter {
-        void changeColourScheme(SQLiteHelper sqlHelper, String username, String colourScheme);
+        boolean changeColourScheme(SQLiteHelper sqlHelper, String username, String colourScheme);
 
         void changeLevelDifficulty(SQLiteHelper sqlHelper, String username, String levelDifficulty);
 
