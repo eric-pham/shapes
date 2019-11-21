@@ -91,9 +91,17 @@ public class MazeThread extends Thread {
     }
   }
 
+  /**
+   * Stores the total time taken to complete the maze.
+   *
+   * @param start the time at which the level was started.
+   */
   private void storeTotalTime(long start) {
     long end = System.currentTimeMillis();
-    mazePresenter.setTotalTime(end - start);
+    float sec = (end - start) / 1000F;
+    System.out.println(sec + " seconds");
+    mazePresenter.setTotalTime(sec);
+//    System.out.println("Level 2 Time: " + mazePresenter.getSQLHelper().findTime(mazePresenter.getUsername()) + " sec");
   }
 
   /**

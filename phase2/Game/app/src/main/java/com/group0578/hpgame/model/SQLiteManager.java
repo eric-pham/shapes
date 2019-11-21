@@ -10,9 +10,9 @@ public class SQLiteManager {
   private String username, password;
   private String levelDifficulty;
   private String colourScheme;
-  private int levelOneTime;
-  private int levelTwoTime;
-  private int levelThreeTime;
+    private float levelOneTime;
+    private float levelTwoTime;
+    private float levelThreeTime;
   private int currLives;
   private String progress;
   private int returningUser;
@@ -81,9 +81,9 @@ public class SQLiteManager {
   /**
    * Returns the time taken to complete level 1. Default value is 0.
    *
-   * @return levelOneTime: an integer
+   * @return levelOneTime: total time playing level one.
    */
-  public int getLevelOneTime() {
+  public float getLevelOneTime() {
     return levelOneTime;
   }
 
@@ -92,16 +92,16 @@ public class SQLiteManager {
    *
    * @param levelOneTime the time taken to complete level 1.
    */
-  public void setLevelOneTime(int levelOneTime) {
+  public void setLevelOneTime(float levelOneTime) {
     this.levelOneTime = levelOneTime;
   }
 
   /**
    * Returns the time taken to complete level 2. Default value is 0.
    *
-   * @return levelTwoTime: an integer
+   * @return levelTwoTime: total time playing level two
    */
-  public int getLevelTwoTime() {
+  public float getLevelTwoTime() {
     return levelTwoTime;
   }
 
@@ -110,16 +110,16 @@ public class SQLiteManager {
    *
    * @param levelTwoTime the time taken to complete level 2.
    */
-  public void setLevelTwoTime(int levelTwoTime) {
+  public void setLevelTwoTime(float levelTwoTime) {
     this.levelTwoTime = levelTwoTime;
   }
 
   /**
    * Returns the time taken to complete level 3. Default value is 0.
    *
-   * @return levelThreeTime: an integer
+   * @return levelThreeTime: total time playing level three
    */
-  public int getLevelThreeTime() {
+  public float getLevelThreeTime() {
     return levelThreeTime;
   }
 
@@ -128,7 +128,7 @@ public class SQLiteManager {
    *
    * @param levelThreeTime the time taken to complete level 3.
    */
-  public void setLevelThreeTime(int levelThreeTime) {
+  public void setLevelThreeTime(float levelThreeTime) {
     this.levelThreeTime = levelThreeTime;
   }
 

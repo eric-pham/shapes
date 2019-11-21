@@ -453,7 +453,14 @@ public class MazePresenter implements Maze.Presenter {
     }
   }
 
-  public void setTotalTime(long totalTime) {
+    /**
+     * Updates the time recorded in the database to the user's most recent game.
+     *
+     * @param totalTime the time taken to complete level 2.
+     */
+    public void setTotalTime(float totalTime) {
+        System.out.println("Reached MazePresenter.setTotalTime()");
+        mazeUseCases.getSQLHelper().setLevelTwoTime(mazeUseCases.getUsername(), totalTime);
 
   }
 

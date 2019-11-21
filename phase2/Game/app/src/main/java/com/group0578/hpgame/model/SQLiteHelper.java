@@ -65,8 +65,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
   /** String with table with appropriate columns */
   private static final String TABLE_CREATED =
           "create table users (id integer primary key not null, username text not null, password text not null,"
-                  + "levelDifficulty text not null , colourScheme text not null, levelOneTime integer not null, "
-          + "levelTwoTime integer not null, levelThreeTime integer not null, currLives integer not null,"
+                  + "levelDifficulty text not null , colourScheme text not null, levelOneTime float(2) not null, "
+                  + "levelTwoTime float(2) not null, levelThreeTime float(2) not null, currLives integer not null,"
                   + "progress text not null, returningUser integer not null, character text not null)";
 
   /**
@@ -348,6 +348,31 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         return progress;
     }
 
+    // temporary just for testing purposes
+//    public float findTime(String username1) {
+//        System.out.println("Progress found");
+//        db = this.getReadableDatabase();
+//
+//        String username2;
+//
+//        String query = "select username, levelTwoTime from " + TABLE_NAME;
+//        Cursor cursor = db.rawQuery(query, null);
+//
+//        float time = 0;
+//
+//        cursor.moveToFirst();
+//        do {
+//            username2 = cursor.getString(0);
+//
+//            if (username2.equals(username1)) {
+//                time = cursor.getInt(1); // gets the progress
+//                db.close();
+//                break; // progress found
+//            }
+//        } while (cursor.moveToNext());
+//        return time;
+//    }
+
     /**
      * Updates the database by changing the String value representing the logged in user's preferred
      * colour scheme.
@@ -409,5 +434,22 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.update(TABLE_NAME, cValues, "id=" + ID, null);
         db.close();
         System.out.println("Completed level: " + level);
+    }
+
+    /**
+     * Updates the database by recording the user's most recent time to complete the maze (level 2).
+     *
+     * @param username  the logged in user.
+     * @param totalTime the time taken to complete level 2
+     */
+    public void setLevelTwoTime(String username, float totalTime) {
+        System.out.println("Method SQLiteHelper.setLevelTwoTime reached.");
+        int ID = this.findID(username);
+        db = this.getWritableDatabase();
+        ContentValues cValues = new ContentValues();
+
+        cValues.put(COLUMN_LEVEL_TWO_TIME, totalTime);
+        db.update(TABLE_NAME, cValues, "id=" + ID, null);
+        db.close();
     }
 }
