@@ -7,7 +7,14 @@ import android.content.ContentValues;
 import android.database.Cursor;
 
 /**
- * This class was derived from Tech Academy's Tutorial and modified to suit the needs of our project
+ * This class was derived from Tech Academy's "Login and Signup - SQLite Database" 3 part Tutorial
+ * and modified to suit the needs of our project
+ *
+ * Sources:
+ * Part 1: https://www.youtube.com/watch?v=NT1qxmqH1eM
+ * Part 2: https://www.youtube.com/watch?v=KxlLsk5j3rY
+ * Part 3: https://www.youtube.com/watch?v=A6Jq7NVBVxU
+ *
  */
 public class SQLiteHelper extends SQLiteOpenHelper {
 
