@@ -2,6 +2,8 @@ package com.group0578.hpgame.presenter;
 
 import android.content.Intent;
 
+import com.group0578.hpgame.Level1.FlyingActivity;
+import com.group0578.hpgame.Level1.FlyingView;
 import com.group0578.hpgame.Level1.Level1Activity;
 import com.group0578.hpgame.Level2.MazeActivity;
 import com.group0578.hpgame.Level3.Level3MainActivity;
@@ -47,7 +49,7 @@ public class StartupPresenter implements Startup.Presenter {
 
   public void createNewStage1Screen() {
     Intent createStage1Intent =
-        new Intent((StartupActivity) this.startupView, Level1Activity.class);
+        new Intent((StartupActivity) this.startupView, FlyingActivity.class);
     System.out.println("Method reached 3");
     startupView.goToStage1Screen(createStage1Intent);
   }
