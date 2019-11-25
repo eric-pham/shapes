@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".Level1.FlyingActivity"></activity>
         <activity android:name=".view.CreateUserActivity" />
         <activity android:name=".view.CreateUser" />
         <activity android:name=".view.StartupActivity">
