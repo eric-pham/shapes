@@ -65,9 +65,14 @@ public class CustomizePresenter implements Customize.Presenter {
      *
      * @param sqlHelper  the database accessing and modifying this user's character appearance
      * @param username   String: username of the user currently logged in
-     * @param customChar String: the new character appearance
+     * @param character  String: the new character appearance
      */
     @Override
-    public void changeCustomCharacter(SQLiteHelper sqlHelper, String username, String customChar) {
+    public void changeCustomCharacter(SQLiteHelper sqlHelper, String username, String character) {
+        // Database character preference does not match new preference for this user
+        if (!sqlHelper.findDifficulty(username).equals(character)) {
+            System.out.println("New character preference detected!" + character);
+            sqlHelper.setCharacter(username, character);
+        }
     }
 }

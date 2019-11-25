@@ -348,24 +348,53 @@ public class MazePresenter implements Maze.Presenter {
         mazeBrush);
   }
 
+    /**
+     * Checks the character shape associated with the logged in user and then calls the corresponding
+     * method to draw the player.
+     *
+     * @param mazeCanvas the canvas on which to draw the circle/player.
+     * @param margin     the margin between the player and the maze walls.
+     * @param character  the string representing the player sprite's shape.
+     */
+    void drawPlayer(Canvas mazeCanvas, float margin, String character) {
+        if (character.equalsIgnoreCase("Circle")) {
+            drawCirclePlayer(mazeCanvas, margin);
+        } else { // player shape is square
+            drawSquarePlayer(mazeCanvas, margin);
+        }
+    }
+
+    /**
+     * Drawing a square on the screen representing the player's current location in the maze.
+     *
+     * @param mazeCanvas the canvas on which to draw the circle/player.
+     * @param margin     the margin between the player and the maze walls.
+     */
+    private void drawSquarePlayer(Canvas mazeCanvas, float margin) {
+        float left = player.getCol() * mazeSectionLength + 3 * margin;
+        float right = (player.getCol() + 1) * mazeSectionLength - 3 * margin;
+        float top = player.getRow() * mazeSectionLength + 3 * margin;
+        float bottom = (player.getRow() + 1) * mazeSectionLength - 3 * margin;
+        mazeCanvas.drawRect(left, top, right, bottom, playerPaint);
+    }
+
   /**
    * Drawing a circle on the screen representing the player's current location in the maze.
-   *
-   * @param mazeCanvas the canvas on which to draw the circle/player
+   *  @param mazeCanvas the canvas on which to draw the circle/player.
    * @param margin the margin between the player and the maze walls.
    */
-  void drawPlayer(Canvas mazeCanvas, float margin) {
-    if (player.hasMoved()) {
-      float left = player.getCol() * mazeSectionLength + margin;
-      float right = (player.getCol() + 1) * mazeSectionLength - margin;
-      float top = player.getRow() * mazeSectionLength + margin;
-      float bottom = (player.getRow() + 1) * mazeSectionLength - margin;
-      mazeCanvas.drawCircle(
-          (left + right) / 2, (top + bottom) / 2, mazeSectionLength / 3, playerPaint);
-    } else { // player has already moved at least once
+  private void drawCirclePlayer(Canvas mazeCanvas, float margin) {
+      if (player.hasMoved()) {
+          float left = player.getCol() * mazeSectionLength + 3 * margin;
+          float right = (player.getCol() + 1) * mazeSectionLength - 3 * margin;
+          float top = player.getRow() * mazeSectionLength + 3 * margin;
+          float bottom = (player.getRow() + 1) * mazeSectionLength - 3 * margin;
+          mazeCanvas.drawCircle(
+                  (left + right) / 2, (top + bottom) / 2, mazeSectionLength / 5, playerPaint);
+    } else { // player has not yet moved
       float firstX = mazeSectionLength / 2;
-      float firstY = mazeSectionLength / 2;
-      mazeCanvas.drawCircle(firstX, firstY, mazeSectionLength / 3, playerPaint);
+          float firstY = mazeSectionLength / 2;
+          mazeCanvas.drawCircle(firstX, firstY, mazeSectionLength / 5 , playerPaint);
     }
   }
 
@@ -458,13 +487,16 @@ public class MazePresenter implements Maze.Presenter {
      *
      * @param totalTime the time taken to complete level 2.
      */
-    public void setTotalTime(float totalTime) {
+    void setTotalTime(float totalTime) {
         System.out.println("Reached MazePresenter.setTotalTime()");
         mazeUseCases.getSQLHelper().setLevelTwoTime(mazeUseCases.getUsername(), totalTime);
 
-  }
+    }
 
-    public void updateProgress() {
+    /**
+     * Updates the logged in user's game completion progress.
+     */
+    void updateProgress() {
         mazeUseCases.getSQLHelper().setProgress(mazeUseCases.getUsername(), "two");
     }
 }

@@ -54,8 +54,8 @@ public class CustomizeActivity extends AppCompatActivity implements Customize.Vi
   }
 
   /**
-   * Checks what the colour scheme is for the user currently logged in, and checks the light and
-   * dark radio buttons accordingly.
+   * Checks what the colour scheme, difficulty and character is for the user currently logged in,
+   * and checks the appropriate radio buttons.
    */
   private void setButtonsClicked() {
     String colourScheme = sqlHelper.findColourScheme(username);
@@ -78,12 +78,12 @@ public class CustomizeActivity extends AppCompatActivity implements Customize.Vi
       ((RadioButton) findViewById(R.id.easyButton)).setChecked(false);
     }
 
-    if (character.equalsIgnoreCase("A")) {
-      ((RadioButton) findViewById(R.id.charAButton)).setChecked(true);
-      ((RadioButton) findViewById(R.id.charBButton)).setChecked(false);
+    if (character.equalsIgnoreCase("Circle")) {
+      ((RadioButton) findViewById(R.id.charCircleButton)).setChecked(true);
+      ((RadioButton) findViewById(R.id.charSquareButton)).setChecked(false);
     } else {
-      ((RadioButton) findViewById(R.id.charBButton)).setChecked(true);
-      ((RadioButton) findViewById(R.id.charAButton)).setChecked(false);
+      ((RadioButton) findViewById(R.id.charSquareButton)).setChecked(true);
+      ((RadioButton) findViewById(R.id.charCircleButton)).setChecked(false);
     }
   }
 
@@ -113,8 +113,8 @@ public class CustomizeActivity extends AppCompatActivity implements Customize.Vi
       ((RadioButton) findViewById(R.id.darkButton)).setTextColor(Color.WHITE);
       ((RadioButton) findViewById(R.id.easyButton)).setTextColor(Color.WHITE);
       ((RadioButton) findViewById(R.id.hardButton)).setTextColor(Color.WHITE);
-      ((RadioButton) findViewById(R.id.charAButton)).setTextColor(Color.WHITE);
-      ((RadioButton) findViewById(R.id.charBButton)).setTextColor(Color.WHITE);
+      ((RadioButton) findViewById(R.id.charCircleButton)).setTextColor(Color.WHITE);
+      ((RadioButton) findViewById(R.id.charSquareButton)).setTextColor(Color.WHITE);
     }
   }
 
@@ -188,22 +188,22 @@ public class CustomizeActivity extends AppCompatActivity implements Customize.Vi
   }
 
   /**
-   * Called when the user currently logged in selects character option "A" for custom character.
+   * Called when the user currently logged in selects character option "Circle" for custom character.
    * Presenter for this activity changes character's appearance
    *
    * @param view the view displaying this activity.
    */
-  public void onClickCharAButton(View view) {
-    customizePresenter.changeCustomCharacter(sqlHelper, username, "A");
+  public void onClickCharCircleButton(View view) {
+    customizePresenter.changeCustomCharacter(sqlHelper, username, "Circle");
   }
 
   /**
-   * Called when the user currently logged in selects character option "B" for custom character.
+   * Called when the user currently logged in selects character option "Square" for custom character.
    * Presenter for this activity changes character's appearance
    *
    * @param view the view displaying this activity.
    */
-  public void onClickCharBButton(View view) {
-    customizePresenter.changeCustomCharacter(sqlHelper, username, "B");
+  public void onClickCharSquareButton(View view) {
+    customizePresenter.changeCustomCharacter(sqlHelper, username, "Square");
   }
 }
