@@ -52,6 +52,7 @@ public class MazeThread extends Thread {
   public void run() {
     // Creating mazeBuilder to build player and exit point attributes.
     String colourScheme = mazePresenter.getSQLHelper().findColourScheme(mazePresenter.getUsername());
+    String character = mazePresenter.getSQLHelper().findCharacter(mazePresenter.getUsername());
     MazeBuilder mazeBuilder = new MazeBuilder();
     mazeBuilder.build(this.mazePresenter, colourScheme);
 
@@ -72,7 +73,7 @@ public class MazeThread extends Thread {
       // Initializing the canvas on which to draw the maze
       mazeCanvas = mazeView.getSurfaceHolder().lockCanvas();
 
-      drawMaze(colourScheme);
+      drawMaze(colourScheme, character);
 
       surfaceHolder.unlockCanvasAndPost(mazeCanvas); // canvas updated with drawn changes
 
@@ -125,8 +126,9 @@ public class MazeThread extends Thread {
    * Draws the maze depending on the colour scheme.
    *
    * @param colourScheme the colour scheme of the game, either 'Light' or 'Dark'.
+   * @param character
    */
-  private void drawMaze(String colourScheme) {
+  private void drawMaze(String colourScheme, String character) {
 
     if (colourScheme.equalsIgnoreCase("Light")) {
       this.mazeCanvas.drawARGB(255, 204, 212, 255);
@@ -135,12 +137,12 @@ public class MazeThread extends Thread {
     }
 
     // Writing the legend on the screen using drawText() method
-    mazeCanvas.drawText("Player = Circle", 100, 100, mazePresenter.getTextBrush());
-    mazeCanvas.drawText("End Point = Square", 550, 100, mazePresenter.getTextBrush());
+    mazeCanvas.drawText("Player = Smaller", 100, 100, mazePresenter.getTextBrush());
+    mazeCanvas.drawText("End Point = Square", 530, 100, mazePresenter.getTextBrush());
 
     // MazePresenter object handles drawing the maze, player, and exitPoint.
     mazePresenter.drawMazeWalls(mazeCanvas);
-    mazePresenter.drawPlayer(mazeCanvas, mazePresenter.getMazeSectionLength() / 10);
+    mazePresenter.drawPlayer(mazeCanvas, mazePresenter.getMazeSectionLength() / 10, character);
     mazePresenter.drawExitPoint(mazeCanvas, mazePresenter.getMazeSectionLength() / 10);
   }
 }

@@ -194,7 +194,7 @@ public class SQLiteManager {
   /**
    * Gets the custom character selected by the user who is currently logged in
    *
-   * @return "A" for character A or "B" for character B
+   * @return "Circle" for circle shaped character or "Square" for square shaped character.
    */
   public String getCharacter() {
     return customCharacter;
@@ -202,9 +202,9 @@ public class SQLiteManager {
 
   /**
    * Sets the value of the character's appearance for the user who is currently logged in.
-   * By default, new users have custom character selection set to option "A"
+   * By default, new users have custom character selection set to option "Circle".
    *
-   * @param customCharacter "A" or "B"
+   * @param customCharacter "Circle" or "Square"
    */
   public void setCharacter(String customCharacter) {
     this.customCharacter = customCharacter;

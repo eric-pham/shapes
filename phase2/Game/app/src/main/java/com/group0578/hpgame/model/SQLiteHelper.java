@@ -299,7 +299,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
    * Finds the game character associated with the logged in user.
    *
    * @param username1 the user's username
-   * @return a String: 'A' or 'B'.
+   * @return a String: 'Circle' or 'Square'.
    */
   public String findCharacter(String username1) {
       System.out.println("character found");
@@ -310,14 +310,14 @@ public class SQLiteHelper extends SQLiteOpenHelper {
       String query = "select username, character from " + TABLE_NAME;
       Cursor cursor = db.rawQuery(query, null);
 
-      String character = "A";
+      String character = "Circle";
 
       cursor.moveToFirst();
       do {
           username2 = cursor.getString(0);
 
           if (username2.equals(username1)) {
-              character = cursor.getString(1); // gets the character: 'A' or 'B'
+              character = cursor.getString(1); // gets the character: 'Circle' or 'Square'
               db.close();
               break; // character found
           }
@@ -405,7 +405,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @param levelDifficulty the string representing the user's preferred game difficulty.
      */
     public void setDifficulty(String username, String levelDifficulty) {
-        System.out.println("Method SQLiteHelper.setColourScheme() reached");
+        System.out.println("Method SQLiteHelper.setDifficulty() reached");
         int ID = this.findID(username);
         db = this.getWritableDatabase();
         ContentValues cValues = new ContentValues();
@@ -420,9 +420,19 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * Updates the database by changing the String value representing the logged in user's preferred
      * character.
      * @param username the logged in user.
-     * @param customCharacter the string representing the user's preferred character.
+     * @param character the string representing the user's preferred character.
      */
-    public void setCharacter(String username, String customCharacter) {}
+    public void setCharacter(String username, String character) {
+        System.out.println("Method SQLiteHelper.setCharacter() reached");
+        int ID = this.findID(username);
+        db = this.getWritableDatabase();
+        ContentValues cValues = new ContentValues();
+
+        cValues.put(COLUMN_CHARACTER, character);
+        db.update(TABLE_NAME, cValues, "id=" + ID, null);
+        db.close();
+        System.out.println("New character: " + character);
+    }
 
     /**
      * Updates the database by changing the String value representing the logged in user's most
