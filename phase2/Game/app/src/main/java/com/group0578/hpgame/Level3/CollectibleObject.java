@@ -5,7 +5,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 
-public class CollectableObject extends Items {
+public class CollectibleObject extends Items {
     /** How the dementor appears on the screen. */
     private String appearance;
 
@@ -17,7 +17,7 @@ public class CollectableObject extends Items {
      * @param x This dementor's first coordinate.
      * @param y This dementor's second coordinate
      */
-    CollectableObject(int x, int y) {
+    CollectibleObject(int x, int y) {
         super(x, y);
         this.appearance = "O";
         paintText.setTextSize(50);

@@ -8,7 +8,7 @@ class Manager {
   /** List of all dementors. */
   private ArrayList<Dementor> myLittledementors;
   /** List of all objects. */
-  private ArrayList<CollectableObject> objects;
+  private ArrayList<CollectibleObject> objects;
   /** List of all blasts. */
   private ArrayList<Blast> myBlasts;
   /** The wand on the screen. */
