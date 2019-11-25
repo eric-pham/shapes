@@ -3,6 +3,7 @@ package com.group0578.hpgame.Level3;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
@@ -26,6 +27,10 @@ public class ScreenView extends SurfaceView implements SurfaceHolder.Callback {
   /** The part of the program that manages time. */
   private MainThread thread;
 
+  private Paint background = new Paint();
+  private Level3Timer level3Timer = new Level3Timer();
+  private Paint scorePaint = new Paint();
+
   public ScreenView(Context context) {
     super(context);
     init();
@@ -45,6 +50,11 @@ public class ScreenView extends SurfaceView implements SurfaceHolder.Callback {
     getHolder().addCallback(this);
     thread = new MainThread(getHolder(), this);
     setFocusable(true);
+    background.setARGB(255, 0, 191, 230);
+    level3Timer.start();
+    scorePaint.setColor(Color.WHITE);
+    scorePaint.setTextSize(70);
+    scorePaint.setTypeface(Typeface.DEFAULT_BOLD);
   }
 
   public static float getCharWidth() {
@@ -105,11 +115,9 @@ public class ScreenView extends SurfaceView implements SurfaceHolder.Callback {
       System.out.println("Rick and Morty");
       try{
         thread.setRunning(false);
-        System.out.println("Pringles");
         // thread.join();
         System.out.println("Paul Gries");
         setVisibility(INVISIBLE);
-        System.out.println("Harry Potter");
       } catch (Exception e) {
         e.printStackTrace();
       }
@@ -123,5 +131,17 @@ public class ScreenView extends SurfaceView implements SurfaceHolder.Callback {
     if (canvas != null) {
       roomManager.draw(canvas);
     }
+
+    String timeDisplay;
+    String timerMSString = String.valueOf(level3Timer.getMiliseconds());
+    if (timerMSString.length() == 1) {
+      timeDisplay = level3Timer.getSeconds() + ".00" + level3Timer.getMiliseconds();
+    } else if (timerMSString.length() == 2) {
+      timeDisplay = level3Timer.getSeconds() + ".0" + level3Timer.getMiliseconds();
+    } else {
+      timeDisplay = level3Timer.getSeconds() + "." + level3Timer.getMiliseconds();
+    }
+    canvas.drawText("Timer : " + timeDisplay, 0, 120, scorePaint);
+    System.out.println(timeDisplay);
   }
 }
