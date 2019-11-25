@@ -1,15 +1,12 @@
 package com.group0578.hpgame.Level3;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.View;
-
 import com.group0578.hpgame.R;
-
 import java.util.Timer;
 import java.util.TimerTask;
 

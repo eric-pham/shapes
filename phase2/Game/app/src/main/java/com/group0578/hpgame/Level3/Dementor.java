@@ -21,8 +21,8 @@ class Dementor extends Items {
    */
   Dementor(int x, int y) {
     super(x, y);
-    this.appearance = "D";
-    paintText.setTextSize(36);
+    this.appearance = "X";
+    paintText.setTextSize(50);
     paintText.setColor(Color.WHITE);
     paintText.setTypeface(Typeface.DEFAULT_BOLD);
   }

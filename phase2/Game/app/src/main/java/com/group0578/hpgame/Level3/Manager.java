@@ -7,6 +7,8 @@ class Manager {
 
   /** List of all dementors. */
   private ArrayList<Dementor> myLittledementors;
+  /** List of all objects. */
+  private ArrayList<CollectableObject> objects;
   /** List of all blasts. */
   private ArrayList<Blast> myBlasts;
   /** The wand on the screen. */
@@ -28,6 +30,7 @@ class Manager {
     gridWidth = width;
     gridHeight = height;
     myLittledementors = new ArrayList<>();
+    objects = new ArrayList<>();
     myBlasts = new ArrayList<>();
     wand = new Wand(gridWidth / 2, gridHeight - 10);
     count = 0;
@@ -51,6 +54,9 @@ class Manager {
 
     for (int a = 0; a != myLittledementors.size(); a++) {
       myLittledementors.get(a).draw(canvas);
+    }
+    for (int a = 0; a != objects.size(); a++) {
+      objects.get(a).draw(canvas);
     }
     for (int a = 0; a != myBlasts.size(); a++) {
       myBlasts.get(a).draw(canvas);
@@ -115,6 +121,10 @@ class Manager {
     }
   }
 
+  void updateObjects() {
+
+  }
+
   /** Creates dementors and stores them in myLittleDementors. */
   void createDementors() {
     int i = myLittledementors.size() + 1;
@@ -129,6 +139,9 @@ class Manager {
       }
     }
     count += 1;
+  }
+
+  void createObjects() {
   }
 
   /** Creates blasts and stores them in myBlasts. */
