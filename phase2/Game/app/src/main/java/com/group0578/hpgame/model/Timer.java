@@ -1,73 +1,65 @@
 package com.group0578.hpgame.model;
 
-/**
- * Timer class represents the amount of time used to complete a level in this game.
- */
+/** Timer class represents the amount of time used to complete a level in this game. */
 public class Timer {
 
-    /**
-     * The number of seconds, minutes and hours taken to complete a level in this game.
-     */
-    private int seconds, minutes, hours;
+  private long start;
 
-    /**
-     * Constructing a new Timer instance.
-     * @param seconds the total number of seconds taken in a level's completion, must be >= 0.
-     */
-    public Timer(int seconds) {
-        setSeconds(seconds);
-    }
+  /** Initialize a new Timer Object with the starting time equal to when it is initialized */
+  public Timer() {
+    start = System.currentTimeMillis();
+  }
 
-    /**
-     * Calculating amount of time taken to complete a level in seconds.
-     * @return total number of seconds to complete a level.
-     */
-    public int getTotalSeconds() {
-        return this.seconds + (this.minutes * 60) + (this.hours * 3600);
-    }
+  /** Start the timer, sets the start time to when this method is called */
+  public void start() {
+    start = System.currentTimeMillis();
+  }
 
-    /**
-     * Setting the number of seconds taken to complete a level.
-     * @param seconds number of seconds to complete a level.
-     */
-    public void setSeconds(int seconds) {
-        this.seconds = seconds;
-        if (this.seconds >= 60) {
-            this.seconds = seconds % 60;
-            setMinutes(seconds / 60);
-        } else {
-            this.minutes = 0;
-            this.hours = 0;
-        }
-    }
+  /**
+   * Returns the number of seconds
+   *
+   * @return number of seconds in long format
+   */
+  public long getSeconds() {
+    return (System.currentTimeMillis() - start) / 1000;
+  }
 
-    /**
-     * Setter for minutes attribute
-     * @param minutes the number of minutes taken to complete a level.
-     */
-    private void setMinutes(int minutes) {
-        this.minutes = minutes;
-        if (this.minutes >= 60) {
-            this.minutes = minutes % 60;
-            setHours(minutes / 60);
-        } else {
-            this.hours = 0;
-        }
-    }
+  /**
+   * Returns the number of milliseconds
+   *
+   * @return number of milliseconds in long format
+   */
+  public long getMilliseconds() {
+    return (System.currentTimeMillis() - start) % 1000;
+  }
 
-    /**
-     * Setter for hours attribute.
-     * @param hours the number of hours taken to complete a level.
-     */
-    private void setHours(int hours) {
-        this.hours = hours;
-    }
+  /**
+   * Returns the String representation of seconds
+   *
+   * @return number of seconds as String
+   */
+  public String getSecondsString() {
+    return String.valueOf((System.currentTimeMillis() - start) / 1000);
+  }
 
-    /**
-     * The string representation of this Timer object
-     * @return the string of hours, minutes, seconds taken to complete a level.
-     */
-    public String toString() {
-        return "H: " + this.hours + ", M: " + this.minutes + ", S: " + this.seconds;
+  /**
+   * Returns the String representation of milliseconds, does not include seconds (takes last 3
+   * digits of the number of milliseconds.
+   *
+   * @return number of milliseconds as String
+   */
+  public String getMillisecondsString() {
+    String msString = String.valueOf((System.currentTimeMillis() - start) % 1000);
+
+    // If 00X, where 0<=X<=9 add extra 0's
+    if (msString.length() == 1) {
+      return "00" + msString;
+
+      // If 0YX, where 0<=X<=9 and 0<=Y<=9 add extra 0's
+    } else if (msString.length() == 2) {
+      return "0" + msString;
+    } else {
+      return msString;
     }
+  }
 }

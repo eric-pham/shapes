@@ -34,11 +34,7 @@ public class User {
      */
     private int numLivesLeft;
 
-    /**
-     * The amount of time this user takes to complete levels 1, 2, and 3 of the game currently
-     * being played.
-     */
-    private Timer levelOneTime, levelTwoTime, levelThreeTime;
+
 
 
     /**
@@ -100,42 +96,6 @@ public class User {
     public void removeLife() {
         this.numLivesLeft -= 1;
     }
-
-    /**
-     * Initialize the amount of time taken to complete level one.
-     * @param levelOneTime the timer object used to keep track of level one's completion time.
-     */
-    public void setLevelOneTime(Timer levelOneTime) {
-        this.levelOneTime = levelOneTime;
-    }
-
-    /**
-     * Initialize the amount of time taken to complete level two.
-     * @param levelTwoTime the timer object used to keep track of level two's completion time.
-     */
-    public void setLevelTwoTime(Timer levelTwoTime) {
-        this.levelTwoTime = levelTwoTime;
-    }
-
-    /**
-     * Initialize the amount of time taken to complete level three.
-     * @param levelThreeTime the timer object used to keep track of level three's completion time.
-     */
-    public void setLevelThreeTime(Timer levelThreeTime) {
-        this.levelThreeTime = levelThreeTime;
-    }
-
-    /**
-     * Calculating the total amount of time to complete the game being played by this user.
-     * @return Timer object representing total time completion of the game.
-     */
-    public Timer calculateTotalTime() {
-        int levelOne = this.levelOneTime.getTotalSeconds();
-        int levelTwo = this.levelTwoTime.getTotalSeconds();
-        int levelThree = this.levelThreeTime.getTotalSeconds();
-        return new Timer(levelOne + levelTwo + levelThree);
-    }
-
 
 
 }

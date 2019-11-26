@@ -9,6 +9,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import com.group0578.hpgame.model.Timer;
+
 public class FlyingView extends View {
 
   private Paint character = new Paint();
@@ -27,7 +29,7 @@ public class FlyingView extends View {
   private Paint background = new Paint();
   private Paint scorePaint = new Paint();
 
-  private Stopwatch stopwatch = new Stopwatch();
+  private Timer timer = new Timer();
 
   public FlyingView(Context context) {
     super(context);
@@ -49,7 +51,7 @@ public class FlyingView extends View {
 
     charY = 100;
 
-    stopwatch.start();
+    timer.start();
   }
 
   @Override
@@ -110,16 +112,16 @@ public class FlyingView extends View {
     String stopwatchTimeDisplay;
 
     //Convert to string
-    String stopwatchMSString = String.valueOf(stopwatch.getMiliseconds());
+    String stopwatchMSString = String.valueOf(timer.getMilliseconds());
     // If 00X, where 0<=X<=9 add extra 0's
     if (stopwatchMSString.length() == 1) {
-      stopwatchTimeDisplay = stopwatch.getSeconds() + ".00" + stopwatch.getMiliseconds();
+      stopwatchTimeDisplay = timer.getSeconds() + ".00" + timer.getMilliseconds();
 
         // If 0YX, where 0<=X<=9 and 0<=Y<=9 add extra 0's
     } else if (stopwatchMSString.length() == 2) {
-      stopwatchTimeDisplay = stopwatch.getSeconds() + ".0" + stopwatch.getMiliseconds();
+      stopwatchTimeDisplay = timer.getSeconds() + ".0" + timer.getMilliseconds();
     } else {
-      stopwatchTimeDisplay = stopwatch.getSeconds() + "." + stopwatch.getMiliseconds();
+      stopwatchTimeDisplay = timer.getSeconds() + "." + timer.getMilliseconds();
     }
     canvas.drawText("Time : " + stopwatchTimeDisplay, 0, 120, scorePaint);
     System.out.println(stopwatchTimeDisplay);
