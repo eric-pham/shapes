@@ -38,7 +38,7 @@ public class Timer {
    *
    * @return number of seconds as String
    */
-  public String getSecondsString() {
+  private String getSecondsString() {
     return String.valueOf((System.currentTimeMillis() - start) / 1000);
   }
 
@@ -48,7 +48,7 @@ public class Timer {
    *
    * @return number of milliseconds as String
    */
-  public String getMillisecondsString() {
+  private String getMillisecondsString() {
     String msString = String.valueOf((System.currentTimeMillis() - start) % 1000);
 
     // If 00X, where 0<=X<=9 add extra 0's
@@ -61,5 +61,9 @@ public class Timer {
     } else {
       return msString;
     }
+  }
+
+  public String getTimerString(){
+    return "Time : " + this.getSecondsString() + "." + this.getMillisecondsString();
   }
 }

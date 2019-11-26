@@ -108,23 +108,7 @@ public class FlyingView extends View {
     canvas.drawText("Collected : " + collected, 0, 60, scorePaint);
     canvas.drawText("Goal : " + goal, (canvasWidth / 3) + 70, 60, scorePaint);
     canvas.drawText("Lives : " + lives, (canvasWidth / 3) * 2 + 50, 60, scorePaint);
-
-    String stopwatchTimeDisplay;
-
-    //Convert to string
-    String stopwatchMSString = String.valueOf(timer.getMilliseconds());
-    // If 00X, where 0<=X<=9 add extra 0's
-    if (stopwatchMSString.length() == 1) {
-      stopwatchTimeDisplay = timer.getSeconds() + ".00" + timer.getMilliseconds();
-
-        // If 0YX, where 0<=X<=9 and 0<=Y<=9 add extra 0's
-    } else if (stopwatchMSString.length() == 2) {
-      stopwatchTimeDisplay = timer.getSeconds() + ".0" + timer.getMilliseconds();
-    } else {
-      stopwatchTimeDisplay = timer.getSeconds() + "." + timer.getMilliseconds();
-    }
-    canvas.drawText("Time : " + stopwatchTimeDisplay, 0, 120, scorePaint);
-    System.out.println(stopwatchTimeDisplay);
+    canvas.drawText(timer.getTimerString(), 0, 120, scorePaint);
   }
 
   public boolean collisionChecker(int x, int y) {
