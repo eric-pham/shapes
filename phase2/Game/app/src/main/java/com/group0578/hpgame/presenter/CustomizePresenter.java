@@ -70,7 +70,7 @@ public class CustomizePresenter implements Customize.Presenter {
     @Override
     public void changeCustomCharacter(SQLiteHelper sqlHelper, String username, String character) {
         // Database character preference does not match new preference for this user
-        if (!sqlHelper.findDifficulty(username).equals(character)) {
+        if (!sqlHelper.findCharacter(username).equals(character)) {
             System.out.println("New character preference detected!" + character);
             sqlHelper.setCharacter(username, character);
         }

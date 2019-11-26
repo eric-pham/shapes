@@ -1,6 +1,5 @@
 package com.group0578.hpgame.Level2;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -9,12 +8,10 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 
-
 /** Got inspiration from youtube channels Y-key, and mybringback which offered tutorials. */
 
 /**
  * The Maze's view or visual appearance on the screen for the user.
- *
  * <p>Implementing View.OnTouchListener -- for performing actions in response to user clicks
  */
 public class MazeView extends SurfaceView implements SurfaceHolder.Callback, View.OnTouchListener {
@@ -22,12 +19,13 @@ public class MazeView extends SurfaceView implements SurfaceHolder.Callback, Vie
   /** The surfaceHolder containing the surface of this MazeView screen. */
   private SurfaceHolder surfaceHolder;
 
-  /** An instance of the mazePresenter responsible for handling user's actions. */
-  private MazePresenter mazePresenter;
-
   /** The MazeThread created in order to draw the Maze. */
   private MazeThread mazeThread;
 
+  /**
+   * The class responsible for changing the player's position in the maze.
+   */
+  private PlayerPositioner playerPositioner;
 
   /**
    * Construct a new instance of a MazeView.
@@ -64,11 +62,13 @@ public class MazeView extends SurfaceView implements SurfaceHolder.Callback, Vie
     surfaceHolder = this.getHolder();
     surfaceHolder.addCallback(this);
     setFocusable(true);
-    mazePresenter = new MazePresenter(this);
-    this.mazeThread = new MazeThread(surfaceHolder, this, mazePresenter);
-    mazePresenter.setUsername(((MazeActivity) context).getUsername());
-    mazePresenter.setSQLHelper(((MazeActivity) context).getSqlHelper());
-
+    this.mazeThread =
+            new MazeThread(
+                    surfaceHolder,
+                    this,
+                    ((MazeActivity) context).getSqlHelper(),
+                    ((MazeActivity) context).getUsername());
+    this.playerPositioner = new PlayerPositioner(this.mazeThread.getMaze());
   }
 
   /**
@@ -142,8 +142,7 @@ public class MazeView extends SurfaceView implements SurfaceHolder.Callback, Vie
       float touchX = event.getX(), touchY = event.getY();
 
       // MazePresenter changes player location based on where the user clicked.
-      mazePresenter.handlePlayerMovement(touchX, touchY);
-
+      this.playerPositioner.handlePlayerMovement(touchX, touchY);
     }
 
     if (event.getAction() == MotionEvent.ACTION_DOWN) {
@@ -153,10 +152,9 @@ public class MazeView extends SurfaceView implements SurfaceHolder.Callback, Vie
     // Checking if player has reached exitPoint
     if (!mazeThread.isRunning()) {
       try {
-        // Destroying the thread.
-//          mazeThread.setRunning(false);
-        mazePresenter.updateProgress(); // marks this level as completed
-        mazeThread.join();
+        // marks this level as completed
+        mazeThread.getSqlHelper().setProgress(mazeThread.getUsername(), "two");
+        mazeThread.join();  // Destroying the thread.
         setVisibility(GONE); // Moving to level 3.
 
       } catch (Exception e) {
@@ -166,5 +164,4 @@ public class MazeView extends SurfaceView implements SurfaceHolder.Callback, Vie
 
     return true; // returns true so the user can continue dragging/clicking to move the player
   }
-
 }

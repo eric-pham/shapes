@@ -4,6 +4,8 @@ import android.graphics.Canvas;
 import android.util.Log;
 import android.view.SurfaceHolder;
 
+import com.group0578.hpgame.model.SQLiteHelper;
+
 /** This thread defines the process of drawing the Level 2 Maze on the screen. */
 public class MazeThread extends Thread {
 
@@ -16,24 +18,45 @@ public class MazeThread extends Thread {
   /** The canvas on which to draw the maze walls and player */
   public Canvas mazeCanvas;
 
-  /** The MazePresenter responsible for handling user's actions within this thread. */
-  private MazePresenter mazePresenter;
-
   /** The MazeView object contains a reference to the surfaceHolder for this thread. */
   private MazeView mazeView;
+
+  /**
+   * The username belonging to the user currently logged in and viewing the profile page.
+   */
+  private String username;
+
+  /**
+   * The sql database helper that has methods that can operate on the database.
+   */
+  private SQLiteHelper sqlHelper;
+
+  /**
+   * The representation of the entire maze built by this maze Thread.
+   */
+  private Maze maze;
 
   /**
    * Constructing an instance of a MazeThread.
    *
    * @param surfaceHolder the surface creating this thread.
    * @param mazeView the MazeView object responsible for making the surface.
-   * @param mazePresenter handles user's interactions with this mazeThread.
+   * @param sqlHelper the database responsible for updating user customization features.
+   * @param username the username of the user currently logged in and playing the maze level.
    */
-  MazeThread(SurfaceHolder surfaceHolder, MazeView mazeView, MazePresenter mazePresenter) {
+  MazeThread(
+          SurfaceHolder surfaceHolder, MazeView mazeView, SQLiteHelper sqlHelper, String username) {
     super();
     this.surfaceHolder = surfaceHolder;
-    this.mazePresenter = mazePresenter;
     this.mazeView = mazeView;
+    this.sqlHelper = sqlHelper;
+    this.username = username;
+    MazeBuilder mazeBuilder = new MazeBuilder();
+    this.maze =
+            mazeBuilder.build(
+                    sqlHelper.findDifficulty(username),
+                    sqlHelper.findColourScheme(username),
+                    sqlHelper.findCharacter(username));
   }
 
   /**
@@ -50,11 +73,7 @@ public class MazeThread extends Thread {
   /** Method called when MazeThread.start() is executed. */
   @Override
   public void run() {
-    // Creating mazeBuilder to build player and exit point attributes.
-    String colourScheme = mazePresenter.getSQLHelper().findColourScheme(mazePresenter.getUsername());
-    String character = mazePresenter.getSQLHelper().findCharacter(mazePresenter.getUsername());
-    MazeBuilder mazeBuilder = new MazeBuilder();
-    mazeBuilder.build(this.mazePresenter, colourScheme);
+    MazePainter mazePainter = new MazePainter(maze);
 
     String TAG = "MazeThread.run";
     Log.e(TAG, "test");
@@ -72,9 +91,7 @@ public class MazeThread extends Thread {
 
       // Initializing the canvas on which to draw the maze
       mazeCanvas = mazeView.getSurfaceHolder().lockCanvas();
-
-      drawMaze(colourScheme, character);
-
+      mazePainter.drawMaze(mazeCanvas);
       surfaceHolder.unlockCanvasAndPost(mazeCanvas); // canvas updated with drawn changes
 
       try {
@@ -86,9 +103,8 @@ public class MazeThread extends Thread {
       // Checking if player has reached exit point in the maze.
       checkExitReached();
       if (!running) {
-        storeTotalTime(start);
+        setTotalTime(start);
       }
-
     }
   }
 
@@ -97,12 +113,11 @@ public class MazeThread extends Thread {
    *
    * @param start the time at which the level was started.
    */
-  private void storeTotalTime(long start) {
+  private void setTotalTime(long start) {
     long end = System.currentTimeMillis();
-    float sec = (end - start) / 1000F;
-    System.out.println(sec + " seconds");
-    mazePresenter.setTotalTime(sec);
-//    System.out.println("Level 2 Time: " + mazePresenter.getSQLHelper().findTime(mazePresenter.getUsername()) + " sec");
+    float totalSec = (end - start) / 1000F;
+    System.out.println(totalSec + " seconds");
+    this.sqlHelper.setLevelTwoTime(this.username, totalSec);
   }
 
   /**
@@ -116,33 +131,36 @@ public class MazeThread extends Thread {
 
   /** Checks if the player's location matches the exitPoint's location. */
   private void checkExitReached() {
-    if (mazePresenter.getPlayer().getRow() == mazePresenter.getExitPoint().getRow()
-            && mazePresenter.getPlayer().getCol() == mazePresenter.getExitPoint().getCol()) {
+    if (this.maze.getPlayer().getRow() == this.maze.getExitPoint().getRow()
+            && this.maze.getPlayer().getCol() == this.maze.getExitPoint().getCol()) {
       running = false; // player and exitPoint locations match so user has won.
     }
   }
 
   /**
-   * Draws the maze depending on the colour scheme.
+   * Getter for the maze associated with this maze thread
    *
-   * @param colourScheme the colour scheme of the game, either 'Light' or 'Dark'.
-   * @param character
+   * @return Maze object
    */
-  private void drawMaze(String colourScheme, String character) {
+  public Maze getMaze() {
+    return maze;
+  }
 
-    if (colourScheme.equalsIgnoreCase("Light")) {
-      this.mazeCanvas.drawARGB(255, 204, 212, 255);
-    } else {
-      this.mazeCanvas.drawARGB(255, 100, 30, 250);
-    }
+  /**
+   * Getter for the sqlHelper database associated with this maze thread
+   *
+   * @return SQLiteHelper object
+   */
+  public SQLiteHelper getSqlHelper() {
+    return sqlHelper;
+  }
 
-    // Writing the legend on the screen using drawText() method
-    mazeCanvas.drawText("Player = Smaller", 100, 100, mazePresenter.getTextBrush());
-    mazeCanvas.drawText("End Point = Square", 530, 100, mazePresenter.getTextBrush());
-
-    // MazePresenter object handles drawing the maze, player, and exitPoint.
-    mazePresenter.drawMazeWalls(mazeCanvas);
-    mazePresenter.drawPlayer(mazeCanvas, mazePresenter.getMazeSectionLength() / 10, character);
-    mazePresenter.drawExitPoint(mazeCanvas, mazePresenter.getMazeSectionLength() / 10);
+  /**
+   * Getter for the username of the user currently logged in and playing the maze level.
+   *
+   * @return String username
+   */
+  public String getUsername() {
+    return username;
   }
 }
