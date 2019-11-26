@@ -8,36 +8,49 @@ public class SQLiteManager {
    * by the SQLiteManager.
    */
   private String username, password;
+
   private String levelDifficulty;
   private String colourScheme;
-    private float levelOneTime;
-    private float levelTwoTime;
-    private float levelThreeTime;
+  private double levelOneTime;
+  private double levelTwoTime;
+  private double levelThreeTime;
   private int currLives;
   private String progress;
   private int returningUser;
   private String customCharacter;
 
-  /**Sets the username.
-   * @param username new username to set. */
+  /**
+   * Sets the username.
+   *
+   * @param username new username to set.
+   */
   public void setUsername(String username) {
     this.username = username;
   }
 
-  /**Returns the username.
-   * @return username: a String. */
+  /**
+   * Returns the username.
+   *
+   * @return username: a String.
+   */
   public String getUsername() {
     return username;
   }
 
-  /**Sets the password.
-   * @param password new password to set. */
+  /**
+   * Sets the password.
+   *
+   * @param password new password to set.
+   */
   public void setPassword(String password) {
     this.password = password;
   }
 
-  /**Returns the password.
-   * @return password: a String. */
+  /**
+   * Returns the password.
+   *
+   * @return password: a String.
+   */
   public String getPassword() {
     return password;
   }
@@ -83,7 +96,7 @@ public class SQLiteManager {
    *
    * @return levelOneTime: total time playing level one.
    */
-  public float getLevelOneTime() {
+  public double getLevelOneTime() {
     return levelOneTime;
   }
 
@@ -92,7 +105,7 @@ public class SQLiteManager {
    *
    * @param levelOneTime the time taken to complete level 1.
    */
-  public void setLevelOneTime(float levelOneTime) {
+  public void setLevelOneTime(double levelOneTime) {
     this.levelOneTime = levelOneTime;
   }
 
@@ -101,7 +114,7 @@ public class SQLiteManager {
    *
    * @return levelTwoTime: total time playing level two
    */
-  public float getLevelTwoTime() {
+  public double getLevelTwoTime() {
     return levelTwoTime;
   }
 
@@ -110,7 +123,7 @@ public class SQLiteManager {
    *
    * @param levelTwoTime the time taken to complete level 2.
    */
-  public void setLevelTwoTime(float levelTwoTime) {
+  public void setLevelTwoTime(double levelTwoTime) {
     this.levelTwoTime = levelTwoTime;
   }
 
@@ -119,7 +132,7 @@ public class SQLiteManager {
    *
    * @return levelThreeTime: total time playing level three
    */
-  public float getLevelThreeTime() {
+  public double getLevelThreeTime() {
     return levelThreeTime;
   }
 
@@ -128,13 +141,13 @@ public class SQLiteManager {
    *
    * @param levelThreeTime the time taken to complete level 3.
    */
-  public void setLevelThreeTime(float levelThreeTime) {
+  public void setLevelThreeTime(double levelThreeTime) {
     this.levelThreeTime = levelThreeTime;
   }
 
   /**
-   * Returns the number of lives the player currently has. Default value is 10 for Easy mode,
-   * 5 for Hard mode.
+   * Returns the number of lives the player currently has. Default value is 10 for Easy mode, 5 for
+   * Hard mode.
    *
    * @return levelOneTime: an integer
    */
@@ -201,8 +214,8 @@ public class SQLiteManager {
   }
 
   /**
-   * Sets the value of the character's appearance for the user who is currently logged in.
-   * By default, new users have custom character selection set to option "Circle".
+   * Sets the value of the character's appearance for the user who is currently logged in. By
+   * default, new users have custom character selection set to option "Circle".
    *
    * @param customCharacter "Circle" or "Square"
    */

@@ -72,8 +72,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
   /** String with table with appropriate columns */
   private static final String TABLE_CREATED =
           "create table users (id integer primary key not null, username text not null, password text not null,"
-                  + "levelDifficulty text not null , colourScheme text not null, levelOneTime float(2) not null, "
-                  + "levelTwoTime float(2) not null, levelThreeTime float(2) not null, currLives integer not null,"
+                  + "levelDifficulty text not null , colourScheme text not null, levelOneTime real not null, "
+                  + "levelTwoTime real not null, levelThreeTime real not null, currLives integer not null,"
                   + "progress text not null, returningUser integer not null, character text not null)";
 
   /**
@@ -459,7 +459,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @param username  the logged in user.
      * @param totalTime the time taken to complete level 2
      */
-    public void setLevelTwoTime(String username, float totalTime) {
+    public void setLevelTwoTime(String username, double totalTime) {
         System.out.println("Method SQLiteHelper.setLevelTwoTime reached.");
         int ID = this.findID(username);
         db = this.getWritableDatabase();
@@ -476,7 +476,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @param username  the logged in user.
      * @param totalTime the time taken to complete level 2
      */
-    public void setLevelThreeTime(String username, float totalTime) {
+    public void setLevelThreeTime(String username, double totalTime) {
         System.out.println("Method SQLiteHelper.setLevelThreeTime reached.");
         int ID = this.findID(username);
         db = this.getWritableDatabase();

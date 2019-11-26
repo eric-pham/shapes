@@ -43,9 +43,9 @@ public class CreateUserPresenter implements CreateUser.Presenter {
     // Setting initial default values
     sqlManager.setColourScheme("Light");
     sqlManager.setLevelDifficulty("Easy");
-    sqlManager.setLevelOneTime(0);
-    sqlManager.setLevelTwoTime(0);
-    sqlManager.setLevelThreeTime(0);
+    sqlManager.setLevelOneTime(0.0);
+    sqlManager.setLevelTwoTime(0.0);
+    sqlManager.setLevelThreeTime(0.0);
     sqlManager.setCurrLives(10);
     sqlManager.setProgress("one");
     sqlManager.setReturningUser(0); // 0 represents false, 1 represents true
