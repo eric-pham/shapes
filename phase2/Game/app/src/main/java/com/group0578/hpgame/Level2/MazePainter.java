@@ -3,6 +3,8 @@ package com.group0578.hpgame.Level2;
 import android.graphics.Canvas;
 import android.util.Log;
 
+import com.group0578.hpgame.model.Timer;
+
 /**
  * The class responsible for drawing the maze on the maze canvas during level 2.
  */
@@ -26,8 +28,9 @@ class MazePainter {
      * Draws the maze depending on the colour scheme.
      *
      * @param mazeCanvas the canvas on which to draw the maze.
+     * @param timer the object that keeps track of the number of seconds spent on this level.
      */
-    void drawMaze(Canvas mazeCanvas) {
+    void drawMaze(Canvas mazeCanvas, Timer timer) {
 
         // Setting mazeCanvas background colours based on colour scheme selected by user
         if (this.maze.getColourScheme().equalsIgnoreCase("Light")) {
@@ -37,8 +40,9 @@ class MazePainter {
         }
 
         // Writing the legend on the screen using drawText() method
-        mazeCanvas.drawText("Player = Smaller", 100, 100, this.maze.getTextBrush());
-        mazeCanvas.drawText("End Point = Square", 550, 100, this.maze.getTextBrush());
+        mazeCanvas.drawText("Player = Smaller", 100, maze.getScreenHeight() - 100, this.maze.getTextBrush());
+        mazeCanvas.drawText("End Point = Square", 550, maze.getScreenHeight() - 100, this.maze.getTextBrush());
+        mazeCanvas.drawText(timer.getSecondsPassedString(), 100, 100, this.maze.getTextBrush());
 
         // Drawing the maze on the mazeCanvas object
         drawMazeWalls(mazeCanvas);

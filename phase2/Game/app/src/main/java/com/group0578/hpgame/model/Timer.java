@@ -1,9 +1,12 @@
 package com.group0578.hpgame.model;
 
+import java.text.DecimalFormat;
+
 /** Timer class represents the amount of time used to complete a level in this game. */
 public class Timer {
 
   private long start;
+  DecimalFormat df = new DecimalFormat("0.000");
 
   /** Initialize a new Timer Object with the starting time equal to when it is initialized */
   public Timer() {
@@ -43,6 +46,15 @@ public class Timer {
   }
 
   /**
+   * Returns the number of seconds that has passed since the starting time.
+   *
+   * @return number of seconds as Double.
+   */
+  public double getSecondsPassed() {
+    return ((double) System.currentTimeMillis() - start) / 1000;
+  }
+
+  /**
    * Returns the String representation of milliseconds, does not include seconds (takes last 3
    * digits of the number of milliseconds.
    *
@@ -63,7 +75,16 @@ public class Timer {
     }
   }
 
-  public String getTimerString(){
-    return "Time : " + this.getSecondsString() + "." + this.getMillisecondsString();
+  public String getTimerString() {
+    return "Seconds : " + this.getSecondsString() + "." + this.getMillisecondsString();
+  }
+
+  /**
+   * Returns the number of seconds that has passed since the starting time.
+   *
+   * @return the number of seconds since the start as a String.
+   */
+  public String getSecondsPassedString() {
+    return "Seconds: " + df.format(getSecondsPassed());
   }
 }
