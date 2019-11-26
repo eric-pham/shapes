@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder;
@@ -50,11 +51,11 @@ public class ScreenView extends SurfaceView implements SurfaceHolder.Callback {
     getHolder().addCallback(this);
     thread = new MainThread(getHolder(), this);
     setFocusable(true);
-    background.setARGB(255, 0, 191, 230);
     level3Timer.start();
     scorePaint.setColor(Color.WHITE);
     scorePaint.setTextSize(70);
     scorePaint.setTypeface(Typeface.DEFAULT_BOLD);
+    background.setARGB(255, 204, 212, 255);
   }
 
   public static float getCharWidth() {
@@ -67,6 +68,10 @@ public class ScreenView extends SurfaceView implements SurfaceHolder.Callback {
 
   public static Manager getRoomManager() {
     return roomManager;
+  }
+
+  public void setBackground (int a, int r, int b, int g) {
+      background.setARGB(a, r, b, g);
   }
 
   @Override
@@ -128,6 +133,7 @@ public class ScreenView extends SurfaceView implements SurfaceHolder.Callback {
   @Override
   public void draw(Canvas canvas) {
     super.draw(canvas);
+    canvas.drawPaint(background);
     if (canvas != null) {
       roomManager.draw(canvas);
     }

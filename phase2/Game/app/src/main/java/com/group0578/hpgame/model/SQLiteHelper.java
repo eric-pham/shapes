@@ -469,4 +469,21 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         db.update(TABLE_NAME, cValues, "id=" + ID, null);
         db.close();
     }
+
+    /**
+     * Updates the database by recording the user's most recent time to complete level 3.
+     *
+     * @param username  the logged in user.
+     * @param totalTime the time taken to complete level 2
+     */
+    public void setLevelThreeTime(String username, float totalTime) {
+        System.out.println("Method SQLiteHelper.setLevelThreeTime reached.");
+        int ID = this.findID(username);
+        db = this.getWritableDatabase();
+        ContentValues cValues = new ContentValues();
+
+        cValues.put(COLUMN_LEVEL_THREE_TIME, totalTime);
+        db.update(TABLE_NAME, cValues, "id=" + ID, null);
+        db.close();
+    }
 }
