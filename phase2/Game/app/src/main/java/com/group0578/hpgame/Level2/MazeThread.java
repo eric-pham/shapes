@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.SurfaceHolder;
 
 import com.group0578.hpgame.model.SQLiteHelper;
+import com.group0578.hpgame.model.Timer;
 
 /** This thread defines the process of drawing the Level 2 Maze on the screen. */
 public class MazeThread extends Thread {
@@ -73,12 +74,14 @@ public class MazeThread extends Thread {
   /** Method called when MazeThread.start() is executed. */
   @Override
   public void run() {
+    Timer timer = new Timer();
     MazePainter mazePainter = new MazePainter(maze);
 
     String TAG = "MazeThread.run";
     Log.e(TAG, "test");
 
-    long start = System.currentTimeMillis();
+//    long start = System.currentTimeMillis();
+    timer.start();
 
     // Only draw the Maze when the thread is currently running
     while (running) {
@@ -91,7 +94,7 @@ public class MazeThread extends Thread {
 
       // Initializing the canvas on which to draw the maze
       mazeCanvas = mazeView.getSurfaceHolder().lockCanvas();
-      mazePainter.drawMaze(mazeCanvas);
+      mazePainter.drawMaze(mazeCanvas, timer);
       surfaceHolder.unlockCanvasAndPost(mazeCanvas); // canvas updated with drawn changes
 
       try {
@@ -103,21 +106,20 @@ public class MazeThread extends Thread {
       // Checking if player has reached exit point in the maze.
       checkExitReached();
       if (!running) {
-        setTotalTime(start);
+        setTotalTime(timer);
       }
     }
   }
 
   /**
    * Stores the total time taken to complete the maze.
-   *
-   * @param start the time at which the level was started.
+   * @param timer
    */
-  private void setTotalTime(long start) {
-    long end = System.currentTimeMillis();
-    float totalSec = (end - start) / 1000F;
-    System.out.println(totalSec + " seconds");
-    this.sqlHelper.setLevelTwoTime(this.username, totalSec);
+  private void setTotalTime(Timer timer) {
+//    long end = System.currentTimeMillis();
+    double totalTime = timer.getSecondsPassed();
+    System.out.println(totalTime + " seconds");
+    this.sqlHelper.setLevelTwoTime(this.username, totalTime);
   }
 
   /**

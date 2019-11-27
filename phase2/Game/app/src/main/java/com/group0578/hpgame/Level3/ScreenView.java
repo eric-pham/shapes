@@ -137,16 +137,16 @@ public class ScreenView extends SurfaceView implements SurfaceHolder.Callback {
       roomManager.draw(canvas);
     }
 
-    String timeDisplay;
-    String timerMSString = String.valueOf(level3Timer.getMilliseconds());
-    if (timerMSString.length() == 1) {
-      timeDisplay = level3Timer.getSeconds() + ".00" + level3Timer.getMilliseconds();
-    } else if (timerMSString.length() == 2) {
-      timeDisplay = level3Timer.getSeconds() + ".0" + level3Timer.getMilliseconds();
-    } else {
-      timeDisplay = level3Timer.getSeconds() + "." + level3Timer.getMilliseconds();
-    }
-    canvas.drawText("Timer : " + timeDisplay, 0, 120, scorePaint);
-    System.out.println(timeDisplay);
+    //    String timeDisplay;
+    //    String timerMSString = String.valueOf(level3Timer.getMilliseconds());
+    //    if (timerMSString.length() == 1) {
+    //      timeDisplay = level3Timer.getSeconds() + ".00" + level3Timer.getMilliseconds();
+    //    } else if (timerMSString.length() == 2) {
+    //      timeDisplay = level3Timer.getSeconds() + ".0" + level3Timer.getMilliseconds();
+    //    } else {
+    //      timeDisplay = level3Timer.getSeconds() + "." + level3Timer.getMilliseconds();
+    //    }
+    canvas.drawText(level3Timer.getSecondsPassedString(), 0, 120, scorePaint);
+    System.out.println(level3Timer.getSecondsPassedString());
   }
 }
