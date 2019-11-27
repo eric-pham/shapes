@@ -67,62 +67,20 @@ public class FlyingView extends View {
     int canvasWidth = getWidth();
     int canvasHeight = getHeight();
 
-    int minCharY = 100;
-    int maxCharY = canvasHeight - 40;
-
     flyingPresenter.updatePlayer(canvasHeight);
-    flyingPresenter.updateYellowBall(canvasWidth,canvasHeight);
-    flyingPresenter.updateGreenBall(canvasWidth,canvasHeight);
-//    charY = charY + charSpeed;
-//
-//    if (charY < minCharY) {
-//      charY = minCharY;
-//    }
-//    if (charY > maxCharY) {
-//      charY = maxCharY;
-//    }
-//    charSpeed = charSpeed + 2;
+    flyingPresenter.updateYellowBall(canvasWidth, canvasHeight);
+    flyingPresenter.updateGreenBall(canvasWidth, canvasHeight);
 
-//    yellowX = yellowX - yellowSpeed;
-//
-//    if (collisionChecker(yellowX, yellowY)) {
-//      collected = collected + 1;
-//      yellowX = -100;
-//    }
-//
-//    if (yellowX < 0) {
-//      yellowX = canvasWidth + 21;
-//      yellowY = (int) Math.floor(Math.random() * (maxCharY - minCharY) + minCharY);
-//    }
+
     canvas.drawCircle(flyingPresenter.getYellowX(), flyingPresenter.getYellowY(), 20, flyingPresenter.getYellowPaint());
-
-//    greenX = greenX - greenSpeed;
-//
-//    if (collisionChecker(greenX, greenY)) {
-//      greenX = -100;
-//      lives--;
-//
-//      if (lives == 0) {
-//        Toast.makeText(getContext(), "Game Over", Toast.LENGTH_SHORT).show();
-//      }
-//    }
-//
-//    if (greenX < 0) {
-//      greenX = canvasWidth + 21;
-//      greenY = (int) Math.floor(Math.random() * (maxCharY - minCharY) + minCharY);
-//    }
     canvas.drawCircle(flyingPresenter.getGreenX(), flyingPresenter.getGreenY(), 30, flyingPresenter.getGreenPaint());
-
     canvas.drawCircle(flyingPresenter.getCharX(), flyingPresenter.getCharY(), 40, flyingPresenter.getCharacter());
     canvas.drawText("Collected : " + flyingPresenter.getCollected(), 0, 60, flyingPresenter.getScorePaint());
     canvas.drawText("Goal : " + flyingPresenter.getGoal(), (canvasWidth / 3) + 70, 60, flyingPresenter.getScorePaint());
     canvas.drawText("Lives : " + flyingPresenter.getLives(), (canvasWidth / 3) * 2 + 50, 60, flyingPresenter.getScorePaint());
     canvas.drawText(timer.getTimerString(), 0, 120, flyingPresenter.getScorePaint());
-  }
 
-//  public boolean collisionChecker(int x, int y) {
-//    return (charX < x && x < (charX + 40) && charY < y && y < (charY + 40));
-//  }
+  }
 
   @Override
   public boolean onTouchEvent(MotionEvent event) {
