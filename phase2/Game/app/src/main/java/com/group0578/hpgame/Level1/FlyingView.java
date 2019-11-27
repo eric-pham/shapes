@@ -78,7 +78,7 @@ public class FlyingView extends View {
     canvas.drawText("Collected : " + flyingPresenter.getCollected(), 0, 60, flyingPresenter.getScorePaint());
     canvas.drawText("Goal : " + flyingPresenter.getGoal(), (canvasWidth / 3) + 70, 60, flyingPresenter.getScorePaint());
     canvas.drawText("Lives : " + flyingPresenter.getLives(), (canvasWidth / 3) * 2 + 50, 60, flyingPresenter.getScorePaint());
-    canvas.drawText(timer.getTimerString(), 0, 120, flyingPresenter.getScorePaint());
+    canvas.drawText(timer.getSecondsPassedString(), 0, 120, flyingPresenter.getScorePaint());
 
   }
 
