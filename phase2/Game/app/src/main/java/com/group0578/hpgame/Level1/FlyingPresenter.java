@@ -27,16 +27,19 @@ public class FlyingPresenter {
         this.flyingView = flyingView;
         this.flyingInteractor = flyingInteractor;
 
-        background.setARGB(255, 0, 191, 230);
-
-        scorePaint.setColor(Color.WHITE);
+        // Setting mazeCanvas background colours based on colour scheme selected by user
+        if (sqlHelper.findColourScheme(username).equalsIgnoreCase("Light")) {
+            background.setARGB(255, 204, 212, 255);
+            scorePaint.setColor(Color.BLACK);
+        } else {
+            //Dark scheme
+            background.setARGB(255, 100, 30, 250);
+            scorePaint.setColor(Color.WHITE);
+        }
         scorePaint.setTextSize(70);
         scorePaint.setTypeface(Typeface.DEFAULT_BOLD);
 
         collected = 0;
-//        System.out.println("--------------");
-//        System.out.println(sqlHelper.findLives(username));
-//        System.out.println("--------------");
         lives = sqlHelper.findLives(username);
         goal = 10;
 
