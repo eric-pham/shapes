@@ -21,7 +21,7 @@ public class FlyingView extends View {
   public FlyingView(Context context, SQLiteHelper sqlHelper, String username) {
     super(context);
     timer.start();
-    flyingPresenter = new FlyingPresenter(this, new FlyingInteractor(), sqlHelper, username);
+    flyingPresenter = new FlyingPresenter(this, new FlyingInteractor(sqlHelper, username));
   }
 
 

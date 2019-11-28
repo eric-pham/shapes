@@ -23,7 +23,7 @@ public class FlyingPresenter {
     private ArrayList<FlyingBall> items = new ArrayList<>();
     private PlayerBall playerBall;
 
-    FlyingPresenter(FlyingView flyingView, FlyingInteractor flyingInteractor, SQLiteHelper sqlHelper, String username) {
+    FlyingPresenter(FlyingView flyingView, FlyingInteractor flyingInteractor) {
         this.flyingView = flyingView;
         this.flyingInteractor = flyingInteractor;
 
@@ -37,7 +37,8 @@ public class FlyingPresenter {
 //        System.out.println("--------------");
 //        System.out.println(sqlHelper.findLives(username));
 //        System.out.println("--------------");
-        lives = sqlHelper.findLives(username);
+//        lives = sqlHelper.findLives(username);
+        lives = 3;
         goal = 10;
 
         playerBall = new PlayerBall(1);
