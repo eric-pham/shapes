@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import com.group0578.hpgame.model.SQLiteHelper;
 import com.group0578.hpgame.model.Timer;
 
 public class FlyingView extends View {
@@ -17,10 +18,10 @@ public class FlyingView extends View {
 
   private FlyingPresenter flyingPresenter;
 
-  public FlyingView(Context context) {
+  public FlyingView(Context context, SQLiteHelper sqlHelper, String username) {
     super(context);
     timer.start();
-    flyingPresenter = new FlyingPresenter(this, new FlyingInteractor());
+    flyingPresenter = new FlyingPresenter(this, new FlyingInteractor(), sqlHelper, username);
   }
 
 
