@@ -17,8 +17,8 @@ class Manager {
   private int gridWidth;
   /** The height of the screen. */
   private int gridHeight;
-   /** The number of dementors created. */
-  private int count;
+   /** The number of dementors that have been killed. */
+  private int numDementorsKilled;
 
   /**
    * The constructor for this manager.
@@ -33,7 +33,7 @@ class Manager {
     objects = new ArrayList<>();
     myBlasts = new ArrayList<>();
     wand = new Wand(gridWidth / 2, gridHeight - 10);
-    count = 0;
+    numDementorsKilled = 0;
   }
 
   ArrayList<Blast> getMyBlasts() {
@@ -78,31 +78,34 @@ class Manager {
         myLittledementors.remove(0);
       }
       // check if more dementors need to be created
-      if (myLittledementors.get(0).getY() >= 5) {
+      int size = myLittledementors.size();
+      if (myLittledementors.get(size - 1).getY() >= 4) {
         createDementors();
       }
       killDementorbyBlast();
-      // move the remaining dementors to
+      // move the remaining dementors.
       for (int i = 0; i < myLittledementors.size(); i++) {
         myLittledementors.get(i).move();
       }
     }
   }
-
+  /** Checks if any dementor has been hit by a blast. If it has, remove that dementor from
+   * the screen. */
   private void killDementorbyBlast()
   {
     ArrayList<Dementor> killeddementors = new ArrayList<>();
     for (int i = 0; i < myBlasts.size(); i++) {
       for (int j = 0; j < myLittledementors.size(); j++) {
         if (myBlasts.get(i).getX() == myLittledementors.get(j).getX()
-              && myBlasts.get(i).getY() == myLittledementors.get(j).getY()) {
-            killeddementors.add(myLittledementors.get(j));
-          }
-        }
-        for (int k = 0; k < killeddementors.size(); k++) {
-          myLittledementors.remove(killeddementors.get(k));
+                && myBlasts.get(i).getY() == myLittledementors.get(j).getY()) {
+          killeddementors.add(myLittledementors.get(j));
         }
       }
+      for (int k = 0; k < killeddementors.size(); k++) {
+        myLittledementors.remove(killeddementors.get(k));
+      }
+    }
+    numDementorsKilled += killeddementors.size();
   }
 
   /** Updates wand by moving it. */
@@ -123,18 +126,8 @@ class Manager {
 
   /** Creates dementors and stores them in myLittleDementors. */
   void createDementors() {
-    int i = myLittledementors.size() + 1;
-    if (count < 5) {
-      if (count == 3 || count == 4) {
-        Dementor d = new Dementor(i * 5 + 1, 0);
-        this.myLittledementors.add(d);
-
-      } else {
-        Dementor d = new Dementor(i * 5, 0);
-        this.myLittledementors.add(d);
-      }
-    }
-    count += 1;
+    Dementor d = new Dementor((int)(Math.random() * (gridWidth - 2) + 2), 0);
+    myLittledementors.add(d);
   }
 
   void createObjects() {
