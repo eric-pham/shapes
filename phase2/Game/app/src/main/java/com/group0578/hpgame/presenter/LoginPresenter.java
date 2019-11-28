@@ -1,26 +1,12 @@
 package com.group0578.hpgame.presenter;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.content.res.AssetManager;
 
-import com.group0578.hpgame.Level1.Level1Activity;
 import com.group0578.hpgame.model.SQLiteHelper;
 import com.group0578.hpgame.view.Login;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.io.FileReader;
-
-import com.google.gson.Gson;
 import com.group0578.hpgame.view.LoginActivity;
 import com.group0578.hpgame.view.ProfilePageActivity;
-import com.group0578.hpgame.view.StartupActivity;
-
-import java.io.File;
 
 /**
  * Responsible for handling actions from the View {@link com.group0578.hpgame.view.LoginActivity}

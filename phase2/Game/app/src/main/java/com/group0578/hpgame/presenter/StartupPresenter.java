@@ -3,8 +3,6 @@ package com.group0578.hpgame.presenter;
 import android.content.Intent;
 
 import com.group0578.hpgame.Level1.FlyingActivity;
-import com.group0578.hpgame.Level1.FlyingView;
-import com.group0578.hpgame.Level1.Level1Activity;
 import com.group0578.hpgame.Level2.MazeActivity;
 import com.group0578.hpgame.Level3.Level3MainActivity;
 import com.group0578.hpgame.view.CreateUserActivity;

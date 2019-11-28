@@ -4,16 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.TextView;
 
-import com.group0578.hpgame.Level1.Level1Activity;
 import com.group0578.hpgame.R;
 import com.group0578.hpgame.model.SQLiteHelper;
 import com.group0578.hpgame.presenter.LoginPresenter;

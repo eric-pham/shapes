@@ -101,7 +101,7 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
   }
 
   /**
-   * Starts the Level1Activity.
+   * Starts the FlyingActivity.
    *
    * @param levelOne the intent for the Level1Activity
    */

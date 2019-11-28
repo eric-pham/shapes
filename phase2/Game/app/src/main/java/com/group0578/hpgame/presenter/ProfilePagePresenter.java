@@ -26,7 +26,7 @@ public class ProfilePagePresenter implements ProfilePage.Presenter {
         this.profilePageView = profilePageView;
     }
 
-    /** Creates the intent for the Level1Activity */
+    /** Creates the intent for the FlyingActivity */
     public void createLevel1() {
         Intent levelOne = new Intent((ProfilePageActivity) this.profilePageView, MazeActivity.class);  // temporarily changed from level1 to level 2 for testing purposes
         System.out.println("levelOne intent created");
