@@ -8,10 +8,6 @@ class Player {
     /** Whether this player has moved. */
     private boolean hasMoved;
 
-    /**
-     * Whether this player has won the game.
-     */
-    private boolean hasWon;
 
     /** The row and column values of this player's position in the maze grid array. */
     private int row, col;
@@ -32,7 +28,6 @@ class Player {
         this.col = col;
         this.lives = lives;
         this.hasMoved = false;
-        this.hasWon = false;
     }
 
     /**
@@ -107,21 +102,4 @@ class Player {
         this.lives = lives;
     }
 
-    /**
-     * Getter for whether this player has won the maze level or not.
-     *
-     * @return true if this player has completed the maze successfully, else false.
-     */
-    boolean hasWon() {
-        return hasWon;
-    }
-
-    /**
-     * Setter for whether this player has finished the maze
-     *
-     * @param hasWon true if the maze has been completed
-     */
-    void setHasWon(boolean hasWon) {
-        this.hasWon = hasWon;
-    }
 }

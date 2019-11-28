@@ -43,6 +43,11 @@ class MazeThread extends Thread {
     private Maze maze;
 
     /**
+     * Whether the game has been won.
+     */
+    private boolean gameWon;
+
+    /**
      * Constructing an instance of a MazeThread.
      *
      * @param surfaceHolder the surface creating this thread.
@@ -108,6 +113,15 @@ class MazeThread extends Thread {
                 e.printStackTrace();
             }
 
+            // checks if the player still has lives
+            if (!playerStillAlive()) {
+                running = false;
+                this.gameWon = false;
+//                this.sqlHelper.setLives(username, 0);
+                break;
+
+            }
+
             // Checking if player has exceeded the time limit for completing the maze.
             if (timeLimitExceeded(resetTimer)) {
                 playerLosesLife();  // may cause running = false
@@ -117,13 +131,23 @@ class MazeThread extends Thread {
             // Checking if player has reached maze exit point if thread is still running.
             if (running) {
                 checkExitReached();
+
             }
 
             // Only store the user's time if the user has won the game.
-            if (!running && this.maze.getPlayer().hasWon()) {
+            if (!running && this.gameWon) {
                 setTotalTime(totalTimer);
             }
         }
+    }
+
+    /**
+     * Returns
+     *
+     * @return a boolean: true if the player still has lives, false if the lives are zero
+     */
+    private boolean playerStillAlive() {
+        return this.maze.getPlayer().getLives() > 0;
     }
 
     /**
@@ -138,32 +162,26 @@ class MazeThread extends Thread {
         String difficulty = sqlHelper.findDifficulty(username);
         double seconds = timer.getSecondsPassed();
         // Time limit to complete the maze is 5 sec. for easy level difficulty, 10 sec. for hard
-        if (difficulty.equalsIgnoreCase("Hard") && seconds > 10.0) {
+        if (difficulty.equalsIgnoreCase("Hard") && seconds > 15.0) {
             return true;
-        } else if (difficulty.equalsIgnoreCase("Easy") && seconds > 5.0) {
+        } else if (difficulty.equalsIgnoreCase("Easy") && seconds > 10.0) {
             return true;
+        } else {
+            return false;
         }
-        return false;
     }
 
     /**
      * Deducts a life for every occasion where the user hasn't completed the maze in the required
-     * time limit, and the user loses the game if they lose all their lives.
+     * time limit, and the user loses the game if they lose all their lives. This method is only
+     * ever called when the lives are greater than 0.
      */
     private void playerLosesLife() {
         System.out.println("Method MazeThread.playerLosesLife reached");
         int livesLeft = this.maze.getPlayer().getLives();
-        if (livesLeft > 1) {    // deducting a life causes lives >= 1.
             this.maze.getPlayer().setLives(livesLeft - 1); // Deduct a life
             this.maze.getPlayer().setRow(0);    // player goes back to start
             this.maze.getPlayer().setCol(0);    // player goes back to start
-            this.sqlHelper.setLives(username, livesLeft - 1);
-        } else {    // deducting a life causes lives = 0, so player loses the game.
-            this.maze.getPlayer().setLives(0);
-            this.maze.getPlayer().setHasWon(false);
-            this.sqlHelper.setLives(username, 0);
-            running = false;
-        }
     }
 
     /**
@@ -173,7 +191,7 @@ class MazeThread extends Thread {
         System.out.println("Method MazeThread.checkExitReached reached");
         if (this.maze.getPlayer().getRow() == this.maze.getExitPoint().getRow()
                 && this.maze.getPlayer().getCol() == this.maze.getExitPoint().getCol()) {
-            this.maze.getPlayer().setHasWon(true);
+            this.gameWon = true;
             running = false; // player and exitPoint locations match so user has won.
         }
     }
@@ -225,4 +243,22 @@ class MazeThread extends Thread {
     public String getUsername() {
         return username;
     }
+
+    /**
+     * Getter for whether this player has won the maze level or not.
+     *
+     * @return true if this player has completed the maze successfully, else false.
+     */
+    boolean isGameWon() {
+        return gameWon;
+    }
+
+//    /**
+//     * Setter for whether this player has finished the maze
+//     *
+//     * @param gameWon true if the maze has been completed
+//     */
+//    void setHasWon(boolean gameWon) {
+//        this.gameWon = gameWon;
+//    }
 }
