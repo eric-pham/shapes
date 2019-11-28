@@ -23,12 +23,12 @@ public class FlyingPresenter {
     private ArrayList<FlyingBall> items = new ArrayList<>();
     private PlayerBall playerBall;
 
-    FlyingPresenter(FlyingView flyingView, FlyingInteractor flyingInteractor, SQLiteHelper sqlHelper, String username) {
+    FlyingPresenter(FlyingView flyingView, FlyingInteractor flyingInteractor) {
         this.flyingView = flyingView;
         this.flyingInteractor = flyingInteractor;
 
         // Setting mazeCanvas background colours based on colour scheme selected by user
-        if (sqlHelper.findColourScheme(username).equalsIgnoreCase("Light")) {
+        if (this.flyingInteractor.getTheme().equalsIgnoreCase("Light")) {
             background.setARGB(255, 204, 212, 255);
             scorePaint.setColor(Color.BLACK);
         } else {
@@ -40,7 +40,7 @@ public class FlyingPresenter {
         scorePaint.setTypeface(Typeface.DEFAULT_BOLD);
 
         collected = 0;
-        lives = sqlHelper.findLives(username);
+        lives = this.flyingInteractor.getLives();
         goal = 10;
 
         playerBall = new PlayerBall(1);

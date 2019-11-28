@@ -444,7 +444,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * colour scheme.
      *
      * @param username     the logged in user.
-     * @param colourScheme the string representing teh user's preferred colour scheme.
+     * @param colourScheme the string representing the user's preferred colour scheme.
      */
     public void setColourScheme(String username, String colourScheme) {
         System.out.println("Method SQLiteHelper.setColourScheme() reached");
