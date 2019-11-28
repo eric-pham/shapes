@@ -20,6 +20,11 @@ public class FlyingInteractor {
     private String character;
 
     /**
+     * String representing the difficulty
+     */
+    private String difficulty;
+
+    /**
      * Create a new FlyingInteractor with the given SQLiteHelper and username. This class stores
      * and returns the user's information from the database required to run the level.
      *
@@ -30,6 +35,7 @@ public class FlyingInteractor {
         this.theme = sqlHelper.findColourScheme(username);
         this.lives = sqlHelper.findLives(username);
         this.character = sqlHelper.findCharacter(username);
+        this.difficulty =sqlHelper.findDifficulty(username);
     }
 
 
@@ -58,6 +64,10 @@ public class FlyingInteractor {
      */
     public String getCharacter() {
         return this.character;
+    }
+
+    public String getDifficulty(){
+        return this.difficulty;
     }
 
     // Need to add update database methods for when game is over, will add after transitions are complete

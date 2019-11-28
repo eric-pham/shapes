@@ -27,31 +27,7 @@ public class FlyingPresenter {
         this.flyingView = flyingView;
         this.flyingInteractor = flyingInteractor;
 
-        // Setting mazeCanvas background colours based on colour scheme selected by user
-        if (this.flyingInteractor.getTheme().equalsIgnoreCase("Light")) {
-            background.setARGB(255, 204, 212, 255);
-            scorePaint.setColor(Color.BLACK);
-        } else {
-            //Dark scheme
-            background.setARGB(255, 100, 30, 250);
-            scorePaint.setColor(Color.WHITE);
-        }
-        scorePaint.setTextSize(70);
-        scorePaint.setTypeface(Typeface.DEFAULT_BOLD);
-
-        collected = 0;
-        lives = this.flyingInteractor.getLives();
-        goal = 10;
-
-        playerBall = new PlayerBall(1);
-        PointBall pointBall = new PointBall(1);
-        DeathBall deathBall = new DeathBall(1);
-        BonusBall bonusBall = new BonusBall(1);
-
-        items.add(bonusBall);
-        items.add(pointBall);
-        items.add(deathBall);
-        items.add(playerBall);
+        setComponents();
     }
 
     public void updateGameState(int width, int height) {
@@ -82,6 +58,40 @@ public class FlyingPresenter {
         return (character.getX() < ball.getX() &&
                 ball.getX() < (character.getX() + character.getRadius()) &&
                 character.getY() < ball.getY() && ball.getY() < (character.getY() + character.getRadius()));
+    }
+
+    void setComponents(){
+        // Setting FlyingView background colours based on colour scheme selected by user
+        if (this.flyingInteractor.getTheme().equalsIgnoreCase("Light")) {
+            background.setARGB(255, 204, 212, 255);
+            scorePaint.setColor(Color.BLACK);
+        } else {
+            //Dark scheme
+            background.setARGB(255, 100, 30, 250);
+            scorePaint.setColor(Color.WHITE);
+        }
+
+        playerBall = new PlayerBall(this.flyingInteractor.getTheme(),this.flyingInteractor.getCharacter());
+        PointBall pointBall = new PointBall(this.flyingInteractor.getTheme());
+        DeathBall deathBall = new DeathBall(this.flyingInteractor.getTheme());
+        BonusBall bonusBall = new BonusBall(this.flyingInteractor.getTheme());
+
+        items.add(bonusBall);
+        items.add(pointBall);
+        items.add(deathBall);
+        items.add(playerBall);
+
+        if (this.flyingInteractor.getDifficulty().equalsIgnoreCase("Easy")){
+            lives = 6;
+        }
+        else{
+            lives = 3;
+        }
+        scorePaint.setTextSize(70);
+        scorePaint.setTypeface(Typeface.DEFAULT_BOLD);
+
+        collected = 0;
+        goal = 10;
     }
 
 

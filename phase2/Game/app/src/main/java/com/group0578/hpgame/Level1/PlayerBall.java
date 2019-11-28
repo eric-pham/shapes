@@ -5,15 +5,15 @@ import android.graphics.Color;
 
 public class PlayerBall extends FlyingBall {
 
-    private int theme;
+    private String character;
 
-    PlayerBall(int theme){
+    PlayerBall(String theme,String character){
         super();
         this.y = 100;
         this.radius = 70;
         this.speed = 0;
-        this.theme = theme;
-        if (theme == 1)
+        this.character = character;
+        if (theme.equalsIgnoreCase("Light"))
             this.paint.setColor(Color.RED);
         else
             this.paint.setColor(Color.BLACK);
@@ -37,6 +37,9 @@ public class PlayerBall extends FlyingBall {
 
     @Override
     public void draw(Canvas canvas) {
+        if (this.character.equalsIgnoreCase("Circle"))
             canvas.drawCircle(radius,y,radius,paint);
+        else
+            canvas.drawRect(0,y + radius,140, y -radius,paint);
     }
 }

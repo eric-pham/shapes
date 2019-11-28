@@ -3,11 +3,11 @@ package com.group0578.hpgame.Level1;
 import android.graphics.Color;
 
 public class BonusBall extends FlyingBall {
-    BonusBall(int theme) {
+    BonusBall(String theme) {
         super();
         this.radius = 30;
         this.speed = 50;
-        if (theme == 1)
+        if (theme.equalsIgnoreCase("Light"))
             paint.setColor(Color.MAGENTA);
         else
             paint.setColor(Color.GRAY);
