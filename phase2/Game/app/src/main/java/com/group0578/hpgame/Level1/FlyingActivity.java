@@ -34,34 +34,26 @@ public class FlyingActivity extends AppCompatActivity {
 
         // extracts the information that was passed from the previous activity
         Bundle extras = getIntent().getExtras();
-        //System.out.println(">>>>>>>");
         if (extras != null) {
             // the username of the user currently logged in
             this.username = extras.getString("username");
-//            System.out.println(">>>>>>>");
-//            System.out.println(this.username);
-//            System.out.println(">>>>>>>");
         }
-        //
 
-//        setContentView(R.layout.activity_flying_game);
         gameView = new FlyingView(this, sqlHelper, username);
         setContentView(gameView);
 
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
-            public void run()
-            {
+            public void run() {
                 handler.post(new Runnable() {
                     @Override
-                    public void run()
-                    {
+                    public void run() {
                         gameView.invalidate();
                     }
                 });
             }
-        },0, Interval);
+        }, 0, Interval);
 
     }
 }
