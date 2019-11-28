@@ -91,6 +91,7 @@ public class Level3MainActivity extends AppCompatActivity {
     }
   }
 
+
   public void createBlast(View view) {
     Manager manager = Level3ScreenView.getRoomManager();
     manager.createBlast();

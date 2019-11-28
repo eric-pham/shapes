@@ -18,7 +18,7 @@ class Manager {
   /** The height of the screen. */
   private int gridHeight;
    /** The number of dementors that have been killed. */
-  private int numDementorsKilled;
+  private static int numDementorsKilled;
 
   /**
    * The constructor for this manager.
@@ -34,6 +34,10 @@ class Manager {
     myBlasts = new ArrayList<>();
     wand = new Wand(gridWidth / 2, gridHeight - 10);
     numDementorsKilled = 0;
+  }
+
+  static int getNumDementorsKilled(){
+    return numDementorsKilled;
   }
 
   ArrayList<Blast> getMyBlasts() {

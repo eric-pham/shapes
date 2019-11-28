@@ -148,5 +148,10 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
     //    }
     canvas.drawText(level3Timer.getSecondsPassedString(), 0, 120, scorePaint);
     System.out.println(level3Timer.getSecondsPassedString());
+
+    canvas.drawText("Collected : " + Manager.getNumDementorsKilled(), 0, 60, scorePaint);
+    canvas.drawText("Goal : 5" , (screenWidth / 3) + 70, 60, scorePaint);
+    canvas.drawText("Lives : ", (screenWidth / 3) * 2 + 50, 60, scorePaint);
+
   }
 }
