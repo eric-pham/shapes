@@ -3,9 +3,9 @@ package com.group0578.hpgame.Level3;
 import android.graphics.Canvas;
 import android.view.SurfaceHolder;
 
-public class MainThread extends Thread {
+public class Level3MainThread extends Thread {
   private SurfaceHolder surfaceHolder;
-  private ScreenView level3ActivityView;
+  private Level3ScreenView level3ActivityView;
   private boolean isRunning;
   public static Canvas canvas;
 
@@ -13,7 +13,7 @@ public class MainThread extends Thread {
    * @param surfaceHolder
    * @param level3ActivityView
    */
-  MainThread(SurfaceHolder surfaceHolder, ScreenView level3ActivityView) {
+  Level3MainThread(SurfaceHolder surfaceHolder, Level3ScreenView level3ActivityView) {
 
     super();
     this.surfaceHolder = surfaceHolder;

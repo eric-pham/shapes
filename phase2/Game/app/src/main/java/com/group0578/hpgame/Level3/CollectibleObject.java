@@ -45,6 +45,6 @@ public class CollectibleObject extends Items {
     private void drawString(Canvas canvas, String appearance, int x, int y) {
 
         canvas.drawText(
-                appearance, y * ScreenView.getCharWidth(), x * ScreenView.getCharHeight(), paintText);
+                appearance, y * Level3ScreenView.getCharWidth(), x * Level3ScreenView.getCharHeight(), paintText);
     }
 }

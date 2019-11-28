@@ -34,7 +34,7 @@ class Blast extends Items {
    * @param y the y-coordinate of the string's cursor location.
    */
   private void drawString(Canvas canvas, String s, int x, int y) {
-    canvas.drawText(s, x * ScreenView.getCharWidth(), y * ScreenView.getCharHeight(), paintText);
+    canvas.drawText(s, x * Level3ScreenView.getCharWidth(), y * Level3ScreenView.getCharHeight(), paintText);
   }
 
   void draw(Canvas canvas) {

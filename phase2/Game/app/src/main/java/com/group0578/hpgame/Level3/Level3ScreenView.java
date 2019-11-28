@@ -11,7 +11,7 @@ import android.view.SurfaceView;
 import android.view.SurfaceHolder;
 import com.group0578.hpgame.model.Timer;
 
-public class ScreenView extends SurfaceView implements SurfaceHolder.Callback {
+public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callback {
 
   /** Screen width. */
   private int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
@@ -26,30 +26,30 @@ public class ScreenView extends SurfaceView implements SurfaceHolder.Callback {
   /** The screen contents. */
   private static Manager roomManager;
   /** The part of the program that manages time. */
-  private MainThread thread;
+  private Level3MainThread thread;
 
   private Paint background = new Paint();
   private Timer level3Timer = new Timer();
   private Paint scorePaint = new Paint();
 
-  public ScreenView(Context context) {
+  public Level3ScreenView(Context context) {
     super(context);
     init();
   }
 
-  public ScreenView(Context context, AttributeSet attrs) {
+  public Level3ScreenView(Context context, AttributeSet attrs) {
     super(context, attrs);
     init();
   }
 
-  public ScreenView(Context context, AttributeSet attrs, int defStyle) {
+  public Level3ScreenView(Context context, AttributeSet attrs, int defStyle) {
     super(context, attrs, defStyle);
     init();
   }
 
   private void init() {
     getHolder().addCallback(this);
-    thread = new MainThread(getHolder(), this);
+    thread = new Level3MainThread(getHolder(), this);
     setFocusable(true);
     level3Timer.start();
     scorePaint.setColor(Color.WHITE);
