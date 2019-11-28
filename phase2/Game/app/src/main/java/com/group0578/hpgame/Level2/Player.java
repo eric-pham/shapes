@@ -8,8 +8,18 @@ class Player {
     /** Whether this player has moved. */
     private boolean hasMoved;
 
+    /**
+     * Whether this player has won the game.
+     */
+    private boolean hasWon;
+
     /** The row and column values of this player's position in the maze grid array. */
     private int row, col;
+
+    /**
+     * The number of lives this player has left to complete the maze.
+     */
+    private int lives;
 
     /**
      * Construct a new Player for the Maze.
@@ -17,10 +27,12 @@ class Player {
      * @param row the current row of the Player's position in the Maze Grid.
      * @param col the current column of the Player's position in the Maze Grid.
      */
-    Player(int row, int col) {
+    Player(int row, int col, int lives) {
         this.row = row;
         this.col = col;
+        this.lives = lives;
         this.hasMoved = false;
+        this.hasWon = false;
     }
 
     /**
@@ -75,5 +87,41 @@ class Player {
      */
     void setCol(int col) {
         this.col = col;
+    }
+
+    /**
+     * Gets the number of lives this player object currently has.
+     *
+     * @return integer: number of lives
+     */
+    int getLives() {
+        return lives;
+    }
+
+    /**
+     * Sets the number of lives this player has left to complete the maze.
+     *
+     * @param lives integer: new number of lives left.
+     */
+    void setLives(int lives) {
+        this.lives = lives;
+    }
+
+    /**
+     * Getter for whether this player has won the maze level or not.
+     *
+     * @return true if this player has completed the maze successfully, else false.
+     */
+    boolean hasWon() {
+        return hasWon;
+    }
+
+    /**
+     * Setter for whether this player has finished the maze
+     *
+     * @param hasWon true if the maze has been completed
+     */
+    void setHasWon(boolean hasWon) {
+        this.hasWon = hasWon;
     }
 }

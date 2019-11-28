@@ -43,6 +43,7 @@ class MazePainter {
         mazeCanvas.drawText("Player = Smaller", 100, maze.getScreenHeight() - 100, this.maze.getTextBrush());
         mazeCanvas.drawText("End Point = Square", 550, maze.getScreenHeight() - 100, this.maze.getTextBrush());
         mazeCanvas.drawText(timer.getSecondsPassedString(), 100, 100, this.maze.getTextBrush());
+        mazeCanvas.drawText("Lives: " + this.maze.getPlayer().getLives(), 100, 150, this.maze.getTextBrush());
 
         // Drawing the maze on the mazeCanvas object
         drawMazeWalls(mazeCanvas);

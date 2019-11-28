@@ -8,7 +8,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 
-/** Got inspiration from youtube channels Y-key, and mybringback which offered tutorials. */
+// Got inspiration from youtube channels Y-key, and mybringback which offered tutorials.
 
 /**
  * The Maze's view or visual appearance on the screen for the user.
