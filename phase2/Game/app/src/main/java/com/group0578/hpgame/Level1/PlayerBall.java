@@ -10,7 +10,7 @@ public class PlayerBall extends FlyingBall {
     PlayerBall(int theme){
         super();
         this.y = 100;
-        this.radius = 40;
+        this.radius = 70;
         this.speed = 0;
         this.theme = theme;
         if (theme == 1)

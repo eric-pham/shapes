@@ -46,7 +46,9 @@ public class FlyingPresenter {
         playerBall = new PlayerBall(1);
         PointBall pointBall = new PointBall(1);
         DeathBall deathBall = new DeathBall(1);
+        BonusBall bonusBall = new BonusBall(1);
 
+        items.add(bonusBall);
         items.add(pointBall);
         items.add(deathBall);
         items.add(playerBall);
@@ -61,6 +63,9 @@ public class FlyingPresenter {
                     item.x = -100;
                 } else if (item instanceof DeathBall) {
                     lives--;
+                    item.x = -100;
+                } else if (item instanceof BonusBall){
+                    collected = collected + 2;
                     item.x = -100;
                 }
             }
