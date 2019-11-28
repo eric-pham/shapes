@@ -5,7 +5,7 @@ import android.graphics.Paint;
 /**
  * The Maze that will be drawn onto the canvas during level 2.
  */
-public class Maze {
+class Maze {
 
     /**
      * The width of the screen representing this MazeView.

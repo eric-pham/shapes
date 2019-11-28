@@ -24,6 +24,7 @@
         <activity android:name=".Level3.Level3MainActivity" />
         <activity android:name=".view.ProfilePageActivity" />
         <activity android:name=".view.CustomizeActivity" />
+        <activity android:name=".view.GameOverActivity" />
     </application>
 
 </manifest>

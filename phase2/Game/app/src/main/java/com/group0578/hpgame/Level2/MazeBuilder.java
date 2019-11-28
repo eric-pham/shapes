@@ -34,22 +34,22 @@ class MazeBuilder {
    *
    * @param difficulty the level difficulty
    * @param colourScheme the string representing the colour scheme of the game
+   * @param character the character representing the shape of the player in this maze.
+   * @param playerLives the number of lives left for the player in the maze level.
    */
-  Maze build(String difficulty, String colourScheme, String character) {
+  Maze build(String difficulty, String colourScheme, String character, int playerLives) {
     // gets the screen height and width
     this.maze.setScreenWidth(Resources.getSystem().getDisplayMetrics().widthPixels);
     this.maze.setScreenHeight(Resources.getSystem().getDisplayMetrics().heightPixels);
     this.maze.setCharacter(character);
     this.maze.setColourScheme(colourScheme); // might not need this
 
-    // Receiving mazeGrid from Presenter
-    //    MazeSection[][] mazeGrid = mazePresenter.buildMazeGrid();
-    //    mazePresenter.setMazeGrid(mazeGrid);
+    // Building the maze
     buildMazeGrid(difficulty);
     buildMaze();
 
     // Initializing new Player object with coordinates (0,0) in mazeGrid array
-    this.maze.setPlayer(new Player(0, 0));
+    this.maze.setPlayer(new Player(0, 0, playerLives));
 
     // prepares the exit
     setExitLocation();
@@ -58,7 +58,7 @@ class MazeBuilder {
     prepareMazeBrushes(colourScheme);
 
     // calculates the dimensions of the margins and the lengths of the walls
-    determineMazeDimensions(this.maze.getMazeGrid());
+    determineMazeDimensions();
 
     // prepares the Paint objects for the player and exit
     makePlayer(colourScheme);
@@ -250,23 +250,10 @@ class MazeBuilder {
     }
   }
 
-  //  /**
-  //   * Initializes the exitPoint attribute to last column and last row in the mazeGrid array.
-  //   *
-  //   * @param mazePresenter the MazePresenter responsible for drawing the maze
-  //   */
-  //  private void setExitLocation(MazePresenter mazePresenter) {
-  //    int rows = mazePresenter.getRowColumnAttributes()[0];
-  //    int cols = mazePresenter.getRowColumnAttributes()[1];
-  //    mazePresenter.setExitPoint(mazePresenter.getMazeGrid()[rows - 1][cols - 1]);
-  //  }
-
   /**
    * Initializes the exitPoint attribute to last column and last row in the mazeGrid array.
    */
   private void setExitLocation() {
-    //        int rows = mazePresenter.getRowColumnAttributes()[0];
-    //        int cols = mazePresenter.getRowColumnAttributes()[1];
     int rows = this.maze.getRows() - 1, cols = this.maze.getCols() - 1;
     this.maze.setExitPoint(this.maze.getMazeGrid()[rows][cols]);
   }
@@ -303,15 +290,13 @@ class MazeBuilder {
    *
    * <p>1) How large each mazeSection should be on the screen (setting mazeSectionLength attribute)
    * 2) Vertical and horizontal margins between the maze and edges of the screen
-   *
-   * @param mazeGrid the grid array on which the maze appears.
    */
-  private void determineMazeDimensions(MazeSection[][] mazeGrid) {
+  private void determineMazeDimensions() {
 
     String TAG = "MazeBuilder.determineMazeDimensions";
 
-    int rows = mazeGrid.length;
-    int cols = mazeGrid[0].length;
+    int rows = this.maze.getMazeGrid().length;
+    int cols = this.maze.getMazeGrid()[0].length;
 
     int screenHeight = this.maze.getScreenHeight();
     int screenWidth = this.maze.getScreenWidth();

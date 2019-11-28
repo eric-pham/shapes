@@ -18,7 +18,7 @@ public class Level3MainActivity extends AppCompatActivity {
 
   private Handler handler = new Handler();
   private static final long Interval = 30;
-  private ScreenView screenView;
+  private Level3ScreenView screenView;
   /** The username belonging to the user currently logged in and viewing the profile page. */
   private String username;
 
@@ -40,7 +40,7 @@ public class Level3MainActivity extends AppCompatActivity {
       this.username = extras.getString("username");
     }
 
-    screenView = new ScreenView(this);
+    screenView = new Level3ScreenView(this);
     Timer timer = new Timer();
     timer.schedule(
         new TimerTask() {
@@ -51,7 +51,7 @@ public class Level3MainActivity extends AppCompatActivity {
                   @Override
                   public void run() {
                     screenView.invalidate();
-                    if (ScreenView.getRoomManager().getMyLittledementors().isEmpty()) {
+                    if (Level3ScreenView.getRoomManager().getMyLittledementors().isEmpty()) {
                       Button leftButton = findViewById(R.id.button4);
                       leftButton.setVisibility(View.INVISIBLE);
                       Button rightButton = findViewById(R.id.button6);
@@ -91,18 +91,19 @@ public class Level3MainActivity extends AppCompatActivity {
     }
   }
 
+
   public void createBlast(View view) {
-    Manager manager = ScreenView.getRoomManager();
+    Manager manager = Level3ScreenView.getRoomManager();
     manager.createBlast();
   }
 
   public void moveWandRight(View view) {
-    Manager manager = ScreenView.getRoomManager();
+    Manager manager = Level3ScreenView.getRoomManager();
     manager.moveWandRight();
   }
 
   public void moveWandLeft(View view) {
-    Manager manager = ScreenView.getRoomManager();
+    Manager manager = Level3ScreenView.getRoomManager();
     manager.moveWandLeft();
   }
 

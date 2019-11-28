@@ -41,6 +41,7 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_profile_page);
+    setTitle("Profile Page");
     profilePagePresenter = new ProfilePagePresenter(this);
 
     // extracts the information that was passed from the previous activity

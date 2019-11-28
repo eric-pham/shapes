@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.group0578.hpgame.R;
+import com.group0578.hpgame.model.SQLiteHelper;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -16,11 +17,35 @@ public class FlyingActivity extends AppCompatActivity {
     private Handler handler = new Handler();
     private final static long Interval = 30;
 
+    /**
+     * The sql database helper that has methods that can operate on the database.
+     */
+    private SQLiteHelper sqlHelper = new SQLiteHelper(this);
+
+    /**
+     * The username belonging to the user currently logged in and viewing the profile page.
+     */
+    private String username;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //
+
+        // extracts the information that was passed from the previous activity
+        Bundle extras = getIntent().getExtras();
+        //System.out.println(">>>>>>>");
+        if (extras != null) {
+            // the username of the user currently logged in
+            this.username = extras.getString("username");
+//            System.out.println(">>>>>>>");
+//            System.out.println(this.username);
+//            System.out.println(">>>>>>>");
+        }
+        //
+
 //        setContentView(R.layout.activity_flying_game);
-        gameView = new FlyingView(this);
+        gameView = new FlyingView(this, sqlHelper, username);
         setContentView(gameView);
 
         Timer timer = new Timer();
@@ -37,5 +62,6 @@ public class FlyingActivity extends AppCompatActivity {
                 });
             }
         },0, Interval);
+
     }
 }

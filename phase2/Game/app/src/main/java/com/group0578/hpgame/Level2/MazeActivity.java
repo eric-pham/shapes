@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.group0578.hpgame.Level3.Level3MainActivity;
 import com.group0578.hpgame.R;
 import com.group0578.hpgame.model.SQLiteHelper;
+import com.group0578.hpgame.view.GameOverActivity;
 
 /** The startup activity for beginning the level 2 maze of this game. */
 public class MazeActivity extends AppCompatActivity {
@@ -78,6 +79,7 @@ public class MazeActivity extends AppCompatActivity {
   public void onClickNextLevel(View view) {
     // Calling Level3MainActivity class
     Intent nextLevelIntent = new Intent(this, Level3MainActivity.class);
+    nextLevelIntent.putExtra("username", this.username);
     startActivity(nextLevelIntent);
     finish();
   }
@@ -88,5 +90,16 @@ public class MazeActivity extends AppCompatActivity {
 
   public SQLiteHelper getSqlHelper() {
     return this.sqlHelper;
+  }
+
+  /**
+   * Starts the GameOverActivity and passes the user's username.
+   */
+  public void goToGameOver() {
+    System.out.println("goToGameOver reached");
+    Intent gameOver = new Intent(this, GameOverActivity.class);
+    gameOver.putExtra("username", this.username);
+    startActivity(gameOver);
+    finish();
   }
 }

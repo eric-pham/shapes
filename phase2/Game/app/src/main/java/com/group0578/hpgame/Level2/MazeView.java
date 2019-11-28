@@ -8,7 +8,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 
-/** Got inspiration from youtube channels Y-key, and mybringback which offered tutorials. */
+// Got inspiration from youtube channels Y-key, and mybringback which offered tutorials.
 
 /**
  * The Maze's view or visual appearance on the screen for the user.
@@ -149,19 +149,31 @@ public class MazeView extends SurfaceView implements SurfaceHolder.Callback, Vie
       return true;
     }
 
-    // Checking if player has reached exitPoint
     if (!mazeThread.isRunning()) {
-      try {
-        // marks this level as completed
-        mazeThread.getSqlHelper().setProgress(mazeThread.getUsername(), "two");
-        mazeThread.join();  // Destroying the thread.
-        setVisibility(GONE); // Moving to level 3.
-
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
+      stopGame();
     }
 
     return true; // returns true so the user can continue dragging/clicking to move the player
   }
+
+  private void stopGame() {
+    try {
+      if (mazeThread.isGameWon()) {
+        // marks this level as completed
+        mazeThread.getSqlHelper().setProgress(mazeThread.getUsername(), "two");
+        // stops the mazeThread
+        mazeThread.join();  // Destroying the thread.
+        setVisibility(GONE); // Moving to level 3.
+      } else { // player has lost all lives thus losing the game
+        // stops the mazeThread
+        mazeThread.join();  // Destroying the thread.
+        ((MazeActivity) this.getContext()).goToGameOver();
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+
+
 }

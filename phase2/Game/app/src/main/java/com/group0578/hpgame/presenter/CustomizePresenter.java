@@ -57,6 +57,23 @@ public class CustomizePresenter implements Customize.Presenter {
         if (!sqlHelper.findDifficulty(username).equals(difficulty)) {
             System.out.println("New difficulty preference detected!");
             sqlHelper.setDifficulty(username, difficulty);
+            // Changing the difficulty causes the number of lives a user has to increase/decrease
+            updatePlayerLives(sqlHelper, username, difficulty);
+        }
+    }
+
+    /**
+     * Changes the number of lives a user has to complete a game after level difficulty is changed.
+     *
+     * @param sqlHelper  the database accessing and modifying this user's number of lives
+     * @param username   String: username of the user currently logged in
+     * @param difficulty String: the new level difficulty
+     */
+    private void updatePlayerLives(SQLiteHelper sqlHelper, String username, String difficulty) {
+        if (difficulty.equalsIgnoreCase("Easy")) {
+            sqlHelper.setLives(username, 10);
+        } else if (difficulty.equalsIgnoreCase("Hard")) {
+            sqlHelper.setLives(username, 5);
         }
     }
 
