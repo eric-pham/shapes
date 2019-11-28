@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 
+import com.group0578.hpgame.model.SQLiteHelper;
+
 import java.util.ArrayList;
 
 public class FlyingPresenter {
@@ -21,7 +23,7 @@ public class FlyingPresenter {
     private ArrayList<FlyingBall> items = new ArrayList<>();
     private PlayerBall playerBall;
 
-    FlyingPresenter(FlyingView flyingView, FlyingInteractor flyingInteractor){
+    FlyingPresenter(FlyingView flyingView, FlyingInteractor flyingInteractor, SQLiteHelper sqlHelper, String username) {
         this.flyingView = flyingView;
         this.flyingInteractor = flyingInteractor;
 
@@ -32,11 +34,14 @@ public class FlyingPresenter {
         scorePaint.setTypeface(Typeface.DEFAULT_BOLD);
 
         collected = 0;
-        lives = 3;
+//        System.out.println("--------------");
+//        System.out.println(sqlHelper.findLives(username));
+//        System.out.println("--------------");
+        lives = sqlHelper.findLives(username);
         goal = 10;
 
         playerBall = new PlayerBall(1);
-        PointBall pointBall = new PointBall( 1);
+        PointBall pointBall = new PointBall(1);
         DeathBall deathBall = new DeathBall(1);
 
         items.add(pointBall);
@@ -44,15 +49,14 @@ public class FlyingPresenter {
         items.add(playerBall);
     }
 
-    public void updateGameState(int width, int height){
+    public void updateGameState(int width, int height) {
         for (FlyingBall item : items) {
-            item.update(width,height);
-            if (collisionChecker(playerBall,item)) {
+            item.update(width, height);
+            if (collisionChecker(playerBall, item)) {
                 if (item instanceof PointBall) {
                     collected = collected + 1;
                     item.x = -100;
-                }
-                else if (item instanceof DeathBall) {
+                } else if (item instanceof DeathBall) {
                     lives--;
                     item.x = -100;
                 }
@@ -65,6 +69,7 @@ public class FlyingPresenter {
             item.draw(canvas);
         }
     }
+
     boolean collisionChecker(FlyingBall character, FlyingBall ball) {
         return (character.getX() < ball.getX() &&
                 ball.getX() < (character.getX() + character.getRadius()) &&
@@ -75,6 +80,7 @@ public class FlyingPresenter {
     public void setCharSpeed(int charSpeed) {
         this.playerBall.speed = charSpeed;
     }
+
     public int getCollected() {
         return collected;
     }
@@ -86,6 +92,7 @@ public class FlyingPresenter {
     public int getLives() {
         return lives;
     }
+
     public Paint getBackground() {
         return background;
     }
