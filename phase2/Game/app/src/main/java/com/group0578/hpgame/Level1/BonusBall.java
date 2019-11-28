@@ -10,7 +10,7 @@ public class BonusBall extends FlyingBall {
         if (theme.equalsIgnoreCase("Light"))
             paint.setColor(Color.MAGENTA);
         else
-            paint.setColor(Color.GRAY);
+            paint.setColor(Color.DKGRAY);
     }
 
     public void update(int width, int height) {

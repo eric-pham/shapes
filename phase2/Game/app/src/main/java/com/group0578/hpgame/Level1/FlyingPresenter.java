@@ -81,12 +81,7 @@ public class FlyingPresenter {
         items.add(deathBall);
         items.add(playerBall);
 
-        if (this.flyingInteractor.getDifficulty().equalsIgnoreCase("Easy")){
-            lives = 6;
-        }
-        else{
-            lives = 3;
-        }
+        lives = this.flyingInteractor.getLives();
         scorePaint.setTextSize(70);
         scorePaint.setTypeface(Typeface.DEFAULT_BOLD);
 

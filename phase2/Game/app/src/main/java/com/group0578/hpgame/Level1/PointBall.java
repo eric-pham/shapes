@@ -10,8 +10,8 @@ public class PointBall extends FlyingBall {
         this.radius = 20;
         this.speed = 16;
         if (theme.equalsIgnoreCase("Light"))
-            paint.setColor(Color.WHITE);
+            paint.setColor(Color.YELLOW);
         else
-            paint.setColor(Color.BLACK);
+            paint.setColor(Color.LTGRAY);
     }
 }

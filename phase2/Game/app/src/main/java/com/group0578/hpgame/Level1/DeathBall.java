@@ -10,7 +10,7 @@ public class DeathBall extends FlyingBall {
         this.radius = 30;
         this.speed = 20;
         if (theme.equalsIgnoreCase("Light"))
-            paint.setColor(Color.GREEN);
+            paint.setColor(Color.RED);
         else
             paint.setColor(Color.CYAN);
     }

@@ -28,8 +28,8 @@ public abstract class FlyingBall {
     public void update(int width,int height)
     {
 
-        int minCharY = 100;
-        int maxCharY = height - 40;
+        int minCharY = 140;
+        int maxCharY = height - 70;
 
         this.x = this.x - this.speed;
 

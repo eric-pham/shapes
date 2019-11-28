@@ -14,15 +14,15 @@ public class PlayerBall extends FlyingBall {
         this.speed = 0;
         this.character = character;
         if (theme.equalsIgnoreCase("Light"))
-            this.paint.setColor(Color.RED);
-        else
             this.paint.setColor(Color.BLACK);
+        else
+            this.paint.setColor(Color.WHITE);
     }
 
     public void update(int width, int height)
     {
-        int minCharY = 100;
-        int maxCharY = height - 40;
+        int minCharY = 200;
+        int maxCharY = height - 70;
 
         this.y = this.y + this.speed;
 
