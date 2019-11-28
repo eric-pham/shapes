@@ -17,7 +17,7 @@ class Manager {
   private int gridWidth;
   /** The height of the screen. */
   private int gridHeight;
-  /** The number of dementors created. */
+   /** The number of dementors created. */
   private int count;
 
   /**
@@ -71,30 +71,30 @@ class Manager {
    */
   void updateDementor() {
     if (myLittledementors.size() > 0) {
-      ArrayList<Integer> dementors = new ArrayList<>();
       // Get the y coordinate of the dementor that is positioned lowest on the screen.
       int y = myLittledementors.get(0).getY();
-      int size = myLittledementors.size();
-      // check if the bottommost dementor is at the bottom of the screen. If it is, remove all
-      // dementors that are in the same row as this dementor.
-      if (y + 4 >= gridHeight - 10) {
-        for (int i = 0; i < size; i++) {
-          if (y == myLittledementors.get(i).getY()) {
-            dementors.add(i);
-          }
-        }
-        for (int j = 0; j < dementors.size(); j++) {
-          myLittledementors.remove(0);
-        }
+      // check if the bottommost dementor is at the bottom of the screen. If it is, remove it.
+      if (y >= gridHeight - 15) {
+        myLittledementors.remove(0);
       }
       // check if more dementors need to be created
       if (myLittledementors.get(0).getY() >= 5) {
         createDementors();
       }
-      ArrayList<Dementor> killeddementors = new ArrayList<>();
-      for (int i = 0; i < myBlasts.size(); i++) {
-        for (int j = 0; j < myLittledementors.size(); j++) {
-          if (myBlasts.get(i).getX() == myLittledementors.get(j).getX()
+      killDementorbyBlast();
+      // move the remaining dementors to
+      for (int i = 0; i < myLittledementors.size(); i++) {
+        myLittledementors.get(i).move();
+      }
+    }
+  }
+
+  private void killDementorbyBlast()
+  {
+    ArrayList<Dementor> killeddementors = new ArrayList<>();
+    for (int i = 0; i < myBlasts.size(); i++) {
+      for (int j = 0; j < myLittledementors.size(); j++) {
+        if (myBlasts.get(i).getX() == myLittledementors.get(j).getX()
               && myBlasts.get(i).getY() == myLittledementors.get(j).getY()) {
             killeddementors.add(myLittledementors.get(j));
           }
@@ -103,10 +103,6 @@ class Manager {
           myLittledementors.remove(killeddementors.get(k));
         }
       }
-      for (int i = 0; i < myLittledementors.size(); i++) {
-        myLittledementors.get(i).move();
-      }
-    }
   }
 
   /** Updates wand by moving it. */
