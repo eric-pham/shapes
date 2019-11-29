@@ -5,12 +5,12 @@ import android.graphics.ColorSpace;
 
 public class DeathBall extends FlyingBall {
 
-    DeathBall(int theme){
+    DeathBall(String theme){
         super();
         this.radius = 30;
         this.speed = 20;
-        if (theme == 1)
-            paint.setColor(Color.GREEN);
+        if (theme.equalsIgnoreCase("Light"))
+            paint.setColor(Color.RED);
         else
             paint.setColor(Color.CYAN);
     }

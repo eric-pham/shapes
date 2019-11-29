@@ -1,6 +1,7 @@
 package com.group0578.hpgame.Level2;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -135,18 +136,24 @@ public class MazeView extends SurfaceView implements SurfaceHolder.Callback, Vie
     String TAG = "MazeBuilder.makePlayer";
     Log.e(TAG, "test");
 
+    // Gets the x and y coordinates of where the user clicked on the screen.
+    float touchX = event.getX(), touchY = event.getY();
+
+    // doesn't work :(
+    if (event.getAction() == MotionEvent.ACTION_DOWN) {
+      // if the click is in the top right hand corner, they can bypass the maze level
+      if (touchX >= Resources.getSystem().getDisplayMetrics().widthPixels - 100 && touchY <= 100) {
+        mazeThread.setGameWon(true);
+        mazeThread.updateDatabase();
+        stopGame();
+      }
+    }
+
     // If the user clicks and drags the mouse, then an action has been detected
     if (event.getAction() == MotionEvent.ACTION_MOVE) {
 
-      // Gets the x and y coordinates of where the user clicked on the screen.
-      float touchX = event.getX(), touchY = event.getY();
-
       // MazePresenter changes player location based on where the user clicked.
       this.playerPositioner.handlePlayerMovement(touchX, touchY);
-    }
-
-    if (event.getAction() == MotionEvent.ACTION_DOWN) {
-      return true;
     }
 
     if (!mazeThread.isRunning()) {

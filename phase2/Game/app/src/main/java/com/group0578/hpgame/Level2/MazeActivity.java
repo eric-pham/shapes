@@ -3,10 +3,13 @@ package com.group0578.hpgame.Level2;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -51,6 +54,13 @@ public class MazeActivity extends AppCompatActivity {
 
     /* Hide the app title bar. */
     getSupportActionBar().hide();
+
+      // initiate the Toast with context, message and duration for the Toast
+      Toast toast = Toast.makeText(this, "X marks the spot ;)", Toast.LENGTH_LONG);
+      // set gravity for the Toast.
+      toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, 0);
+      // display the Toast
+      toast.show();
   }
 
   /**

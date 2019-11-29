@@ -5,13 +5,13 @@ import android.graphics.Color;
 
 public class PointBall extends FlyingBall {
 
-    PointBall(int theme){
+    PointBall(String theme){
         super();
         this.radius = 20;
         this.speed = 16;
-        if (theme == 1)
-            paint.setColor(Color.WHITE);
+        if (theme.equalsIgnoreCase("Light"))
+            paint.setColor(Color.YELLOW);
         else
-            paint.setColor(Color.BLACK);
+            paint.setColor(Color.LTGRAY);
     }
 }

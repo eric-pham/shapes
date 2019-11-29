@@ -15,7 +15,7 @@ public class FlyingPresenter {
     private FlyingInteractor flyingInteractor;
 
 
-    private int collected, lives, goal;
+    private int collected, lives, goal, bonus;
 
     private Paint background = new Paint();
     private Paint scorePaint = new Paint();
@@ -23,30 +23,11 @@ public class FlyingPresenter {
     private ArrayList<FlyingBall> items = new ArrayList<>();
     private PlayerBall playerBall;
 
-    FlyingPresenter(FlyingView flyingView, FlyingInteractor flyingInteractor, SQLiteHelper sqlHelper, String username) {
+    FlyingPresenter(FlyingView flyingView, FlyingInteractor flyingInteractor) {
         this.flyingView = flyingView;
         this.flyingInteractor = flyingInteractor;
 
-        background.setARGB(255, 0, 191, 230);
-
-        scorePaint.setColor(Color.WHITE);
-        scorePaint.setTextSize(70);
-        scorePaint.setTypeface(Typeface.DEFAULT_BOLD);
-
-        collected = 0;
-//        System.out.println("--------------");
-//        System.out.println(sqlHelper.findLives(username));
-//        System.out.println("--------------");
-        lives = sqlHelper.findLives(username);
-        goal = 10;
-
-        playerBall = new PlayerBall(1);
-        PointBall pointBall = new PointBall(1);
-        DeathBall deathBall = new DeathBall(1);
-
-        items.add(pointBall);
-        items.add(deathBall);
-        items.add(playerBall);
+        setComponents();
     }
 
     public void updateGameState(int width, int height) {
@@ -58,6 +39,9 @@ public class FlyingPresenter {
                     item.x = -100;
                 } else if (item instanceof DeathBall) {
                     lives--;
+                    item.x = -100;
+                } else if (item instanceof BonusBall){
+                    bonus = bonus + 1;
                     item.x = -100;
                 }
             }
@@ -74,6 +58,36 @@ public class FlyingPresenter {
         return (character.getX() < ball.getX() &&
                 ball.getX() < (character.getX() + character.getRadius()) &&
                 character.getY() < ball.getY() && ball.getY() < (character.getY() + character.getRadius()));
+    }
+
+    void setComponents(){
+        // Setting FlyingView background colours based on colour scheme selected by user
+        if (this.flyingInteractor.getTheme().equalsIgnoreCase("Light")) {
+            background.setARGB(255, 204, 212, 255);
+            scorePaint.setColor(Color.BLACK);
+        } else {
+            //Dark scheme
+            background.setARGB(255, 100, 30, 250);
+            scorePaint.setColor(Color.WHITE);
+        }
+
+        playerBall = new PlayerBall(this.flyingInteractor.getTheme(),this.flyingInteractor.getCharacter());
+        PointBall pointBall = new PointBall(this.flyingInteractor.getTheme());
+        DeathBall deathBall = new DeathBall(this.flyingInteractor.getTheme());
+        BonusBall bonusBall = new BonusBall(this.flyingInteractor.getTheme());
+
+        items.add(bonusBall);
+        items.add(pointBall);
+        items.add(deathBall);
+        items.add(playerBall);
+
+        lives = this.flyingInteractor.getLives();
+        scorePaint.setTextSize(70);
+        scorePaint.setTypeface(Typeface.DEFAULT_BOLD);
+
+        collected = 0;
+        bonus = 0;
+        goal = 10;
     }
 
 
@@ -99,5 +113,9 @@ public class FlyingPresenter {
 
     public Paint getScorePaint() {
         return scorePaint;
+    }
+
+    public int getBonus() {
+        return bonus;
     }
 }
