@@ -47,6 +47,8 @@ class MazeThread extends Thread {
      */
     private boolean gameWon;
 
+    Timer totalTimer = new Timer();
+
     /**
      * Constructing an instance of a MazeThread.
      *
@@ -84,13 +86,14 @@ class MazeThread extends Thread {
      */
     @Override
     public void run() {
-        Timer totalTimer = new Timer(), resetTimer = new Timer();
+//        Timer totalTimer = new Timer(), resetTimer = new Timer();
+        Timer resetTimer = new Timer();
         MazePainter mazePainter = new MazePainter(maze);
 
         String TAG = "MazeThread.run";
         Log.e(TAG, "test");
 
-        totalTimer.start();
+        this.totalTimer.start();
         resetTimer.start();
 
         // Only draw the Maze when the thread is currently running
@@ -104,7 +107,7 @@ class MazeThread extends Thread {
 
             // Initializing the canvas on which to draw the maze
             Canvas mazeCanvas = mazeView.getSurfaceHolder().lockCanvas();
-            mazePainter.drawMaze(mazeCanvas, totalTimer);
+            mazePainter.drawMaze(mazeCanvas, this.totalTimer);
             surfaceHolder.unlockCanvasAndPost(mazeCanvas); // canvas updated with drawn changes
 
             try {
@@ -135,8 +138,8 @@ class MazeThread extends Thread {
             }
 
             // Only store the user's time if the user has won the game.
-            if (!running && this.gameWon) {
-                setTotalTime(totalTimer);
+            if (!running && this.gameWon) { // move this to the stop game method? make timer an instance variable?
+                setTotalTime();
             }
         }
     }
@@ -199,13 +202,18 @@ class MazeThread extends Thread {
     /**
      * Stores the total time taken to complete the maze.
      *
-     * @param timer the timer object representing how long this thread has been running
+     //     * @param timer the timer object representing how long this thread has been running
      */
-    private void setTotalTime(Timer timer) {
+    private void setTotalTime() {
         System.out.println("Method MazeThread.setTotalTime reached");
-        double totalTime = timer.getSecondsPassed();
+        double totalTime = this.totalTimer.getSecondsPassed();
         System.out.println(totalTime + " seconds");
         this.sqlHelper.setLevelTwoTime(this.username, totalTime);
+    }
+
+    void updateDatabase() {
+        this.sqlHelper.setLives(this.username, this.maze.getPlayer().getLives());
+        setTotalTime();
     }
 
     /**
@@ -247,18 +255,18 @@ class MazeThread extends Thread {
     /**
      * Getter for whether this player has won the maze level or not.
      *
-     * @return true if this player has completed the maze successfully, else false.
+     * @return true if this player has completed the maze level successfully, else false.
      */
     boolean isGameWon() {
         return gameWon;
     }
 
-//    /**
-//     * Setter for whether this player has finished the maze
-//     *
-//     * @param gameWon true if the maze has been completed
-//     */
-//    void setHasWon(boolean gameWon) {
-//        this.gameWon = gameWon;
-//    }
+    /**
+     * Setter for whether this player has won the maze level or not.
+     *
+     * @param gameWon true if this player has completed the maze level successfully, else false
+     */
+    void setGameWon(boolean gameWon) {
+        this.gameWon = gameWon;
+    }
 }
