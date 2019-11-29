@@ -28,7 +28,7 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
   /** The part of the program that manages time. */
   private Level3MainThread thread;
 
-  private Paint background = new Paint();
+  private static Paint background = new Paint();
   private Timer level3Timer = new Timer();
   private Paint scorePaint = new Paint();
 
@@ -55,7 +55,7 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
     scorePaint.setColor(Color.WHITE);
     scorePaint.setTextSize(70);
     scorePaint.setTypeface(Typeface.DEFAULT_BOLD);
-    background.setARGB(255, 204, 212, 255);
+    // background.setARGB(255, 204, 212, 255);
   }
 
   public static float getCharWidth() {
@@ -70,8 +70,8 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
     return roomManager;
   }
 
-  public void setBackground(int a, int r, int b, int g) {
-    background.setARGB(a, r, b, g);
+  public static void setBackground(int a, int r, int g, int b) {
+    background.setARGB(a, r, g, b);
   }
 
   @Override

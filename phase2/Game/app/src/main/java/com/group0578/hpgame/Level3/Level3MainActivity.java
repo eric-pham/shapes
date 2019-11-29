@@ -68,9 +68,7 @@ public class Level3MainActivity extends AppCompatActivity {
         0,
         Interval);
 
-    // setComponentColours();
-    getWindow().getDecorView().setBackgroundColor(Color.argb(255, 204, 212, 255));
-    screenView.setBackground(255, 204, 212, 255);
+    setComponentColours();
   }
 
   /** Changes the background and text colour depending on the colour scheme. */
@@ -78,12 +76,12 @@ public class Level3MainActivity extends AppCompatActivity {
     String colourScheme = sqlHelper.findColourScheme(username);
     if (colourScheme.equalsIgnoreCase("Light")) {
       getWindow().getDecorView().setBackgroundColor(Color.argb(255, 204, 212, 255));
-      screenView.setBackground(255, 204, 212, 255);
+      Level3ScreenView.setBackground(255, 204, 212, 255);
       // ((TextView) findViewById(R.id.level3_congrats_message_textView))
       // .setTextColor(Color.argb(255, 68, 0, 102));
     } else {
       getWindow().getDecorView().setBackgroundColor(Color.argb(255, 100, 30, 250));
-      screenView.setBackground(255, 100, 30, 250);
+      Level3ScreenView.setBackground(255, 100, 30, 250);
       // ((TextView) findViewById(R.id.level2_congrats_message_textView))
       //        .setTextColor(Color.argb(255, 255, 179, 204));
       //      ((TextView) findViewById(R.id.level2_congrats_message_textView))
