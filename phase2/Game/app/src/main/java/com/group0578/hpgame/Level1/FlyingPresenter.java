@@ -15,7 +15,7 @@ public class FlyingPresenter {
     private FlyingInteractor flyingInteractor;
 
 
-    private int collected, lives, goal;
+    private int collected, lives, goal, bonus;
 
     private Paint background = new Paint();
     private Paint scorePaint = new Paint();
@@ -41,7 +41,7 @@ public class FlyingPresenter {
                     lives--;
                     item.x = -100;
                 } else if (item instanceof BonusBall){
-                    collected = collected + 2;
+                    bonus = bonus + 1;
                     item.x = -100;
                 }
             }
@@ -86,6 +86,7 @@ public class FlyingPresenter {
         scorePaint.setTypeface(Typeface.DEFAULT_BOLD);
 
         collected = 0;
+        bonus = 0;
         goal = 10;
     }
 
@@ -112,5 +113,9 @@ public class FlyingPresenter {
 
     public Paint getScorePaint() {
         return scorePaint;
+    }
+
+    public int getBonus() {
+        return bonus;
     }
 }

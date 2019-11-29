@@ -2,11 +2,13 @@ package com.group0578.hpgame.Level1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
 import com.group0578.hpgame.R;
 import com.group0578.hpgame.model.SQLiteHelper;
+import com.group0578.hpgame.view.GameOverActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -54,6 +56,5 @@ public class FlyingActivity extends AppCompatActivity {
                 });
             }
         }, 0, Interval);
-
     }
 }
