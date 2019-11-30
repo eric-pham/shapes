@@ -3,8 +3,10 @@ package com.group0578.hpgame.view;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -33,6 +35,11 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
    * Request for the colour scheme used in goToCustomizePage(), and overridden onActivityResult()
    */
   final int COLOUR_SCHEME_REQUEST = 1;
+
+    /**
+     * The Toast responsible for displaying messages to the user.
+     */
+    Toast toast;
 
   /** Called immediately when the activity is started. */
   @Override
@@ -93,24 +100,11 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
    * @param view the view
    */
   public void onClickPlayGame(View view) {
-    //If previous progress, set database values to default except for customization
+      //If there exists previous progress, set database values to default except for customization
     if (!sqlHelper.findProgress(username).equalsIgnoreCase("none")) {
-      sqlHelper.setProgress(username, "none");
-      sqlHelper.setLevelOneTime(username,0.0);
-      sqlHelper.setLevelTwoTime(username, 0.0);
-      sqlHelper.setLevelThreeTime(username, 0.0);
+        profilePagePresenter.resetDefaults(sqlHelper, username);
     }
     profilePagePresenter.createLevel1();
-  }
-
-  /**
-   * Starts the FlyingActivity.
-   *
-   * @param levelOne the intent for the Level1Activity
-   */
-  public void goToLevel1(Intent levelOne) {
-    levelOne.putExtra("username", this.username);
-    startActivity(levelOne);
   }
 
   /**
@@ -125,17 +119,6 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
   }
 
   /**
-   * Starting the activity that begins the level unfinished from the previous game for the
-   * user who is currently logged in.
-   *
-   * @param previousLevel Intent for the unfinished level's main activity
-   */
-  public void resumePreviousLevel(Intent previousLevel) {
-    previousLevel.putExtra("username", this.username);
-    startActivity(previousLevel);
-  }
-
-  /**
    * Called when the user presses the 'PlayerLevel3 Stats' button. Displays the user's (currently playing)
    * statistics from previous games they have played.
    *
@@ -145,6 +128,38 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
     System.out.println("onClickPlayerStats method reached");
     profilePagePresenter.displayPlayerStats();
   }
+
+    /**
+     * Called when the user presses the 'Customize' button. Changes the user's customization settings
+     * for light/dark colour scheme, level difficulty etc.
+     *
+     * @param view the view displaying this activity.
+     */
+    public void onClickCustomize(View view) {
+        profilePagePresenter.changeUserCustomization();
+    }
+
+    /**
+     * Starts the FlyingActivity.
+     *
+     * @param levelOne the intent for the Level1Activity
+     */
+    public void goToLevel1(Intent levelOne) {
+        levelOne.putExtra("username", this.username);
+        toast.cancel();  // hides the toast message if still showing
+        startActivity(levelOne);
+    }
+
+    /**
+     * Starting the activity that begins the level unfinished from the previous game for the
+     * user who is currently logged in.
+     *
+     * @param previousLevel Intent for the unfinished level's main activity
+     */
+    public void resumePreviousLevel(Intent previousLevel) {
+        previousLevel.putExtra("username", this.username);
+        startActivity(previousLevel);
+    }
 
   /**
    * Receiving the intent creating the Player Stats Page and starting the activity to move
@@ -158,17 +173,22 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
     startActivity(playerStatsPage);
   }
 
-  /**
-   * Called when the user presses the 'Customize' button. Changes the user's customization settings
-   * for light/dark colour scheme, level difficulty etc.
-   *
-   * @param view the view displaying this activity.
-   */
-  public void onClickCustomize(View view) {
-    profilePagePresenter.changeUserCustomization();
-  }
+    /**
+     * Displays a message when the user attempts to perform an unavailable action.
+     *
+     * @param message a String representing the message to be displayed.
+     */
+    @Override
+    public void displayToast(String message) {  // still needs to be tested for the longer message.
+        // initiate the Toast with context, message and duration for the Toast
+        toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+        // set gravity for the Toast.
+        toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+        // display the Toast
+        toast.show();
+    }
 
-  /**
+    /**
    * Called by the method profilePagePresenter.changeUserCustomization() Starts the new activity to
    * show the customization page.
    *

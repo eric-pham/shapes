@@ -5,6 +5,7 @@ import android.content.Intent;
 import com.group0578.hpgame.level1.FlyingActivity;
 import com.group0578.hpgame.level2.MazeActivity;
 import com.group0578.hpgame.level3.Level3MainActivity;
+import com.group0578.hpgame.model.SQLiteHelper;
 import com.group0578.hpgame.view.CustomizeActivity;
 import com.group0578.hpgame.view.ProfilePage;
 import com.group0578.hpgame.view.ProfilePageActivity;
@@ -52,8 +53,12 @@ public class ProfilePagePresenter implements ProfilePage.Presenter {
         } else if (progress.equalsIgnoreCase("two")) {
             resumeLevel = new Intent((ProfilePageActivity) this.profilePageView, Level3MainActivity.class);
             this.profilePageView.resumePreviousLevel(resumeLevel);
-        } else { // progress equals "none" (no games completed yet)
-            // Display message to show no previous games have been started.
+        } else if (progress.equalsIgnoreCase("three")) {
+            String message = "You have already completed the game. Start a new game or go to the statistics page.";
+            this.profilePageView.displayToast(message);
+        } else { // progress equals none
+            String message = "You must start a new game.";
+            this.profilePageView.displayToast(message);
         }
     }
 
@@ -77,5 +82,15 @@ public class ProfilePagePresenter implements ProfilePage.Presenter {
                 new Intent((ProfilePageActivity) profilePageView, CustomizeActivity.class);
         System.out.println("Method ProfilePagePresenter.changeUserCustomization() reached");
         profilePageView.goToCustomizePage(createCustomizePage);
+    }
+
+    /**
+     * Calls the method to reset the game values to their defaults.
+     *
+     * @param sqlHelper the SQLiteHelper that has methods for modifying the database.
+     * @param username  the logged in user.
+     */
+    public void resetDefaults(SQLiteHelper sqlHelper, String username) {
+        sqlHelper.resetDefaults(username);
     }
 }
