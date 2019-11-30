@@ -148,7 +148,7 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
     if (lives == 0){
       goToGameOver();
     }
-    else if (roomManager.getNumDementorsKilled() == 5 ||
+    else if (roomManager.getNumDementorsKilled() >= 5 ||
             Level3ScreenView.getRoomManager().getObjects().isEmpty()) {
       goToLevel3Transition();
     }
