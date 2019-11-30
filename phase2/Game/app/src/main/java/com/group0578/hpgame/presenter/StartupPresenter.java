@@ -2,9 +2,9 @@ package com.group0578.hpgame.presenter;
 
 import android.content.Intent;
 
-import com.group0578.hpgame.Level1.FlyingActivity;
-import com.group0578.hpgame.Level2.MazeActivity;
-import com.group0578.hpgame.Level3.Level3MainActivity;
+import com.group0578.hpgame.level1.FlyingActivity;
+import com.group0578.hpgame.level2.MazeActivity;
+import com.group0578.hpgame.level3.Level3MainActivity;
 import com.group0578.hpgame.view.CreateUserActivity;
 import com.group0578.hpgame.view.LoginActivity;
 import com.group0578.hpgame.view.Startup;

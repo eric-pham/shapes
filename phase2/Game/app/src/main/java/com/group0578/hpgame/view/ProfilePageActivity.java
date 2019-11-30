@@ -8,8 +8,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.group0578.hpgame.Level2.MazeActivity;
-import com.group0578.hpgame.Level3.Level3MainActivity;
+import com.group0578.hpgame.level2.MazeActivity;
+import com.group0578.hpgame.level3.Level3MainActivity;
 import com.group0578.hpgame.R;
 import com.group0578.hpgame.model.SQLiteHelper;
 import com.group0578.hpgame.presenter.ProfilePagePresenter;

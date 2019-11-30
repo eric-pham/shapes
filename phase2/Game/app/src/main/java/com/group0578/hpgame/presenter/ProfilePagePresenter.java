@@ -2,9 +2,9 @@ package com.group0578.hpgame.presenter;
 
 import android.content.Intent;
 
-import com.group0578.hpgame.Level1.FlyingActivity;
-import com.group0578.hpgame.Level2.MazeActivity;
-import com.group0578.hpgame.Level3.Level3MainActivity;
+import com.group0578.hpgame.level1.FlyingActivity;
+import com.group0578.hpgame.level2.MazeActivity;
+import com.group0578.hpgame.level3.Level3MainActivity;
 import com.group0578.hpgame.view.CustomizeActivity;
 import com.group0578.hpgame.view.ProfilePage;
 import com.group0578.hpgame.view.ProfilePageActivity;
@@ -15,7 +15,9 @@ import com.group0578.hpgame.view.ProfilePageActivity;
  */
 public class ProfilePagePresenter implements ProfilePage.Presenter {
 
-    /** The view associated with this presenter. */
+    /**
+     * The view associated with this presenter.
+     */
     private ProfilePage.View profilePageView;
 
     /**
@@ -27,9 +29,11 @@ public class ProfilePagePresenter implements ProfilePage.Presenter {
         this.profilePageView = profilePageView;
     }
 
-    /** Creates the intent for the FlyingActivity */
+    /**
+     * Creates the intent for the FlyingActivity
+     */
     public void createLevel1() {
-        Intent levelOne = new Intent((ProfilePageActivity) this.profilePageView, FlyingActivity.class);  // temporarily changed from level1 to level 2 for testing purposes
+        Intent levelOne = new Intent((ProfilePageActivity) this.profilePageView, FlyingActivity.class);
         System.out.println("levelOne intent created");
         profilePageView.goToLevel1(levelOne);
     }
@@ -49,7 +53,8 @@ public class ProfilePagePresenter implements ProfilePage.Presenter {
      * default display message: "No games played. Statistics available after game completion."
      */
     @Override
-    public void displayPlayerStats() {}
+    public void displayPlayerStats() {
+    }
 
     /**
      * Changes the logged in user's customization preferences for colour scheme, game level difficulty
