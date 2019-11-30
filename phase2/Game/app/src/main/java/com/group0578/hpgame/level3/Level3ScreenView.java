@@ -11,6 +11,7 @@ import android.util.AttributeSet;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder;
 
+import com.group0578.hpgame.model.SQLiteHelper;
 import com.group0578.hpgame.model.Timer;
 import com.group0578.hpgame.view.GameOverActivity;
 import com.group0578.hpgame.view.StatsActivity;
@@ -169,7 +170,8 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
             String username = ((Level3MainActivity) getContext()).getUsername();
             ((Level3MainActivity) getContext()).getSqlHelper().setLives(username, lives);
             ((Level3MainActivity) getContext()).getSqlHelper().setProgress(username, "three");
-            goToLevel3Transition();
+            ((Level3MainActivity) getContext()).getSqlHelper().setLevelThreeTime(username, level3Timer.getSecondsPassed());
+            finishGame();
         }
 
     }
@@ -181,13 +183,25 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
         getContext().startActivity(gameOver);
     }
 
-    public void goToLevel3Transition() {
+    public void finishGame() {
+        SQLiteHelper sqLiteHelper = ((Level3MainActivity) getContext()).getSqlHelper();
+        String username = ((Level3MainActivity) getContext()).getUsername();
+        sqLiteHelper.saveNewScore(username);
+        String userOnScoreboard;
+        if (sqLiteHelper.userOnScoreboard(username)) {
+            userOnScoreboard = "true";
+        } else {
+            userOnScoreboard = "false";
+        }
+        goToPlayerStats(userOnScoreboard);
+    }
 
+    private void goToPlayerStats(String userOnScoreboard) {
         Intent displayStats = new Intent(getContext(), StatsActivity.class);
         displayStats.putExtra("username", ((Level3MainActivity) getContext()).getUsername());
+        displayStats.putExtra("userOnScoreboard", userOnScoreboard);
         displayStats.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         getContext().startActivity(displayStats);
-
     }
 
 }
