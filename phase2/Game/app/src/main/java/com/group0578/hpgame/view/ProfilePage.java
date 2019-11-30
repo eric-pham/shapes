@@ -15,6 +15,10 @@ public interface ProfilePage {
     void goToLevel1(Intent levelOne);
 
     void goToCustomizePage(Intent createCustomizePage);
+
+      void resumePreviousLevel(Intent previousLevel);
+
+      void goToPlayerStatsPage(Intent playerStatsPage);
   }
 
   /** Not sure if needed yet. */

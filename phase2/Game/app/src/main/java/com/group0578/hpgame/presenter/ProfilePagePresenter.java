@@ -8,6 +8,7 @@ import com.group0578.hpgame.level3.Level3MainActivity;
 import com.group0578.hpgame.view.CustomizeActivity;
 import com.group0578.hpgame.view.ProfilePage;
 import com.group0578.hpgame.view.ProfilePageActivity;
+import com.group0578.hpgame.view.StatsActivity;
 
 /**
  * Responsible for handling actions from the View {@link
@@ -40,12 +41,20 @@ public class ProfilePagePresenter implements ProfilePage.Presenter {
 
     /**
      * Resumes the previous game for the user currently playing.
-     *
-     * @param progress
+     * @param progress the progress level from the previous game for the user currently playing.
      */
     @Override
     public void resumePreviousGame(String progress) {
-
+        Intent resumeLevel;
+        if (progress.equalsIgnoreCase("one")) {
+            resumeLevel = new Intent((ProfilePageActivity) this.profilePageView, MazeActivity.class);
+            this.profilePageView.resumePreviousLevel(resumeLevel);
+        } else if (progress.equalsIgnoreCase("two")) {
+            resumeLevel = new Intent((ProfilePageActivity) this.profilePageView, Level3MainActivity.class);
+            this.profilePageView.resumePreviousLevel(resumeLevel);
+        } else { // progress equals "none" (no games completed yet)
+            // Display message to show no previous games have been started.
+        }
     }
 
     /**
@@ -54,6 +63,8 @@ public class ProfilePagePresenter implements ProfilePage.Presenter {
      */
     @Override
     public void displayPlayerStats() {
+        Intent createStatsPage = new Intent((ProfilePageActivity) this.profilePageView, StatsActivity.class);
+        this.profilePageView.goToPlayerStatsPage(createStatsPage);
     }
 
     /**

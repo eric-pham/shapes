@@ -8,8 +8,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.group0578.hpgame.level2.MazeActivity;
-import com.group0578.hpgame.level3.Level3MainActivity;
 import com.group0578.hpgame.R;
 import com.group0578.hpgame.model.SQLiteHelper;
 import com.group0578.hpgame.presenter.ProfilePagePresenter;
@@ -83,8 +81,8 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
   }
 
   /**
-   * Called when the user attempts to hit the android device 'back' button Prevents users from going
-   * back to startup page after signing in.
+   * Called when the user attempts to hit the android device 'back' button.
+   * Prevents users from going back to startup page after signing in.
    */
   @Override
   public void onBackPressed() {}
@@ -119,21 +117,18 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
    */
   public void onClickResumeGame(View view) {
     String progress = sqlHelper.findProgress(username);
+    profilePagePresenter.resumePreviousGame(progress);
+  }
 
-    if (progress.equalsIgnoreCase("one")) {
-      Intent level2 = new Intent(this, MazeActivity.class);
-      level2.putExtra("username", this.username);
-      startActivity(level2);
-    } else if (progress.equalsIgnoreCase("two")) {
-      Intent level3 = new Intent(this, Level3MainActivity.class);
-      level3.putExtra("username", this.username);
-      startActivity(level3);
-    } else { // progress equals level 3
-      //      Intent playerStats = new Intent(this, PlayerStatsActivity.class);
-      //      playerStats.putExtra("username", this.username);
-      //      startActivity(playerStats);
-    }
-    //    profilePagePresenter.resumePreviousGame(progress);
+  /**
+   * Starting the activity that begins the level unfinished from the previous game for the
+   * user who is currently logged in.
+   *
+   * @param previousLevel Intent for the unfinished level's main activity
+   */
+  public void resumePreviousLevel(Intent previousLevel) {
+    previousLevel.putExtra("username", this.username);
+    startActivity(previousLevel);
   }
 
   /**
@@ -143,7 +138,20 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
    * @param view the view displaying this activity.
    */
   public void onClickPlayerStats(View view) {
+    System.out.println("onClickPlayerStats method reached");
     profilePagePresenter.displayPlayerStats();
+  }
+
+  /**
+   * Receiving the intent creating the Player Stats Page and starting the activity to move
+   * to the new screen.
+   *
+   * @param playerStatsPage the Intent starting the Player Stats Page.
+   */
+  public void goToPlayerStatsPage(Intent playerStatsPage) {
+    System.out.println("Entering Player Stats Page!");
+    playerStatsPage.putExtra("username", this.username);
+    startActivity(playerStatsPage);
   }
 
   /**

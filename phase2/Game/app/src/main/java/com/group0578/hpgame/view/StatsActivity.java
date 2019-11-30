@@ -18,13 +18,25 @@ public class StatsActivity extends AppCompatActivity implements Stats.View {
     private StatsPresenter statsPresenter;
 
     /**
+     * The username of the user who is logged in and currently viewing the scoreboard.
+     */
+    String username;
+
+    /**
      * The constructor for the activity that displays the user statistics screen.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("Scoreboard");
         setContentView(R.layout.activity_stats);
         statsPresenter = new StatsPresenter(this);
 
+        // extracts the information that was passed from the previous activity
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            // the username of the user currently logged in
+            this.username = extras.getString("username");
+        }
     }
 }
