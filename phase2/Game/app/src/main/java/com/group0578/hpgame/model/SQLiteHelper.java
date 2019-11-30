@@ -86,6 +86,11 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static final String COLUMN_CHARACTER = "character";
 
     /**
+     * Column for a user's high score after completing the game.
+     */
+    private static final String COLUMN_USER_SCORE = "score";
+
+    /**
      * SQLiteDatabase object
      */
     private SQLiteDatabase db;
@@ -94,10 +99,19 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * String with table with appropriate columns
      */
     private static final String TABLE_CREATED =
-            "create table users (id integer primary key not null, username text not null, password text not null,"
-                    + "levelDifficulty text not null , colourScheme text not null, levelOneTime real not null, "
-                    + "levelTwoTime real not null, levelThreeTime real not null, currLives integer not null,"
-                    + "progress text not null, returningUser integer not null, character text not null)";
+            "create table users (id integer primary key not null, "
+                    + "username text not null, "
+                    + "password text not null,"
+                    + "levelDifficulty text not null, "
+                    + "colourScheme text not null, "
+                    + "character text not null,"
+                    + "levelOneTime real not null, "
+                    + "levelTwoTime real not null, "
+                    + "levelThreeTime real not null, "
+                    + "currLives integer not null,"
+                    + "progress text not null, "
+                    + "returningUser integer not null,"
+                    + "score integer not null)";
 
     /**
      * Constructor for SQLiteHelper
@@ -407,6 +421,33 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         return currLives;
     }
 
+    /**
+     * Finds the current high score (most points earned in a game) for the user logged in
+     *
+     * @param username1 the username of the user logged in.
+     * @return integer score for this user.
+     */
+    public synchronized int findScore(String username1) {
+        System.out.println("Method SQLiteHelper.findScore() reached");
+        db = this.getReadableDatabase();
+
+        String query = "select username, score from " + TABLE_NAME;
+        Cursor cursor = db.rawQuery(query, null);
+        String username2;
+        int score = 0;
+
+        cursor.moveToFirst();
+        do {
+            username2 = cursor.getString(0);
+            if (username2.equals(username1)) {
+                score = cursor.getInt(1); // gets the current score for the user.
+                break;
+            }
+        } while (cursor.moveToNext());
+        cursor.close();
+        return score;
+    }
+
     // temporary just for testing purposes
 //    public float findTime(String username1) {
 //        System.out.println("Progress found");
@@ -568,6 +609,23 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         ContentValues cValues = new ContentValues();
 
         cValues.put(COLUMN_CURRENT_LIVES, lives);
+        db.update(TABLE_NAME, cValues, "id=" + ID, null);
+    }
+
+    /**
+     * Updates the database by recording the logged in user's new high score if it beats (is
+     * larger than) their old high score.
+     *
+     * @param username the username of the user currently logged in.
+     * @param score    the new score for the user logged in.
+     */
+    public synchronized void setScore(String username, int score) {
+        System.out.println("SQLiteHelper.setUserScore() method reached");
+        int ID = this.findID(username);
+        db = this.getWritableDatabase();
+        ContentValues cValues = new ContentValues();
+
+        cValues.put(COLUMN_USER_SCORE, score);
         db.update(TABLE_NAME, cValues, "id=" + ID, null);
     }
 

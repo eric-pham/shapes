@@ -241,6 +241,7 @@ obj/
 .idea/sqlDataSources.xml
 .idea/dynamic.xml
 .idea/uiDesigner.xml
+.idea/google-java-format.xml
 
 # OS-specific files
 .DS_Store

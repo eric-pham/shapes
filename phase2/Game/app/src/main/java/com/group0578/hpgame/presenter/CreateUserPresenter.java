@@ -50,6 +50,7 @@ public class CreateUserPresenter implements CreateUser.Presenter {
     sqlManager.setProgress("none");
     sqlManager.setReturningUser(0); // 0 represents false, 1 represents true
     sqlManager.setCharacter("Circle"); // A represents character A, B for character B
+    sqlManager.setScore(0); // user hasn't played any games yet (no points earned)
 
     sqlHelper.insertUser(sqlManager);
     System.out.println("Inserted!");

@@ -18,6 +18,7 @@ public class SQLiteManager {
   private String progress;
   private int returningUser;
   private String customCharacter;
+    private int score;
 
   /**
    * Sets the username.
@@ -222,4 +223,22 @@ public class SQLiteManager {
   public void setCharacter(String customCharacter) {
     this.customCharacter = customCharacter;
   }
+
+    /**
+     * Gets the high score for most points earned in a game by the user currently logged in.
+     *
+     * @return integer representing the logged in user's score.
+     */
+    public int getScore() {
+        return score;
+    }
+
+    /**
+     * Sets the high score (most points earned in a game) for the user currently logged in.
+     *
+     * @param score the new high score for the user logged in.
+     */
+    public void setScore(int score) {
+        this.score = score;
+    }
 }
