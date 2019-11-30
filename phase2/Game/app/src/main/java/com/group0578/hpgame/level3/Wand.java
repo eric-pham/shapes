@@ -23,14 +23,20 @@ class Wand extends Items {
    * @param x This wand's first coordinate.
    * @param y This wand's second coordinate
    */
-  Wand(int x, int y) {
+  Wand(int x, int y, String apperance) {
     super(x, y);
     paintText.setTextSize(60);
     paintText.setTypeface(Typeface.DEFAULT_BOLD);
     paintText.setColor(Color.YELLOW);
     goingRight = true;
-    this.appearance = "|";
+    if (apperance.equals("Circle")){
+      this.appearance = "O";
+    }
+    else {
+      this.appearance = "[]";
+    }
   }
+
 
   /** Changes the direction of the wand's horizontal movement. */
   private void turnAround() {

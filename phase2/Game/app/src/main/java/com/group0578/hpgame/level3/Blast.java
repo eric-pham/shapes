@@ -21,7 +21,7 @@ class Blast extends Items {
     super(x, y);
     paintText.setTextSize(50);
     paintText.setTypeface(Typeface.DEFAULT_BOLD);
-    paintText.setColor(Color.BLUE);
+    paintText.setColor(Color.BLACK);
     appearance = "*";
   }
 

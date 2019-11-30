@@ -48,7 +48,7 @@ class Manager {
         myLittledementors = new ArrayList<>();
         objects = new ArrayList<>();
         myBlasts = new ArrayList<>();
-        wand = new Wand(gridWidth / 2, gridHeight - 10);
+        wand = new Wand(gridWidth / 2, gridHeight - 10, player.getCharacter());
         numDementorsKilled = 0;
         this.player = player;
     }
