@@ -168,6 +168,7 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
                 Level3ScreenView.getRoomManager().getObjects().isEmpty()) {
             String username = ((Level3MainActivity) getContext()).getUsername();
             ((Level3MainActivity) getContext()).getSqlHelper().setLives(username, lives);
+            ((Level3MainActivity) getContext()).getSqlHelper().setProgress(username, "three");
             goToLevel3Transition();
         }
 
