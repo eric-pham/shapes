@@ -14,7 +14,7 @@ import java.util.TimerTask;
 /**
  * The startup activity for beginning the level 1 Flying portion of this game.
  */
-public class FlyingActivity extends AppCompatActivity {
+public  class FlyingActivity extends AppCompatActivity {
 
     /**
      * Stores FlyingView, responsible for visual updates

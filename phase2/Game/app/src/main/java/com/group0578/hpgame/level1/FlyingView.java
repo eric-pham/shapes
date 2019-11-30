@@ -68,6 +68,12 @@ class FlyingView extends View {
         canvas.drawText("Lives : " + flyingPresenter.getLives(), (canvasWidth / 3) * 2 + 50, 60, flyingPresenter.getScorePaint());
         canvas.drawText(timer.getSecondsPassedString(), 0, 120, flyingPresenter.getScorePaint());
 
+        //Legend for instructions
+        canvas.drawText("= +1", 70, canvasHeight - 20, flyingPresenter.getScorePaint());
+        canvas.drawText("= +10", (canvasWidth / 3) + 60, canvasHeight - 20, flyingPresenter.getScorePaint());
+        canvas.drawText("= -1 lives", canvasWidth - 320, canvasHeight - 20, flyingPresenter.getScorePaint());
+        flyingPresenter.drawLegend(canvas, canvasHeight, canvasWidth);
+
         if (flyingPresenter.getLives() == 0) {
             System.out.println("goToGameOver method");
             gameOver = false;
@@ -121,7 +127,7 @@ class FlyingView extends View {
         getContext().startActivity(transition);
     }
 
-    public boolean getGameOver(){
+    public boolean getGameOver() {
         return this.gameOver;
     }
 }
