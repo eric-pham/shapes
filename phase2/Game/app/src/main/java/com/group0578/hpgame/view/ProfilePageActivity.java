@@ -146,7 +146,7 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
      */
     public void goToLevel1(Intent levelOne) {
         levelOne.putExtra("username", this.username);
-        toast.cancel();  // hides the toast message if still showing
+//         toast.cancel();  // causes errors
         startActivity(levelOne);
     }
 
