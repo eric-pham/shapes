@@ -7,25 +7,25 @@ public class PlayerLevel3 {
     private String character;
     private String difficulty;
 
-    PlayerLevel3(SQLiteHelper SqlHelper, String username){
+    PlayerLevel3(SQLiteHelper SqlHelper, String username) {
         this.lives = SqlHelper.findLives(username);
         this.character = SqlHelper.findCharacter(username);
         this.difficulty = SqlHelper.findDifficulty(username);
     }
 
-    public int getLives(){
+    public int getLives() {
         return this.lives;
     }
 
-    public String getCharacter(){
+    public String getCharacter() {
         return this.character;
     }
 
-    public String getDifficulty(){
+    public String getDifficulty() {
         return this.difficulty;
     }
 
-    void reduceLives(){
+    void reduceLives() {
         this.lives = this.lives - 1;
     }
 
