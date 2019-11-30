@@ -12,6 +12,7 @@ class Dementor extends Items {
   private String appearance;
 
   private Paint paintText = new Paint();
+  private static int speed = 1;
 
   /**
    * The constructor for this dementor.
@@ -27,9 +28,13 @@ class Dementor extends Items {
     paintText.setTypeface(Typeface.DEFAULT_BOLD);
   }
 
+  public static void setSpeed(int newSpeed) {
+    speed = newSpeed;
+  }
+
   /** Causes this item to move down on the screen. */
   void move() {
-    setY(getY() + 1);
+    setY(getY() + speed);
   }
 
   void draw(Canvas canvas) {
