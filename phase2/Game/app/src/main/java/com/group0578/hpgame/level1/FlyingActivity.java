@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
 
+import com.group0578.hpgame.R;
 import com.group0578.hpgame.model.SQLiteHelper;
 
 import java.util.Timer;
@@ -37,6 +38,7 @@ public class FlyingActivity extends AppCompatActivity {
             // the username of the user currently logged in
             this.username = extras.getString("username");
         }
+        getSupportActionBar().hide();
 
         gameView = new FlyingView(this, sqlHelper, username);
         setContentView(gameView);
@@ -47,11 +49,17 @@ public class FlyingActivity extends AppCompatActivity {
             public void run() {
                 handler.post(new Runnable() {
                     @Override
+
                     public void run() {
+                        if (!gameView.getGameOver())
+                            return;
                         gameView.invalidate();
-                    }
+
+                        }
+
                 });
             }
         }, 0, Interval);
+
     }
 }
