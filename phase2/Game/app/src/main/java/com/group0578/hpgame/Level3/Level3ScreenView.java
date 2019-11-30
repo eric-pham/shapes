@@ -88,6 +88,7 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
     roomManager = new Manager((int) (screenWidth / charWidth), (int) (screenHeight / charHeight));
 
     roomManager.createDementors();
+    roomManager.createObjects();
 
     thread.setRunning(true);
     thread.start();
@@ -116,6 +117,7 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
     roomManager.updateDementor();
     roomManager.updateBlasts();
     roomManager.updateWand();
+    roomManager.updateObjects();
     if (roomManager.getMyLittledementors().isEmpty()) {
       System.out.println("Rick and Morty");
       try {

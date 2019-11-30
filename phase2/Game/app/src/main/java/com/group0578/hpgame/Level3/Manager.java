@@ -65,6 +65,9 @@ class Manager {
     for (int a = 0; a != myBlasts.size(); a++) {
       myBlasts.get(a).draw(canvas);
     }
+    for (int a = 0; a != objects.size(); a++) {
+      objects.get(a).draw(canvas);
+    }
   }
 
   ArrayList<Dementor> getMyLittledementors() {return myLittledementors;}
@@ -125,7 +128,13 @@ class Manager {
   }
 
   void updateObjects() {
-
+    for (int i = 0; i < myBlasts.size(); i++) {
+      if (myBlasts.get(i).getX() == objects.get(0).getX()
+              && myBlasts.get(i).getY() == objects.get(0).getY()) {
+        objects.remove(0);
+      }
+    }
+    objects.get(0).move();
   }
 
   /** Creates dementors and stores them in myLittleDementors. */
@@ -135,6 +144,8 @@ class Manager {
   }
 
   void createObjects() {
+    CollectibleObject collectibleObject = new CollectibleObject(gridWidth / 2, 0);
+    objects.add(collectibleObject);
   }
 
   /** Creates blasts and stores them in myBlasts. */
