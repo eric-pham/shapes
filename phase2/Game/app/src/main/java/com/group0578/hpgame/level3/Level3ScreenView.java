@@ -13,6 +13,7 @@ import android.view.SurfaceHolder;
 
 import com.group0578.hpgame.model.Timer;
 import com.group0578.hpgame.view.GameOverActivity;
+import com.group0578.hpgame.view.StatsActivity;
 
 public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callback {
 
@@ -161,6 +162,11 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
   }
 
   public void goToLevel3Transition(){
+
+    Intent displayStats = new Intent(getContext(), StatsActivity.class);
+    displayStats.putExtra("username",((Level3MainActivity) getContext()).getUsername());
+    displayStats.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+    getContext().startActivity(displayStats);
 
   }
 
