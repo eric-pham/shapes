@@ -45,9 +45,12 @@ class MazeThread extends Thread {
     /**
      * Whether the game has been won.
      */
-    private boolean gameWon;
+    private boolean levelWon;
 
-    Timer totalTimer = new Timer();
+    /**
+     * The Timer object that keeps track of the total time the user spends on this level.
+     */
+    private Timer totalTimer = new Timer();
 
     /**
      * Constructing an instance of a MazeThread.
@@ -110,19 +113,11 @@ class MazeThread extends Thread {
             mazePainter.drawMaze(mazeCanvas, this.totalTimer);
             surfaceHolder.unlockCanvasAndPost(mazeCanvas); // canvas updated with drawn changes
 
-            try {
-                sleep(150);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
             // checks if the player still has lives
             if (!playerStillAlive()) {
-                running = false;
-                this.gameWon = false;
-//                this.sqlHelper.setLives(username, 0);
+                this.running = false;
+                this.levelWon = false;
                 break;
-
             }
 
             // Checking if player has exceeded the time limit for completing the maze.
@@ -131,23 +126,19 @@ class MazeThread extends Thread {
                 resetTimer.start(); // resetTimer must start again.
             }
 
-            // Checking if player has reached maze exit point if thread is still running.
+            // If running = true, then the player still has lives and has not completed the level.
             if (running) {
                 checkExitReached();
-
-            }
-
-            // Only store the user's time if the user has won the game.
-            if (!running && this.gameWon) { // move this to the stop game method? make timer an instance variable?
-                setTotalTime();
+            } else if (this.levelWon) { // Only store the user's time if the user has won the game.
+                updateDatabase();
             }
         }
     }
 
     /**
-     * Returns
+     * Returns true if the player still has lives, false if the lives are zero.
      *
-     * @return a boolean: true if the player still has lives, false if the lives are zero
+     * @return a boolean: true if the player still has lives, false if the lives are zero.
      */
     private boolean playerStillAlive() {
         return this.maze.getPlayer().getLives() > 0;
@@ -182,9 +173,9 @@ class MazeThread extends Thread {
     private void playerLosesLife() {
         System.out.println("Method MazeThread.playerLosesLife reached");
         int livesLeft = this.maze.getPlayer().getLives();
-            this.maze.getPlayer().setLives(livesLeft - 1); // Deduct a life
-            this.maze.getPlayer().setRow(0);    // player goes back to start
-            this.maze.getPlayer().setCol(0);    // player goes back to start
+        this.maze.getPlayer().setLives(livesLeft - 1); // Deduct a life
+        this.maze.getPlayer().setRow(0);    // player goes back to start
+        this.maze.getPlayer().setCol(0);    // player goes back to start
     }
 
     /**
@@ -194,15 +185,13 @@ class MazeThread extends Thread {
         System.out.println("Method MazeThread.checkExitReached reached");
         if (this.maze.getPlayer().getRow() == this.maze.getExitPoint().getRow()
                 && this.maze.getPlayer().getCol() == this.maze.getExitPoint().getCol()) {
-            this.gameWon = true;
-            running = false; // player and exitPoint locations match so user has won.
+            this.levelWon = true;
+            this.running = false; // player and exitPoint locations match so user has won.
         }
     }
 
     /**
      * Stores the total time taken to complete the maze.
-     *
-     //     * @param timer the timer object representing how long this thread has been running
      */
     private void setTotalTime() {
         System.out.println("Method MazeThread.setTotalTime reached");
@@ -211,9 +200,17 @@ class MazeThread extends Thread {
         this.sqlHelper.setLevelTwoTime(this.username, totalTime);
     }
 
+    /**
+     * This method is only called if the user successfully completed the level. Updates the database
+     * with the user's remaining lives, game progress and the time taken to complete the level.
+     */
     void updateDatabase() {
-        this.sqlHelper.setLives(this.username, this.maze.getPlayer().getLives());
+        // updates the user's information with the time taken to complete the level
         setTotalTime();
+        // updates the user's remaining lives in the database
+        this.sqlHelper.setLives(this.username, this.maze.getPlayer().getLives());
+        // marks this level as completed
+        this.getSqlHelper().setProgress(this.username, "two");
     }
 
     /**
@@ -257,16 +254,16 @@ class MazeThread extends Thread {
      *
      * @return true if this player has completed the maze level successfully, else false.
      */
-    boolean isGameWon() {
-        return gameWon;
+    boolean isLevelWon() {
+        return levelWon;
     }
 
     /**
      * Setter for whether this player has won the maze level or not.
      *
-     * @param gameWon true if this player has completed the maze level successfully, else false
+     * @param levelWon true if this player has completed the maze level successfully, else false
      */
-    void setGameWon(boolean gameWon) {
-        this.gameWon = gameWon;
+    void setLevelWon(boolean levelWon) {
+        this.levelWon = levelWon;
     }
 }

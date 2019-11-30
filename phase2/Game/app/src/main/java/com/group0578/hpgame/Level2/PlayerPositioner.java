@@ -79,7 +79,7 @@ class PlayerPositioner {
     }
 
     /**
-     * Moves the player's current location down which means one row larger in the mazeGrid array.
+     * Moves the player's current location click which means one row larger in the mazeGrid array.
      */
     private void movePlayerDown() {
         Player player = this.maze.getPlayer();

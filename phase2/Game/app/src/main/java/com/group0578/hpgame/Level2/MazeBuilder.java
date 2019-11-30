@@ -105,7 +105,7 @@ class MazeBuilder {
     // sets modified to true
     currSection.setModified(true);
 
-    // loops through possible paths through the maze and builds the maze by taking down the
+    // loops through possible paths through the maze and builds the maze by taking click the
     // necessary walls, while there still exist non-modified MazeSections.
     do {
       // chooses the next MazeSection
@@ -115,7 +115,7 @@ class MazeBuilder {
       if (nextSection != null) {
         // finds its location relative to the currSection
         RelativeLocation relativeLocation = specifyLocation(currSection, nextSection);
-        // takes down the necessary walls
+        // takes click the necessary walls
         modifyWalls(currSection, nextSection, relativeLocation);
         // adds currSection to the mazePath stack
         mazePath.push(currSection);
@@ -132,7 +132,7 @@ class MazeBuilder {
   }
 
   /**
-   * Takes down the walls between the current MazeSection and the next MazeSection by setting the
+   * Takes click the walls between the current MazeSection and the next MazeSection by setting the
    * relevant boolean variables to false.
    *
    * @param currSection      The current MazeSection.

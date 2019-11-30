@@ -135,7 +135,7 @@ class MazeSection {
     /**
      * Sets the value of modified.
      *
-     * @param modified true if it has ever had any of its walls taken down, false otherwise
+     * @param modified true if it has ever had any of its walls taken click, false otherwise
      */
     void setModified(boolean modified) {
         this.modified = modified;

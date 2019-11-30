@@ -162,7 +162,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         cValues.put(COLUMN_CHARACTER, sqlManager.getCharacter());
 
         db.insert(TABLE_NAME, null, cValues);
-        db.close();
+//        db.close();
         cursor.close();
         System.out.println("Inserted");
     }
@@ -173,7 +173,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @param username username to search for in the table
      * @return password associated with the username or "Cannot find pass"
      */
-    public String findPassword(String username) {
+    public synchronized String findPassword(String username) {
         System.out.println("FIndpassword method 1");
         db = this.getReadableDatabase();
 
@@ -196,7 +196,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 }
             } while (cursor.moveToNext());
         }
-        db.close();
+
         cursor.close();
         return pass;
     }
@@ -207,7 +207,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @param username1 the user's desired username
      * @return true if the username is already in the database, false otherwise
      */
-    public boolean checkDuplicates(String username1) {
+    public synchronized boolean checkDuplicates(String username1) {
         System.out.println("duplicates checked.");
         db = this.getReadableDatabase();
 
@@ -226,7 +226,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 }
             } while (cursor.moveToNext());
         }
-        db.close();
         cursor.close();
         return false; // there are no duplicate user names
     }
@@ -237,7 +236,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @param username1 the username of the user currently logged in
      * @return ID column value for the user with username username1
      */
-    private int findID(String username1) {
+    private synchronized int findID(String username1) {
         System.out.println("SQLiteHelper.findID method reached");
         db = this.getReadableDatabase();
 
@@ -256,7 +255,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 }
             } while (cursor.moveToNext());
         }
-//    db.close();
         cursor.close();
         return ID;
     }
@@ -268,7 +266,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @param username1 the user's username
      * @return a String: 'Light' or 'Dark'.
      */
-    public String findColourScheme(String username1) {
+    public synchronized String findColourScheme(String username1) {
 
         System.out.println("colour scheme found.");
         db = this.getReadableDatabase();
@@ -288,7 +286,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 break; // the colour scheme has been found
             }
         } while (cursor.moveToNext());
-        db.close();
         cursor.close();
         return colourScheme;
     }
@@ -299,7 +296,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @param username1 the user's username
      * @return a String: 'Easy' or 'Hard'.
      */
-    public String findDifficulty(String username1) {
+    public synchronized String findDifficulty(String username1) {
         System.out.println("difficulty found");
         db = this.getReadableDatabase();
 
@@ -319,7 +316,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 break; // difficulty found
             }
         } while (cursor.moveToNext());
-        db.close();
         cursor.close();
         return difficulty;
     }
@@ -330,7 +326,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @param username1 the user's username
      * @return a String: 'Circle' or 'Square'.
      */
-    public String findCharacter(String username1) {
+    public synchronized String findCharacter(String username1) {
         System.out.println("character found");
         db = this.getReadableDatabase();
 
@@ -350,7 +346,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 break; // character found
             }
         } while (cursor.moveToNext());
-        db.close();
         cursor.close();
         return character;
     }
@@ -361,7 +356,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @param username1 the user's username
      * @return a String: 'one', 'two' or 'three'.
      */
-    public String findProgress(String username1) {
+    public synchronized String findProgress(String username1) {
         System.out.println("Progress found");
         db = this.getReadableDatabase();
 
@@ -381,7 +376,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 break; // progress found
             }
         } while (cursor.moveToNext());
-        db.close();
         cursor.close();
         return progress;
     }
@@ -392,7 +386,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @param username1 the username of the user in this database to find
      * @return integer for number of lives remaining
      */
-    public int findLives(String username1) {
+    public synchronized int findLives(String username1) {
         System.out.println("Method SQLiteHelper.findLives() reached");
         db = this.getReadableDatabase();
 
@@ -409,7 +403,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 break;
             }
         } while (cursor.moveToNext());
-        db.close();
         cursor.close();
         return currLives;
     }
@@ -446,7 +439,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @param username     the logged in user.
      * @param colourScheme the string representing the user's preferred colour scheme.
      */
-    public void setColourScheme(String username, String colourScheme) {
+    public synchronized void setColourScheme(String username, String colourScheme) {
         System.out.println("Method SQLiteHelper.setColourScheme() reached");
         int ID = this.findID(username);
         db = this.getWritableDatabase();
@@ -454,7 +447,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         cValues.put(COLUMN_COLOUR_SCHEME, colourScheme);
         db.update(TABLE_NAME, cValues, "id=" + ID, null);
-        db.close();
         System.out.println("New colour scheme: " + colourScheme);
     }
 
@@ -465,7 +457,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @param username        the logged in user.
      * @param levelDifficulty the string representing the user's preferred game difficulty.
      */
-    public void setDifficulty(String username, String levelDifficulty) {
+    public synchronized void setDifficulty(String username, String levelDifficulty) {
         System.out.println("Method SQLiteHelper.setDifficulty() reached");
         int ID = this.findID(username);
         db = this.getWritableDatabase();
@@ -473,7 +465,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         cValues.put(COLUMN_LEVEL_DIFFICULTY, levelDifficulty);
         db.update(TABLE_NAME, cValues, "id=" + ID, null);
-        db.close();
         System.out.println("New difficulty: " + levelDifficulty);
     }
 
@@ -484,7 +475,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @param username  the logged in user.
      * @param character the string representing the user's preferred character.
      */
-    public void setCharacter(String username, String character) {
+    public synchronized void setCharacter(String username, String character) {
         System.out.println("Method SQLiteHelper.setCharacter() reached");
         int ID = this.findID(username);
         db = this.getWritableDatabase();
@@ -492,7 +483,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         cValues.put(COLUMN_CHARACTER, character);
         db.update(TABLE_NAME, cValues, "id=" + ID, null);
-        db.close();
         System.out.println("New character: " + character);
     }
 
@@ -503,7 +493,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @param username the logged in user.
      * @param level    the string representing the user's most recently completed level in the game.
      */
-    public void setProgress(String username, String level) {
+    public synchronized void setProgress(String username, String level) {
         System.out.println("Method SQLiteHelper.setColourScheme() reached");
         int ID = this.findID(username);
         db = this.getWritableDatabase();
@@ -511,7 +501,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         cValues.put(COLUMN_PROGRESS, level);
         db.update(TABLE_NAME, cValues, "id=" + ID, null);
-        db.close();
         System.out.println("Completed level: " + level);
     }
 
@@ -521,7 +510,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @param username  the logged in user.
      * @param totalTime the time taken to complete level 2
      */
-    public void setLevelTwoTime(String username, double totalTime) {
+    public synchronized void setLevelTwoTime(String username, double totalTime) {
         System.out.println("Method SQLiteHelper.setLevelTwoTime reached.");
         int ID = this.findID(username);
         db = this.getWritableDatabase();
@@ -529,7 +518,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         cValues.put(COLUMN_LEVEL_TWO_TIME, totalTime);
         db.update(TABLE_NAME, cValues, "id=" + ID, null);
-        db.close();
     }
 
     /**
@@ -538,7 +526,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @param username  the logged in user.
      * @param totalTime the time taken to complete level 2
      */
-    public void setLevelThreeTime(String username, double totalTime) {
+    public synchronized void setLevelThreeTime(String username, double totalTime) {
         System.out.println("Method SQLiteHelper.setLevelThreeTime reached.");
         int ID = this.findID(username);
         db = this.getWritableDatabase();
@@ -546,7 +534,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         cValues.put(COLUMN_LEVEL_THREE_TIME, totalTime);
         db.update(TABLE_NAME, cValues, "id=" + ID, null);
-        db.close();
     }
 
     /**
@@ -556,7 +543,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @param username the username of the user playing the game
      * @param lives    the new number of lives left for the user playing.
      */
-    public void setLives(String username, int lives) {
+    public synchronized void setLives(String username, int lives) {
         System.out.println("Method SQLiteHelper.setLives() reached.");
         int ID = this.findID(username);
         db = this.getWritableDatabase();
@@ -564,6 +551,5 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         cValues.put(COLUMN_CURRENT_LIVES, lives);
         db.update(TABLE_NAME, cValues, "id=" + ID, null);
-        db.close();
     }
 }

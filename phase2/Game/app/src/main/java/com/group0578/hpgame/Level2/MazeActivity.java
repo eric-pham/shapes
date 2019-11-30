@@ -31,37 +31,45 @@ public class MazeActivity extends AppCompatActivity {
    */
   private SQLiteHelper sqlHelper = new SQLiteHelper(this);
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    requestWindowFeature(Window.FEATURE_NO_TITLE);
+    /**
+     * The message that displays the secret win condition hint.
+     */
+    private Toast toast;
 
-    getWindow()
-            .setFlags(
-                    WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    /**
+     * Called when the activity is started.
+     */
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-    // extracts the information that was passed from the previous activity
-    Bundle extras = getIntent().getExtras();
-    if (extras != null) {
-      // the username of the user currently logged in
-      this.username = extras.getString("username");
+        getWindow()
+                .setFlags(
+                        WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        // extracts the information that was passed from the previous activity
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            // the username of the user currently logged in
+            this.username = extras.getString("username");
+        }
+
+        // Sets this activity's display as activity_maze.xml
+        setContentView(R.layout.activity_maze);
+
+        setComponentColours();
+
+        /* Hide the app title bar. */
+        getSupportActionBar().hide();
+
+        // initiate the Toast with context, message and duration for the Toast
+        toast = Toast.makeText(this, "X marks the spot ;)", Toast.LENGTH_LONG);
+        // set gravity for the Toast.
+        toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, 0);
+        // display the Toast
+        toast.show();
     }
-
-    // Sets this activity's display as activity_maze.xml
-    setContentView(R.layout.activity_maze);
-
-    setComponentColours();
-
-    /* Hide the app title bar. */
-    getSupportActionBar().hide();
-
-      // initiate the Toast with context, message and duration for the Toast
-      Toast toast = Toast.makeText(this, "X marks the spot ;)", Toast.LENGTH_LONG);
-      // set gravity for the Toast.
-      toast.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL, 0, 0);
-      // display the Toast
-      toast.show();
-  }
 
   /**
    * Changes the background and text colour depending on the colour scheme.
@@ -87,20 +95,37 @@ public class MazeActivity extends AppCompatActivity {
    * @param view the view for the enterLevelThree button
    */
   public void onClickNextLevel(View view) {
-    // Calling Level3MainActivity class
-    Intent nextLevelIntent = new Intent(this, Level3MainActivity.class);
-    nextLevelIntent.putExtra("username", this.username);
-    startActivity(nextLevelIntent);
-    finish();
+      // Calling Level3MainActivity class
+      Intent nextLevelIntent = new Intent(this, Level3MainActivity.class);
+      nextLevelIntent.putExtra("username", this.username);
+      startActivity(nextLevelIntent);
+      finish();
   }
 
-  public String getUsername() {
-    return this.username;
-  }
+    /**
+     * Getter for the user's username.
+     * @return the String representing the SQLiteHelper
+     */
+    public String getUsername() {
+        return this.username;
+    }
 
-  public SQLiteHelper getSqlHelper() {
-    return this.sqlHelper;
-  }
+    /**
+     * Getter for the SQLiteHelper.
+     * @return the SQLiteHelper containing the methods used to access the database.
+     */
+    public SQLiteHelper getSqlHelper() {
+        return this.sqlHelper;
+    }
+
+    /**
+     * Getter for the Toast that displays the hint.
+     *
+     * @return the the Toast object that displays the hint to quickly pass the level.
+     */
+    public Toast getToast() {
+        return toast;
+    }
 
   /**
    * Starts the GameOverActivity and passes the user's username.

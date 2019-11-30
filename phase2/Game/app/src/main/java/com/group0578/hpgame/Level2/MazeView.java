@@ -29,6 +29,16 @@ public class MazeView extends SurfaceView implements SurfaceHolder.Callback, Vie
   private PlayerPositioner playerPositioner;
 
   /**
+   * The maximum duration that will count as a click.
+   */
+  private static final int MAX_CLICK_DURATION = 200;
+
+  /**
+   * The time representing the start of the click.
+   */
+  private long startClickTime;
+
+  /**
    * Construct a new instance of a MazeView.
    *
    * @param context the environment making this MazeView appear on the screen.
@@ -133,29 +143,41 @@ public class MazeView extends SurfaceView implements SurfaceHolder.Callback, Vie
    */
   @Override
   public boolean onTouch(View v, MotionEvent event) {
-    String TAG = "MazeBuilder.makePlayer";
+    String TAG = "MazeView.onTouch";
     Log.e(TAG, "test");
+
 
     // Gets the x and y coordinates of where the user clicked on the screen.
     float touchX = event.getX(), touchY = event.getY();
 
-    // doesn't work :(
-    if (event.getAction() == MotionEvent.ACTION_DOWN) {
-      // if the click is in the top right hand corner, they can bypass the maze level
-      if (touchX >= Resources.getSystem().getDisplayMetrics().widthPixels - 100 && touchY <= 100) {
-        mazeThread.setGameWon(true);
-        mazeThread.updateDatabase();
-        stopGame();
-      }
+    switch (event.getAction()) {
+      case MotionEvent.ACTION_DOWN:
+        startClickTime = System.currentTimeMillis();
+        break;
+      case MotionEvent.ACTION_UP:
+        //this is the time in milliseconds
+        long diff = System.currentTimeMillis() - startClickTime;
+        if (diff <= MAX_CLICK_DURATION) {
+          // if the click is in the top right hand corner, they can bypass the maze level
+          if (touchX >= Resources.getSystem().getDisplayMetrics().widthPixels - 100 && touchY <= 100) {
+            mazeThread.setLevelWon(true);
+            mazeThread.updateDatabase();
+            mazeThread.setRunning(false);
+            try {
+              mazeThread.join();
+            } catch (Exception e) {
+              e.printStackTrace();
+            }
+            stopGame();
+          }
+          break;
+        }
+      case MotionEvent.ACTION_MOVE:
+        // MazePresenter changes player location based on where the user clicked.
+        this.playerPositioner.handlePlayerMovement(touchX, touchY);
     }
 
-    // If the user clicks and drags the mouse, then an action has been detected
-    if (event.getAction() == MotionEvent.ACTION_MOVE) {
-
-      // MazePresenter changes player location based on where the user clicked.
-      this.playerPositioner.handlePlayerMovement(touchX, touchY);
-    }
-
+    // The MazeThread stops running if the player dies or wins the game.
     if (!mazeThread.isRunning()) {
       stopGame();
     }
@@ -163,24 +185,18 @@ public class MazeView extends SurfaceView implements SurfaceHolder.Callback, Vie
     return true; // returns true so the user can continue dragging/clicking to move the player
   }
 
+  /**
+   * Ends the level by either taking the user to the Game Over screen or to the next level
+   */
   private void stopGame() {
-    try {
-      if (mazeThread.isGameWon()) {
-        // marks this level as completed
-        mazeThread.getSqlHelper().setProgress(mazeThread.getUsername(), "two");
-        // stops the mazeThread
-        mazeThread.join();  // Destroying the thread.
-        setVisibility(GONE); // Moving to level 3.
-      } else { // player has lost all lives thus losing the game
-        // stops the mazeThread
-        mazeThread.join();  // Destroying the thread.
-        ((MazeActivity) this.getContext()).goToGameOver();
-      }
-    } catch (Exception e) {
-      e.printStackTrace();
+    if (mazeThread.isLevelWon()) { // user completed the level
+      // hides the MazeView
+      setVisibility(GONE);
+      // hides the hint if the user figures it out before the message disappears.
+      ((MazeActivity) this.getContext()).getToast().cancel();
+    } else { // player has lost all lives thus losing the game
+      // leads to the game over screen
+      ((MazeActivity) this.getContext()).goToGameOver();
     }
   }
-
-
-
 }
