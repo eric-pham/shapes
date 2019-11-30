@@ -18,7 +18,7 @@
     <string name="username_hint">Enter a username</string>
     <string name="password_hint">Enter a password</string>
     <string name="confirm">Confirm</string>
-    <string name="play_game">Play Game</string>
+    <string name="play_game">Start New Game</string>
     <string name="resume_game">Resume Game</string>
     <string name="player_stats">Player Stats</string>
     <string name="customize">Customize</string>

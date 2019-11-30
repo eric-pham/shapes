@@ -93,8 +93,12 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
    * @param view the view
    */
   public void onClickPlayGame(View view) {
-    if (!sqlHelper.findProgress(username).equalsIgnoreCase("one")) {
-      sqlHelper.setProgress(username, "one");
+    //If previous progress, set database values to default except for customization
+    if (!sqlHelper.findProgress(username).equalsIgnoreCase("none")) {
+      sqlHelper.setProgress(username, "none");
+      sqlHelper.setLevelOneTime(username,0.0);
+      sqlHelper.setLevelTwoTime(username, 0.0);
+      sqlHelper.setLevelThreeTime(username, 0.0);
     }
     profilePagePresenter.createLevel1();
   }
