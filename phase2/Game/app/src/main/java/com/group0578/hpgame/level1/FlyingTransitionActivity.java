@@ -10,6 +10,9 @@ import com.group0578.hpgame.level2.MazeActivity;
 import com.group0578.hpgame.R;
 import com.group0578.hpgame.model.SQLiteHelper;
 
+/**
+ * Helps facilitate transition to the next level
+ */
 public class FlyingTransitionActivity extends AppCompatActivity {
 
     /**
@@ -22,6 +25,10 @@ public class FlyingTransitionActivity extends AppCompatActivity {
      */
     private String username;
 
+    /**
+     * Called when the activity is started
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +41,11 @@ public class FlyingTransitionActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Proceeds to the next level passing in required information
+     *
+     * @param view View for next level screen
+     */
     public void onClickNextLevel(View view) {
         // Calling MazeActivity class
         Intent nextLevelIntent = new Intent(this, MazeActivity.class);

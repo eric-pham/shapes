@@ -2,7 +2,7 @@ package com.group0578.hpgame.level1;
 
 import android.graphics.Color;
 
-public class BonusBall extends FlyingBall {
+class BonusBall extends FlyingBall {
     BonusBall(String theme) {
         super();
         this.radius = 30;

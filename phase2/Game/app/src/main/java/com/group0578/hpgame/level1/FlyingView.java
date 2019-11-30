@@ -10,7 +10,10 @@ import com.group0578.hpgame.model.SQLiteHelper;
 import com.group0578.hpgame.model.Timer;
 import com.group0578.hpgame.view.GameOverActivity;
 
-public class FlyingView extends View {
+/**
+ * Handles visual appearance of the Flying Game
+ */
+class FlyingView extends View {
     /**
      * Initialize a Timer for the level
      */

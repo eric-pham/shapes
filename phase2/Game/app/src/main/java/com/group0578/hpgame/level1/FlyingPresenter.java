@@ -7,20 +7,53 @@ import android.graphics.Typeface;
 
 import java.util.ArrayList;
 
-public class FlyingPresenter {
+/**
+ * Handles all the calculations for the game
+ */
+class FlyingPresenter {
 
+    /**
+     * Stores FlyingView, the view for the
+     */
     private FlyingView flyingView;
+
+    /**
+     * Stores FlyingInteractor, helps facilitate database changes
+     */
     private FlyingInteractor flyingInteractor;
 
 
+    /**
+     * Integer variables that keep track of collected objects, lives, goal and bonus
+     */
     private int collected, lives, goal, bonus;
 
+    /**
+     * Paint for background
+     */
     private Paint background = new Paint();
+
+    /**
+     * Paint for score
+     */
     private Paint scorePaint = new Paint();
 
+    /**
+     * Array that stores FlyingBall objects
+     */
     private ArrayList<FlyingBall> items = new ArrayList<>();
+
+    /**
+     * Store the PlayerBall
+     */
     private PlayerBall playerBall;
 
+    /**
+     * Create a new FlyingPresenter
+     *
+     * @param flyingView       View, the display for the game
+     * @param flyingInteractor Interactor, helps facilitate database changes
+     */
     FlyingPresenter(FlyingView flyingView, FlyingInteractor flyingInteractor) {
         this.flyingView = flyingView;
         this.flyingInteractor = flyingInteractor;
@@ -28,7 +61,8 @@ public class FlyingPresenter {
         setComponents();
     }
 
-    public void updateGameState(int width, int height) {
+
+    void updateGameState(int width, int height) {
         for (FlyingBall item : items) {
             item.update(width, height);
             if (collisionChecker(playerBall, item)) {
@@ -38,7 +72,7 @@ public class FlyingPresenter {
                 } else if (item instanceof DeathBall) {
                     lives--;
                     item.x = -100;
-                } else if (item instanceof BonusBall){
+                } else if (item instanceof BonusBall) {
                     bonus = bonus + 1;
                     item.x = -100;
                 }
@@ -52,13 +86,13 @@ public class FlyingPresenter {
         }
     }
 
-    boolean collisionChecker(FlyingBall character, FlyingBall ball) {
+    private boolean collisionChecker(FlyingBall character, FlyingBall ball) {
         return (character.getX() < ball.getX() &&
                 ball.getX() < (character.getX() + character.getRadius()) &&
                 character.getY() < ball.getY() && ball.getY() < (character.getY() + character.getRadius()));
     }
 
-    void setComponents(){
+    private void setComponents() {
         // Setting FlyingView background colours based on colour scheme selected by user
         if (this.flyingInteractor.getTheme().equalsIgnoreCase("Light")) {
             background.setARGB(255, 204, 212, 255);
@@ -69,7 +103,7 @@ public class FlyingPresenter {
             scorePaint.setColor(Color.WHITE);
         }
 
-        playerBall = new PlayerBall(this.flyingInteractor.getTheme(),this.flyingInteractor.getCharacter());
+        playerBall = new PlayerBall(this.flyingInteractor.getTheme(), this.flyingInteractor.getCharacter());
         PointBall pointBall = new PointBall(this.flyingInteractor.getTheme());
         DeathBall deathBall = new DeathBall(this.flyingInteractor.getTheme());
         BonusBall bonusBall = new BonusBall(this.flyingInteractor.getTheme());
@@ -89,31 +123,61 @@ public class FlyingPresenter {
     }
 
 
-    public void setCharSpeed(int charSpeed) {
+    void setCharSpeed(int charSpeed) {
         this.playerBall.speed = charSpeed;
     }
 
-    public int getCollected() {
+    /**
+     * Returns number of collected objects
+     *
+     * @return collected
+     */
+    int getCollected() {
         return collected;
     }
 
-    public int getGoal() {
+    /**
+     * Sets required goal
+     *
+     * @return goal
+     */
+    int getGoal() {
         return goal;
     }
 
-    public int getLives() {
+    /**
+     * Returns number of lives
+     *
+     * @return lives
+     */
+    int getLives() {
         return lives;
     }
 
-    public Paint getBackground() {
+    /**
+     * Returns the background Paint
+     *
+     * @return background
+     */
+    Paint getBackground() {
         return background;
     }
 
-    public Paint getScorePaint() {
+    /**
+     * Returns the score Paint
+     *
+     * @return scorePaint
+     */
+    Paint getScorePaint() {
         return scorePaint;
     }
 
-    public int getBonus() {
+    /**
+     * Returns the bonus
+     *
+     * @return bonus
+     */
+    int getBonus() {
         return bonus;
     }
 }

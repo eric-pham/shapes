@@ -3,7 +3,7 @@ package com.group0578.hpgame.level1;
 import android.graphics.Canvas;
 import android.graphics.Color;
 
-public class PlayerBall extends FlyingBall {
+class PlayerBall extends FlyingBall {
 
     private String character;
 

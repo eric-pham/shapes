@@ -2,7 +2,7 @@ package com.group0578.hpgame.level1;
 
 import android.graphics.Color;
 
-public class PointBall extends FlyingBall {
+class PointBall extends FlyingBall {
 
     PointBall(String theme){
         super();
