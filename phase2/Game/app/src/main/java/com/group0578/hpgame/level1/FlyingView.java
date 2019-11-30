@@ -34,6 +34,8 @@ class FlyingView extends View {
      */
     private FlyingInteractor flyingInteractor;
 
+    private boolean gameOver = true;
+
     /**
      * Initialize a new FlyingView
      *
@@ -66,10 +68,16 @@ class FlyingView extends View {
         canvas.drawText("Lives : " + flyingPresenter.getLives(), (canvasWidth / 3) * 2 + 50, 60, flyingPresenter.getScorePaint());
         canvas.drawText(timer.getSecondsPassedString(), 0, 120, flyingPresenter.getScorePaint());
 
-        if (flyingPresenter.getLives() == 0)
+        if (flyingPresenter.getLives() == 0) {
+            System.out.println("goToGameOver method");
+            gameOver = false;
             goToGameOver();
-        if (flyingPresenter.getCollected() == 10 || flyingPresenter.getBonus() == 1)
+        }
+        if (flyingPresenter.getCollected() == 10 || flyingPresenter.getBonus() == 1) {
+            System.out.println("goToTransition method");
+            gameOver = false;
             goToTransition();
+        }
 
 
     }
@@ -111,5 +119,9 @@ class FlyingView extends View {
         transition.putExtra("username", this.username);
         transition.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         getContext().startActivity(transition);
+    }
+
+    public boolean getGameOver(){
+        return this.gameOver;
     }
 }
