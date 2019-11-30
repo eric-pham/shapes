@@ -86,7 +86,7 @@ public class FlyingView extends View {
         System.out.println("goToGameOver reached");
 
         //Update the database with default values
-        flyingInteractor.updateDatabase(0, 0.0, "one");
+        flyingInteractor.updateDatabase(0, 0.0, "none");
 
 
         Intent gameOver = new Intent(getContext(), GameOverActivity.class);
@@ -102,7 +102,7 @@ public class FlyingView extends View {
         System.out.println("Transition reached");
 
         //Update the database with new data for lives and time
-        flyingInteractor.updateDatabase(flyingPresenter.getLives(), timer.getSecondsPassed(), "two");
+        flyingInteractor.updateDatabase(flyingPresenter.getLives(), timer.getSecondsPassed(), "one");
 
         Intent transition = new Intent(getContext(), FlyingTransitionActivity.class);
         transition.putExtra("username", this.username);

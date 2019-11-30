@@ -354,7 +354,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * Finds the last level completed by the logged in user.
      *
      * @param username1 the user's username
-     * @return a String: 'one', 'two' or 'three'.
+     * @return a String: 'none', 'one', 'two' or 'three'.
      */
     public synchronized String findProgress(String username1) {
         System.out.println("Progress found");

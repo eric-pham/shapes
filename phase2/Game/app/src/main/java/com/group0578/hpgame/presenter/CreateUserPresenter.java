@@ -47,7 +47,7 @@ public class CreateUserPresenter implements CreateUser.Presenter {
     sqlManager.setLevelTwoTime(0.0);
     sqlManager.setLevelThreeTime(0.0);
     sqlManager.setCurrLives(10);
-    sqlManager.setProgress("one");
+    sqlManager.setProgress("none");
     sqlManager.setReturningUser(0); // 0 represents false, 1 represents true
     sqlManager.setCharacter("Circle"); // A represents character A, B for character B
 
