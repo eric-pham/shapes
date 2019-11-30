@@ -570,4 +570,23 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         cValues.put(COLUMN_CURRENT_LIVES, lives);
         db.update(TABLE_NAME, cValues, "id=" + ID, null);
     }
+
+    /**
+     * Resets the game progress, user lives, and the times for each level.
+     *
+     * @param username the logged in user.
+     */
+    public void resetDefaults(String username) {
+        System.out.println("Method SQLiteHelper.resetDefaults() reached.");
+        int ID = this.findID(username);
+        db = this.getWritableDatabase();
+        ContentValues cValues = new ContentValues();
+
+        cValues.put(COLUMN_LEVEL_ONE_TIME, 0.0);
+        cValues.put(COLUMN_LEVEL_TWO_TIME, 0.0);
+        cValues.put(COLUMN_LEVEL_THREE_TIME, 0.0);
+        cValues.put(COLUMN_CURRENT_LIVES, 10);
+        cValues.put(COLUMN_PROGRESS, "none");
+        db.update(TABLE_NAME, cValues, "id=" + ID, null);
+    }
 }
