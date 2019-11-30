@@ -8,12 +8,12 @@
     android:layout_gravity="bottom"
     android:orientation="horizontal"
     android:weightSum="3"
-    tools:context="com.group0578.hpgame.Level3.Level3MainActivity"
+    tools:context="com.group0578.hpgame.level3.Level3MainActivity"
     tools:layout_editor_absoluteY="3dp">
 
     <view
         android:id="@+id/view"
-        class="com.group0578.hpgame.Level3.Level3ScreenView"
+        class="com.group0578.hpgame.level3.Level3ScreenView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -73,7 +73,7 @@
         android:layout_marginBottom="476dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Congratulations"
+        android:text="@string/level3_won"
         android:visibility="invisible" />
 
 </RelativeLayout>
