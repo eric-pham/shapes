@@ -6,12 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.group0578.hpgame.Level2.MazeActivity"
+    tools:context="com.group0578.hpgame.level2.MazeActivity"
     tools:ignore="ExtraText">
 
     <view
         android:id="@+id/mazeViewXML"
-        class="com.group0578.hpgame.Level2.MazeView"
+        class="com.group0578.hpgame.level2.MazeView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
-        android:text="Congratulations! You have completed level 2! \n \nClick the button to \n go to level 3."
+        android:text="@string/level2_won"
         android:textSize="30sp"
         android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -41,7 +41,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="onClickNextLevel"
-        android:text="Level 3"
+        android:text="@string/enter_level3"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

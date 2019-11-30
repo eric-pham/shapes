@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.group0578.hpgame">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.group0578.hpgame"
+    tools:ignore="GoogleAppIndexingWarning">
 
     <application
         android:allowBackup="true"
@@ -9,8 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Level1.FlyingTransitionActivity"></activity>
-        <activity android:name=".Level1.FlyingActivity" />
+        <activity android:name=".level1.FlyingTransitionActivity" />
+        <activity android:name=".level1.FlyingActivity" />
         <activity android:name=".view.CreateUserActivity" />
         <activity android:name=".view.CreateUser" />
         <activity android:name=".view.StartupActivity">
@@ -21,8 +23,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.LoginActivity" />
-        <activity android:name=".Level2.MazeActivity" />
-        <activity android:name=".Level3.Level3MainActivity" />
+        <activity android:name=".level2.MazeActivity" />
+        <activity android:name=".level3.Level3MainActivity" />
         <activity android:name=".view.ProfilePageActivity" />
         <activity android:name=".view.CustomizeActivity" />
         <activity android:name=".view.GameOverActivity" />

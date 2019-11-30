@@ -4,17 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.group0578.hpgame.Level1.FlyingTransitionActivity">
+    tools:context="com.group0578.hpgame.level1.FlyingTransitionActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/congratsMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="94dp"
         android:layout_marginTop="233dp"
         android:layout_marginEnd="94dp"
         android:layout_marginBottom="479dp"
-        android:text="Congratulations on beating stage 1"
+        android:text="@string/level1_won"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/goToLevel2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="164dp"
@@ -30,9 +30,9 @@
         android:layout_marginEnd="159dp"
         android:layout_marginBottom="341dp"
         android:onClick="onClickNextLevel"
-        android:text="Button"
+        android:text="@string/enter_level2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/congratsMessage" />
 </androidx.constraintlayout.widget.ConstraintLayout>
