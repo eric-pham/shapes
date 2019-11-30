@@ -149,6 +149,8 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
     }
     else if (roomManager.getNumDementorsKilled() >= 5 ||
             Level3ScreenView.getRoomManager().getObjects().isEmpty()) {
+      String username = ((Level3MainActivity) getContext()).getUsername();
+      ((Level3MainActivity) getContext()).getSqlHelper().setLives(username, lives);
       goToLevel3Transition();
     }
 
