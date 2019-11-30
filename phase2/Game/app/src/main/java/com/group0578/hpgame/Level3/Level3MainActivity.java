@@ -1,16 +1,17 @@
 package com.group0578.hpgame.Level3;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import com.group0578.hpgame.R;
 import com.group0578.hpgame.model.SQLiteHelper;
+
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -19,28 +20,30 @@ public class Level3MainActivity extends AppCompatActivity {
   private Handler handler = new Handler();
   private static final long Interval = 30;
   private Level3ScreenView screenView;
+
   /** The username belonging to the user currently logged in and viewing the profile page. */
   private String username;
 
   /** The sql database helper that has methods that can operate on the database. */
   private SQLiteHelper sqlHelper = new SQLiteHelper(this);
 
+  PlayerLevel3 player;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     getWindow()
-        .setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+            .setFlags(
+                    WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     this.requestWindowFeature(Window.FEATURE_NO_TITLE);
     setContentView(R.layout.level3);
-
     Bundle extras = getIntent().getExtras();
     if (extras != null) {
       // the username of the user currently logged in
       this.username = extras.getString("username");
     }
-
     screenView = new Level3ScreenView(this);
+    this.player = new PlayerLevel3(sqlHelper, username);
+
     Timer timer = new Timer();
     timer.schedule(
         new TimerTask() {
@@ -51,16 +54,6 @@ public class Level3MainActivity extends AppCompatActivity {
                   @Override
                   public void run() {
                     screenView.invalidate();
-                    if (Level3ScreenView.getRoomManager().getMyLittledementors().isEmpty() || Level3ScreenView.getRoomManager().getObjects().isEmpty()) {
-                      Button leftButton = findViewById(R.id.button4);
-                      leftButton.setVisibility(View.INVISIBLE);
-                      Button rightButton = findViewById(R.id.button6);
-                      rightButton.setVisibility(View.INVISIBLE);
-                      Button shootButton = findViewById(R.id.button5);
-                      shootButton.setVisibility(View.INVISIBLE);
-                      TextView message = findViewById(R.id.editText);
-                      message.setVisibility(View.VISIBLE);
-                    }
                   }
                 });
           }
@@ -108,4 +101,10 @@ public class Level3MainActivity extends AppCompatActivity {
   public SQLiteHelper getSqlHelper() {
     return this.sqlHelper;
   }
+
+  public PlayerLevel3 getPlayer(){
+    return this.player;
+  }
+
+
 }

@@ -19,6 +19,7 @@ class Manager {
   private int gridHeight;
    /** The number of dementors that have been killed. */
   private static int numDementorsKilled;
+  private PlayerLevel3 player;
 
   /**
    * The constructor for this manager.
@@ -26,7 +27,7 @@ class Manager {
    * @param width The width of the screen this manager is managing.
    * @param height The height of the screen this manager is managing.
    */
-  Manager(int width, int height) {
+  Manager(int width, int height, PlayerLevel3 player) {
     gridWidth = width;
     gridHeight = height;
     myLittledementors = new ArrayList<>();
@@ -34,6 +35,7 @@ class Manager {
     myBlasts = new ArrayList<>();
     wand = new Wand(gridWidth / 2, gridHeight - 10);
     numDementorsKilled = 0;
+    this.player = player;
   }
 
   static int getNumDementorsKilled(){
@@ -68,9 +70,6 @@ class Manager {
     for (int a = 0; a != myBlasts.size(); a++) {
       myBlasts.get(a).draw(canvas);
     }
-    for (int a = 0; a != objects.size(); a++) {
-      objects.get(a).draw(canvas);
-    }
   }
 
   ArrayList<Dementor> getMyLittledementors() {return myLittledementors;}
@@ -85,6 +84,7 @@ class Manager {
       int y = myLittledementors.get(0).getY();
       // check if the bottommost dementor is at the bottom of the screen. If it is, remove it.
       if (y >= gridHeight - 15) {
+        this.player.reduceLives();
         myLittledementors.remove(0);
       }
       // check if more dementors need to be created

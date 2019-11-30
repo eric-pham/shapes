@@ -1,6 +1,7 @@
 package com.group0578.hpgame.Level3;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -9,7 +10,11 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
 import android.view.SurfaceHolder;
+
+import com.group0578.hpgame.Level2.MazeActivity;
+import com.group0578.hpgame.model.SQLiteHelper;
 import com.group0578.hpgame.model.Timer;
+import com.group0578.hpgame.view.GameOverActivity;
 
 public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callback {
 
@@ -55,7 +60,6 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
     scorePaint.setColor(Color.WHITE);
     scorePaint.setTextSize(70);
     scorePaint.setTypeface(Typeface.DEFAULT_BOLD);
-    // background.setARGB(255, 204, 212, 255);
   }
 
   public static float getCharWidth() {
@@ -85,7 +89,8 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
     charHeight = -paintText.ascent() + paintText.descent();
 
     // Use the letter size and screen height to determine the size of the screen.
-    roomManager = new Manager((int) (screenWidth / charWidth), (int) (screenHeight / charHeight));
+    roomManager = new Manager((int) (screenWidth / charWidth), (int) (screenHeight / charHeight),
+            ((Level3MainActivity) getContext()).getPlayer());
 
     roomManager.createDementors();
     roomManager.createObjects();
@@ -118,11 +123,11 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
     roomManager.updateBlasts();
     roomManager.updateWand();
     roomManager.updateObjects();
-    if (roomManager.getMyLittledementors().isEmpty() || roomManager.getObjects().isEmpty()) {
+    if (roomManager.getNumDementorsKilled() == 5 || roomManager.getObjects().isEmpty()) {
       try {
         thread.setRunning(false);
-        // thread.join();
-        setVisibility(INVISIBLE);
+         //thread.join();
+         setVisibility(INVISIBLE);
       } catch (Exception e) {
         e.printStackTrace();
       }
@@ -133,25 +138,32 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
   public void draw(Canvas canvas) {
     super.draw(canvas);
     canvas.drawPaint(background);
-    if (canvas != null) {
-      roomManager.draw(canvas);
-    }
-
-    //    String timeDisplay;
-    //    String timerMSString = String.valueOf(level3Timer.getMilliseconds());
-    //    if (timerMSString.length() == 1) {
-    //      timeDisplay = level3Timer.getSeconds() + ".00" + level3Timer.getMilliseconds();
-    //    } else if (timerMSString.length() == 2) {
-    //      timeDisplay = level3Timer.getSeconds() + ".0" + level3Timer.getMilliseconds();
-    //    } else {
-    //      timeDisplay = level3Timer.getSeconds() + "." + level3Timer.getMilliseconds();
-    //    }
+    roomManager.draw(canvas);
+    int lives = ((Level3MainActivity) getContext()).getPlayer().getLives();
     canvas.drawText(level3Timer.getSecondsPassedString(), 0, 120, scorePaint);
-    System.out.println(level3Timer.getSecondsPassedString());
-
     canvas.drawText("Collected : " + Manager.getNumDementorsKilled(), 0, 60, scorePaint);
     canvas.drawText("Goal : 5" , (screenWidth / 3) + 70, 60, scorePaint);
-    canvas.drawText("Lives : ", (screenWidth / 3) * 2 + 50, 60, scorePaint);
+    canvas.drawText("Lives : " + lives, (screenWidth / 3) * 2 + 30, 60, scorePaint);
+
+    if (lives == 0){
+      goToGameOver();
+    }
+    else if (roomManager.getNumDementorsKilled() == 5 ||
+            Level3ScreenView.getRoomManager().getObjects().isEmpty()) {
+      goToLevel3Transition();
+    }
 
   }
+
+  public void goToGameOver(){
+    Intent gameOver = new Intent(getContext(), GameOverActivity.class);
+    gameOver.putExtra("username",((Level3MainActivity) getContext()).getUsername());
+    gameOver.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+    getContext().startActivity(gameOver);
+  }
+
+  public void goToLevel3Transition(){
+
+  }
+
 }
