@@ -39,6 +39,9 @@ class Manager {
   static int getNumDementorsKilled(){
     return numDementorsKilled;
   }
+  public ArrayList<CollectibleObject> getObjects() {
+    return objects;
+  }
 
   ArrayList<Blast> getMyBlasts() {
     return myBlasts;
@@ -128,13 +131,17 @@ class Manager {
   }
 
   void updateObjects() {
-    for (int i = 0; i < myBlasts.size(); i++) {
-      if (myBlasts.get(i).getX() == objects.get(0).getX()
-              && myBlasts.get(i).getY() == objects.get(0).getY()) {
-        objects.remove(0);
+    if (!objects.isEmpty()) {
+      for (int i = 0; i < myBlasts.size(); i++) {
+        if (myBlasts.get(i).getX() == objects.get(0).getX()
+                && myBlasts.get(i).getY() == objects.get(0).getY()) {
+          objects.remove(0);
+        }
+      }
+      if (!objects.isEmpty()) {
+        objects.get(0).move();
       }
     }
-    objects.get(0).move();
   }
 
   /** Creates dementors and stores them in myLittleDementors. */

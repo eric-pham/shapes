@@ -27,7 +27,7 @@ public class CollectibleObject extends Items {
 
     /** Causes this item to move down on the screen. */
     void move() {
-        setY(getY() + 5);
+        setY(getY() + 3);
     }
 
     void draw(Canvas canvas) {

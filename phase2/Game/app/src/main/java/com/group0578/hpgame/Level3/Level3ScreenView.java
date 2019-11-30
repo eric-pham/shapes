@@ -118,12 +118,10 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
     roomManager.updateBlasts();
     roomManager.updateWand();
     roomManager.updateObjects();
-    if (roomManager.getMyLittledementors().isEmpty()) {
-      System.out.println("Rick and Morty");
+    if (roomManager.getMyLittledementors().isEmpty() || roomManager.getObjects().isEmpty()) {
       try {
         thread.setRunning(false);
         // thread.join();
-        System.out.println("Paul Gries");
         setVisibility(INVISIBLE);
       } catch (Exception e) {
         e.printStackTrace();

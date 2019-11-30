@@ -51,7 +51,7 @@ public class Level3MainActivity extends AppCompatActivity {
                   @Override
                   public void run() {
                     screenView.invalidate();
-                    if (Level3ScreenView.getRoomManager().getMyLittledementors().isEmpty()) {
+                    if (Level3ScreenView.getRoomManager().getMyLittledementors().isEmpty() || Level3ScreenView.getRoomManager().getObjects().isEmpty()) {
                       Button leftButton = findViewById(R.id.button4);
                       leftButton.setVisibility(View.INVISIBLE);
                       Button rightButton = findViewById(R.id.button6);
@@ -77,15 +77,11 @@ public class Level3MainActivity extends AppCompatActivity {
     if (colourScheme.equalsIgnoreCase("Light")) {
       getWindow().getDecorView().setBackgroundColor(Color.argb(255, 204, 212, 255));
       Level3ScreenView.setBackground(255, 204, 212, 255);
-      // ((TextView) findViewById(R.id.level3_congrats_message_textView))
-      // .setTextColor(Color.argb(255, 68, 0, 102));
+      ((TextView) findViewById(R.id.editText)).setTextColor(Color.argb(255, 68, 0, 102));
     } else {
       getWindow().getDecorView().setBackgroundColor(Color.argb(255, 100, 30, 250));
       Level3ScreenView.setBackground(255, 100, 30, 250);
-      // ((TextView) findViewById(R.id.level2_congrats_message_textView))
-      //        .setTextColor(Color.argb(255, 255, 179, 204));
-      //      ((TextView) findViewById(R.id.level2_congrats_message_textView))
-      //              .setTextColor(Color.argb(255, 239, 222, 205));
+      ((TextView) findViewById(R.id.editText)).setTextColor(Color.argb(255, 255, 179, 204));
     }
   }
 
