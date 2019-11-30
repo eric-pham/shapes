@@ -23,12 +23,12 @@
         app:layout_constraintVertical_bias="0.25" />
 
     <Button
-        android:id="@+id/profileGOReturn"
+        android:id="@+id/profileReturnG0"
         android:layout_width="279dp"
         android:layout_height="103dp"
         android:text="@string/profile_page_return"
         android:textSize="20sp"
-        android:onClick="onClickPlayAgain"
+        android:onClick="onClickProfilePageReturn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +43,7 @@
         android:layout_marginBottom="24dp"
         android:text="@string/play_again"
         android:textSize="20sp"
-        android:onClick="onClickProfilePageReturn"
+        android:onClick="onClickPlayAgain"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"

@@ -5,17 +5,19 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 
-public class CollectibleObject extends Items {
-    /** How the dementor appears on the screen. */
+class CollectibleObject extends Items {
+    /**
+     * How the object appears on the screen.
+     */
     private String appearance;
 
     private Paint paintText = new Paint();
 
     /**
-     * The constructor for this dementor.
+     * The constructor for this object.
      *
-     * @param x This dementor's first coordinate.
-     * @param y This dementor's second coordinate
+     * @param x This object's first coordinate.
+     * @param y This object's second coordinate.
      */
     CollectibleObject(int x, int y) {
         super(x, y);
@@ -25,7 +27,9 @@ public class CollectibleObject extends Items {
         paintText.setTypeface(Typeface.DEFAULT_BOLD);
     }
 
-    /** Causes this item to move down on the screen. */
+    /**
+     * Causes this item to move down on the screen.
+     */
     void move() {
         setY(getY() + 3);
     }
@@ -37,10 +41,10 @@ public class CollectibleObject extends Items {
     /**
      * Draws the given string in the given graphics context at at the given cursor location.
      *
-     * @param canvas the graphics context in which to draw the string.
+     * @param canvas     the graphics context in which to draw the string.
      * @param appearance the string to draw.
-     * @param x the x-coordinate of the string's cursor location.
-     * @param y the y-coordinate of the string's cursor location.
+     * @param x          the x-coordinate of the string's cursor location.
+     * @param y          the y-coordinate of the string's cursor location.
      */
     private void drawString(Canvas canvas, String appearance, int x, int y) {
 

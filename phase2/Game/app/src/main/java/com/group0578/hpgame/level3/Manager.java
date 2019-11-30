@@ -33,7 +33,7 @@ class Manager {
     /**
      * The number of dementors that have been killed.
      */
-    private static int numDementorsKilled;
+    private static int killedDementorsCount;
     private PlayerLevel3 player;
 
     /**
@@ -49,15 +49,15 @@ class Manager {
         objects = new ArrayList<>();
         myBlasts = new ArrayList<>();
         wand = new Wand(gridWidth / 2, gridHeight - 10, player.getCharacter());
-        numDementorsKilled = 0;
+        killedDementorsCount = 0;
         this.player = player;
     }
 
-    static int getNumDementorsKilled() {
-        return numDementorsKilled;
+    static int getKilledDementorsCount() {
+        return killedDementorsCount;
     }
 
-    public ArrayList<CollectibleObject> getObjects() {
+    ArrayList<CollectibleObject> getObjects() {
         return objects;
     }
 
@@ -86,10 +86,6 @@ class Manager {
         for (int a = 0; a != myBlasts.size(); a++) {
             myBlasts.get(a).draw(canvas);
         }
-    }
-
-    ArrayList<Dementor> getMyLittledementors() {
-        return myLittledementors;
     }
 
     /**
@@ -135,7 +131,7 @@ class Manager {
                 myLittledementors.remove(killeddementors.get(k));
             }
         }
-        numDementorsKilled += killeddementors.size();
+        killedDementorsCount += killeddementors.size();
     }
 
     /**

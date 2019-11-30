@@ -1,5 +1,6 @@
 package com.group0578.hpgame.view;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.group0578.hpgame.R;
+import com.group0578.hpgame.level1.FlyingActivity;
 import com.group0578.hpgame.model.SQLiteHelper;
 
 /**
@@ -45,6 +47,7 @@ public class GameOverActivity extends AppCompatActivity {
         messageTextView.setText(String.format(message, username));
 
         setComponentColours();
+        this.sqlHelper.resetDefaults(this.username);
     }
 
     /**
@@ -63,12 +66,28 @@ public class GameOverActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Starts a new game by starting the Level 1 FlyingActivity.
+     *
+     * @param view the view displaying this activity.
+     */
     public void onClickPlayAgain(View view) {
         System.out.println("GameOverActivity.onClickPlayAgain method reached");
+        Intent level1 = new Intent(this, FlyingActivity.class);
+        level1.putExtra("username", this.username);
+        startActivity(level1);
     }
 
+    /**
+     * Returns the user to the ProfilePageActivity.
+     *
+     * @param view the view displaying this activity.
+     */
     public void onClickProfilePageReturn(View view) {
         System.out.println("GameOverActivity.onClickProfilePageReturn method reached");
+        Intent profile = new Intent(this, ProfilePageActivity.class);
+        profile.putExtra("username", this.username);
+        startActivity(profile);
     }
 
 }

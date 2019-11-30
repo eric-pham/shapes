@@ -19,6 +19,8 @@ public interface ProfilePage {
       void resumePreviousLevel(Intent previousLevel);
 
       void goToPlayerStatsPage(Intent playerStatsPage);
+
+    void displayToast(String message);
   }
 
   /** Not sure if needed yet. */
