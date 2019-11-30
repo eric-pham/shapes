@@ -174,6 +174,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         cValues.put(COLUMN_PROGRESS, sqlManager.getProgress());
         cValues.put(COLUMN_RETURNING_USER, sqlManager.getReturningUser());
         cValues.put(COLUMN_CHARACTER, sqlManager.getCharacter());
+        cValues.put(COLUMN_USER_SCORE, sqlManager.getScore());
 
         db.insert(TABLE_NAME, null, cValues);
 //        db.close();
