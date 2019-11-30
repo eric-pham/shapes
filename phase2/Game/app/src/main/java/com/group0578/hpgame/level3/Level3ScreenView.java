@@ -166,23 +166,30 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
             goToGameOver();
         } else if (Manager.getKilledDementorsCount() >= 5 ||
                 Level3ScreenView.getRoomManager().getObjects().isEmpty()) {
-            String username = ((Level3MainActivity) getContext()).getUsername();
-            ((Level3MainActivity) getContext()).getSqlHelper().setLives(username, lives);
-            ((Level3MainActivity) getContext()).getSqlHelper().setProgress(username, "three");
-            goToLevel3Transition();
+            goToLevel3Transition(lives);
         }
 
     }
 
     public void goToGameOver() {
+        String username = ((Level3MainActivity) getContext()).getUsername();
+        ((Level3MainActivity) getContext()).getSqlHelper().setLives(username, 0);
+        ((Level3MainActivity) getContext()).getSqlHelper().setProgress(username, "none");
+        ((Level3MainActivity) getContext()).getSqlHelper().setLevelThreeTime(username,
+                0);
         Intent gameOver = new Intent(getContext(), GameOverActivity.class);
         gameOver.putExtra("username", ((Level3MainActivity) getContext()).getUsername());
         gameOver.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         getContext().startActivity(gameOver);
+
     }
 
-    public void goToLevel3Transition() {
-
+    public void goToLevel3Transition(int lives) {
+        String username = ((Level3MainActivity) getContext()).getUsername();
+        ((Level3MainActivity) getContext()).getSqlHelper().setLives(username, lives);
+        ((Level3MainActivity) getContext()).getSqlHelper().setProgress(username, "three");
+        ((Level3MainActivity) getContext()).getSqlHelper().setLevelThreeTime(username,
+                level3Timer.getSecondsPassed());
         Intent displayStats = new Intent(getContext(), StatsActivity.class);
         displayStats.putExtra("username", ((Level3MainActivity) getContext()).getUsername());
         displayStats.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
