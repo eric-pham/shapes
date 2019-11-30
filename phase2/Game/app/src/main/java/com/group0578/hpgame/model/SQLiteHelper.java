@@ -492,6 +492,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      *
      * @param username the logged in user.
      * @param level    the string representing the user's most recently completed level in the game.
+     *                 should be either "one", "two" or "three"
      */
     public synchronized void setProgress(String username, String level) {
         System.out.println("Method SQLiteHelper.setColourScheme() reached");
@@ -502,6 +503,23 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         cValues.put(COLUMN_PROGRESS, level);
         db.update(TABLE_NAME, cValues, "id=" + ID, null);
         System.out.println("Completed level: " + level);
+    }
+
+    /**
+     * Updates the database by recording the user's most recent time to complete the Flying Level
+     * (level 1).
+     *
+     * @param username  the logged in user.
+     * @param totalTime the time taken to complete level 2
+     */
+    public synchronized void setLevelOneTime(String username, double totalTime) {
+        System.out.println("Method SQLiteHelper.setLevelOneTime reached.");
+        int ID = this.findID(username);
+        db = this.getWritableDatabase();
+        ContentValues cValues = new ContentValues();
+
+        cValues.put(COLUMN_LEVEL_ONE_TIME, totalTime);
+        db.update(TABLE_NAME, cValues, "id=" + ID, null);
     }
 
     /**

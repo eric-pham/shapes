@@ -24,7 +24,17 @@ public class FlyingView extends View {
      * Presenter for the level
      */
     private FlyingPresenter flyingPresenter;
+
+    /**
+     * Store the username String to pass to next level later
+     */
     private String username;
+
+    /**
+     *
+     */
+    private FlyingInteractor flyingInteractor;
+
     /**
      * Initialize a new FlyingView
      *
@@ -36,7 +46,8 @@ public class FlyingView extends View {
         super(context);
         timer.start();
         this.username = username;
-        flyingPresenter = new FlyingPresenter(this, new FlyingInteractor(sqlHelper, username));
+        this.flyingInteractor = new FlyingInteractor(sqlHelper, username);
+        flyingPresenter = new FlyingPresenter(this, this.flyingInteractor);
     }
 
 
@@ -72,15 +83,31 @@ public class FlyingView extends View {
         return true;
     }
 
+    /**
+     * Lost all lives, transition to GameOver
+     */
     public void goToGameOver() {
         System.out.println("goToGameOver reached");
+
+        //Update the database with default values
+        flyingInteractor.updateDatabase(0, 0.0, "one");
+
+
         Intent gameOver = new Intent(getContext(), GameOverActivity.class);
         gameOver.putExtra("username", this.username);
         gameOver.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         getContext().startActivity(gameOver);
     }
+
+    /**
+     * Goal reached transition to next level
+     */
     public void goToTransition() {
         System.out.println("Transition reached");
+
+        //Update the database with new data for lives and time
+        flyingInteractor.updateDatabase(flyingPresenter.getLives(), timer.getSecondsPassed(), "two");
+
         Intent transition = new Intent(getContext(), FlyingTransitionActivity.class);
         transition.putExtra("username", this.username);
         transition.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

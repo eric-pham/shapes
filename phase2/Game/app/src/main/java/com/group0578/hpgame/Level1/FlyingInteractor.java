@@ -25,6 +25,16 @@ public class FlyingInteractor {
     private String difficulty;
 
     /**
+     * String representing the username of the user
+     */
+    private String username;
+
+    /**
+     * SQLiteHelper object to update and find items form the Database
+     */
+    private SQLiteHelper sqLiteHelper;
+
+    /**
      * Create a new FlyingInteractor with the given SQLiteHelper and username. This class stores
      * and returns the user's information from the database required to run the level.
      *
@@ -32,10 +42,12 @@ public class FlyingInteractor {
      * @param username  username of the user we're storing info from.
      */
     FlyingInteractor(SQLiteHelper sqlHelper, String username) {
+        this.username = username;
+        this.sqLiteHelper = sqlHelper;
         this.theme = sqlHelper.findColourScheme(username);
         this.lives = sqlHelper.findLives(username);
         this.character = sqlHelper.findCharacter(username);
-        this.difficulty =sqlHelper.findDifficulty(username);
+        this.difficulty = sqlHelper.findDifficulty(username);
     }
 
 
@@ -44,7 +56,7 @@ public class FlyingInteractor {
      *
      * @return number of lives
      */
-    public int getLives() {
+    int getLives() {
         return this.lives;
     }
 
@@ -53,7 +65,7 @@ public class FlyingInteractor {
      *
      * @return a String: 'Light' or 'Dark'.
      */
-    public String getTheme() {
+    String getTheme() {
         return this.theme;
     }
 
@@ -62,14 +74,31 @@ public class FlyingInteractor {
      *
      * @return a String: 'Circle' or 'Square'.
      */
-    public String getCharacter() {
+    String getCharacter() {
         return this.character;
     }
 
-    public String getDifficulty(){
+
+    /**
+     * Returns the difficulty of the game.
+     *
+     * @return a String: 'Easy' or 'Hard'
+     */
+    String getDifficulty() {
         return this.difficulty;
     }
 
-    // Need to add update database methods for when game is over, will add after transitions are complete
+    /**
+     * Updates the database by recording stats from this level
+     *
+     * @param lives the new number of lives left for the user playing
+     * @param time  total time it took to complete the level
+     */
+    void updateDatabase(int lives, double time, String progress) {
+        sqLiteHelper.setLevelOneTime(this.username, time);
+        sqLiteHelper.setLives(this.username, lives);
+        sqLiteHelper.setProgress(this.username, progress);
+    }
+
 
 }
