@@ -11,22 +11,30 @@ public abstract class FlyingBall {
     int radius;
     int speed;
 
-    FlyingBall(){}
+    FlyingBall() {
+    }
 
-    public int getRadius() {
+    int getRadius() {
         return radius;
     }
 
-    public int getX() {
+    int getX() {
         return x;
     }
 
-    public int getY() {
+    int getY() {
         return y;
     }
 
-    public void update(int width,int height)
-    {
+    void setX(int x) {
+        this.x = x;
+    }
+
+    void setY(int y) {
+        this.y = y;
+    }
+
+    public void update(int width, int height) {
 
         int minCharY = 140;
         int maxCharY = height - 70;
@@ -39,8 +47,8 @@ public abstract class FlyingBall {
         }
     }
 
-    public void draw(Canvas canvas){
-        canvas.drawCircle(x,y,radius,paint);
+    public void draw(Canvas canvas) {
+        canvas.drawCircle(x, y, radius, paint);
     }
 
     boolean collisionChecker(FlyingBall character, FlyingBall ball) {

@@ -80,10 +80,36 @@ class FlyingPresenter {
         }
     }
 
-    public void draw(Canvas canvas) {
+    void draw(Canvas canvas) {
         for (FlyingBall item : items) {
             item.draw(canvas);
         }
+    }
+
+    /**
+     * Draws the legend
+     *
+     * @param canvas to draw to
+     */
+    void drawLegend(Canvas canvas, int canvasHeight, int canvasWidth) {
+        String theme = flyingInteractor.getTheme();
+
+
+        PointBall pointBall = new PointBall(theme);
+        BonusBall bonusBall = new BonusBall(theme);
+        DeathBall deathBall = new DeathBall(theme);
+
+        pointBall.setX(40);
+        pointBall.setY(canvasHeight - 40);
+        pointBall.draw(canvas);
+
+        bonusBall.setX((canvasWidth / 3) + 20);
+        bonusBall.setY(canvasHeight - 40);
+        bonusBall.draw(canvas);
+
+        deathBall.setX(canvasWidth - 360);
+        deathBall.setY(canvasHeight - 40);
+        deathBall.draw(canvas);
     }
 
     private boolean collisionChecker(FlyingBall character, FlyingBall ball) {
