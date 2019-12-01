@@ -11,6 +11,7 @@ import com.group0578.hpgame.R;
 import com.group0578.hpgame.model.SQLiteHelper;
 import com.group0578.hpgame.presenter.StatsPresenter;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.ArrayList;
@@ -72,6 +73,7 @@ public class StatsActivity extends AppCompatActivity implements Stats.View {
         } else {
             getWindow().getDecorView().setBackgroundColor(Color.argb(255, 0, 51, 153));
             findViewById(R.id.scoreboard).setBackgroundColor(Color.argb(255, 0, 51, 143));
+
         }
     }
 
@@ -94,17 +96,22 @@ public class StatsActivity extends AppCompatActivity implements Stats.View {
         TreeMap<Integer, String> treeMap = sqLiteHelper.findAllScores();
 
         //Two ArrayList for username and scores
-        ArrayList<String> usernames = new ArrayList<String>();
-        ArrayList<String> scores = new ArrayList<String>();
+        ArrayList<String> usernames = new ArrayList<>();
+        ArrayList<String> scores = new ArrayList<>();
 
         //Fills the two arrays, converts the scores to strings
         for (Map.Entry<Integer, String> entry : treeMap.entrySet()) {
             Integer key = entry.getKey();
             String value = entry.getValue();
 
-            usernames.add(value);
-            scores.add(String.valueOf(key));
+            if (key > 0) {
+                usernames.add(value);
+                scores.add(String.valueOf(key));
+            }
         }
+
+        Collections.reverse(scores);
+        Collections.reverse(usernames);
 
         //Check if < 20 size, if yes fill in empty spots with blank strings
         if (usernames.size() < 20) {
@@ -114,7 +121,6 @@ public class StatsActivity extends AppCompatActivity implements Stats.View {
                 scores.add("");
             }
         }
-
 
         //Sets all TextViews accordingly
         ((TextView) findViewById(R.id.user1)).setText(usernames.get(0));

@@ -2,7 +2,7 @@
     <string name="app_name">hpgame</string>
     <string name="login_button">Login</string>
     <string name="create_account_button">Create Account</string>
-    <string name="harry_potter_game">Harry Potter Game</string>
+    <string name="game_name">sHaPe</string>
     <string name="level1">Level 1</string>
     <string name="level1_won">Congratulations on beating stage 1</string>
     <string name="level2_won">Congratulations! You have completed level 2! \n \nClick the button to \n go to level 3.</string>
@@ -12,12 +12,12 @@
     <string name="level2">Level 2</string>
     <string name="level3">Level 3</string>
     <string name="username_error">Username already exists.\nPlease enter a different username.</string>
-    <string name="login_error">Username or Password is incorrect.</string>
+    <string name="login_error">Username or Password is incorrect. Please try again!</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="username_hint">Enter a username</string>
     <string name="password_hint">Enter a password</string>
-    <string name="confirm">Confirm</string>
+    <string name="confirm">Create</string>
     <string name="play_game">Start New Game</string>
     <string name="resume_game">Resume Game</string>
     <string name="player_stats">Player Stats</string>
