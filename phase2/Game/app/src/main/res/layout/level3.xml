@@ -23,19 +23,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+
     <Button
         android:id="@+id/button4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
+        android:layout_marginStart="23dp"
         android:layout_marginEnd="300dp"
         android:layout_marginBottom="22dp"
         android:onClick="moveWandLeft"
-        android:text="@string/button4"
+        android:text="Left"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="147dp" />
-
 
     <Button
         android:id="@+id/button5"
@@ -57,7 +59,7 @@
         android:layout_marginEnd="26dp"
         android:layout_marginBottom="22dp"
         android:onClick="moveWandRight"
-        android:text="@string/button6"
+        android:text="Right"
         tools:layout_editor_absoluteX="323dp"
         tools:layout_editor_absoluteY="17dp" />
 
