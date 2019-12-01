@@ -2,6 +2,7 @@ package com.group0578.hpgame.level3;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.group0578.hpgame.R;
 import com.group0578.hpgame.model.SQLiteHelper;
+import com.group0578.hpgame.view.ProfilePageActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -121,6 +123,17 @@ public class Level3MainActivity extends AppCompatActivity {
 
     public PlayerLevel3 getPlayer() {
         return this.player;
+    }
+
+    /**
+     * Pressing the back button will bring you to the ProfilePageActivity.
+     */
+    @Override
+    public void onBackPressed() {
+        Intent profile = new Intent(this, ProfilePageActivity.class);
+        profile.putExtra("username", this.username);
+        startActivity(profile);
+        finish();
     }
 
 
