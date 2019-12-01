@@ -16,16 +16,20 @@ import com.group0578.hpgame.model.Timer;
 import com.group0578.hpgame.view.GameOverActivity;
 import com.group0578.hpgame.view.StatsActivity;
 
+
+/**
+ * The level's view or visual appearance on the screen for the user.
+ */
 public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callback {
 
     /**
      * Screen width.
      */
-    private  static int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
+    private static int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
     /**
      * Screen height.
      */
-    private  static int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
+    private static int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
     /**
      * The width of a character.
      */
@@ -55,21 +59,42 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
      */
     private Paint scorePaint = new Paint();
 
+    /**
+     * Construct a new instance of a Level3ScreenView.
+     *
+     * @param context the environment making this view appear on the screen.
+     */
     public Level3ScreenView(Context context) {
         super(context);
         init();
     }
 
+    /**
+     * Construct a new instance of a Level3ScreenView.
+     *
+     * @param context the environment making this view appear on the screen.
+     * @param attrs   default attribute of the parent class.
+     */
     public Level3ScreenView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
     }
 
+    /**
+     * Construct a new instance of a Level3ScreenView.
+     *
+     * @param context  the environment making this view appear on the screen.
+     * @param attrs    default attribute of the parent class.
+     * @param defStyle default style of the parent class.
+     */
     public Level3ScreenView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init();
     }
 
+    /**
+     * Method called by constructor for initializing instance attributes.
+     */
     private void init() {
         getHolder().addCallback(this);
         thread = new Level3MainThread(getHolder(), this);
@@ -96,10 +121,14 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
         background.setARGB(a, r, g, b);
     }
 
-    public static int getScreenWidth()  { return  screenWidth; }
-
-    public static int getScreenHeight()  { return  screenHeight; }
-
+    /**
+     * This is called immediately after the surface is first created. Implementations of this should
+     * start up whatever rendering code they desire. Note that only one thread can ever draw into a
+     * {@link Level3ScreenView}, so you should not draw into the Surface here if your normal
+     * rendering will be in another thread.
+     *
+     * @param holder The SurfaceHolder whose surface is being created.
+     */
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
 
@@ -121,10 +150,28 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
         thread.start();
     }
 
+    /**
+     * This is called immediately after any structural changes (format or size) have been made to the
+     * surface. You should at this point update the imagery in the surface. This method is always
+     * called at least once, after {@link #surfaceCreated}.
+     *
+     * @param holder The SurfaceHolder whose surface has changed.
+     * @param format The new PixelFormat of the surface.
+     * @param width  The new width of the surface.
+     * @param height The new height of the surface.
+     */
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
     }
 
+    /**
+     * This is called immediately before a surface is being destroyed. After returning from this call,
+     * you should no longer try to access this surface. If you have a rendering thread that directly
+     * accesses the surface, you must ensure that thread is no longer touching the Surface before
+     * returning from this function.
+     *
+     * @param holder The SurfaceHolder whose surface is being destroyed.
+     */
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
 
@@ -141,12 +188,16 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
         }
     }
 
+    /**
+     * Updates the items on the screen and stops the running thread when the game is over.
+     */
     public void update() {
         roomManager.updateDementor();
         roomManager.updateBlasts();
-        roomManager.updateWand();
+        roomManager.updatePlayer();
         roomManager.updateObjects();
-        if ((Manager.getKilledDementorsCount() == 5) || roomManager.getObjects().isEmpty()) {
+        int lives = ((Level3MainActivity) getContext()).getPlayer().getLives();
+        if ((Manager.getKilledDementorsCount() == 5) || roomManager.getObjects().isEmpty() || lives == 0) {
             try {
                 thread.setRunning(false);
                 setVisibility(INVISIBLE);
@@ -156,6 +207,11 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
         }
     }
 
+    /**
+     * Draw the view and the texts on the canvas.
+     *
+     * @param canvas the canvas the view is drawn on.
+     */
     @Override
     public void draw(Canvas canvas) {
         super.draw(canvas);
@@ -171,14 +227,17 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
             goToGameOver();
         } else if (Manager.getKilledDementorsCount() >= 5 ||
                 Level3ScreenView.getRoomManager().getObjects().isEmpty()) {
-            System.out.println("Level3ScreenView draw method reached");
             updateDatabase(lives);
         }
 
     }
 
+    /**
+     * Update the statistics of the user.
+     *
+     * @param lives the lives of the user.
+     */
     private void updateDatabase(int lives) {
-        System.out.println("Level3ScreenView updateDatabase() method reached");
         String username = ((Level3MainActivity) getContext()).getUsername();
         SQLiteHelper sqLiteHelper = ((Level3MainActivity) getContext()).getSqlHelper();
         sqLiteHelper.setLives(username, lives);
@@ -195,6 +254,9 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
         goToPlayerStats(userOnScoreboard);
     }
 
+    /**
+     * Go to the GameOver activity when the user loses.
+     */
     public void goToGameOver() {
         Intent gameOver = new Intent(getContext(), GameOverActivity.class);
         gameOver.putExtra("username", ((Level3MainActivity) getContext()).getUsername());
@@ -202,6 +264,11 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
         getContext().startActivity(gameOver);
     }
 
+    /**
+     * Go to the Stats activity when the user wins.
+     *
+     * @param userOnScoreboard the username that goes on the scoreboard.
+     */
     private void goToPlayerStats(String userOnScoreboard) {
         Intent displayStats = new Intent(getContext(), StatsActivity.class);
         displayStats.putExtra("username", ((Level3MainActivity) getContext()).getUsername());

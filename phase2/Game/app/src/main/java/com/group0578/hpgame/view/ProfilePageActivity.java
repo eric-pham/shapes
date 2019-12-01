@@ -131,7 +131,7 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
   }
 
   /**
-   * Called when the user presses the 'PlayerLevel3 Stats' button. Displays the user's (currently playing)
+   * Called when the user presses the 'UserLevel3 Stats' button. Displays the user's (currently playing)
    * statistics from previous games they have played.
    *
    * @param view the view displaying this activity.

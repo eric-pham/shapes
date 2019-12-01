@@ -13,6 +13,9 @@ class Dementor extends Items {
      */
     private String appearance;
 
+    /**
+     * Paint for this dementor.
+     */
     private Paint paintText = new Paint();
 
     /**
@@ -50,6 +53,11 @@ class Dementor extends Items {
         setY(getY() + speed);
     }
 
+    /**
+     * Draws the dementor in the given graphics context.
+     *
+     * @param canvas the graphics context in which to draw.
+     */
     void draw(Canvas canvas) {
         drawString(canvas, appearance, getY(), getX());
     }

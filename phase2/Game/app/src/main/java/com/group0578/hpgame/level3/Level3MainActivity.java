@@ -22,6 +22,10 @@ public class Level3MainActivity extends AppCompatActivity {
 
     private Handler handler = new Handler();
     private static final long Interval = 30;
+
+    /**
+     * The view of the level 3 game.
+     */
     private Level3ScreenView screenView;
 
     /**
@@ -34,8 +38,16 @@ public class Level3MainActivity extends AppCompatActivity {
      */
     private SQLiteHelper sqlHelper = new SQLiteHelper(this);
 
-    PlayerLevel3 player;
+    /**
+     * The user playing the game.
+     */
+    UserLevel3 player;
 
+    /**
+     * Called when the activity is started. Creates the game level.
+     *
+     * @param savedInstanceState The instance state of the game.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +62,7 @@ public class Level3MainActivity extends AppCompatActivity {
             this.username = extras.getString("username");
         }
         screenView = new Level3ScreenView(this);
-        this.player = new PlayerLevel3(sqlHelper, username);
+        this.player = new UserLevel3(sqlHelper, username);
 
         Timer timer = new Timer();
         timer.schedule(
@@ -89,6 +101,9 @@ public class Level3MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Changes the level difficulty depending on the customization.
+     */
     private void setLevelDifficulty() {
         String difficulty = sqlHelper.findDifficulty(username);
         if (difficulty.equalsIgnoreCase("Easy")) {
@@ -98,19 +113,34 @@ public class Level3MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * onCreate method for the shoot button; shoots a blast from the player.
+     *
+     * @param view The view on which to create the blast.
+     */
     public void createBlast(View view) {
         Manager manager = Level3ScreenView.getRoomManager();
         manager.createBlast();
     }
 
-    public void moveWandRight(View view) {
+    /**
+     * onCreate method for the right button; sets the players direction of motion to right.
+     *
+     * @param view The view on which to move the player.
+     */
+    public void moverPlayerRight(View view) {
         Manager manager = Level3ScreenView.getRoomManager();
-        manager.moveWandRight();
+        manager.movePlayerRight();
     }
 
-    public void moveWandLeft(View view) {
+    /**
+     * onCreate method for the left button; sets the players direction of motion to left.
+     *
+     * @param view The view on which to move the player.
+     */
+    public void moverPlayerLeft(View view) {
         Manager manager = Level3ScreenView.getRoomManager();
-        manager.moveWandLeft();
+        manager.movePlayerLeft();
     }
 
     public String getUsername() {
@@ -121,7 +151,7 @@ public class Level3MainActivity extends AppCompatActivity {
         return this.sqlHelper;
     }
 
-    public PlayerLevel3 getPlayer() {
+    public UserLevel3 getPlayer() {
         return this.player;
     }
 

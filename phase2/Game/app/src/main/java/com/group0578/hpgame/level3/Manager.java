@@ -19,9 +19,9 @@ class Manager {
      */
     private ArrayList<Blast> myBlasts;
     /**
-     * The wand on the screen.
+     * The level3Player on the screen.
      */
-    private Wand wand;
+    private PlayerObject level3Player;
     /**
      * The width of the screen.
      */
@@ -34,48 +34,72 @@ class Manager {
      * The number of dementors that have been killed.
      */
     private static int killedDementorsCount;
-    private PlayerLevel3 player;
+    /**
+     * The user currently playing the game.
+     */
+    private UserLevel3 player;
 
     /**
      * The constructor for this manager.
      *
      * @param width  The width of the screen this manager is managing.
      * @param height The height of the screen this manager is managing.
+     * @param player The user currently playing the game.
      */
-    Manager(int width, int height, PlayerLevel3 player) {
+    Manager(int width, int height, UserLevel3 player) {
         gridWidth = width;
         gridHeight = height;
         myLittledementors = new ArrayList<>();
         objects = new ArrayList<>();
         myBlasts = new ArrayList<>();
-        wand = new Wand(gridWidth / 2, gridHeight - 10, player.getCharacter());
+        level3Player = new PlayerObject(gridWidth / 2, gridHeight - 10, player.getCharacter());
         killedDementorsCount = 0;
         this.player = player;
     }
 
+    /**
+     * Getter for this.killedDementorsCount.
+     *
+     * @return The number of killed dementors.
+     */
     static int getKilledDementorsCount() {
         return killedDementorsCount;
     }
 
+    /**
+     * Getter for this.objects.
+     *
+     * @return The list of objects.
+     */
     ArrayList<CollectibleObject> getObjects() {
         return objects;
     }
 
+    /**
+     * Getter for this.myBlasts.
+     *
+     * @return The list of blasts.
+     */
     ArrayList<Blast> getMyBlasts() {
         return myBlasts;
     }
 
+    /**
+     * Getter for the width of the grid.
+     *
+     * @return The width of the screen.
+     */
     int getGridWidth() {
         return gridWidth;
     }
 
     /**
-     * Draws the wand, the blasts and the dementors created by this manager.
+     * Draws the level3Player, the blasts and the dementors created by this manager.
      *
      * @param canvas the graphics context in which to draw this item.
      */
     void draw(Canvas canvas) {
-        wand.draw(canvas);
+        level3Player.draw(canvas);
 
         for (int a = 0; a != myLittledementors.size(); a++) {
             myLittledementors.get(a).draw(canvas);
@@ -135,10 +159,10 @@ class Manager {
     }
 
     /**
-     * Updates wand by moving it.
+     * Updates level3Player by moving it.
      */
-    void updateWand() {
-        wand.move(this);
+    void updatePlayer() {
+        level3Player.move(this);
     }
 
     /**
@@ -150,6 +174,9 @@ class Manager {
         }
     }
 
+    /**
+     * Updates the objects in this.objects by moving them and omitting them if hit by a blast.
+     */
     void updateObjects() {
         if (!objects.isEmpty()) {
             for (int i = 0; i < myBlasts.size(); i++) {
@@ -172,6 +199,9 @@ class Manager {
         myLittledementors.add(d);
     }
 
+    /**
+     * Creates an object and stores it in objects.
+     */
     void createObjects() {
         CollectibleObject collectibleObject = new CollectibleObject(gridWidth / 2, 0);
         objects.add(collectibleObject);
@@ -181,24 +211,24 @@ class Manager {
      * Creates blasts and stores them in myBlasts.
      */
     void createBlast() {
-        wand.shoot(this);
+        level3Player.shoot(this);
     }
 
     /**
-     * moves wand to the right.
+     * moves level3Player to the right.
      */
-    void moveWandRight() {
-        if (!wand.getDirection()) {
-            wand.moveRight(this);
+    void movePlayerRight() {
+        if (!level3Player.getDirection()) {
+            level3Player.moveRight(this);
         }
     }
 
     /**
-     * moves wand to the left.
+     * moves level3Player to the left.
      */
-    void moveWandLeft() {
-        if (wand.getDirection()) {
-            wand.moveLeft(this);
+    void movePlayerLeft() {
+        if (level3Player.getDirection()) {
+            level3Player.moveLeft(this);
         }
     }
 }

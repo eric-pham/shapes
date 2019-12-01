@@ -24,18 +24,38 @@ abstract class Items {
         this.y = y;
     }
 
+    /**
+     * Getter for this item's first coordinate.
+     *
+     * @return This item's first coordinate.
+     */
     int getX() {
         return x;
     }
 
+    /**
+     * Getter for this item's second coordinate.
+     *
+     * @return This item's second coordinate.
+     */
     int getY() {
         return y;
     }
 
+    /**
+     * Setter for this item's first coordinate.
+     *
+     * @param x This item's new first coordinate.
+     */
     void setX(int x) {
         this.x = x;
     }
 
+    /**
+     * Setter for this item's second coordinate.
+     *
+     * @param y This item's new second coordinate.
+     */
     void setY(int y) {
         this.y = y;
     }

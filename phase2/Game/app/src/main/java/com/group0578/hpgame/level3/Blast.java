@@ -11,7 +11,9 @@ class Blast extends Items {
      * How the blast appears on the screen.
      */
     private String appearance;
-
+    /**
+     * Paint for this blast.
+     */
     private Paint paintText = new Paint();
 
     /**
@@ -40,6 +42,11 @@ class Blast extends Items {
         canvas.drawText(s, x * Level3ScreenView.getCharWidth(), y * Level3ScreenView.getCharHeight(), paintText);
     }
 
+    /**
+     * Draws the blast in the given graphics context.
+     *
+     * @param canvas the graphics context in which to draw.
+     */
     void draw(Canvas canvas) {
         drawString(canvas, appearance, getX(), getY());
     }

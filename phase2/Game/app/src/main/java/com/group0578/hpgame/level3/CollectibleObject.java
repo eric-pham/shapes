@@ -11,6 +11,9 @@ class CollectibleObject extends Items {
      */
     private String appearance;
 
+    /**
+     * Paint for this object.
+     */
     private Paint paintText = new Paint();
 
     /**
@@ -34,6 +37,11 @@ class CollectibleObject extends Items {
         setY(getY() + 3);
     }
 
+    /**
+     * Draws the object in the given graphics context.
+     *
+     * @param canvas the graphics context in which to draw.
+     */
     void draw(Canvas canvas) {
         drawString(canvas, appearance, getY(), getX());
     }

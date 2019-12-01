@@ -34,7 +34,7 @@
         android:layout_marginStart="23dp"
         android:layout_marginEnd="300dp"
         android:layout_marginBottom="22dp"
-        android:onClick="moveWandLeft"
+        android:onClick="moverPlayerLeft"
         android:text="Left"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="147dp" />
@@ -58,7 +58,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="26dp"
         android:layout_marginBottom="22dp"
-        android:onClick="moveWandRight"
+        android:onClick="moverPlayerRight"
         android:text="Right"
         tools:layout_editor_absoluteX="323dp"
         tools:layout_editor_absoluteY="17dp" />
