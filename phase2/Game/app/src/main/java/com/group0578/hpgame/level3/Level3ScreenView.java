@@ -144,7 +144,7 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
                 ((Level3MainActivity) getContext()).getPlayer());
 
         roomManager.createDementors();
-        roomManager.createObjects();
+        roomManager.createSpecialItems();
 
         thread.setRunning(true);
         thread.start();
@@ -195,9 +195,9 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
         roomManager.updateDementor();
         roomManager.updateBlasts();
         roomManager.updatePlayer();
-        roomManager.updateObjects();
+        roomManager.updateSpecialItems();
         int lives = ((Level3MainActivity) getContext()).getPlayer().getLives();
-        if ((Manager.getKilledDementorsCount() == 5) || roomManager.getObjects().isEmpty() || lives == 0) {
+        if ((Manager.getKilledDementorsCount() == 5) || roomManager.getSpecialItems().isEmpty() || lives == 0) {
             try {
                 thread.setRunning(false);
                 setVisibility(INVISIBLE);
@@ -226,7 +226,7 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
         if (lives == 0) {
             goToGameOver();
         } else if (Manager.getKilledDementorsCount() >= 5 ||
-                Level3ScreenView.getRoomManager().getObjects().isEmpty()) {
+                Level3ScreenView.getRoomManager().getSpecialItems().isEmpty()) {
             updateDatabase(lives);
         }
 

@@ -11,9 +11,9 @@ class Manager {
      */
     private ArrayList<Dementor> myLittledementors;
     /**
-     * List of all objects.
+     * List of all specialItems.
      */
-    private ArrayList<CollectibleObject> objects;
+    private ArrayList<SpecialItem> specialItems;
     /**
      * List of all blasts.
      */
@@ -50,7 +50,7 @@ class Manager {
         gridWidth = width;
         gridHeight = height;
         myLittledementors = new ArrayList<>();
-        objects = new ArrayList<>();
+        specialItems = new ArrayList<>();
         myBlasts = new ArrayList<>();
         level3Player = new PlayerObject(gridWidth / 2, gridHeight - 10, player.getCharacter());
         killedDementorsCount = 0;
@@ -67,12 +67,12 @@ class Manager {
     }
 
     /**
-     * Getter for this.objects.
+     * Getter for specialItems.
      *
-     * @return The list of objects.
+     * @return The list of specialItems.
      */
-    ArrayList<CollectibleObject> getObjects() {
-        return objects;
+    ArrayList<SpecialItem> getSpecialItems() {
+        return specialItems;
     }
 
     /**
@@ -104,8 +104,8 @@ class Manager {
         for (int a = 0; a != myLittledementors.size(); a++) {
             myLittledementors.get(a).draw(canvas);
         }
-        for (int a = 0; a != objects.size(); a++) {
-            objects.get(a).draw(canvas);
+        for (int a = 0; a != specialItems.size(); a++) {
+            specialItems.get(a).draw(canvas);
         }
         for (int a = 0; a != myBlasts.size(); a++) {
             myBlasts.get(a).draw(canvas);
@@ -175,18 +175,18 @@ class Manager {
     }
 
     /**
-     * Updates the objects in this.objects by moving them and omitting them if hit by a blast.
+     * Updates the specialItems in this.specialItems by moving them and omitting them if hit by a blast.
      */
-    void updateObjects() {
-        if (!objects.isEmpty()) {
+    void updateSpecialItems() {
+        if (!specialItems.isEmpty()) {
             for (int i = 0; i < myBlasts.size(); i++) {
-                if (myBlasts.get(i).getX() == objects.get(0).getX()
-                        && myBlasts.get(i).getY() == objects.get(0).getY()) {
-                    objects.remove(0);
+                if (myBlasts.get(i).getX() == specialItems.get(0).getX()
+                        && myBlasts.get(i).getY() == specialItems.get(0).getY()) {
+                    specialItems.remove(0);
                 }
             }
-            if (!objects.isEmpty()) {
-                objects.get(0).move();
+            if (!specialItems.isEmpty()) {
+                specialItems.get(0).move();
             }
         }
     }
@@ -200,11 +200,11 @@ class Manager {
     }
 
     /**
-     * Creates an object and stores it in objects.
+     * Creates an instance of SpecialItem and stores it in specialItems.
      */
-    void createObjects() {
-        CollectibleObject collectibleObject = new CollectibleObject(gridWidth / 2, 0);
-        objects.add(collectibleObject);
+    void createSpecialItems() {
+        SpecialItem specialItem = new SpecialItem(gridWidth / 2, 0);
+        specialItems.add(specialItem);
     }
 
     /**

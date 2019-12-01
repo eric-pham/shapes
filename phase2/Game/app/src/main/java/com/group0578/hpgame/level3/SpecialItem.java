@@ -5,24 +5,24 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 
-class CollectibleObject extends Items {
+class SpecialItem extends Items {
     /**
-     * How the object appears on the screen.
+     * How the item appears on the screen.
      */
     private String appearance;
 
     /**
-     * Paint for this object.
+     * Paint for this item.
      */
     private Paint paintText = new Paint();
 
     /**
-     * The constructor for this object.
+     * The constructor for this item.
      *
-     * @param x This object's first coordinate.
-     * @param y This object's second coordinate.
+     * @param x This item's first coordinate.
+     * @param y This item's second coordinate.
      */
-    CollectibleObject(int x, int y) {
+    SpecialItem(int x, int y) {
         super(x, y);
         this.appearance = "O";
         paintText.setTextSize(50);
@@ -38,7 +38,7 @@ class CollectibleObject extends Items {
     }
 
     /**
-     * Draws the object in the given graphics context.
+     * Draws the item in the given graphics context.
      *
      * @param canvas the graphics context in which to draw.
      */
