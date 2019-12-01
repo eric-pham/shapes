@@ -460,7 +460,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @return double array of length 3 containing user's times to complete each level in seconds.
      */
     private double[] findTimes(String username1) {
-        System.out.println("Progress found");
+        System.out.println("SQLiteHelper findTimes method reached");
         db = this.getReadableDatabase();
 
         String username2;
@@ -686,6 +686,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * If the user beats their previous best score, then the database is updated with the new score.
      */
     public void saveNewScore(String username) {
+        System.out.println("SQLiteHelper saveNewScore method reached");
         double[] allTimes = findTimes(username);
         double totalTime = allTimes[0] + allTimes[1] + allTimes[2];
         String difficulty = findDifficulty(username);
@@ -695,9 +696,11 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         // Reducing the number of points based on how many lives user has left at end of game.
         if (difficulty.equalsIgnoreCase("Easy")) { // total possible lives is 10
-            totalScore *= (livesLeft / 10);
-        } else {    // total possible lives is 5
-            totalScore *= (livesLeft / 5);
+            float percentage = livesLeft / 10f;
+            totalScore = (int) (totalScore * percentage);
+        } else {    // total possible lives is
+            float percentage = livesLeft / 5f;
+            totalScore = (int) (totalScore * percentage);
         }
 
         if (totalScore > findScore(username)) { // new score beats previous best
