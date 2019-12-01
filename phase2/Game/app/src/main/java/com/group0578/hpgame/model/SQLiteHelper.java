@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.ContentValues;
 import android.database.Cursor;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -906,7 +907,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         double oldTotal = findTotalTime(username);
 
         if (newTotal < oldTotal) { // new time is better than the previous
-            setTotalTime(username, newTotal);
+            DecimalFormat df = new DecimalFormat("0.000");
+            setTotalTime(username, Double.parseDouble(df.format(newTotal)));
         }
     }
 
@@ -923,7 +925,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         double oldAvg = findAvgTime(username);
 
         if (newAvg < oldAvg | oldAvg == -1) { // new avg time is better than the previous
-            setAvgTime(username, newAvg);
+            DecimalFormat df = new DecimalFormat("0.000");
+            setAvgTime(username, Double.parseDouble(df.format(newAvg)));
         }
     }
 

@@ -45,9 +45,19 @@ public class MyStatsActivity extends AppCompatActivity {
      * Displays the users best records.
      */
     private void displayUserStats() {
-        ((TextView) findViewById(R.id.bestTotalValue)).setText(String.format("%s seconds", sqlHelper.findTotalTime(username)));
-        ((TextView) findViewById(R.id.bestAverageValue)).setText(String.format("%s seconds", sqlHelper.findAvgTime(username)));
-        ((TextView) findViewById(R.id.highScoreValue)).setText(String.format("%s points", sqlHelper.findScore(username)));
+        String totalTime = String.format("%s seconds", sqlHelper.findTotalTime(username));
+        String avgTime = String.format("%s seconds", sqlHelper.findAvgTime(username));
+        String score = String.format("%s points", sqlHelper.findScore(username));
+        if (!totalTime.equals("10000.0 seconds")) {
+            ((TextView) findViewById(R.id.bestTotalValue)).setText(totalTime);
+            ((TextView) findViewById(R.id.bestAverageValue)).setText(avgTime);
+            ((TextView) findViewById(R.id.highScoreValue)).setText(score);
+        } else {
+            ((TextView) findViewById(R.id.bestTotalValue)).setText(R.string.record_unavailable);
+            ((TextView) findViewById(R.id.bestAverageValue)).setText(R.string.record_unavailable);
+            ((TextView) findViewById(R.id.highScoreValue)).setText(R.string.record_unavailable);
+        }
+
     }
 
     /**
