@@ -85,6 +85,11 @@ class MazeBuilder {
 
   /**
    * Creates the design of the maze.
+   * This method was derived from Parts 3 and 4 of Y-Key's "Android Programming - Maze Game"
+   * 5 part Tutorial and modified to suit the needs of our project.
+   * Source:
+   * Part 3: https://www.youtube.com/watch?v=kiG1BUa34lc&t=1s
+   * Part 4: https://www.youtube.com/watch?v=IMan30VNi3A&t=1s
    */
   private void buildMaze() {
     // a stack to hold the current path being taken to navigate through the maze

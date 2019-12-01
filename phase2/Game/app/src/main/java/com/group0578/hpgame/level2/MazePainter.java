@@ -6,6 +6,12 @@ import android.util.Log;
 import com.group0578.hpgame.model.Timer;
 
 /**
+ * Methods from this class were derived from Part 2 of Y-Key's "Android Programming - Maze Game"
+ * 5 part Tutorial and modified to suit the needs of our project
+ * <p>
+ * Sources:
+ * Part 2: https://www.youtube.com/watch?v=iri0wZ3NvdQ
+ *
  * The class responsible for drawing the maze on the maze canvas during level 2.
  */
 class MazePainter {

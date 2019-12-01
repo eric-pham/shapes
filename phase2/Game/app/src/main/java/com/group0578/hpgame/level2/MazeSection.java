@@ -1,6 +1,12 @@
 package com.group0578.hpgame.level2;
 
 /**
+ * Methods from this class were derived from Part 1 of Y-Key's "Android Programming - Maze Game"
+ * 5 part Tutorial and modified to suit the needs of our project
+ * <p>
+ * Sources:
+ * Part 1: https://www.youtube.com/watch?v=I9lTBTAk5MU
+ *
  * A section representing a portion of the Maze.
  */
 class MazeSection {
