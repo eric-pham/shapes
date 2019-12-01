@@ -43,7 +43,8 @@
                     android:gravity="center"
                     android:text="@string/scoreboard_username"
                     android:textSize="24sp"
-                    android:textStyle="bold" />
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/score"
@@ -59,6 +60,7 @@
                     android:gravity="center"
                     android:text="@string/scoreboard_score"
                     android:textSize="24sp"
+                    android:textColor="#ffffff"
                     android:textStyle="bold" />
 
             </TableRow>
@@ -72,7 +74,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/score1"
@@ -81,7 +85,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"/>
 
             </TableRow>
 
@@ -94,7 +100,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/score2"
@@ -103,7 +111,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"/>
 
             </TableRow>
 
@@ -116,7 +126,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/score3"
@@ -125,7 +137,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"/>
 
             </TableRow>
 
@@ -138,7 +152,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/score4"
@@ -147,7 +163,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"/>
 
             </TableRow>
 
@@ -160,7 +178,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/score5"
@@ -169,7 +189,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"/>
 
             </TableRow>
 
@@ -182,7 +204,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/score6"
@@ -191,7 +215,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold" />
 
             </TableRow>
 
@@ -204,7 +230,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/score7"
@@ -213,7 +241,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"/>
 
             </TableRow>
 
@@ -226,7 +256,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/score8"
@@ -235,7 +267,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold" />
 
             </TableRow>
 
@@ -248,7 +282,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/score9"
@@ -257,7 +293,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold" />
 
             </TableRow>
 
@@ -270,7 +308,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/score10"
@@ -279,7 +319,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold" />
 
             </TableRow>
 
@@ -292,7 +334,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/score11"
@@ -301,7 +345,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"/>
 
             </TableRow>
 
@@ -314,7 +360,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/score12"
@@ -323,7 +371,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"/>
 
             </TableRow>
 
@@ -336,7 +386,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/score13"
@@ -345,7 +397,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"/>
 
             </TableRow>
 
@@ -358,7 +412,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/score14"
@@ -367,7 +423,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"/>
 
             </TableRow>
 
@@ -380,7 +438,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/score15"
@@ -389,7 +449,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"/>
 
             </TableRow>
 
@@ -402,7 +464,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/score16"
@@ -411,7 +475,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold" />
 
             </TableRow>
 
@@ -424,7 +490,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/score17"
@@ -433,7 +501,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold" />
 
             </TableRow>
 
@@ -446,7 +516,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"  />
 
                 <TextView
                     android:id="@+id/score18"
@@ -455,7 +527,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold" />
 
             </TableRow>
 
@@ -468,7 +542,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/score19"
@@ -477,7 +553,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold" />
 
             </TableRow>
 
@@ -490,7 +568,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/score20"
@@ -499,7 +579,9 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text=""
-                    android:textSize="24sp" />
+                    android:textSize="24sp"
+                    android:textColor="#ffffff"
+                    android:textStyle="bold"/>
 
             </TableRow>
 

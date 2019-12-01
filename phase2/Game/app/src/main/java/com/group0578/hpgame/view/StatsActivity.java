@@ -69,7 +69,7 @@ public class StatsActivity extends AppCompatActivity implements Stats.View {
         ((TextView) findViewById(R.id.score)).setTextColor(Color.BLACK);
         if (colourScheme.equalsIgnoreCase("Light")) {
             getWindow().getDecorView().setBackgroundColor(Color.argb(255, 204, 212, 255));
-            findViewById(R.id.scoreboard).setBackgroundColor(Color.argb(255, 204, 212, 240));
+            findViewById(R.id.scoreboard).setBackgroundColor(Color.argb(255, 176, 191, 26));
         } else {
             getWindow().getDecorView().setBackgroundColor(Color.argb(255, 0, 51, 153));
             findViewById(R.id.scoreboard).setBackgroundColor(Color.argb(255, 0, 51, 143));
