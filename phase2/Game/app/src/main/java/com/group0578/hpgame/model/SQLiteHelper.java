@@ -968,7 +968,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     public void saveNewAvgTime(String username) {
         System.out.println("SQLiteHelper saveNewScore method reached");
         double[] allTimes = findTimes(username);
-        double newAvg = allTimes[0] + allTimes[1] + allTimes[2];
+        double newAvg = (allTimes[0] + allTimes[1] + allTimes[2]) / 3f;
         double oldAvg = findAvgTime(username);
 
         if (newAvg < oldAvg) { // new avg time is better than the previous

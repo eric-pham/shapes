@@ -227,26 +227,50 @@ public class SQLiteManager {
         this.score = score;
     }
 
+    /**
+     * Getter for the total time in seconds.
+     * @return a double representing the total time.
+     */
     double getTotalTime() {
         return totalTime;
     }
 
+    /**
+     * Setter for the total time in seconds.
+     * @param totalTime a double representing the total time.
+     */
     public void setTotalTime(double totalTime) {
         this.totalTime = totalTime;
     }
 
+    /**
+     * Getter for the average time in seconds.
+     * @return a double representing the average time.
+     */
     double getAvgTime() {
         return avgTime;
     }
 
+    /**
+     * Setter for the average time in seconds.
+     * @param avgTime a double representing the average time.
+     */
     public void setAvgTime(double avgTime) {
         this.avgTime = avgTime;
     }
 
+    /**
+     * Getter for the best lives achieved by this user.
+     * @return an int representing the lives.
+     */
     int getBestLives() {
         return bestLives;
     }
 
+    /**
+     * Setter for the best lives achieved by this user.
+     * @param bestLives an int representing the lives.
+     */
     public void setBestLives(int bestLives) {
         this.bestLives = bestLives;
     }
