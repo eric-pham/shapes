@@ -143,14 +143,27 @@ public class Level3MainActivity extends AppCompatActivity {
         manager.movePlayerLeft();
     }
 
+    /**
+     * Getter for the username of user playing the game.
+     *
+     * @return The username of the user playing the game.
+     */
     public String getUsername() {
         return this.username;
     }
-
+    /**
+     * Getter for the SQLiteHelper object..
+     *
+     * @return The SQLiteHelper object.
+     */
     public SQLiteHelper getSqlHelper() {
         return this.sqlHelper;
     }
-
+    /**
+     * Getter for the Player that is currently on level 3.
+     *
+     * @return The Player that is currently on level 3.
+     */
     public UserLevel3 getPlayer() {
         return this.player;
     }

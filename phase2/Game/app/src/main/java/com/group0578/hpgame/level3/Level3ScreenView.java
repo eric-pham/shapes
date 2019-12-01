@@ -104,15 +104,29 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
         scorePaint.setTextSize(70);
         scorePaint.setTypeface(Typeface.DEFAULT_BOLD);
     }
-
+    /**
+     * Getter for character width.
+     *
+     * @return The character width.
+     */
     public static float getCharWidth() {
         return charWidth;
     }
 
+    /**
+     * Getter for character height.
+     *
+     * @return The character height.
+     */
     public static float getCharHeight() {
         return charHeight;
     }
 
+    /**
+     * Getter for the Manager for this level.
+     *
+     * @return The Manager for this level.
+     */
     public static Manager getRoomManager() {
         return roomManager;
     }
