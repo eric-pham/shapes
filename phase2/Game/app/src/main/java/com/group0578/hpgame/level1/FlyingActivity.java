@@ -11,10 +11,24 @@ import com.group0578.hpgame.model.SQLiteHelper;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class FlyingActivity extends AppCompatActivity {
+/**
+ * The startup activity for beginning the level 1 Flying portion of this game.
+ */
+public  class FlyingActivity extends AppCompatActivity {
 
+    /**
+     * Stores FlyingView, responsible for visual updates
+     */
     private FlyingView gameView;
+
+    /**
+     * Stores handler
+     */
     private Handler handler = new Handler();
+
+    /**
+     *  Stores Interval, how often the screen updates
+     */
     private final static long Interval = 30;
 
     /**
@@ -27,6 +41,10 @@ public class FlyingActivity extends AppCompatActivity {
      */
     private String username;
 
+    /**
+     * Starts the activity
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

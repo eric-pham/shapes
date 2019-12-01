@@ -6,6 +6,12 @@ import android.content.Context;
 import android.content.ContentValues;
 import android.database.Cursor;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
+
 /**
  * This class was derived from Tech Academy's "Login and Signup - SQLite Database" 3 part Tutorial
  * and modified to suit the needs of our project
@@ -174,9 +180,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         cValues.put(COLUMN_PROGRESS, sqlManager.getProgress());
         cValues.put(COLUMN_RETURNING_USER, sqlManager.getReturningUser());
         cValues.put(COLUMN_CHARACTER, sqlManager.getCharacter());
+        cValues.put(COLUMN_USER_SCORE, sqlManager.getScore());
 
         db.insert(TABLE_NAME, null, cValues);
-//        db.close();
         cursor.close();
         System.out.println("Inserted");
     }
@@ -448,30 +454,37 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         return score;
     }
 
-    // temporary just for testing purposes
-//    public float findTime(String username1) {
-//        System.out.println("Progress found");
-//        db = this.getReadableDatabase();
-//
-//        String username2;
-//
-//        String query = "select username, levelTwoTime from " + TABLE_NAME;
-//        Cursor cursor = db.rawQuery(query, null);
-//
-//        float time = 0;
-//
-//        cursor.moveToFirst();
-//        do {
-//            username2 = cursor.getString(0);
-//
-//            if (username2.equals(username1)) {
-//                time = cursor.getInt(1); // gets the progress
-//                db.close();
-//                break; // progress found
-//            }
-//        } while (cursor.moveToNext());
-//        return time;
-//    }
+    /**
+     * Finds the levelOneTime, levelTwoTime, and levelThreeTime to calculate the user's score
+     * after they have won the game.
+     *
+     * @param username1 the username of the user who just finished the game
+     * @return double array of length 3 containing user's times to complete each level in seconds.
+     */
+    private double[] findTimes(String username1) {
+        System.out.println("Progress found");
+        db = this.getReadableDatabase();
+
+        String username2;
+
+        String query = "select username, levelOneTime, levelTwoTime, levelThreeTime from " + TABLE_NAME;
+        Cursor cursor = db.rawQuery(query, null);
+
+        double[] times = new double[3];
+
+        cursor.moveToFirst();
+        do {
+            username2 = cursor.getString(0);
+
+            if (username2.equals(username1)) {
+                times[0] = cursor.getInt(1);
+                times[1] = cursor.getInt(2);
+                times[2] = cursor.getInt(3);
+                break; // times have been found -- don't need to continue looping over database
+            }
+        } while (cursor.moveToNext());
+        return times;
+    }
 
     /**
      * Updates the database by changing the String value representing the logged in user's preferred
@@ -646,5 +659,73 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         cValues.put(COLUMN_CURRENT_LIVES, 10);
         cValues.put(COLUMN_PROGRESS, "none");
         db.update(TABLE_NAME, cValues, "id=" + ID, null);
+    }
+
+    /**
+     * Generates a TreeMap object sorted from least to greatest user scores where keys are
+     * integers representing users' scores and values are strings for the users' username.
+     *
+     * @return TreeMap<Integer, String> object of (user scores, username)
+     */
+    public TreeMap<Integer, String> findAllScores() {
+        Map<Integer, String> userScores = new HashMap<>();
+        db = this.getReadableDatabase();
+
+        String query = "select username, score from " + TABLE_NAME;
+        Cursor cursor = db.rawQuery(query, null);
+
+        cursor.moveToFirst();
+        do {
+            userScores.put(cursor.getInt(1), cursor.getString(0));
+        } while (cursor.moveToNext());
+        cursor.close();
+        return new TreeMap<>(userScores);
+    }
+
+    /**
+     * Calculates the new high score for the user logged in who just won the game.
+     * If the user beats their previous best score, then the database is updated with the new score.
+     */
+    public void saveNewScore(String username) {
+        double[] allTimes = findTimes(username);
+        double totalTime = allTimes[0] + allTimes[1] + allTimes[2];
+        String difficulty = findDifficulty(username);
+        int livesLeft = findLives(username);
+        // User
+        int totalScore = 10000 - (int) Math.floor((totalTime / 10) * 100);
+
+        // Reducing the number of points based on how many lives user has left at end of game.
+        if (difficulty.equalsIgnoreCase("Easy")) { // total possible lives is 10
+            totalScore *= (livesLeft / 10);
+        } else {    // total possible lives is 5
+            totalScore *= (livesLeft / 5);
+        }
+
+        if (totalScore > findScore(username)) { // new score beats previous best
+            setScore(username, totalScore);
+        }
+    }
+
+    /**
+     * Returns a boolean specifying whether the user with username has a high enough score to be
+     * on the scoreboard.
+     *
+     * @param username the username of the user logged in.
+     * @return true if the user is on the scoreboard, else false
+     */
+    public boolean userOnScoreboard(String username) {
+        TreeMap<Integer, String> allScores = findAllScores();
+        if (allScores.size() <= 20) {
+            return true;
+        } else {
+            ArrayList<String> usernames = (ArrayList<String>) allScores.values();
+            Collections.reverse(usernames);
+            for (int i = 0; i < 20; i++) {
+                if (usernames.get(i).equals(username)) {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

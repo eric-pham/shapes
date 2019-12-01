@@ -170,6 +170,7 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
   public void goToPlayerStatsPage(Intent playerStatsPage) {
     System.out.println("Entering Player Stats Page!");
     playerStatsPage.putExtra("username", this.username);
+      playerStatsPage.putExtra("userOnScoreboard", "N/A");
     startActivity(playerStatsPage);
   }
 

@@ -2,7 +2,10 @@ package com.group0578.hpgame.level1;
 
 import com.group0578.hpgame.model.SQLiteHelper;
 
-public class FlyingInteractor {
+/**
+ * Facilitates access and modification to database data
+ */
+class FlyingInteractor {
     /**
      * String representing the theme, either 'Light' or 'Dark'
      */
