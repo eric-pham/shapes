@@ -12,14 +12,14 @@ class Wand extends Items {
     /**
      * How the wand appears on the screen.
      */
-    private String appearance;
+    private boolean isCircle;
 
     /**
      * Indicates whether the wand is moving right.
      */
     private boolean goingRight;
 
-    private Paint paintText = new Paint();
+    private Paint paint = new Paint();
 
     /**
      * The constructor for this wand.
@@ -29,15 +29,9 @@ class Wand extends Items {
      */
     Wand(int x, int y, String apperance) {
         super(x, y);
-        paintText.setTextSize(60);
-        paintText.setTypeface(Typeface.DEFAULT_BOLD);
-        paintText.setColor(Color.YELLOW);
+        paint.setColor(Color.YELLOW);
         goingRight = true;
-        if (apperance.equals("Circle")) {
-            this.appearance = "O";
-        } else {
-            this.appearance = "[]";
-        }
+        this.isCircle = apperance.equals("Circle");
     }
 
 
@@ -49,23 +43,18 @@ class Wand extends Items {
     }
 
     void draw(Canvas canvas) {
-        drawString(canvas, appearance, getX(), getY());
+        if (isCircle) {
+            int radius = 25;
+            canvas.drawCircle(getX() * Level3ScreenView.getCharWidth(), getY() * Level3ScreenView.getCharHeight(), radius, paint);
+        } else {
+            paint.setTextSize(60);
+            paint.setTypeface(Typeface.DEFAULT_BOLD);
+            canvas.drawText("[]", getX() * Level3ScreenView.getCharWidth(), getY() * Level3ScreenView.getCharHeight(), paint);
+        }
     }
 
     boolean getDirection() {
         return goingRight;
-    }
-
-    /**
-     * Draws the given string in the given graphics context at at the given cursor location.
-     *
-     * @param canvas the graphics context in which to draw the string.
-     * @param s      the string to draw.
-     * @param x      the x-coordinate of the string's cursor location.
-     * @param y      the y-coordinate of the string's cursor location.
-     */
-    private void drawString(Canvas canvas, String s, int x, int y) {
-        canvas.drawText(s, x * Level3ScreenView.getCharWidth(), y * Level3ScreenView.getCharHeight(), paintText);
     }
 
     /**
