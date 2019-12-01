@@ -3,13 +3,16 @@ package com.group0578.hpgame.view;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.group0578.hpgame.R;
 import com.group0578.hpgame.model.SQLiteHelper;
-import com.group0578.hpgame.presenter.StatsPresenter;
+import com.group0578.hpgame.presenter.ScoreboardPresenter;
 
 import java.util.Collections;
 import java.util.Map;
@@ -19,12 +22,12 @@ import java.util.ArrayList;
 /**
  * Displays the user statistics screen.
  */
-public class StatsActivity extends AppCompatActivity implements Stats.View {
+public class ScoreboardActivity extends AppCompatActivity implements Scoreboard.View {
 
     /**
      * The presenter associated with this View that handles the user's interactions with the UI.
      */
-    private StatsPresenter statsPresenter;
+    private ScoreboardPresenter scoreboardPresenter;
 
     /**
      * The username of the user who is logged in and currently viewing the scoreboard.
@@ -32,7 +35,8 @@ public class StatsActivity extends AppCompatActivity implements Stats.View {
     private String username;
 
     /**
-     * The SQLiteHelper class reads the database allowing this activity to display users' scores
+     * The SQLiteHelper class reads the database allowing this activity to access and display users'
+     * info.
      */
     private SQLiteHelper sqLiteHelper = new SQLiteHelper(this);
 
@@ -44,7 +48,7 @@ public class StatsActivity extends AppCompatActivity implements Stats.View {
         super.onCreate(savedInstanceState);
         setTitle("Scoreboard");
         setContentView(R.layout.activity_stats);
-        statsPresenter = new StatsPresenter(this);
+        scoreboardPresenter = new ScoreboardPresenter(this);
 
         // extracts the information that was passed from the previous activity
         Bundle extras = getIntent().getExtras();
@@ -54,7 +58,7 @@ public class StatsActivity extends AppCompatActivity implements Stats.View {
         }
 
         setComponentColours();
-        displayPlayerScores();
+        displayUsersByScore();
     }
 
     /**
@@ -89,9 +93,25 @@ public class StatsActivity extends AppCompatActivity implements Stats.View {
     }
 
     /**
+     * Pressing this button will bring you to the MyStatsActivity that displays all your best records.
+     */
+    public void onClickDisplayScoreboard(View view) {
+        // needs to be implemented
+    }
+
+    /**
+     * Pressing this button will bring you to the MyStatsActivity that displays all your best records.
+     */
+    public void onClickMyStats(View view) {
+        Intent myStats = new Intent(this, MyStatsActivity.class);
+        myStats.putExtra("username", this.username);
+        startActivity(myStats);
+    }
+
+    /**
      * Displays the Player Scores on the scoreboard
      */
-    private void displayPlayerScores() {
+    private void displayUsersByScore() {
         //Gets the sorted TreeMap
         TreeMap<Integer, String> treeMap = sqLiteHelper.findAllScores();
 
@@ -121,6 +141,8 @@ public class StatsActivity extends AppCompatActivity implements Stats.View {
                 scores.add("");
             }
         }
+
+//        setScoreBoardValues(usernames, scores);
 
         //Sets all TextViews accordingly
         ((TextView) findViewById(R.id.user1)).setText(usernames.get(0));
@@ -184,5 +206,99 @@ public class StatsActivity extends AppCompatActivity implements Stats.View {
         ((TextView) findViewById(R.id.score20)).setText(scores.get(19));
 
 
+    }
+
+    /**
+     * Ranks the users on the scoreboard based on the total time they completed the game.
+     */
+    private void displayUsersByTotalTime() {
+        //Gets the sorted TreeMap
+        TreeMap<Double, String> treeMap = sqLiteHelper.findAllTotalTimes();
+
+        //Two ArrayList for username and total times
+        ArrayList<String> usernames = new ArrayList<>();
+        ArrayList<String> totalTimes = new ArrayList<>();
+
+        //Fills the two arrays, converts the total time to a String
+        for (Map.Entry<Double, String> entry : treeMap.entrySet()) {
+            Double key = entry.getKey();
+            String value = entry.getValue();
+
+            if (key > 0) {
+                usernames.add(value);
+                totalTimes.add(String.valueOf(key));
+            }
+        }
+
+//        Collections.reverse(totalTimes);
+//        Collections.reverse(usernames);
+
+        //Check if < 20 size, if yes fill in empty spots with blank strings
+        if (usernames.size() < 20) {
+            int difference = 20 - usernames.size();
+            for (int i = 0; i < difference; i++) {
+                usernames.add("");
+                totalTimes.add("");
+            }
+        }
+
+        setScoreBoardValues(usernames, totalTimes);
+    }
+
+    /**
+     * Ranks the users on the scoreboard based on the average time they completed the game.
+     */
+    private void displayUsersByAvgTime() {
+        //Gets the sorted TreeMap
+        TreeMap<Double, String> treeMap = sqLiteHelper.findAllAvgTimes();
+
+        //Two ArrayList for username and avg times
+        ArrayList<String> usernames = new ArrayList<>();
+        ArrayList<String> avgTimes = new ArrayList<>();
+
+        //Fills the two arrays, converts the avg time to a String
+        for (Map.Entry<Double, String> entry : treeMap.entrySet()) {
+            Double key = entry.getKey();
+            String value = entry.getValue();
+
+            if (key > 0) {
+                usernames.add(value);
+                avgTimes.add(String.valueOf(key));
+            }
+        }
+        // we want times from least to greatest
+//        Collections.reverse(avgTimes);
+//        Collections.reverse(usernames);
+
+        //Check if < 20 size, if yes fill in empty spots with blank strings
+        if (usernames.size() < 20) {
+            int difference = 20 - usernames.size();
+            for (int i = 0; i < difference; i++) {
+                usernames.add("");
+                avgTimes.add("");
+            }
+        }
+
+        setScoreBoardValues(usernames, avgTimes);
+    }
+
+
+    // still working on this, produces errors
+    /**
+     * Sets the text of all the TextViews making up the scoreboard.
+     * @param usernames the array list containing all the users to be displayed on the scoreboard.
+     * @param values the array list containing the values by which the users are being ranked
+     */
+    private void setScoreBoardValues(ArrayList<String> usernames, ArrayList<String> values) {
+        //Sets all TextViews accordingly
+        TableLayout scoreTable = findViewById(R.id.scoreboard);
+        for (int i = 1; i < scoreTable.getChildCount() - 1; i++) {
+            TableRow row = (TableRow) scoreTable.getChildAt(i);
+            for (int j = 0; j < row.getChildCount(); j++) {
+                TextView cell = (TextView) row.getChildAt(j);
+                cell.setText(usernames.get(i));
+                cell.setText(values.get(i));
+            }
+        }
     }
 }

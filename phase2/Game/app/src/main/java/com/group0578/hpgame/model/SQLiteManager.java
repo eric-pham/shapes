@@ -22,7 +22,6 @@ public class SQLiteManager {
     private int score;
     private double totalTime;
     private double avgTime;
-    private int bestLives;
 
 
     /**
@@ -259,19 +258,4 @@ public class SQLiteManager {
         this.avgTime = avgTime;
     }
 
-    /**
-     * Getter for the best lives achieved by this user.
-     * @return an int representing the lives.
-     */
-    int getBestLives() {
-        return bestLives;
-    }
-
-    /**
-     * Setter for the best lives achieved by this user.
-     * @param bestLives an int representing the lives.
-     */
-    public void setBestLives(int bestLives) {
-        this.bestLives = bestLives;
-    }
 }

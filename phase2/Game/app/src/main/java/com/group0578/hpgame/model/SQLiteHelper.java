@@ -102,11 +102,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static final String COLUMN_AVG_TIME = "avgTime";
 
     /**
-     * Column for a user's best live count after completing the game.
-     */
-    private static final String COLUMN_BEST_LIVES = "bestLives";
-
-    /**
      * SQLiteDatabase object
      */
     private SQLiteDatabase db;
@@ -128,8 +123,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                     + "progress text not null, "
                     + "score integer not null, "
                     + "totalTime real not null, "
-                    + "avgTime real not null, "
-                    + "bestLives integer not null)";
+                    + "avgTime real not null)";
 
     /**
      * Constructor for SQLiteHelper
@@ -194,7 +188,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         cValues.put(COLUMN_USER_SCORE, sqlManager.getScore());
         cValues.put(COLUMN_TOTAL_TIME, sqlManager.getTotalTime());
         cValues.put(COLUMN_AVG_TIME, sqlManager.getAvgTime());
-        cValues.put(COLUMN_BEST_LIVES, sqlManager.getBestLives());
 
 
         db.insert(TABLE_NAME, null, cValues);
@@ -448,7 +441,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @param username1 the username of the user logged in.
      * @return integer score for this user.
      */
-    private synchronized int findScore(String username1) {
+    public synchronized int findScore(String username1) {
         System.out.println("Method SQLiteHelper.findScore() reached");
         db = this.getReadableDatabase();
 
@@ -469,13 +462,14 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         return score;
     }
 
+// needs to be fixed
     /**
      * Finds the current best total time for the user logged in.
      *
      * @param username1 the username of the user logged in.
      * @return double representing best total time in seconds.
      */
-    private synchronized double findTotalTime(String username1) {
+    public synchronized double findTotalTime(String username1) {
         System.out.println("Method SQLiteHelper.findScore() reached");
         db = this.getReadableDatabase();
 
@@ -496,13 +490,14 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         return totalTime;
     }
 
+    // needs to be fixed
     /**
      * Finds the current best avg time for the user logged in.
      *
      * @param username1 the username of the user logged in.
      * @return double representing avg total time in seconds.
      */
-    private synchronized double findAvgTime(String username1) {
+    public synchronized double findAvgTime(String username1) {
         System.out.println("Method SQLiteHelper.findScore() reached");
         db = this.getReadableDatabase();
 
@@ -773,23 +768,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Updates the database by recording the logged in user's new best lives if it beats (is
-     * larger than) their old avg time.
-     *
-     * @param username the username of the user currently logged in.
-     * @param lives the new best lives for the logged in user.
-     */
-    private synchronized void setBestLives(String username, int lives) {
-        System.out.println("SQLiteHelper.setUserScore() method reached");
-        int ID = this.findID(username);
-        db = this.getWritableDatabase();
-        ContentValues cValues = new ContentValues();
-
-        cValues.put(COLUMN_BEST_LIVES, lives);
-        db.update(TABLE_NAME, cValues, "id=" + ID, null);
-    }
-
-    /**
      * Resets the game progress, user lives, and the times for each level.
      *
      * @param username the logged in user.
@@ -976,20 +954,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         }
     }
 
-    /**
-     * Calculates the new avg time to beat each level for the user logged in.
-     * If the user beats their previous best average time, then the database is updated with the
-     * new time.
-     */
-    public void saveNewBestLives(String username) {
-        System.out.println("SQLiteHelper saveNewBestLives method reached");
-        int oldLives = findBestLives(username);
-        int newLives = findLives(username);
-
-        if (newLives > oldLives) { // new lives are more than the previous
-            setBestLives(username, newLives);
-        }
-    }
 
     /**
      * Returns a boolean specifying whether the user with username has a high enough score to be

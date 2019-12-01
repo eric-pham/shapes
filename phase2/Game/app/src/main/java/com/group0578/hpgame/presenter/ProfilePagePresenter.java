@@ -9,7 +9,7 @@ import com.group0578.hpgame.model.SQLiteHelper;
 import com.group0578.hpgame.view.CustomizeActivity;
 import com.group0578.hpgame.view.ProfilePage;
 import com.group0578.hpgame.view.ProfilePageActivity;
-import com.group0578.hpgame.view.StatsActivity;
+import com.group0578.hpgame.view.ScoreboardActivity;
 
 /**
  * Responsible for handling actions from the View {@link
@@ -67,8 +67,8 @@ public class ProfilePagePresenter implements ProfilePage.Presenter {
      * default display message: "No games played. Statistics available after game completion."
      */
     @Override
-    public void displayPlayerStats() {
-        Intent createStatsPage = new Intent((ProfilePageActivity) this.profilePageView, StatsActivity.class);
+    public void displayScoreBoard() {
+        Intent createStatsPage = new Intent((ProfilePageActivity) this.profilePageView, ScoreboardActivity.class);
         this.profilePageView.goToPlayerStatsPage(createStatsPage);
     }
 

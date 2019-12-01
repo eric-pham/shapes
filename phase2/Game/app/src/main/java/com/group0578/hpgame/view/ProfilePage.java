@@ -32,7 +32,7 @@ public interface ProfilePage {
 
     void resumePreviousGame(String progress);
 
-    void displayPlayerStats();
+    void displayScoreBoard();
 
     void changeUserCustomization();
   }
