@@ -16,6 +16,7 @@ import com.group0578.hpgame.level3.Level3MainActivity;
 import com.group0578.hpgame.R;
 import com.group0578.hpgame.model.SQLiteHelper;
 import com.group0578.hpgame.view.GameOverActivity;
+import com.group0578.hpgame.view.ProfilePageActivity;
 
 /** The startup activity for beginning the level 2 maze of this game. */
 public class MazeActivity extends AppCompatActivity {
@@ -136,4 +137,15 @@ public class MazeActivity extends AppCompatActivity {
     startActivity(gameOver);
     finish();
   }
+
+    /**
+     * Pressing the back button will bring you to the ProfilePageActivity.
+     */
+    @Override
+    public void onBackPressed() {
+        Intent profile = new Intent(this, ProfilePageActivity.class);
+        profile.putExtra("username", this.username);
+        startActivity(profile);
+        finish();
+    }
 }
