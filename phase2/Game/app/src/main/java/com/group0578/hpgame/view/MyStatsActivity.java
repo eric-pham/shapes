@@ -48,6 +48,7 @@ public class MyStatsActivity extends AppCompatActivity {
         String totalTime = String.format("%s seconds", sqlHelper.findTotalTime(username));
         String avgTime = String.format("%s seconds", sqlHelper.findAvgTime(username));
         String score = String.format("%s points", sqlHelper.findScore(username));
+        // the user hasn't yet completed the game
         if (!totalTime.equals("10000.0 seconds")) {
             ((TextView) findViewById(R.id.bestTotalValue)).setText(totalTime);
             ((TextView) findViewById(R.id.bestAverageValue)).setText(avgTime);

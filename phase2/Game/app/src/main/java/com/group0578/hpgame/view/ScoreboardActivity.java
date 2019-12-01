@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.group0578.hpgame.R;
 import com.group0578.hpgame.model.SQLiteHelper;
-import com.group0578.hpgame.presenter.ScoreboardPresenter;
 
 import java.util.Collections;
 import java.util.Map;
@@ -25,12 +24,7 @@ import java.util.ArrayList;
 /**
  * Displays the user statistics screen.
  */
-public class ScoreboardActivity extends AppCompatActivity implements Scoreboard.View, AdapterView.OnItemSelectedListener {
-
-    /**
-     * The presenter associated with this View that handles the user's interactions with the UI.
-     */
-    private ScoreboardPresenter scoreboardPresenter;
+public class ScoreboardActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     /**
      * The username of the user who is logged in and currently viewing the scoreboard.
@@ -51,7 +45,6 @@ public class ScoreboardActivity extends AppCompatActivity implements Scoreboard.
         super.onCreate(savedInstanceState);
         setTitle("Scoreboard");
         setContentView(R.layout.activity_scoreboard);
-        scoreboardPresenter = new ScoreboardPresenter(this);
 
         // extracts the information that was passed from the previous activity
         Bundle extras = getIntent().getExtras();
@@ -149,69 +142,6 @@ public class ScoreboardActivity extends AppCompatActivity implements Scoreboard.
         }
 
     setScoreBoardValues(usernames, scores);
-
-//        //Sets all TextViews accordingly
-//        ((TextView) findViewById(R.id.user1)).setText(usernames.get(0));
-//        ((TextView) findViewById(R.id.score1)).setText(scores.get(0));
-//
-//        ((TextView) findViewById(R.id.user2)).setText(usernames.get(1));
-//        ((TextView) findViewById(R.id.score2)).setText(scores.get(1));
-//
-//        ((TextView) findViewById(R.id.user3)).setText(usernames.get(2));
-//        ((TextView) findViewById(R.id.score3)).setText(scores.get(2));
-//
-//        ((TextView) findViewById(R.id.user4)).setText(usernames.get(3));
-//        ((TextView) findViewById(R.id.score4)).setText(scores.get(3));
-//
-//        ((TextView) findViewById(R.id.user5)).setText(usernames.get(4));
-//        ((TextView) findViewById(R.id.score5)).setText(scores.get(4));
-//
-//        ((TextView) findViewById(R.id.user6)).setText(usernames.get(5));
-//        ((TextView) findViewById(R.id.score6)).setText(scores.get(5));
-//
-//        ((TextView) findViewById(R.id.user7)).setText(usernames.get(6));
-//        ((TextView) findViewById(R.id.score7)).setText(scores.get(6));
-//
-//        ((TextView) findViewById(R.id.user8)).setText(usernames.get(7));
-//        ((TextView) findViewById(R.id.score8)).setText(scores.get(7));
-//
-//        ((TextView) findViewById(R.id.user9)).setText(usernames.get(8));
-//        ((TextView) findViewById(R.id.score9)).setText(scores.get(8));
-//
-//        ((TextView) findViewById(R.id.user10)).setText(usernames.get(9));
-//        ((TextView) findViewById(R.id.score10)).setText(scores.get(9));
-//
-//        ((TextView) findViewById(R.id.user11)).setText(usernames.get(10));
-//        ((TextView) findViewById(R.id.score11)).setText(scores.get(10));
-//
-//        ((TextView) findViewById(R.id.user12)).setText(usernames.get(11));
-//        ((TextView) findViewById(R.id.score12)).setText(scores.get(11));
-//
-//        ((TextView) findViewById(R.id.user13)).setText(usernames.get(12));
-//        ((TextView) findViewById(R.id.score13)).setText(scores.get(12));
-//
-//        ((TextView) findViewById(R.id.user14)).setText(usernames.get(13));
-//        ((TextView) findViewById(R.id.score14)).setText(scores.get(13));
-//
-//        ((TextView) findViewById(R.id.user15)).setText(usernames.get(14));
-//        ((TextView) findViewById(R.id.score15)).setText(scores.get(14));
-//
-//        ((TextView) findViewById(R.id.user16)).setText(usernames.get(15));
-//        ((TextView) findViewById(R.id.score16)).setText(scores.get(15));
-//
-//        ((TextView) findViewById(R.id.user17)).setText(usernames.get(16));
-//        ((TextView) findViewById(R.id.score17)).setText(scores.get(16));
-//
-//        ((TextView) findViewById(R.id.user18)).setText(usernames.get(17));
-//        ((TextView) findViewById(R.id.score18)).setText(scores.get(17));
-//
-//        ((TextView) findViewById(R.id.user19)).setText(usernames.get(18));
-//        ((TextView) findViewById(R.id.score19)).setText(scores.get(18));
-//
-//        ((TextView) findViewById(R.id.user20)).setText(usernames.get(19));
-//        ((TextView) findViewById(R.id.score20)).setText(scores.get(19));
-
-
     }
 
     /**
@@ -295,8 +225,11 @@ public class ScoreboardActivity extends AppCompatActivity implements Scoreboard.
     private void setScoreBoardValues(ArrayList<String> usernames, ArrayList<String> values) {
         //Sets all TextViews accordingly
         TableLayout scoreTable = findViewById(R.id.scoreboard);
+
+        // loops through each table row
         for (int i = 1; i < scoreTable.getChildCount() - 1; i++) {
             TableRow row = (TableRow) scoreTable.getChildAt(i);
+            // loops through each cell in the row
             for (int j = 0; j < row.getChildCount(); j++) {
                 TextView cell = (TextView) row.getChildAt(j);
                 if (j % 2 == 0) {
