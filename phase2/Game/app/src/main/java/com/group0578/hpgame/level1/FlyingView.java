@@ -118,8 +118,6 @@ class FlyingView extends View {
      * Lost all lives, transition to GameOver
      */
     public void goToGameOver() {
-        System.out.println("goToGameOver reached");
-
         //Update the database with default values
         flyingInteractor.updateDatabase(0, 0.0, "none");
 
@@ -134,8 +132,6 @@ class FlyingView extends View {
      * Goal reached transition to next level
      */
     public void goToTransition() {
-        System.out.println("Transition reached");
-
         //Update the database with new data for lives and time
         flyingInteractor.updateDatabase(flyingPresenter.getLives(), timer.getSecondsPassed(), "one");
 
