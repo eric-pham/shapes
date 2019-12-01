@@ -69,7 +69,7 @@ public  class FlyingActivity extends AppCompatActivity {
                     @Override
 
                     public void run() {
-                        if (!gameView.getGameOver())
+                        if (gameView.getGameOver())
                             return;
                         gameView.invalidate();
 

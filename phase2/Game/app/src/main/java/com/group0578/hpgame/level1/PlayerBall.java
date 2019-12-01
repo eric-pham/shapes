@@ -3,10 +3,19 @@ package com.group0578.hpgame.level1;
 import android.graphics.Canvas;
 import android.graphics.Color;
 
+/**
+ * The Player's ball/character in the game
+ */
 class PlayerBall extends FlyingBall {
 
+    /**
+     * Keeps track of whether the character is a circle or a square
+     */
     private String character;
 
+    /**
+     * Constructor that creates the players ball and colour
+     */
     PlayerBall(String theme,String character){
         super();
         this.y = 100;
@@ -19,10 +28,13 @@ class PlayerBall extends FlyingBall {
             this.paint.setColor(Color.WHITE);
     }
 
+    /**
+     * Override parent function because player ball only goes up and down
+     */
     public void update(int width, int height)
     {
         int minCharY = 200;
-        int maxCharY = height - 70;
+        int maxCharY = height - 140;
 
         this.y = this.y + this.speed;
 
@@ -35,6 +47,11 @@ class PlayerBall extends FlyingBall {
         this.speed = this.speed + 2;
     }
 
+
+    /**
+     * Override parent function because player can be either a circle or a square
+     * Draws the player based on character option
+     */
     @Override
     public void draw(Canvas canvas) {
         if (this.character.equalsIgnoreCase("Circle"))

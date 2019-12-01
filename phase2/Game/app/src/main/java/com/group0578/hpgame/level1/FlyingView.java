@@ -1,5 +1,6 @@
 package com.group0578.hpgame.level1;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Canvas;
@@ -34,7 +35,7 @@ class FlyingView extends View {
      */
     private FlyingInteractor flyingInteractor;
 
-    private boolean gameOver = true;
+    private boolean gameOver = false;
 
     /**
      * Initialize a new FlyingView
@@ -51,7 +52,13 @@ class FlyingView extends View {
         flyingPresenter = new FlyingPresenter(this, this.flyingInteractor);
     }
 
-
+    /**
+     * Override onDraw method, main body to update the screen
+     * Uses the presenter to update the game state and draw the balls
+     * Also draws the stats and legend
+     *
+     * @param canvas the canvas to be drawn on
+     */
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
@@ -60,9 +67,11 @@ class FlyingView extends View {
         int canvasWidth = getWidth();
         int canvasHeight = getHeight();
 
+        //Updating the balls and player, and then drawing them
         flyingPresenter.updateGameState(canvasWidth, canvasHeight);
         flyingPresenter.draw(canvas);
 
+        //Draws the stats that are being kept track of
         canvas.drawText("Collected : " + flyingPresenter.getCollected(), 0, 60, flyingPresenter.getScorePaint());
         canvas.drawText("Goal : " + flyingPresenter.getGoal(), (canvasWidth / 3) + 70, 60, flyingPresenter.getScorePaint());
         canvas.drawText("Lives : " + flyingPresenter.getLives(), (canvasWidth / 3) * 2 + 50, 60, flyingPresenter.getScorePaint());
@@ -74,24 +83,33 @@ class FlyingView extends View {
         canvas.drawText("= -1 lives", canvasWidth - 320, canvasHeight - 20, flyingPresenter.getScorePaint());
         flyingPresenter.drawLegend(canvas, canvasHeight, canvasWidth);
 
+        //Checks if lives have gone to zero indicating game over
         if (flyingPresenter.getLives() == 0) {
-            System.out.println("goToGameOver method");
-            gameOver = false;
+            gameOver = true;
             goToGameOver();
         }
+        //Checks if the player has collected 10 balls or collected a bonus ball
         if (flyingPresenter.getCollected() == 10 || flyingPresenter.getBonus() == 1) {
-            System.out.println("goToTransition method");
-            gameOver = false;
+            gameOver = true;
             goToTransition();
         }
 
 
     }
 
+    /**
+     * Override onTouchEvent method
+     * Uses the presenter to update the speed of the player, moving them up the screen
+     * if the user has tapped the screen
+     *
+     * @param event the event if the user has touched the screen
+     * @return always returns true signalling player has touched screen
+     */
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            flyingPresenter.setCharSpeed(-22);
+            flyingPresenter.setCharSpeed();
         }
         return true;
     }
@@ -127,6 +145,11 @@ class FlyingView extends View {
         getContext().startActivity(transition);
     }
 
+    /**
+     * Gets the if the game is over or not
+     *
+     * @return boolean representing if the game is over
+     */
     public boolean getGameOver() {
         return this.gameOver;
     }

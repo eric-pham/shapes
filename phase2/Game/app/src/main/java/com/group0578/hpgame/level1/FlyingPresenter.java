@@ -61,25 +61,34 @@ class FlyingPresenter {
         setComponents();
     }
 
-
+    /**
+     * Update the position and stats of the game
+     *
+     * @param width width of the canvas
+     * @param height height of the canvas
+     */
     void updateGameState(int width, int height) {
         for (FlyingBall item : items) {
             item.update(width, height);
             if (collisionChecker(playerBall, item)) {
                 if (item instanceof PointBall) {
                     collected = collected + 1;
-                    item.x = -100;
+                    item.setX(-100);
                 } else if (item instanceof DeathBall) {
                     lives--;
-                    item.x = -100;
+                    item.setX(-100);
                 } else if (item instanceof BonusBall) {
                     bonus = bonus + 1;
-                    item.x = -100;
+                    item.setX(-100);
                 }
             }
         }
     }
-
+    /**
+     * Draws all the ball objects in the game
+     *
+     * @param canvas the canvas to be drawn on
+     */
     void draw(Canvas canvas) {
         for (FlyingBall item : items) {
             item.draw(canvas);
@@ -90,6 +99,8 @@ class FlyingPresenter {
      * Draws the legend
      *
      * @param canvas to draw to
+     * @param canvasHeight height of the canavas
+     * @param canvasWidth width of the canavas
      */
     void drawLegend(Canvas canvas, int canvasHeight, int canvasWidth) {
         String theme = flyingInteractor.getTheme();
@@ -111,13 +122,26 @@ class FlyingPresenter {
         deathBall.setY(canvasHeight - 40);
         deathBall.draw(canvas);
     }
-
+    /**
+     * Checks whether the a ball has collided with the player
+     *
+     * @param character the player
+     * @param ball the ball that is being checked
+     *
+     * @return boolean if ball and player have collided or not
+     */
     private boolean collisionChecker(FlyingBall character, FlyingBall ball) {
         return (character.getX() < ball.getX() &&
                 ball.getX() < (character.getX() + character.getRadius()) &&
                 character.getY() < ball.getY() && ball.getY() < (character.getY() + character.getRadius()));
     }
 
+    /**
+     * Sets the correct components for the game.
+     * Sets ball colours based on theme
+     * Sets character based on character choice
+     * Sets lives based on difficulty
+     */
     private void setComponents() {
         // Setting FlyingView background colours based on colour scheme selected by user
         if (this.flyingInteractor.getTheme().equalsIgnoreCase("Light")) {
@@ -148,9 +172,11 @@ class FlyingPresenter {
         goal = 10;
     }
 
-
-    void setCharSpeed(int charSpeed) {
-        this.playerBall.speed = charSpeed;
+    /**
+     * Sets the players speed, increasingly gets "bigger" so they fall down faster
+     */
+    void setCharSpeed() {
+        this.playerBall.speed = -22;
     }
 
     /**
