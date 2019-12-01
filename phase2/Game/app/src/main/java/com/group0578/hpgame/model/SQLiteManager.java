@@ -11,16 +11,62 @@ public class SQLiteManager {
      */
     private String username, password;
 
+    /**
+     * String that represents the level difficulty, 'Easy' or 'Hard'
+     */
     private String levelDifficulty;
+
+    /**
+     * String that represents the colour scheme of the game, either 'Light' or 'Dark'
+     */
     private String colourScheme;
+
+    /**
+     * double that represents the time in seconds and milliseconds that it took to complete level
+     * one
+     */
     private double levelOneTime;
+
+    /**
+     * double that represents the time in seconds and milliseconds that it took to complete level
+     * two
+     */
     private double levelTwoTime;
+
+    /**
+     * double that represents the time in seconds and milliseconds that it took to complete level
+     * three
+     */
     private double levelThreeTime;
+
+    /**
+     * integer depicting the current number of lives
+     */
     private int currLives;
+
+    /**
+     * String that represents the progress, either 'none', 'one', 'two', or 'three'
+     */
     private String progress;
+
+    /**
+     * String that represents the character, either 'Circle' or 'Square'
+     */
     private String character;
+
+    /**
+     * integer representing the score
+     */
     private int score;
+
+    /**
+     * double representing the total time
+     */
     private double totalTime;
+
+    /**
+     * double representing the average time
+     */
     private double avgTime;
 
 
@@ -170,7 +216,7 @@ public class SQLiteManager {
     }
 
     /**
-     * Returns the string representing the user's progress. Default value is 'one'. This gets updated
+     * Returns the string representing the user's progress. Default value is 'none'. This gets updated
      * with the most recently completed level.
      *
      * @return progress: a String
@@ -180,7 +226,7 @@ public class SQLiteManager {
     }
 
     /**
-     * Sets the string representing the user's progress. Default value is 'one'. This gets updated
+     * Sets the string representing the user's progress. Default value is 'none'. This gets updated
      * with the most recently completed level.
      *
      * @param progress the most recently completed level.
@@ -228,6 +274,7 @@ public class SQLiteManager {
 
     /**
      * Getter for the total time in seconds.
+     *
      * @return a double representing the total time.
      */
     double getTotalTime() {
@@ -236,6 +283,7 @@ public class SQLiteManager {
 
     /**
      * Setter for the total time in seconds.
+     *
      * @param totalTime a double representing the total time.
      */
     public void setTotalTime(double totalTime) {
@@ -244,6 +292,7 @@ public class SQLiteManager {
 
     /**
      * Getter for the average time in seconds.
+     *
      * @return a double representing the average time.
      */
     double getAvgTime() {
@@ -252,6 +301,7 @@ public class SQLiteManager {
 
     /**
      * Setter for the average time in seconds.
+     *
      * @param avgTime a double representing the average time.
      */
     public void setAvgTime(double avgTime) {

@@ -29,7 +29,14 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      */
     private static final int DB_VERSION = 1;
 
+    /**
+     * Database name
+     */
     private static final String DB_NAME = "users.db";
+
+    /**
+     * Table name
+     */
     private static final String TABLE_NAME = "users";
 
     /**
@@ -464,6 +471,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     }
 
 // needs to be fixed
+
     /**
      * Finds the current best total time for the user logged in.
      *
@@ -492,6 +500,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     }
 
     // needs to be fixed
+
     /**
      * Finds the current best avg time for the user logged in.
      *
@@ -738,7 +747,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * Updates the database by recording the logged in user's new best total time if it beats (is
      * smaller than) their old total time.
      *
-     * @param username the username of the user currently logged in.
+     * @param username  the username of the user currently logged in.
      * @param totalTime the new total time for the logged in user.
      */
     private synchronized void setTotalTime(String username, double totalTime) {
@@ -756,7 +765,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * smaller than) their old avg time.
      *
      * @param username the username of the user currently logged in.
-     * @param avgTime the new avg time for the logged in user.
+     * @param avgTime  the new avg time for the logged in user.
      */
     private synchronized void setAvgTime(String username, double avgTime) {
         System.out.println("SQLiteHelper.setUserScore() method reached");
