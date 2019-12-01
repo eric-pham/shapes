@@ -867,35 +867,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * Generates a TreeMap object sorted from least to greatest user best lives where keys are
-     * integers representing users' lives after game completion and values are strings for the
-     * users' username.
-     *
-     * @return TreeMap<Integer, String> object of (user lives, username)
-     */
-    public TreeMap<Integer, String> findAllBestLives() {
-        // Create Hash Map for the username and lives combinations
-        Map<Integer, String> userLives = new HashMap<>();
-        db = this.getReadableDatabase();
-
-        String query = "select username, bestLives from " + TABLE_NAME;
-        Cursor cursor = db.rawQuery(query, null);
-
-        cursor.moveToFirst();
-        do {
-            // Calculates the avg time and enters it into the Hash Map for every user that has
-            // completed the game.
-                // check this is being done properly
-            if (cursor.getInt(1) > -1) {
-                userLives.put(cursor.getInt(1), cursor.getString(0));
-            }
-        } while (cursor.moveToNext());
-        cursor.close();
-
-        return new TreeMap<>(userLives);
-    }
-
-    /**
      * Calculates the new high score for the user logged in who just won the game.
      * If the user beats their previous best score, then the database is updated with the new score.
      */
@@ -931,6 +902,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         System.out.println("SQLiteHelper saveNewScore method reached");
         double[] allTimes = findTimes(username);
         double newTotal = allTimes[0] + allTimes[1] + allTimes[2];
+        System.out.println(" new total time: " + newTotal);
         double oldTotal = findTotalTime(username);
 
         if (newTotal < oldTotal) { // new time is better than the previous
@@ -947,9 +919,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         System.out.println("SQLiteHelper saveNewScore method reached");
         double[] allTimes = findTimes(username);
         double newAvg = (allTimes[0] + allTimes[1] + allTimes[2]) / 3f;
+        System.out.println("new avg time: " + newAvg);
         double oldAvg = findAvgTime(username);
 
-        if (newAvg < oldAvg) { // new avg time is better than the previous
+        if (newAvg < oldAvg | oldAvg == -1) { // new avg time is better than the previous
             setAvgTime(username, newAvg);
         }
     }
