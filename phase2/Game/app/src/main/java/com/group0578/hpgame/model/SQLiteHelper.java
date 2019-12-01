@@ -82,11 +82,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
     private static final String COLUMN_PROGRESS = "progress";
 
     /**
-     * Column representing a boolean that's true if the user did not just create an account
-     */
-    private static final String COLUMN_RETURNING_USER = "returningUser";
-
-    /**
      * Column for a user account's custom character appearance.
      */
     private static final String COLUMN_CHARACTER = "character";
@@ -95,6 +90,21 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * Column for a user's high score after completing the game.
      */
     private static final String COLUMN_USER_SCORE = "score";
+
+    /**
+     * Column for a user's best total time after completing the game.
+     */
+    private static final String COLUMN_TOTAL_TIME = "totalTime";
+
+    /**
+     * Column for a user's best average time after completing the game.
+     */
+    private static final String COLUMN_AVG_TIME = "avgTime";
+
+    /**
+     * Column for a user's best live count after completing the game.
+     */
+    private static final String COLUMN_BEST_LIVES = "bestLives";
 
     /**
      * SQLiteDatabase object
@@ -116,7 +126,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                     + "levelThreeTime real not null, "
                     + "currLives integer not null,"
                     + "progress text not null, "
-                    + "score integer not null)";
+                    + "score integer not null, "
+                    + "totalTime real not null, "
+                    + "avgTime real not null, "
+                    + "bestLives integer not null)";
 
     /**
      * Constructor for SQLiteHelper
@@ -179,6 +192,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         cValues.put(COLUMN_PROGRESS, sqlManager.getProgress());
         cValues.put(COLUMN_CHARACTER, sqlManager.getCharacter());
         cValues.put(COLUMN_USER_SCORE, sqlManager.getScore());
+        cValues.put(COLUMN_TOTAL_TIME, sqlManager.getTotalTime());
+        cValues.put(COLUMN_AVG_TIME, sqlManager.getAvgTime());
+        cValues.put(COLUMN_BEST_LIVES, sqlManager.getBestLives());
+
 
         db.insert(TABLE_NAME, null, cValues);
         cursor.close();
@@ -431,7 +448,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @param username1 the username of the user logged in.
      * @return integer score for this user.
      */
-    public synchronized int findScore(String username1) {
+    private synchronized int findScore(String username1) {
         System.out.println("Method SQLiteHelper.findScore() reached");
         db = this.getReadableDatabase();
 
@@ -450,6 +467,87 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         } while (cursor.moveToNext());
         cursor.close();
         return score;
+    }
+
+    /**
+     * Finds the current best total time for the user logged in.
+     *
+     * @param username1 the username of the user logged in.
+     * @return double representing best total time in seconds.
+     */
+    private synchronized double findTotalTime(String username1) {
+        System.out.println("Method SQLiteHelper.findScore() reached");
+        db = this.getReadableDatabase();
+
+        String query = "select username, totalTime from " + TABLE_NAME;
+        Cursor cursor = db.rawQuery(query, null);
+        String username2;
+        double totalTime = 0;
+
+        cursor.moveToFirst();
+        do {
+            username2 = cursor.getString(0);
+            if (username2.equals(username1)) {
+                totalTime = cursor.getDouble(1);
+                break;
+            }
+        } while (cursor.moveToNext());
+        cursor.close();
+        return totalTime;
+    }
+
+    /**
+     * Finds the current best avg time for the user logged in.
+     *
+     * @param username1 the username of the user logged in.
+     * @return double representing avg total time in seconds.
+     */
+    private synchronized double findAvgTime(String username1) {
+        System.out.println("Method SQLiteHelper.findScore() reached");
+        db = this.getReadableDatabase();
+
+        String query = "select username, avgTime from " + TABLE_NAME;
+        Cursor cursor = db.rawQuery(query, null);
+        String username2;
+        double avgTime = 0;
+
+        cursor.moveToFirst();
+        do {
+            username2 = cursor.getString(0);
+            if (username2.equals(username1)) {
+                avgTime = cursor.getDouble(1);
+                break;
+            }
+        } while (cursor.moveToNext());
+        cursor.close();
+        return avgTime;
+    }
+
+    /**
+     * Finds the current high score (most points earned in a game) for the user logged in
+     *
+     * @param username1 the username of the user logged in.
+     * @return integer score for this user.
+     */
+    private synchronized int findBestLives(String username1) {
+        System.out.println("Method SQLiteHelper.findScore() reached");
+        db = this.getReadableDatabase();
+
+        String query = "select username, bestLives from " + TABLE_NAME;
+        Cursor cursor = db.rawQuery(query, null);
+        String username2;
+        int lives = 0;
+
+        cursor.moveToFirst();
+        do {
+            username2 = cursor.getString(0);
+            if (username2.equals(username1)) {
+                lives = cursor.getInt(1);
+                break;
+            }
+        } while (cursor.moveToNext());
+        cursor.close();
+        return lives;
     }
 
     /**
@@ -630,13 +728,64 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @param username the username of the user currently logged in.
      * @param score    the new score for the user logged in.
      */
-    public synchronized void setScore(String username, int score) {
+    private synchronized void setScore(String username, int score) {
         System.out.println("SQLiteHelper.setUserScore() method reached");
         int ID = this.findID(username);
         db = this.getWritableDatabase();
         ContentValues cValues = new ContentValues();
 
         cValues.put(COLUMN_USER_SCORE, score);
+        db.update(TABLE_NAME, cValues, "id=" + ID, null);
+    }
+
+    /**
+     * Updates the database by recording the logged in user's new best total time if it beats (is
+     * smaller than) their old total time.
+     *
+     * @param username the username of the user currently logged in.
+     * @param totalTime the new total time for the logged in user.
+     */
+    private synchronized void setTotalTime(String username, double totalTime) {
+        System.out.println("SQLiteHelper.setUserScore() method reached");
+        int ID = this.findID(username);
+        db = this.getWritableDatabase();
+        ContentValues cValues = new ContentValues();
+
+        cValues.put(COLUMN_TOTAL_TIME, totalTime);
+        db.update(TABLE_NAME, cValues, "id=" + ID, null);
+    }
+
+    /**
+     * Updates the database by recording the logged in user's new best avg time if it beats (is
+     * smaller than) their old avg time.
+     *
+     * @param username the username of the user currently logged in.
+     * @param avgTime the new avg time for the logged in user.
+     */
+    private synchronized void setAvgTime(String username, double avgTime) {
+        System.out.println("SQLiteHelper.setUserScore() method reached");
+        int ID = this.findID(username);
+        db = this.getWritableDatabase();
+        ContentValues cValues = new ContentValues();
+
+        cValues.put(COLUMN_AVG_TIME, avgTime);
+        db.update(TABLE_NAME, cValues, "id=" + ID, null);
+    }
+
+    /**
+     * Updates the database by recording the logged in user's new best lives if it beats (is
+     * larger than) their old avg time.
+     *
+     * @param username the username of the user currently logged in.
+     * @param lives the new best lives for the logged in user.
+     */
+    private synchronized void setBestLives(String username, int lives) {
+        System.out.println("SQLiteHelper.setUserScore() method reached");
+        int ID = this.findID(username);
+        db = this.getWritableDatabase();
+        ContentValues cValues = new ContentValues();
+
+        cValues.put(COLUMN_BEST_LIVES, lives);
         db.update(TABLE_NAME, cValues, "id=" + ID, null);
     }
 
@@ -663,9 +812,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * Generates a TreeMap object sorted from least to greatest user scores where keys are
      * integers representing users' scores and values are strings for the users' username.
      *
-     * @return TreeMap<Integer, String> object of (user scores, username)
+     * @return TreeMap<Integer, String> object of (user score, username)
      */
     public TreeMap<Integer, String> findAllScores() {
+        // Create Hash Map for the username and score combinations
         Map<Integer, String> userScores = new HashMap<>();
         db = this.getReadableDatabase();
 
@@ -674,11 +824,97 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         cursor.moveToFirst();
         do {
-            userScores.put(cursor.getInt(1), cursor.getString(0));
+            // Enters the score into the Hash Map for every user that has completed the game.
+            if (cursor.getInt(1) > 0) {
+                userScores.put(cursor.getInt(1), cursor.getString(0));
+            }
         } while (cursor.moveToNext());
         cursor.close();
 
         return new TreeMap<>(userScores);
+    }
+
+    /**
+     * Generates a TreeMap object sorted from least to greatest user total times where keys are
+     * integers representing users' total times and values are strings for the users' username.
+     *
+     * @return TreeMap<Integer, String> object of (user total time, username)
+     */
+    public TreeMap<Double, String> findAllTotalTimes() {
+        // Create Hash Map for the username and total time combinations
+        Map<Double, String> userTotalTimes = new HashMap<>();
+        db = this.getReadableDatabase();
+
+        String query = "select username, totalTime from " + TABLE_NAME;
+        Cursor cursor = db.rawQuery(query, null);
+
+        cursor.moveToFirst();
+        do {
+            // Calculates the total time and enters it into the Hash Map for every user that has
+            // completed the game.
+            if (cursor.getDouble(1) > 0) {
+                userTotalTimes.put(cursor.getDouble(1), cursor.getString(0));
+            }
+        } while (cursor.moveToNext());
+        cursor.close();
+
+        return new TreeMap<>(userTotalTimes);
+    }
+
+    /**
+     * Generates a TreeMap object sorted from least to greatest user average time where keys are
+     * integers representing users' average time to complete a level and values are strings for the
+     * users' username.
+     *
+     * @return TreeMap<Integer, String> object of (user average time, username)
+     */
+    public TreeMap<Double, String> findAllAvgTimes() {
+        // Create Hash Map for the username and average time combinations
+        Map<Double, String> userAvgTimes = new HashMap<>();
+        db = this.getReadableDatabase();
+
+        String query = "select username, avgTime from " + TABLE_NAME;
+        Cursor cursor = db.rawQuery(query, null);
+
+        cursor.moveToFirst();
+        do {
+            // Calculates the avg time and enters it into the Hash Map for every user that has
+            // completed the game.
+            if (cursor.getDouble(1) > 0)
+                userAvgTimes.put(cursor.getDouble(1), cursor.getString(0));
+        } while (cursor.moveToNext());
+        cursor.close();
+
+        return new TreeMap<>(userAvgTimes);
+    }
+
+    /**
+     * Generates a TreeMap object sorted from least to greatest user best lives where keys are
+     * integers representing users' lives after game completion and values are strings for the
+     * users' username.
+     *
+     * @return TreeMap<Integer, String> object of (user lives, username)
+     */
+    public TreeMap<Integer, String> findAllBestLives() {
+        // Create Hash Map for the username and lives combinations
+        Map<Integer, String> userLives = new HashMap<>();
+        db = this.getReadableDatabase();
+
+        String query = "select username, bestLives from " + TABLE_NAME;
+        Cursor cursor = db.rawQuery(query, null);
+
+        cursor.moveToFirst();
+        do {
+            // Calculates the avg time and enters it into the Hash Map for every user that has
+            // completed the game.
+                // check this is being done properly
+            if (cursor.getInt(1) > -1) {
+                userLives.put(cursor.getInt(1), cursor.getString(0));
+            }
+        } while (cursor.moveToNext());
+        cursor.close();
+
+        return new TreeMap<>(userLives);
     }
 
     /**
@@ -705,6 +941,53 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         if (totalScore > findScore(username)) { // new score beats previous best
             setScore(username, totalScore);
+        }
+    }
+
+    /**
+     * Calculates the new total time to beat the game for the user logged in
+     * If the user beats their previous best total time, then the database is updated with the
+     * new time.
+     */
+    public void saveNewTotalTime(String username) {
+        System.out.println("SQLiteHelper saveNewScore method reached");
+        double[] allTimes = findTimes(username);
+        double newTotal = allTimes[0] + allTimes[1] + allTimes[2];
+        double oldTotal = findTotalTime(username);
+
+        if (newTotal < oldTotal) { // new time is better than the previous
+            setTotalTime(username, newTotal);
+        }
+    }
+
+    /**
+     * Calculates the new avg time to beat each level for the user logged in.
+     * If the user beats their previous best average time, then the database is updated with the
+     * new time.
+     */
+    public void saveNewAvgTime(String username) {
+        System.out.println("SQLiteHelper saveNewScore method reached");
+        double[] allTimes = findTimes(username);
+        double newAvg = (allTimes[0] + allTimes[1] + allTimes[2]) / 3f;
+        double oldAvg = findAvgTime(username);
+
+        if (newAvg < oldAvg) { // new avg time is better than the previous
+            setAvgTime(username, newAvg);
+        }
+    }
+
+    /**
+     * Calculates the new avg time to beat each level for the user logged in.
+     * If the user beats their previous best average time, then the database is updated with the
+     * new time.
+     */
+    public void saveNewBestLives(String username) {
+        System.out.println("SQLiteHelper saveNewBestLives method reached");
+        int oldLives = findBestLives(username);
+        int newLives = findLives(username);
+
+        if (newLives > oldLives) { // new lives are more than the previous
+            setBestLives(username, newLives);
         }
     }
 

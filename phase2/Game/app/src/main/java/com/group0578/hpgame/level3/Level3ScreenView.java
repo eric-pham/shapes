@@ -244,6 +244,9 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
         sqLiteHelper.setProgress(username, "three");
         sqLiteHelper.setLevelThreeTime(username, level3Timer.getSecondsPassed());
         sqLiteHelper.saveNewScore(username);
+        sqLiteHelper.saveNewTotalTime(username);
+        sqLiteHelper.saveNewAvgTime(username);
+        sqLiteHelper.saveNewBestLives(username);
 
         String userOnScoreboard;
         if (sqLiteHelper.userOnScoreboard(username)) {

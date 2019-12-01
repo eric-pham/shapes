@@ -18,8 +18,12 @@ public class SQLiteManager {
     private double levelThreeTime;
     private int currLives;
     private String progress;
-    private String customCharacter;
+    private String character;
     private int score;
+    private double totalTime;
+    private double avgTime;
+    private int bestLives;
+
 
     /**
      * Sets the username.
@@ -192,7 +196,7 @@ public class SQLiteManager {
      * @return "Circle" for circle shaped character or "Square" for square shaped character.
      */
     public String getCharacter() {
-        return customCharacter;
+        return character;
     }
 
     /**
@@ -202,7 +206,7 @@ public class SQLiteManager {
      * @param customCharacter "Circle" or "Square"
      */
     public void setCharacter(String customCharacter) {
-        this.customCharacter = customCharacter;
+        this.character = customCharacter;
     }
 
     /**
@@ -221,5 +225,53 @@ public class SQLiteManager {
      */
     public void setScore(int score) {
         this.score = score;
+    }
+
+    /**
+     * Getter for the total time in seconds.
+     * @return a double representing the total time.
+     */
+    double getTotalTime() {
+        return totalTime;
+    }
+
+    /**
+     * Setter for the total time in seconds.
+     * @param totalTime a double representing the total time.
+     */
+    public void setTotalTime(double totalTime) {
+        this.totalTime = totalTime;
+    }
+
+    /**
+     * Getter for the average time in seconds.
+     * @return a double representing the average time.
+     */
+    double getAvgTime() {
+        return avgTime;
+    }
+
+    /**
+     * Setter for the average time in seconds.
+     * @param avgTime a double representing the average time.
+     */
+    public void setAvgTime(double avgTime) {
+        this.avgTime = avgTime;
+    }
+
+    /**
+     * Getter for the best lives achieved by this user.
+     * @return an int representing the lives.
+     */
+    int getBestLives() {
+        return bestLives;
+    }
+
+    /**
+     * Setter for the best lives achieved by this user.
+     * @param bestLives an int representing the lives.
+     */
+    public void setBestLives(int bestLives) {
+        this.bestLives = bestLives;
     }
 }
