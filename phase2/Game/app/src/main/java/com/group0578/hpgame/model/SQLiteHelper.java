@@ -470,8 +470,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         return score;
     }
 
-// needs to be fixed
-
     /**
      * Finds the current best total time for the user logged in.
      *
@@ -526,33 +524,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         } while (cursor.moveToNext());
         cursor.close();
         return avgTime;
-    }
-
-    /**
-     * Finds the current high score (most points earned in a game) for the user logged in
-     *
-     * @param username1 the username of the user logged in.
-     * @return integer score for this user.
-     */
-    private synchronized int findBestLives(String username1) {
-        System.out.println("Method SQLiteHelper.findScore() reached");
-        db = this.getReadableDatabase();
-
-        String query = "select username, bestLives from " + TABLE_NAME;
-        Cursor cursor = db.rawQuery(query, null);
-        String username2;
-        int lives = 0;
-
-        cursor.moveToFirst();
-        do {
-            username2 = cursor.getString(0);
-            if (username2.equals(username1)) {
-                lives = cursor.getInt(1);
-                break;
-            }
-        } while (cursor.moveToNext());
-        cursor.close();
-        return lives;
     }
 
     /**
@@ -936,30 +907,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         if (newAvg < oldAvg | oldAvg == -1) { // new avg time is better than the previous
             DecimalFormat df = new DecimalFormat("0.000");
             setAvgTime(username, Double.parseDouble(df.format(newAvg)));
-        }
-    }
-
-
-    /**
-     * Returns a boolean specifying whether the user with username has a high enough score to be
-     * on the scoreboard.
-     *
-     * @param username the username of the user logged in.
-     * @return true if the user is on the scoreboard, else false
-     */
-    public boolean userOnScoreboard(String username) {
-        TreeMap<Integer, String> allScores = findAllScores();
-        if (allScores.size() <= 20) {
-            return true;
-        } else {
-            ArrayList<String> usernames = (ArrayList<String>) allScores.values();
-            Collections.reverse(usernames);
-            for (int i = 0; i < 20; i++) {
-                if (usernames.get(i).equals(username)) {
-                    return true;
-                }
-            }
-            return false;
         }
     }
 }

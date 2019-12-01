@@ -261,13 +261,7 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
         sqLiteHelper.saveNewTotalTime(username);
         sqLiteHelper.saveNewAvgTime(username);
 
-        String userOnScoreboard;
-        if (sqLiteHelper.userOnScoreboard(username)) {
-            userOnScoreboard = "true";
-        } else {
-            userOnScoreboard = "false";
-        }
-        goToPlayerStats(userOnScoreboard);
+        goToPlayerStats();
     }
 
     /**
@@ -282,13 +276,10 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
 
     /**
      * Go to the Scoreboard activity when the user wins.
-     *
-     * @param userOnScoreboard the username that goes on the scoreboard.
      */
-    private void goToPlayerStats(String userOnScoreboard) {
+    private void goToPlayerStats() {
         Intent displayStats = new Intent(getContext(), ScoreboardActivity.class);
         displayStats.putExtra("username", ((Level3MainActivity) getContext()).getUsername());
-        displayStats.putExtra("userOnScoreboard", userOnScoreboard);
         displayStats.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         getContext().startActivity(displayStats);
     }
