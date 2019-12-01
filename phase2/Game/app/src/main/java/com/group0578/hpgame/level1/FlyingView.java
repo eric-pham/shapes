@@ -22,9 +22,10 @@ class FlyingView extends View {
   /** Store the username String to pass to next level later */
   private String username;
 
-  /** */
+  /** Store the related interactor*/
   private FlyingInteractor flyingInteractor;
 
+  /** Store the state of the game in a boolean*/
   private boolean gameOver = false;
 
   /**
@@ -82,17 +83,6 @@ class FlyingView extends View {
     canvas.drawText(
         "= -1 lives", canvasWidth - 320, canvasHeight - 20, flyingPresenter.getScorePaint());
     flyingPresenter.drawLegend(canvas, canvasHeight, canvasWidth);
-
-    // Checks if lives have gone to zero indicating game over
-    if (flyingPresenter.getLives() == 0) {
-      gameOver = true;
-      goToGameOver();
-    }
-    // Checks if the player has collected 10 balls or collected a bonus ball
-    if (flyingPresenter.getCollected() == 10 || flyingPresenter.getBonus() == 1) {
-      gameOver = true;
-      goToTransition();
-    }
   }
 
   /**
@@ -141,4 +131,6 @@ class FlyingView extends View {
   public boolean getGameOver() {
     return this.gameOver;
   }
+
+  public void setGameOver(boolean value){this.gameOver = value;}
 }
