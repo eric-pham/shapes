@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -32,6 +34,11 @@ public class CustomizeActivity extends AppCompatActivity implements Customize.Vi
    * Boolean specifying whether the colour scheme has been changed by selected light/dark buttons
    */
   private boolean colourSchemeChanged = false;
+
+  /**
+   * Boolean specifying whether the difficulty has been  by selected light/dark buttons
+   */
+  private boolean requiresNotification = false;
 
   /** Called immediately when the activity is started. */
   @Override
@@ -129,7 +136,7 @@ public class CustomizeActivity extends AppCompatActivity implements Customize.Vi
     if (colourSchemeChanged) {
       backToProfilePage.putExtra("colourScheme", sqlHelper.findColourScheme(username));
     } else {
-      backToProfilePage.putExtra("colourScheme", "not changed");
+      backToProfilePage.putExtra("colourScheme", "not requiresNotification");
     }
     setResult(Activity.RESULT_OK, backToProfilePage);
     finish();
@@ -143,11 +150,9 @@ public class CustomizeActivity extends AppCompatActivity implements Customize.Vi
    */
   public void onClickLightButton(View view) {
     // presenter returns true if colour scheme was changed
-    if (customizePresenter.changeColourScheme(sqlHelper, username, "Light")) {
-      colourSchemeChanged = true;
-      setComponentColours(); // changes background colours immediately
-    } else {
-      colourSchemeChanged = false;
+    colourSchemeChanged = customizePresenter.changeColourScheme(sqlHelper, username, "Light");
+    if (colourSchemeChanged) {
+      setComponentColours();
     }
   }
 
@@ -159,11 +164,9 @@ public class CustomizeActivity extends AppCompatActivity implements Customize.Vi
    */
   public void onClickDarkButton(View view) {
     // presenter returns true if colour scheme was changed
-    if (customizePresenter.changeColourScheme(sqlHelper, username, "Dark")) {
-      colourSchemeChanged = true;
-      setComponentColours(); // changes background colours immediately
-    } else {
-      colourSchemeChanged = false;
+    colourSchemeChanged = customizePresenter.changeColourScheme(sqlHelper, username, "Dark");
+    if (colourSchemeChanged) {
+      setComponentColours();
     }
   }
 
@@ -174,7 +177,13 @@ public class CustomizeActivity extends AppCompatActivity implements Customize.Vi
    * @param view the view displaying this activity.
    */
   public void onClickEasyButton(View view) {
-    customizePresenter.changeLevelDifficulty(sqlHelper, username, "Easy");
+    requiresNotification = customizePresenter.changeLevelDifficulty(sqlHelper, username, "Easy");
+
+    if (requiresNotification) {
+      displayToast("Your previous game was on a different difficulty. Your game progress was reset.");
+      sqlHelper.resetDefaults(username);
+    }
+    requiresNotification = false;
   }
 
   /**
@@ -184,7 +193,13 @@ public class CustomizeActivity extends AppCompatActivity implements Customize.Vi
    * @param view the view displaying this activity.
    */
   public void onClickHardButton(View view) {
-    customizePresenter.changeLevelDifficulty(sqlHelper, username, "Hard");
+    requiresNotification = customizePresenter.changeLevelDifficulty(sqlHelper, username, "Hard");
+
+    if (requiresNotification) {
+      displayToast("Your previous game was on a different difficulty. Your game progress was reset.");
+      sqlHelper.resetDefaults(username);
+    }
+    requiresNotification = false;
   }
 
   /**
@@ -205,5 +220,19 @@ public class CustomizeActivity extends AppCompatActivity implements Customize.Vi
    */
   public void onClickCharSquareButton(View view) {
     customizePresenter.changeCustomCharacter(sqlHelper, username, "Square");
+  }
+
+  /**
+   * Displays a message when the user attempts to perform an unavailable action.
+   *
+   * @param message a String representing the message to be displayed.
+   */
+  public void displayToast(String message) {  // still needs to be tested for the longer message.
+    // initiate the Toast with context, message and duration for the Toast
+    Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+    // set gravity for the Toast.
+    toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+    // display the Toast
+    toast.show();
   }
 }

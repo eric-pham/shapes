@@ -36,7 +36,7 @@ public class CustomizePresenter implements Customize.Presenter {
     @Override
     public boolean changeColourScheme(SQLiteHelper sqlHelper, String username, String colourScheme) {
         // Database colour scheme does not match new colour scheme for this user
-        if (!sqlHelper.findColourScheme(username).equals(colourScheme)) {
+        if (!sqlHelper.findColourScheme(username).equalsIgnoreCase(colourScheme)) {
             System.out.println("New colour scheme preference detected!");
             sqlHelper.setColourScheme(username, colourScheme);
             return true; // colour scheme updated
@@ -52,14 +52,20 @@ public class CustomizePresenter implements Customize.Presenter {
      * @param difficulty String: the new level difficulty
      */
     @Override
-    public void changeLevelDifficulty(SQLiteHelper sqlHelper, String username, String difficulty) {
+    public boolean changeLevelDifficulty(SQLiteHelper sqlHelper, String username, String difficulty) {
         // Database level difficulty does not match new level difficulty for this user
-        if (!sqlHelper.findDifficulty(username).equals(difficulty)) {
+        if (!sqlHelper.findDifficulty(username).equalsIgnoreCase(difficulty)) {
             System.out.println("New difficulty preference detected!");
             sqlHelper.setDifficulty(username, difficulty);
             // Changing the difficulty causes the number of lives a user has to increase/decrease
             updatePlayerLives(sqlHelper, username, difficulty);
+            if (!sqlHelper.findProgress(username).equalsIgnoreCase("none")) {
+                return true;
+            } else {
+                return false;
+            }
         }
+        return false;
     }
 
     /**

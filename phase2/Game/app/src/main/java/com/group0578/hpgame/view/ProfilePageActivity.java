@@ -237,7 +237,7 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
   private void changeColourScheme(Bundle extras) {
     if (extras != null) {
       String newColour = extras.getString("colourScheme");
-      if (!newColour.equals("not changed")) {
+      if (!"not changed".equalsIgnoreCase(newColour)) {
         setComponentColours(); // changes this screen's background colours
       }
     }

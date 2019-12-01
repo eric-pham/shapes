@@ -25,7 +25,7 @@ public interface Customize {
     interface Presenter {
         boolean changeColourScheme(SQLiteHelper sqlHelper, String username, String colourScheme);
 
-        void changeLevelDifficulty(SQLiteHelper sqlHelper, String username, String levelDifficulty);
+        boolean changeLevelDifficulty(SQLiteHelper sqlHelper, String username, String levelDifficulty);
 
         void changeCustomCharacter(SQLiteHelper sqlHelper, String username, String customChar);
     }
