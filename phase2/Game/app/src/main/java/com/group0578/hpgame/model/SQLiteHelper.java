@@ -679,6 +679,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             userScores.put(cursor.getInt(1), cursor.getString(0));
         } while (cursor.moveToNext());
         cursor.close();
+
         return new TreeMap<>(userScores);
     }
 
