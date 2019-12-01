@@ -116,7 +116,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                     + "levelThreeTime real not null, "
                     + "currLives integer not null,"
                     + "progress text not null, "
-                    + "returningUser integer not null,"
                     + "score integer not null)";
 
     /**
@@ -178,7 +177,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         cValues.put(COLUMN_LEVEL_THREE_TIME, sqlManager.getLevelThreeTime());
         cValues.put(COLUMN_CURRENT_LIVES, sqlManager.getCurrLives());
         cValues.put(COLUMN_PROGRESS, sqlManager.getProgress());
-        cValues.put(COLUMN_RETURNING_USER, sqlManager.getReturningUser());
         cValues.put(COLUMN_CHARACTER, sqlManager.getCharacter());
         cValues.put(COLUMN_USER_SCORE, sqlManager.getScore());
 

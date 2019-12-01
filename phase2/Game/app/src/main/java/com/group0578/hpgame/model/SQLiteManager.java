@@ -18,7 +18,6 @@ public class SQLiteManager {
     private double levelThreeTime;
     private int currLives;
     private String progress;
-    private int returningUser;
     private String customCharacter;
     private int score;
 
@@ -185,26 +184,6 @@ public class SQLiteManager {
      */
     public void setProgress(String progress) {
         this.progress = progress;
-    }
-
-    /**
-     * Returns 0 (representing false) if the user has logged in for the first time. Returns 1
-     * (representing true) if the user has logged before.
-     *
-     * @return returningUser: a String
-     */
-    int getReturningUser() {
-        return returningUser;
-    }
-
-    /**
-     * Sets the value to 0 (if the user has logged in for the first time) or 1 (if the user is a
-     * returning user).
-     *
-     * @param returningUser whether the user has logged in before.
-     */
-    public void setReturningUser(int returningUser) {
-        this.returningUser = returningUser;
     }
 
     /**

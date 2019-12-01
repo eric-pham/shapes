@@ -6,7 +6,6 @@ import com.group0578.hpgame.view.CreateUser;
 import com.group0578.hpgame.view.CreateUserActivity;
 import com.group0578.hpgame.view.ProfilePageActivity;
 
-import android.content.Context;
 import android.content.Intent;
 
 /**
@@ -48,7 +47,6 @@ public class CreateUserPresenter implements CreateUser.Presenter {
     sqlManager.setLevelThreeTime(0.0);
     sqlManager.setCurrLives(10);
     sqlManager.setProgress("none");
-    sqlManager.setReturningUser(0); // 0 represents false, 1 represents true
     sqlManager.setCharacter("Circle"); // A represents character A, B for character B
     sqlManager.setScore(0); // user hasn't played any games yet (no points earned)
 
