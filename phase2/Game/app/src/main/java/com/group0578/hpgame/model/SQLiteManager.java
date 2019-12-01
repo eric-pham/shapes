@@ -18,8 +18,12 @@ public class SQLiteManager {
     private double levelThreeTime;
     private int currLives;
     private String progress;
-    private String customCharacter;
+    private String character;
     private int score;
+    private double totalTime;
+    private double avgTime;
+    private int bestLives;
+
 
     /**
      * Sets the username.
@@ -192,7 +196,7 @@ public class SQLiteManager {
      * @return "Circle" for circle shaped character or "Square" for square shaped character.
      */
     public String getCharacter() {
-        return customCharacter;
+        return character;
     }
 
     /**
@@ -202,7 +206,7 @@ public class SQLiteManager {
      * @param customCharacter "Circle" or "Square"
      */
     public void setCharacter(String customCharacter) {
-        this.customCharacter = customCharacter;
+        this.character = customCharacter;
     }
 
     /**
@@ -221,5 +225,29 @@ public class SQLiteManager {
      */
     public void setScore(int score) {
         this.score = score;
+    }
+
+    double getTotalTime() {
+        return totalTime;
+    }
+
+    public void setTotalTime(double totalTime) {
+        this.totalTime = totalTime;
+    }
+
+    double getAvgTime() {
+        return avgTime;
+    }
+
+    public void setAvgTime(double avgTime) {
+        this.avgTime = avgTime;
+    }
+
+    int getBestLives() {
+        return bestLives;
+    }
+
+    public void setBestLives(int bestLives) {
+        this.bestLives = bestLives;
     }
 }
