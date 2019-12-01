@@ -92,12 +92,24 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
    * Prevents users from going back to startup page after signing in.
    */
   @Override
-  public void onBackPressed() {}
+  public void onBackPressed() {
+      displayToast("Invalid request. Logout to return to the Startup screen.");
+  }
+
+    /**
+     * Returns the user to the startup screen, logging them out.
+     *
+     * @param view the view displaying this activity.
+     */
+    public void onClickLogout(View view) {
+        Intent logout = new Intent(this, StartupActivity.class);
+        startActivity(logout);
+    }
 
   /**
    * Starts the game by calling the method that will create the intent for the first level.
    *
-   * @param view the view
+   * @param view the view displaying this activity.
    */
   public void onClickPlayGame(View view) {
       //If there exists previous progress, set database values to default except for customization
