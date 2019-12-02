@@ -124,7 +124,7 @@ class FlyingView extends View {
   }
 
   /**
-   * Gets the if the game is over or not
+   * Gets if the game is over or not
    *
    * @return boolean representing if the game is over
    */
@@ -132,5 +132,9 @@ class FlyingView extends View {
     return this.gameOver;
   }
 
+  /**
+   * Sets the value to true if game is over
+   * @param value boolean representing if the game is over
+   */
   public void setGameOver(boolean value){this.gameOver = value;}
 }

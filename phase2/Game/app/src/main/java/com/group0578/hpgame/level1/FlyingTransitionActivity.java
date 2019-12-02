@@ -8,13 +8,10 @@ import android.view.View;
 
 import com.group0578.hpgame.level2.MazeActivity;
 import com.group0578.hpgame.R;
-import com.group0578.hpgame.model.SQLiteHelper;
 
 /** Helps facilitate transition to the next level */
 public class FlyingTransitionActivity extends AppCompatActivity {
 
-  /** The sql database helper that has methods that can operate on the database. */
-  private SQLiteHelper sqlHelper = new SQLiteHelper(this);
 
   /** The username belonging to the user currently logged in and viewing the profile page. */
   private String username;

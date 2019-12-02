@@ -7,8 +7,6 @@ import android.content.ContentValues;
 import android.database.Cursor;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
