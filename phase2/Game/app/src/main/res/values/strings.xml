@@ -50,6 +50,8 @@
     <string name="title_score">Score</string>
     <string name="title_total_time">Total Time</string>
     <string name="title_avg_time">Average Time</string>
+    <string name="right">Right</string>
+    <string name="left">Left</string>
     <string-array name="scoreboardFilters">
         <item>Score</item>
         <item>Total Time</item>
