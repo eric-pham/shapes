@@ -25,11 +25,11 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
     /**
      * Screen width.
      */
-    private static int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
+    private int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
     /**
      * Screen height.
      */
-    private static int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
+    private int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
     /**
      * The width of a character.
      */
