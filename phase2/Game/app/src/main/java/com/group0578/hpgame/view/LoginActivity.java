@@ -48,8 +48,6 @@ public class LoginActivity extends AppCompatActivity implements Login.View {
     if (loginPresenter.checkLogin(sqlHelper, username, password)) {  // the login info is correct
       loginPresenter.createProfileScreen(username);
     } else {  // the password and username don't match
-      System.out.println("Login Failed!");
-
       // after button is clicked, hides keyboard
       InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
       assert imm != null;
@@ -67,7 +65,6 @@ public class LoginActivity extends AppCompatActivity implements Login.View {
    * @param profileIntent the intent for ProfilePageActivity
    */
   public void goToProfilePage(Intent profileIntent) {
-    System.out.println("Testing: Reached method LoginActivity.goToProfilePage ");
     startActivity(profileIntent);
     finish();
   }

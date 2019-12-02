@@ -102,7 +102,7 @@ public class SQLiteManager {
      *
      * @return password: a String.
      */
-    public String getPassword() {
+    String getPassword() {
         return password;
     }
 

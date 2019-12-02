@@ -72,7 +72,6 @@ public class GameOverActivity extends AppCompatActivity {
      * @param view the view displaying this activity.
      */
     public void onClickPlayAgain(View view) {
-        System.out.println("GameOverActivity.onClickPlayAgain method reached");
         Intent level1 = new Intent(this, FlyingActivity.class);
         level1.putExtra("username", this.username);
         startActivity(level1);
@@ -84,7 +83,6 @@ public class GameOverActivity extends AppCompatActivity {
      * @param view the view displaying this activity.
      */
     public void onClickProfilePageReturn(View view) {
-        System.out.println("GameOverActivity.onClickProfilePageReturn method reached");
         Intent profile = new Intent(this, ProfilePageActivity.class);
         profile.putExtra("username", this.username);
         startActivity(profile);

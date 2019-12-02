@@ -36,7 +36,6 @@ public class ProfilePagePresenter implements ProfilePage.Presenter {
      */
     public void createLevel1() {
         Intent levelOne = new Intent((ProfilePageActivity) this.profilePageView, FlyingActivity.class);
-        System.out.println("levelOne intent created");
         profilePageView.goToLevel1(levelOne);
     }
 
@@ -80,7 +79,6 @@ public class ProfilePagePresenter implements ProfilePage.Presenter {
     public void changeUserCustomization() {
         Intent createCustomizePage =
                 new Intent((ProfilePageActivity) profilePageView, CustomizeActivity.class);
-        System.out.println("Method ProfilePagePresenter.changeUserCustomization() reached");
         profilePageView.goToCustomizePage(createCustomizePage);
     }
 

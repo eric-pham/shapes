@@ -171,7 +171,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @param sqlManager contains username and password to be inserted
      */
     public void insertUser(SQLiteManager sqlManager) {
-        System.out.println("Inserted");
         db = this.getWritableDatabase();
         ContentValues cValues = new ContentValues();
 
@@ -198,7 +197,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         db.insert(TABLE_NAME, null, cValues);
         cursor.close();
-        System.out.println("Inserted");
     }
 
     /**
@@ -208,15 +206,11 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @return password associated with the username or "Cannot find pass"
      */
     public synchronized String findPassword(String username) {
-        System.out.println("FIndpassword method 1");
         db = this.getReadableDatabase();
 
-        System.out.println("FIndpassword method 2");
         String query = "select username, password from " + TABLE_NAME;
         Cursor cursor = db.rawQuery(query, null);
         String user, pass;
-
-        System.out.println("FIndpassword method 3");
 
         pass = "Cannot find pass";
         if (cursor.moveToFirst()) {
@@ -242,7 +236,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @return true if the username is already in the database, false otherwise
      */
     public synchronized boolean checkDuplicates(String username1) {
-        System.out.println("duplicates checked.");
         db = this.getReadableDatabase();
 
         String username2;
@@ -271,7 +264,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @return ID column value for the user with username username1
      */
     private synchronized int findID(String username1) {
-        System.out.println("SQLiteHelper.findID method reached");
         db = this.getReadableDatabase();
 
         String query = "select id, username from " + TABLE_NAME;
@@ -301,8 +293,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @return a String: 'Light' or 'Dark'.
      */
     public synchronized String findColourScheme(String username1) {
-
-        System.out.println("colour scheme found.");
         db = this.getReadableDatabase();
         String username2;
 
@@ -331,7 +321,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @return a String: 'Easy' or 'Hard'.
      */
     public synchronized String findDifficulty(String username1) {
-        System.out.println("difficulty found");
         db = this.getReadableDatabase();
 
         String username2;
@@ -361,7 +350,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @return a String: 'Circle' or 'Square'.
      */
     public synchronized String findCharacter(String username1) {
-        System.out.println("character found");
         db = this.getReadableDatabase();
 
         String username2;
@@ -391,7 +379,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @return a String: 'none', 'one', 'two' or 'three'.
      */
     public synchronized String findProgress(String username1) {
-        System.out.println("Progress found");
         db = this.getReadableDatabase();
 
         String username2;
@@ -421,7 +408,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @return integer for number of lives remaining
      */
     public synchronized int findLives(String username1) {
-        System.out.println("Method SQLiteHelper.findLives() reached");
         db = this.getReadableDatabase();
 
         String query = "select username, currLives from " + TABLE_NAME;
@@ -448,7 +434,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @return integer score for this user.
      */
     public synchronized int findScore(String username1) {
-        System.out.println("Method SQLiteHelper.findScore() reached");
         db = this.getReadableDatabase();
 
         String query = "select username, score from " + TABLE_NAME;
@@ -475,7 +460,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @return double representing best total time in seconds.
      */
     public synchronized double findTotalTime(String username1) {
-        System.out.println("Method SQLiteHelper.findScore() reached");
         db = this.getReadableDatabase();
 
         String query = "select username, totalTime from " + TABLE_NAME;
@@ -504,7 +488,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @return double representing avg total time in seconds.
      */
     public synchronized double findAvgTime(String username1) {
-        System.out.println("Method SQLiteHelper.findScore() reached");
         db = this.getReadableDatabase();
 
         String query = "select username, avgTime from " + TABLE_NAME;
@@ -532,7 +515,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @return double array of length 3 containing user's times to complete each level in seconds.
      */
     private double[] findTimes(String username1) {
-        System.out.println("SQLiteHelper findTimes method reached");
         db = this.getReadableDatabase();
 
         String username2;
@@ -553,6 +535,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 break; // times have been found -- don't need to continue looping over database
             }
         } while (cursor.moveToNext());
+        cursor.close();
         return times;
     }
 
@@ -564,14 +547,12 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @param colourScheme the string representing the user's preferred colour scheme.
      */
     public synchronized void setColourScheme(String username, String colourScheme) {
-        System.out.println("Method SQLiteHelper.setColourScheme() reached");
         int ID = this.findID(username);
         db = this.getWritableDatabase();
         ContentValues cValues = new ContentValues();
 
         cValues.put(COLUMN_COLOUR_SCHEME, colourScheme);
         db.update(TABLE_NAME, cValues, "id=" + ID, null);
-        System.out.println("New colour scheme: " + colourScheme);
     }
 
     /**
@@ -582,14 +563,12 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @param levelDifficulty the string representing the user's preferred game difficulty.
      */
     public synchronized void setDifficulty(String username, String levelDifficulty) {
-        System.out.println("Method SQLiteHelper.setDifficulty() reached");
         int ID = this.findID(username);
         db = this.getWritableDatabase();
         ContentValues cValues = new ContentValues();
 
         cValues.put(COLUMN_LEVEL_DIFFICULTY, levelDifficulty);
         db.update(TABLE_NAME, cValues, "id=" + ID, null);
-        System.out.println("New difficulty: " + levelDifficulty);
     }
 
     /**
@@ -600,14 +579,12 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @param character the string representing the user's preferred character.
      */
     public synchronized void setCharacter(String username, String character) {
-        System.out.println("Method SQLiteHelper.setCharacter() reached");
         int ID = this.findID(username);
         db = this.getWritableDatabase();
         ContentValues cValues = new ContentValues();
 
         cValues.put(COLUMN_CHARACTER, character);
         db.update(TABLE_NAME, cValues, "id=" + ID, null);
-        System.out.println("New character: " + character);
     }
 
     /**
@@ -619,14 +596,12 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      *                 should be either "one", "two" or "three"
      */
     public synchronized void setProgress(String username, String level) {
-        System.out.println("Method SQLiteHelper.setColourScheme() reached");
         int ID = this.findID(username);
         db = this.getWritableDatabase();
         ContentValues cValues = new ContentValues();
 
         cValues.put(COLUMN_PROGRESS, level);
         db.update(TABLE_NAME, cValues, "id=" + ID, null);
-        System.out.println("Completed level: " + level);
     }
 
     /**
@@ -637,7 +612,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @param totalTime the time taken to complete level 2
      */
     public synchronized void setLevelOneTime(String username, double totalTime) {
-        System.out.println("Method SQLiteHelper.setLevelOneTime reached.");
         int ID = this.findID(username);
         db = this.getWritableDatabase();
         ContentValues cValues = new ContentValues();
@@ -653,7 +627,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @param totalTime the time taken to complete level 2
      */
     public synchronized void setLevelTwoTime(String username, double totalTime) {
-        System.out.println("Method SQLiteHelper.setLevelTwoTime reached.");
         int ID = this.findID(username);
         db = this.getWritableDatabase();
         ContentValues cValues = new ContentValues();
@@ -669,7 +642,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @param totalTime the time taken to complete level 2
      */
     public synchronized void setLevelThreeTime(String username, double totalTime) {
-        System.out.println("Method SQLiteHelper.setLevelThreeTime reached.");
         int ID = this.findID(username);
         db = this.getWritableDatabase();
         ContentValues cValues = new ContentValues();
@@ -686,7 +658,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @param lives    the new number of lives left for the user playing.
      */
     public synchronized void setLives(String username, int lives) {
-        System.out.println("Method SQLiteHelper.setLives() reached.");
         int ID = this.findID(username);
         db = this.getWritableDatabase();
         ContentValues cValues = new ContentValues();
@@ -703,7 +674,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @param score    the new score for the user logged in.
      */
     private synchronized void setScore(String username, int score) {
-        System.out.println("SQLiteHelper.setUserScore() method reached");
         int ID = this.findID(username);
         db = this.getWritableDatabase();
         ContentValues cValues = new ContentValues();
@@ -720,7 +690,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @param totalTime the new total time for the logged in user.
      */
     private synchronized void setTotalTime(String username, double totalTime) {
-        System.out.println("SQLiteHelper.setUserScore() method reached");
         int ID = this.findID(username);
         db = this.getWritableDatabase();
         ContentValues cValues = new ContentValues();
@@ -737,7 +706,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @param avgTime  the new avg time for the logged in user.
      */
     private synchronized void setAvgTime(String username, double avgTime) {
-        System.out.println("SQLiteHelper.setUserScore() method reached");
         int ID = this.findID(username);
         db = this.getWritableDatabase();
         ContentValues cValues = new ContentValues();
@@ -752,7 +720,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * @param username the logged in user.
      */
     public void resetDefaults(String username) {
-        System.out.println("Method SQLiteHelper.resetDefaults() reached.");
         int ID = this.findID(username);
         db = this.getWritableDatabase();
         ContentValues cValues = new ContentValues();
@@ -850,12 +817,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * If the user beats their previous best score, then the database is updated with the new score.
      */
     public void saveNewScore(String username) {
-        System.out.println("SQLiteHelper saveNewScore method reached");
         double[] allTimes = findTimes(username);
         double totalTime = allTimes[0] + allTimes[1] + allTimes[2];
         String difficulty = findDifficulty(username);
         int livesLeft = findLives(username);
-        // User
         int totalScore = 10000 - (int) Math.floor((totalTime / 10) * 100);
 
         // Reducing the number of points based on how many lives user has left at end of game.
@@ -878,10 +843,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * new time.
      */
     public void saveNewTotalTime(String username) {
-        System.out.println("SQLiteHelper saveNewScore method reached");
         double[] allTimes = findTimes(username);
         double newTotal = allTimes[0] + allTimes[1] + allTimes[2];
-        System.out.println(" new total time: " + newTotal);
         double oldTotal = findTotalTime(username);
 
         if (newTotal < oldTotal) { // new time is better than the previous
@@ -896,10 +859,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
      * new time.
      */
     public void saveNewAvgTime(String username) {
-        System.out.println("SQLiteHelper saveNewScore method reached");
         double[] allTimes = findTimes(username);
         double newAvg = (allTimes[0] + allTimes[1] + allTimes[2]) / 3f;
-        System.out.println("new avg time: " + newAvg);
         double oldAvg = findAvgTime(username);
 
         if (newAvg < oldAvg | oldAvg == -1) { // new avg time is better than the previous

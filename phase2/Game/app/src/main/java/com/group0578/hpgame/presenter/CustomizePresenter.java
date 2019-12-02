@@ -12,7 +12,7 @@ public class CustomizePresenter implements Customize.Presenter {
     /**
      * Customize.View interface reference to refer to the CustomizeActivity file
      */
-    public Customize.View customizeView;
+    private Customize.View customizeView;
 
     /**
      * Constructs an instance of a Presenter responsible for updating the customization page.
@@ -37,7 +37,6 @@ public class CustomizePresenter implements Customize.Presenter {
     public boolean changeColourScheme(SQLiteHelper sqlHelper, String username, String colourScheme) {
         // Database colour scheme does not match new colour scheme for this user
         if (!sqlHelper.findColourScheme(username).equalsIgnoreCase(colourScheme)) {
-            System.out.println("New colour scheme preference detected!");
             sqlHelper.setColourScheme(username, colourScheme);
             return true; // colour scheme updated
         }
@@ -55,7 +54,6 @@ public class CustomizePresenter implements Customize.Presenter {
     public boolean changeLevelDifficulty(SQLiteHelper sqlHelper, String username, String difficulty) {
         // Database level difficulty does not match new level difficulty for this user
         if (!sqlHelper.findDifficulty(username).equalsIgnoreCase(difficulty)) {
-            System.out.println("New difficulty preference detected!");
             sqlHelper.setDifficulty(username, difficulty);
             // Changing the difficulty causes the number of lives a user has to increase/decrease
             updatePlayerLives(sqlHelper, username, difficulty);
@@ -94,7 +92,6 @@ public class CustomizePresenter implements Customize.Presenter {
     public void changeCustomCharacter(SQLiteHelper sqlHelper, String username, String character) {
         // Database character preference does not match new preference for this user
         if (!sqlHelper.findCharacter(username).equals(character)) {
-            System.out.println("New character preference detected!" + character);
             sqlHelper.setCharacter(username, character);
         }
     }
