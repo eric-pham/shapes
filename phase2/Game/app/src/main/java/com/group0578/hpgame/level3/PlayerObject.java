@@ -30,11 +30,11 @@ class PlayerObject extends Items {
      * @param x This player's first coordinate.
      * @param y This player's second coordinate
      */
-    PlayerObject(int x, int y, String apperance) {
+    PlayerObject(int x, int y, String appearance) {
         super(x, y);
         paint.setColor(Color.YELLOW);
         goingRight = true;
-        this.isCircle = apperance.equals("Circle");
+        this.isCircle = appearance.equals("Circle");
     }
 
 

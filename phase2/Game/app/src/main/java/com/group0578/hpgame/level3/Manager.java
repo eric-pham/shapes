@@ -9,7 +9,7 @@ class Manager {
     /**
      * List of all dementors.
      */
-    private ArrayList<Dementor> myLittledementors;
+    private ArrayList<Dementor> myLittleDementors;
     /**
      * List of all specialItems.
      */
@@ -49,7 +49,7 @@ class Manager {
     Manager(int width, int height, UserLevel3 player) {
         gridWidth = width;
         gridHeight = height;
-        myLittledementors = new ArrayList<>();
+        myLittleDementors = new ArrayList<>();
         specialItems = new ArrayList<>();
         myBlasts = new ArrayList<>();
         level3Player = new PlayerObject(gridWidth / 2, gridHeight - 10, player.getCharacter());
@@ -101,8 +101,8 @@ class Manager {
     void draw(Canvas canvas) {
         level3Player.draw(canvas);
 
-        for (int a = 0; a != myLittledementors.size(); a++) {
-            myLittledementors.get(a).draw(canvas);
+        for (int a = 0; a != myLittleDementors.size(); a++) {
+            myLittleDementors.get(a).draw(canvas);
         }
         for (int a = 0; a != specialItems.size(); a++) {
             specialItems.get(a).draw(canvas);
@@ -117,23 +117,23 @@ class Manager {
      * has been hit with a blast removes the dementor and if not, moves the dementor.
      */
     void updateDementor() {
-        if (myLittledementors.size() > 0) {
+        if (myLittleDementors.size() > 0) {
             // Get the y coordinate of the dementor that is positioned lowest on the screen.
-            int y = myLittledementors.get(0).getY();
+            int y = myLittleDementors.get(0).getY();
             // check if the bottommost dementor is at the bottom of the screen. If it is, remove it.
             if (y >= gridHeight - 15) {
                 this.player.reduceLives();
-                myLittledementors.remove(0);
+                myLittleDementors.remove(0);
             }
             // check if more dementors need to be created
-            int size = myLittledementors.size();
-            if (myLittledementors.get(size - 1).getY() >= 4) {
+            int size = myLittleDementors.size();
+            if (myLittleDementors.get(size - 1).getY() >= 4) {
                 createDementors();
             }
             killDementorbyBlast();
             // move the remaining dementors.
-            for (int i = 0; i < myLittledementors.size(); i++) {
-                myLittledementors.get(i).move();
+            for (int i = 0; i < myLittleDementors.size(); i++) {
+                myLittleDementors.get(i).move();
             }
         }
     }
@@ -145,14 +145,14 @@ class Manager {
     private void killDementorbyBlast() {
         ArrayList<Dementor> killeddementors = new ArrayList<>();
         for (int i = 0; i < myBlasts.size(); i++) {
-            for (int j = 0; j < myLittledementors.size(); j++) {
-                if (myBlasts.get(i).getX() == myLittledementors.get(j).getX()
-                        && myBlasts.get(i).getY() == myLittledementors.get(j).getY()) {
-                    killeddementors.add(myLittledementors.get(j));
+            for (int j = 0; j < myLittleDementors.size(); j++) {
+                if (myBlasts.get(i).getX() == myLittleDementors.get(j).getX()
+                        && myBlasts.get(i).getY() == myLittleDementors.get(j).getY()) {
+                    killeddementors.add(myLittleDementors.get(j));
                 }
             }
             for (int k = 0; k < killeddementors.size(); k++) {
-                myLittledementors.remove(killeddementors.get(k));
+                myLittleDementors.remove(killeddementors.get(k));
             }
         }
         killedDementorsCount += killeddementors.size();
@@ -196,7 +196,7 @@ class Manager {
      */
     void createDementors() {
         Dementor d = new Dementor((int) (Math.random() * (gridWidth - 2) + 2), 0);
-        myLittledementors.add(d);
+        myLittleDementors.add(d);
     }
 
     /**
