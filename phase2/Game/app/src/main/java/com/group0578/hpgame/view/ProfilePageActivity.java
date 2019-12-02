@@ -17,9 +17,7 @@ import com.group0578.hpgame.presenter.ProfilePagePresenter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-/**
- * Responsible for handling user interactions (button clicks etc.) with the Profile Page.
- */
+/** Responsible for handling user interactions (button clicks etc.) with the Profile Page. */
 public class ProfilePageActivity extends AppCompatActivity implements ProfilePage.View {
 
   /** The presenter associated with this View that handles the user's interactions with the UI. */
@@ -36,10 +34,8 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
    */
   final int COLOUR_SCHEME_REQUEST = 1;
 
-    /**
-     * The Toast responsible for displaying messages to the user.
-     */
-    Toast toast;
+  /** The Toast responsible for displaying messages to the user. */
+  Toast toast;
 
   /** Called immediately when the activity is started. */
   @Override
@@ -88,23 +84,23 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
   }
 
   /**
-   * Called when the user attempts to hit the android device 'back' button.
-   * Prevents users from going back to startup page after signing in.
+   * Called when the user attempts to hit the android device 'back' button. Prevents users from
+   * going back to startup page after signing in.
    */
   @Override
   public void onBackPressed() {
-      displayToast("Invalid request. Logout to return to the Startup screen.");
+    displayToast("Invalid request. Logout to return to the Startup screen.");
   }
 
-    /**
-     * Returns the user to the startup screen, logging them out.
-     *
-     * @param view the view displaying this activity.
-     */
-    public void onClickLogout(View view) {
-        Intent logout = new Intent(this, StartupActivity.class);
-        startActivity(logout);
-    }
+  /**
+   * Returns the user to the startup screen, logging them out.
+   *
+   * @param view the view displaying this activity.
+   */
+  public void onClickLogout(View view) {
+    Intent logout = new Intent(this, StartupActivity.class);
+    startActivity(logout);
+  }
 
   /**
    * Starts the game by calling the method that will create the intent for the first level.
@@ -112,9 +108,9 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
    * @param view the view displaying this activity.
    */
   public void onClickPlayGame(View view) {
-      //If there exists previous progress, set database values to default except for customization
+    // If there exists previous progress, set database values to default except for customization
     if (!sqlHelper.findProgress(username).equalsIgnoreCase("none")) {
-        profilePagePresenter.resetDefaults(sqlHelper, username);
+      profilePagePresenter.resetDefaults(sqlHelper, username);
     }
     profilePagePresenter.createLevel1();
   }
@@ -131,8 +127,8 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
   }
 
   /**
-   * Called when the user presses the 'UserLevel3 Scoreboard' button. Displays the user's (currently playing)
-   * statistics from previous games they have played.
+   * Called when the user presses the 'UserLevel3 Scoreboard' button. Displays the user's (currently
+   * playing) statistics from previous games they have played.
    *
    * @param view the view displaying this activity.
    */
@@ -140,65 +136,65 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
     profilePagePresenter.displayScoreBoard();
   }
 
-    /**
-     * Called when the user presses the 'Customize' button. Changes the user's customization settings
-     * for light/dark colour scheme, level difficulty etc.
-     *
-     * @param view the view displaying this activity.
-     */
-    public void onClickCustomize(View view) {
-        profilePagePresenter.changeUserCustomization();
-    }
-
-    /**
-     * Starts the FlyingActivity.
-     *
-     * @param levelOne the intent for the Level1Activity
-     */
-    public void goToLevel1(Intent levelOne) {
-        levelOne.putExtra("username", this.username);
-        startActivity(levelOne);
-    }
-
-    /**
-     * Starting the activity that begins the level unfinished from the previous game for the
-     * user who is currently logged in.
-     *
-     * @param previousLevel Intent for the unfinished level's main activity
-     */
-    public void resumePreviousLevel(Intent previousLevel) {
-        previousLevel.putExtra("username", this.username);
-        startActivity(previousLevel);
-    }
+  /**
+   * Called when the user presses the 'Customize' button. Changes the user's customization settings
+   * for light/dark colour scheme, level difficulty etc.
+   *
+   * @param view the view displaying this activity.
+   */
+  public void onClickCustomize(View view) {
+    profilePagePresenter.changeUserCustomization();
+  }
 
   /**
-   * Receiving the intent creating the Player Scoreboard Page and starting the activity to move
-   * to the new screen.
+   * Starts the FlyingActivity.
+   *
+   * @param levelOne the intent for the Level1Activity
+   */
+  public void goToLevel1(Intent levelOne) {
+    levelOne.putExtra("username", this.username);
+    startActivity(levelOne);
+  }
+
+  /**
+   * Starting the activity that begins the level unfinished from the previous game for the user who
+   * is currently logged in.
+   *
+   * @param previousLevel Intent for the unfinished level's main activity
+   */
+  public void resumePreviousLevel(Intent previousLevel) {
+    previousLevel.putExtra("username", this.username);
+    startActivity(previousLevel);
+  }
+
+  /**
+   * Receiving the intent creating the Player Scoreboard Page and starting the activity to move to
+   * the new screen.
    *
    * @param playerStatsPage the Intent starting the Player Scoreboard Page.
    */
   public void goToPlayerStatsPage(Intent playerStatsPage) {
     playerStatsPage.putExtra("username", this.username);
-      playerStatsPage.putExtra("userOnScoreboard", "N/A");
+    playerStatsPage.putExtra("userOnScoreboard", "N/A");
     startActivity(playerStatsPage);
   }
 
-    /**
-     * Displays a message when the user attempts to perform an unavailable action.
-     *
-     * @param message a String representing the message to be displayed.
-     */
-    @Override
-    public void displayToast(String message) {  // still needs to be tested for the longer message.
-        // initiate the Toast with context, message and duration for the Toast
-        toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
-        // set gravity for the Toast.
-        toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
-        // display the Toast
-        toast.show();
-    }
+  /**
+   * Displays a message when the user attempts to perform an unavailable action.
+   *
+   * @param message a String representing the message to be displayed.
+   */
+  @Override
+  public void displayToast(String message) { // still needs to be tested for the longer message.
+    // initiate the Toast with context, message and duration for the Toast
+    toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+    // set gravity for the Toast.
+    toast.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL, 0, 0);
+    // display the Toast
+    toast.show();
+  }
 
-    /**
+  /**
    * Called by the method profilePagePresenter.changeUserCustomization() Starts the new activity to
    * show the customization page.
    *
@@ -214,8 +210,8 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
    * Called by CustomizeActivity.onBackPressed to update the profile page's colour scheme
    *
    * @param requestCode should equal COLOUR_SCHEME_REPORT instance attribute
-   * @param resultCode  if the request was successful
-   * @param data        the intent (CustomizeActivity) calling this activity
+   * @param resultCode if the request was successful
+   * @param data the intent (CustomizeActivity) calling this activity
    */
   @Override
   public void onActivityResult(int requestCode, int resultCode, Intent data) {

@@ -14,14 +14,10 @@ import com.group0578.hpgame.model.SQLiteHelper;
 import com.group0578.hpgame.presenter.CreateUserPresenter;
 import com.group0578.hpgame.R;
 
-/**
- * Displays the create account screen.
- */
+/** Displays the create account screen. */
 public class CreateUserActivity extends AppCompatActivity implements CreateUser.View {
 
-  /**
-   * The Presenter managing the actions behind this CreateUserActivity View
-   */
+  /** The Presenter managing the actions behind this CreateUserActivity View */
   private CreateUserPresenter createUserPresenter;
 
   private SQLiteHelper sqlHelper = new SQLiteHelper(this);
@@ -34,9 +30,7 @@ public class CreateUserActivity extends AppCompatActivity implements CreateUser.
     createUserPresenter = new CreateUserPresenter(this);
   }
 
-  /**
-   * When create user button is clicked add information to data
-   */
+  /** When create user button is clicked add information to data */
   public void onClickConfirm(View v) {
     // Get username and password from user inputted EditText
     final EditText userNameCreate = findViewById(R.id.userNameCreate);
@@ -56,7 +50,7 @@ public class CreateUserActivity extends AppCompatActivity implements CreateUser.
       InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
       assert imm != null;
       imm.hideSoftInputFromWindow(
-              findViewById(R.id.constraintLayoutCreateUser).getWindowToken(), 0);
+          findViewById(R.id.constraintLayoutCreateUser).getWindowToken(), 0);
 
       // display error message
       findViewById(R.id.errorMessageCreateUser).setVisibility(View.VISIBLE);

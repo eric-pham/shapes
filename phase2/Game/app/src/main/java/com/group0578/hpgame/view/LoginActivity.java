@@ -44,9 +44,9 @@ public class LoginActivity extends AppCompatActivity implements Login.View {
     final EditText loginPassword = findViewById(R.id.loginPassword);
     String password = loginPassword.getText().toString();
 
-    if (loginPresenter.checkLogin(sqlHelper, username, password)) {  // the login info is correct
+    if (loginPresenter.checkLogin(sqlHelper, username, password)) { // the login info is correct
       loginPresenter.createProfileScreen(username);
-    } else {  // the password and username don't match
+    } else { // the password and username don't match
       // after button is clicked, hides keyboard
       InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
       assert imm != null;
@@ -56,7 +56,6 @@ public class LoginActivity extends AppCompatActivity implements Login.View {
       findViewById(R.id.errorMessageLogin).setVisibility(View.VISIBLE);
     }
   }
-
 
   /**
    * Starts the ProfilePageActivity.

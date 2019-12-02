@@ -44,6 +44,7 @@ public class LoginPresenter implements Login.Presenter {
 
   /**
    * Creates the new intent to go to the profile page screen.
+   *
    * @param username the user's username they typed when logging in
    */
   public void createProfileScreen(String username) {

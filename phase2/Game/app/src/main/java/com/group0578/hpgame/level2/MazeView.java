@@ -13,6 +13,7 @@ import android.view.View;
 
 /**
  * The Maze's view or visual appearance on the screen for the user.
+ *
  * <p>Implementing View.OnTouchListener -- for performing actions in response to user clicks
  */
 public class MazeView extends SurfaceView implements SurfaceHolder.Callback, View.OnTouchListener {
@@ -23,19 +24,13 @@ public class MazeView extends SurfaceView implements SurfaceHolder.Callback, Vie
   /** The MazeThread created in order to draw the Maze. */
   private MazeThread mazeThread;
 
-  /**
-   * The class responsible for changing the player's position in the maze.
-   */
+  /** The class responsible for changing the player's position in the maze. */
   private PlayerPositioner playerPositioner;
 
-  /**
-   * The maximum duration that will count as a click.
-   */
+  /** The maximum duration that will count as a click. */
   private static final int MAX_CLICK_DURATION = 200;
 
-  /**
-   * The time representing the start of the click.
-   */
+  /** The time representing the start of the click. */
   private long startClickTime;
 
   /**
@@ -74,11 +69,11 @@ public class MazeView extends SurfaceView implements SurfaceHolder.Callback, Vie
     surfaceHolder.addCallback(this);
     setFocusable(true);
     this.mazeThread =
-            new MazeThread(
-                    surfaceHolder,
-                    this,
-                    ((MazeActivity) context).getSqlHelper(),
-                    ((MazeActivity) context).getUsername());
+        new MazeThread(
+            surfaceHolder,
+            this,
+            ((MazeActivity) context).getSqlHelper(),
+            ((MazeActivity) context).getUsername());
     this.playerPositioner = new PlayerPositioner(this.mazeThread.getMaze());
   }
 
@@ -146,7 +141,6 @@ public class MazeView extends SurfaceView implements SurfaceHolder.Callback, Vie
     String TAG = "MazeView.onTouch";
     Log.e(TAG, "test");
 
-
     // Gets the x and y coordinates of where the user clicked on the screen.
     float touchX = event.getX(), touchY = event.getY();
 
@@ -155,11 +149,12 @@ public class MazeView extends SurfaceView implements SurfaceHolder.Callback, Vie
         startClickTime = System.currentTimeMillis();
         break;
       case MotionEvent.ACTION_UP:
-        //this is the time in milliseconds
+        // this is the time in milliseconds
         long diff = System.currentTimeMillis() - startClickTime;
         if (diff <= MAX_CLICK_DURATION) {
           // if the click is in the top right hand corner, they can bypass the maze level
-          if (touchX >= Resources.getSystem().getDisplayMetrics().widthPixels - 100 && touchY <= 100) {
+          if (touchX >= Resources.getSystem().getDisplayMetrics().widthPixels - 100
+              && touchY <= 100) {
             mazeThread.setLevelWon(true);
             mazeThread.updateDatabase();
             mazeThread.setRunning(false);
@@ -185,9 +180,7 @@ public class MazeView extends SurfaceView implements SurfaceHolder.Callback, Vie
     return true; // returns true so the user can continue dragging/clicking to move the player
   }
 
-  /**
-   * Ends the level by either taking the user to the Game Over screen or to the next level
-   */
+  /** Ends the level by either taking the user to the Game Over screen or to the next level */
   private void stopGame() {
     if (mazeThread.isLevelWon()) { // user completed the level
       // hides the MazeView

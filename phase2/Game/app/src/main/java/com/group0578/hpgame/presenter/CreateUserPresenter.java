@@ -64,7 +64,7 @@ public class CreateUserPresenter implements CreateUser.Presenter {
   @Override
   public void createProfileScreen(String username) {
     Intent profileIntent =
-            new Intent((CreateUserActivity) this.createUserView, ProfilePageActivity.class);
+        new Intent((CreateUserActivity) this.createUserView, ProfilePageActivity.class);
     profileIntent.putExtra("username", username);
     System.out.println("createProfileScreen method reached.");
     createUserView.goToProfilePage(profileIntent);
@@ -74,10 +74,10 @@ public class CreateUserPresenter implements CreateUser.Presenter {
    * Checks whether the username is available.
    *
    * @param sqlHelper instance of the database helper that defines all methods that can be used on
-   *                  the database
-   * @param username  the username of the person currently logged in
+   *     the database
+   * @param username the username of the person currently logged in
    * @return a boolean; returns true if the username is already taken; returns false if the username
-   * is available.
+   *     is available.
    */
   public boolean checkDuplicates(SQLiteHelper sqlHelper, String username) {
     return sqlHelper.checkDuplicates(username);

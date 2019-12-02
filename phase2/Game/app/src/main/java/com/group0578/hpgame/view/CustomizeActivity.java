@@ -16,9 +16,7 @@ import com.group0578.hpgame.R;
 import com.group0578.hpgame.model.SQLiteHelper;
 import com.group0578.hpgame.presenter.CustomizePresenter;
 
-/**
- * Responsible for handling user actions like button clicks on the Customization page
- */
+/** Responsible for handling user actions like button clicks on the Customization page */
 public class CustomizeActivity extends AppCompatActivity {
 
   /** The presenter associated with this View that handles the user's interactions with the UI. */
@@ -35,9 +33,7 @@ public class CustomizeActivity extends AppCompatActivity {
    */
   private boolean colourSchemeChanged = false;
 
-  /**
-   * Boolean specifying whether the difficulty has been  by selected light/dark buttons
-   */
+  /** Boolean specifying whether the difficulty has been by selected light/dark buttons */
   private boolean requiresNotification = false;
 
   /** Called immediately when the activity is started. */
@@ -94,28 +90,26 @@ public class CustomizeActivity extends AppCompatActivity {
     }
   }
 
-  /**
-   * Changes the background and text colour depending on the colour scheme.
-   */
+  /** Changes the background and text colour depending on the colour scheme. */
   private void setComponentColours() {
     String colourScheme = sqlHelper.findColourScheme(username);
     if (colourScheme.equalsIgnoreCase("Light")) {
       getWindow().getDecorView().setBackgroundColor(Color.argb(255, 204, 212, 255));
       ((TextView) findViewById(R.id.chooseColourSchemeText))
-              .setTextColor(Color.argb(255, 68, 0, 102));
+          .setTextColor(Color.argb(255, 68, 0, 102));
       ((TextView) findViewById(R.id.chooseDifficultyText))
-              .setTextColor(Color.argb(255, 68, 0, 102));
+          .setTextColor(Color.argb(255, 68, 0, 102));
       ((TextView) findViewById(R.id.chooseCharacterText)).setTextColor(Color.argb(255, 68, 0, 102));
     } else {
       getWindow().getDecorView().setBackgroundColor(Color.argb(255, 0, 51, 153));
       //      ((TextView) findViewById(R.id.level2_congrats_message_textView))
       //              .setTextColor(Color.argb(255, 255, 179, 204));
       ((TextView) findViewById(R.id.chooseColourSchemeText))
-              .setTextColor(Color.argb(255, 239, 222, 205));
+          .setTextColor(Color.argb(255, 239, 222, 205));
       ((TextView) findViewById(R.id.chooseDifficultyText))
-              .setTextColor(Color.argb(255, 239, 222, 205));
+          .setTextColor(Color.argb(255, 239, 222, 205));
       ((TextView) findViewById(R.id.chooseCharacterText))
-              .setTextColor(Color.argb(255, 239, 222, 205));
+          .setTextColor(Color.argb(255, 239, 222, 205));
       ((RadioButton) findViewById(R.id.lightButton)).setTextColor(Color.WHITE);
       ((RadioButton) findViewById(R.id.darkButton)).setTextColor(Color.WHITE);
       ((RadioButton) findViewById(R.id.easyButton)).setTextColor(Color.WHITE);
@@ -180,7 +174,8 @@ public class CustomizeActivity extends AppCompatActivity {
     requiresNotification = customizePresenter.changeLevelDifficulty(sqlHelper, username, "Easy");
 
     if (requiresNotification) {
-      displayToast("Your previous game was on a different difficulty. Your game progress was reset.");
+      displayToast(
+          "Your previous game was on a different difficulty. Your game progress was reset.");
       sqlHelper.resetDefaults(username);
     }
     requiresNotification = false;
@@ -196,15 +191,16 @@ public class CustomizeActivity extends AppCompatActivity {
     requiresNotification = customizePresenter.changeLevelDifficulty(sqlHelper, username, "Hard");
 
     if (requiresNotification) {
-      displayToast("Your previous game was on a different difficulty. Your game progress was reset.");
+      displayToast(
+          "Your previous game was on a different difficulty. Your game progress was reset.");
       sqlHelper.resetDefaults(username);
     }
     requiresNotification = false;
   }
 
   /**
-   * Called when the user currently logged in selects character option "Circle" for custom character.
-   * Presenter for this activity changes character's appearance
+   * Called when the user currently logged in selects character option "Circle" for custom
+   * character. Presenter for this activity changes character's appearance
    *
    * @param view the view displaying this activity.
    */
@@ -213,8 +209,8 @@ public class CustomizeActivity extends AppCompatActivity {
   }
 
   /**
-   * Called when the user currently logged in selects character option "Square" for custom character.
-   * Presenter for this activity changes character's appearance
+   * Called when the user currently logged in selects character option "Square" for custom
+   * character. Presenter for this activity changes character's appearance
    *
    * @param view the view displaying this activity.
    */
@@ -227,7 +223,7 @@ public class CustomizeActivity extends AppCompatActivity {
    *
    * @param message a String representing the message to be displayed.
    */
-  public void displayToast(String message) {  // still needs to be tested for the longer message.
+  public void displayToast(String message) { // still needs to be tested for the longer message.
     // initiate the Toast with context, message and duration for the Toast
     Toast toast = Toast.makeText(this, message, Toast.LENGTH_SHORT);
     // set gravity for the Toast.

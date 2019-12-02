@@ -11,18 +11,15 @@ import com.group0578.hpgame.presenter.LoginPresenter;
  */
 public interface Login {
 
-    /**
-     * Behaviour of the LoginActivity.
-     */
-    interface View {
-        void goToProfilePage(Intent profileIntent);
-    }
+  /** Behaviour of the LoginActivity. */
+  interface View {
+    void goToProfilePage(Intent profileIntent);
+  }
 
-    /**
-     * Behaviour of the LoginPresenter.
-     */
-    interface Presenter {
-        boolean checkLogin(SQLiteHelper sqlHelper, String username, String password);
-        void createProfileScreen(String username);
-    }
+  /** Behaviour of the LoginPresenter. */
+  interface Presenter {
+    boolean checkLogin(SQLiteHelper sqlHelper, String username, String password);
+
+    void createProfileScreen(String username);
+  }
 }

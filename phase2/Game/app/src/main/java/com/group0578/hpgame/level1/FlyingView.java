@@ -23,10 +23,10 @@ class FlyingView extends View {
   /** Store the username String to pass to next level later */
   private String username;
 
-  /** Store the related interactor*/
+  /** Store the related interactor */
   private FlyingInteractor flyingInteractor;
 
-  /** Store the state of the game in a boolean*/
+  /** Store the state of the game in a boolean */
   private boolean gameOver = false;
 
   /**
@@ -133,8 +133,8 @@ class FlyingView extends View {
     return this.gameOver;
   }
 
-  /**
-   * Sets the value to true if game is over
-   */
-  void setGameOver(){this.gameOver = true;}
+  /** Sets the value to true if game is over */
+  void setGameOver() {
+    this.gameOver = true;
+  }
 }

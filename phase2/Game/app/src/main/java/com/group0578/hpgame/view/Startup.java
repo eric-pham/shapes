@@ -10,19 +10,17 @@ import com.group0578.hpgame.presenter.StartupPresenter;
  */
 public interface Startup {
 
-    /**
-     * Behaviour of the StartupActivity.
-     */
-    interface View {
-        void goToLoginScreen(Intent loginIntent);
-        void goToCreateUserScreen(Intent createAccountIntent);
-    }
+  /** Behaviour of the StartupActivity. */
+  interface View {
+    void goToLoginScreen(Intent loginIntent);
 
-    /**
-     * Behaviour of the StartupPresenter.
-     */
-    interface Presenter {
-        void createLoginScreen();
-        void createNewAccountScreen();
-    }
+    void goToCreateUserScreen(Intent createAccountIntent);
+  }
+
+  /** Behaviour of the StartupPresenter. */
+  interface Presenter {
+    void createLoginScreen();
+
+    void createNewAccountScreen();
+  }
 }

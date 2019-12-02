@@ -6,229 +6,200 @@ import java.util.ArrayList;
 
 class Manager {
 
-    /**
-     * List of all dementors.
-     */
-    private ArrayList<Dementor> myLittleDementors;
-    /**
-     * List of all specialItems.
-     */
-    private ArrayList<SpecialItem> specialItems;
-    /**
-     * List of all blasts.
-     */
-    private ArrayList<Blast> myBlasts;
-    /**
-     * The level3Player on the screen.
-     */
-    private PlayerObject level3Player;
-    /**
-     * The width of the screen.
-     */
-    private int gridWidth;
-    /**
-     * The height of the screen.
-     */
-    private int gridHeight;
-    /**
-     * The number of dementors that have been killed.
-     */
-    private static int killedDementorsCount;
-    /**
-     * The user currently playing the game.
-     */
-    private UserLevel3 player;
+  /** List of all dementors. */
+  private ArrayList<Dementor> myLittleDementors;
+  /** List of all specialItems. */
+  private ArrayList<SpecialItem> specialItems;
+  /** List of all blasts. */
+  private ArrayList<Blast> myBlasts;
+  /** The level3Player on the screen. */
+  private PlayerObject level3Player;
+  /** The width of the screen. */
+  private int gridWidth;
+  /** The height of the screen. */
+  private int gridHeight;
+  /** The number of dementors that have been killed. */
+  private static int killedDementorsCount;
+  /** The user currently playing the game. */
+  private UserLevel3 player;
 
-    /**
-     * The constructor for this manager.
-     *
-     * @param width  The width of the screen this manager is managing.
-     * @param height The height of the screen this manager is managing.
-     * @param player The user currently playing the game.
-     */
-    Manager(int width, int height, UserLevel3 player) {
-        gridWidth = width;
-        gridHeight = height;
-        myLittleDementors = new ArrayList<>();
-        specialItems = new ArrayList<>();
-        myBlasts = new ArrayList<>();
-        level3Player = new PlayerObject(gridWidth / 2, gridHeight - 10, player.getCharacter());
-        killedDementorsCount = 0;
-        this.player = player;
+  /**
+   * The constructor for this manager.
+   *
+   * @param width The width of the screen this manager is managing.
+   * @param height The height of the screen this manager is managing.
+   * @param player The user currently playing the game.
+   */
+  Manager(int width, int height, UserLevel3 player) {
+    gridWidth = width;
+    gridHeight = height;
+    myLittleDementors = new ArrayList<>();
+    specialItems = new ArrayList<>();
+    myBlasts = new ArrayList<>();
+    level3Player = new PlayerObject(gridWidth / 2, gridHeight - 10, player.getCharacter());
+    killedDementorsCount = 0;
+    this.player = player;
+  }
+
+  /**
+   * Getter for this.killedDementorsCount.
+   *
+   * @return The number of killed dementors.
+   */
+  static int getKilledDementorsCount() {
+    return killedDementorsCount;
+  }
+
+  /**
+   * Getter for specialItems.
+   *
+   * @return The list of specialItems.
+   */
+  ArrayList<SpecialItem> getSpecialItems() {
+    return specialItems;
+  }
+
+  /**
+   * Getter for this.myBlasts.
+   *
+   * @return The list of blasts.
+   */
+  ArrayList<Blast> getMyBlasts() {
+    return myBlasts;
+  }
+
+  /**
+   * Getter for the width of the grid.
+   *
+   * @return The width of the screen.
+   */
+  int getGridWidth() {
+    return gridWidth;
+  }
+
+  /**
+   * Draws the level3Player, the blasts and the dementors created by this manager.
+   *
+   * @param canvas the graphics context in which to draw this item.
+   */
+  void draw(Canvas canvas) {
+    level3Player.draw(canvas);
+
+    for (int a = 0; a != myLittleDementors.size(); a++) {
+      myLittleDementors.get(a).draw(canvas);
     }
-
-    /**
-     * Getter for this.killedDementorsCount.
-     *
-     * @return The number of killed dementors.
-     */
-    static int getKilledDementorsCount() {
-        return killedDementorsCount;
+    for (int a = 0; a != specialItems.size(); a++) {
+      specialItems.get(a).draw(canvas);
     }
-
-    /**
-     * Getter for specialItems.
-     *
-     * @return The list of specialItems.
-     */
-    ArrayList<SpecialItem> getSpecialItems() {
-        return specialItems;
+    for (int a = 0; a != myBlasts.size(); a++) {
+      myBlasts.get(a).draw(canvas);
     }
+  }
 
-    /**
-     * Getter for this.myBlasts.
-     *
-     * @return The list of blasts.
-     */
-    ArrayList<Blast> getMyBlasts() {
-        return myBlasts;
+  /**
+   * Updates the dementors in myLittleDementors; if a dementor has reached the bottom of a screen or
+   * has been hit with a blast removes the dementor and if not, moves the dementor.
+   */
+  void updateDementor() {
+    if (myLittleDementors.size() > 0) {
+      // Get the y coordinate of the dementor that is positioned lowest on the screen.
+      int y = myLittleDementors.get(0).getY();
+      // check if the bottommost dementor is at the bottom of the screen. If it is, remove it.
+      if (y >= gridHeight - 15) {
+        this.player.reduceLives();
+        myLittleDementors.remove(0);
+      }
+      // check if more dementors need to be created
+      int size = myLittleDementors.size();
+      if (myLittleDementors.get(size - 1).getY() >= 4) {
+        createDementors();
+      }
+      killDementorbyBlast();
+      // move the remaining dementors.
+      for (int i = 0; i < myLittleDementors.size(); i++) {
+        myLittleDementors.get(i).move();
+      }
     }
+  }
 
-    /**
-     * Getter for the width of the grid.
-     *
-     * @return The width of the screen.
-     */
-    int getGridWidth() {
-        return gridWidth;
-    }
-
-    /**
-     * Draws the level3Player, the blasts and the dementors created by this manager.
-     *
-     * @param canvas the graphics context in which to draw this item.
-     */
-    void draw(Canvas canvas) {
-        level3Player.draw(canvas);
-
-        for (int a = 0; a != myLittleDementors.size(); a++) {
-            myLittleDementors.get(a).draw(canvas);
+  /**
+   * Checks if any dementor has been hit by a blast. If it has, remove that dementor from the
+   * screen.
+   */
+  private void killDementorbyBlast() {
+    ArrayList<Dementor> killeddementors = new ArrayList<>();
+    for (int i = 0; i < myBlasts.size(); i++) {
+      for (int j = 0; j < myLittleDementors.size(); j++) {
+        if (myBlasts.get(i).getX() == myLittleDementors.get(j).getX()
+            && myBlasts.get(i).getY() == myLittleDementors.get(j).getY()) {
+          killeddementors.add(myLittleDementors.get(j));
         }
-        for (int a = 0; a != specialItems.size(); a++) {
-            specialItems.get(a).draw(canvas);
+      }
+      for (int k = 0; k < killeddementors.size(); k++) {
+        myLittleDementors.remove(killeddementors.get(k));
+      }
+    }
+    killedDementorsCount += killeddementors.size();
+  }
+
+  /** Updates level3Player by moving it. */
+  void updatePlayer() {
+    level3Player.move(this);
+  }
+
+  /** Updates the blasts in myBlasts by moving them. */
+  void updateBlasts() {
+    for (int i = 0; i < myBlasts.size(); i++) {
+      myBlasts.get(i).move();
+    }
+  }
+
+  /**
+   * Updates the specialItems in this.specialItems by moving them and omitting them if hit by a
+   * blast.
+   */
+  void updateSpecialItems() {
+    if (!specialItems.isEmpty()) {
+      for (int i = 0; i < myBlasts.size(); i++) {
+        if (myBlasts.get(i).getX() == specialItems.get(0).getX()
+            && myBlasts.get(i).getY() == specialItems.get(0).getY()) {
+          specialItems.remove(0);
         }
-        for (int a = 0; a != myBlasts.size(); a++) {
-            myBlasts.get(a).draw(canvas);
-        }
+      }
+      if (!specialItems.isEmpty()) {
+        specialItems.get(0).move();
+      }
     }
+  }
 
-    /**
-     * Updates the dementors in myLittleDementors; if a dementor has reached the bottom of a screen or
-     * has been hit with a blast removes the dementor and if not, moves the dementor.
-     */
-    void updateDementor() {
-        if (myLittleDementors.size() > 0) {
-            // Get the y coordinate of the dementor that is positioned lowest on the screen.
-            int y = myLittleDementors.get(0).getY();
-            // check if the bottommost dementor is at the bottom of the screen. If it is, remove it.
-            if (y >= gridHeight - 15) {
-                this.player.reduceLives();
-                myLittleDementors.remove(0);
-            }
-            // check if more dementors need to be created
-            int size = myLittleDementors.size();
-            if (myLittleDementors.get(size - 1).getY() >= 4) {
-                createDementors();
-            }
-            killDementorbyBlast();
-            // move the remaining dementors.
-            for (int i = 0; i < myLittleDementors.size(); i++) {
-                myLittleDementors.get(i).move();
-            }
-        }
-    }
+  /** Creates dementors and stores them in myLittleDementors. */
+  void createDementors() {
+    Dementor d = new Dementor((int) (Math.random() * (gridWidth - 2) + 2), 0);
+    myLittleDementors.add(d);
+  }
 
-    /**
-     * Checks if any dementor has been hit by a blast. If it has, remove that dementor from
-     * the screen.
-     */
-    private void killDementorbyBlast() {
-        ArrayList<Dementor> killeddementors = new ArrayList<>();
-        for (int i = 0; i < myBlasts.size(); i++) {
-            for (int j = 0; j < myLittleDementors.size(); j++) {
-                if (myBlasts.get(i).getX() == myLittleDementors.get(j).getX()
-                        && myBlasts.get(i).getY() == myLittleDementors.get(j).getY()) {
-                    killeddementors.add(myLittleDementors.get(j));
-                }
-            }
-            for (int k = 0; k < killeddementors.size(); k++) {
-                myLittleDementors.remove(killeddementors.get(k));
-            }
-        }
-        killedDementorsCount += killeddementors.size();
-    }
+  /** Creates an instance of SpecialItem and stores it in specialItems. */
+  void createSpecialItems() {
+    SpecialItem specialItem = new SpecialItem(gridWidth / 2, 0);
+    specialItems.add(specialItem);
+  }
 
-    /**
-     * Updates level3Player by moving it.
-     */
-    void updatePlayer() {
-        level3Player.move(this);
-    }
+  /** Creates blasts and stores them in myBlasts. */
+  void createBlast() {
+    level3Player.shoot(this);
+  }
 
-    /**
-     * Updates the blasts in myBlasts by moving them.
-     */
-    void updateBlasts() {
-        for (int i = 0; i < myBlasts.size(); i++) {
-            myBlasts.get(i).move();
-        }
+  /** moves level3Player to the right. */
+  void movePlayerRight() {
+    if (!level3Player.getDirection()) {
+      level3Player.moveRight(this);
     }
+  }
 
-    /**
-     * Updates the specialItems in this.specialItems by moving them and omitting them if hit by a blast.
-     */
-    void updateSpecialItems() {
-        if (!specialItems.isEmpty()) {
-            for (int i = 0; i < myBlasts.size(); i++) {
-                if (myBlasts.get(i).getX() == specialItems.get(0).getX()
-                        && myBlasts.get(i).getY() == specialItems.get(0).getY()) {
-                    specialItems.remove(0);
-                }
-            }
-            if (!specialItems.isEmpty()) {
-                specialItems.get(0).move();
-            }
-        }
+  /** moves level3Player to the left. */
+  void movePlayerLeft() {
+    if (level3Player.getDirection()) {
+      level3Player.moveLeft(this);
     }
-
-    /**
-     * Creates dementors and stores them in myLittleDementors.
-     */
-    void createDementors() {
-        Dementor d = new Dementor((int) (Math.random() * (gridWidth - 2) + 2), 0);
-        myLittleDementors.add(d);
-    }
-
-    /**
-     * Creates an instance of SpecialItem and stores it in specialItems.
-     */
-    void createSpecialItems() {
-        SpecialItem specialItem = new SpecialItem(gridWidth / 2, 0);
-        specialItems.add(specialItem);
-    }
-
-    /**
-     * Creates blasts and stores them in myBlasts.
-     */
-    void createBlast() {
-        level3Player.shoot(this);
-    }
-
-    /**
-     * moves level3Player to the right.
-     */
-    void movePlayerRight() {
-        if (!level3Player.getDirection()) {
-            level3Player.moveRight(this);
-        }
-    }
-
-    /**
-     * moves level3Player to the left.
-     */
-    void movePlayerLeft() {
-        if (level3Player.getDirection()) {
-            level3Player.moveLeft(this);
-        }
-    }
+  }
 }

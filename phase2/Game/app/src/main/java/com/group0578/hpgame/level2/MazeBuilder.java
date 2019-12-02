@@ -9,9 +9,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Stack;
 
-/**
- * The MazeBuilder responsible for creating maze sections, walls, dimensions etc.
- */
+/** The MazeBuilder responsible for creating maze sections, walls, dimensions etc. */
 class MazeBuilder {
 
   /** An enum for the relative location between two MazeSections. */
@@ -84,12 +82,10 @@ class MazeBuilder {
   }
 
   /**
-   * Creates the design of the maze.
-   * This method was derived from Parts 3 and 4 of Y-Key's "Android Programming - Maze Game"
-   * 5 part Tutorial and modified to suit the needs of our project.
-   * Source:
-   * Part 3: https://www.youtube.com/watch?v=kiG1BUa34lc&t=1s
-   * Part 4: https://www.youtube.com/watch?v=IMan30VNi3A&t=1s
+   * Creates the design of the maze. This method was derived from Parts 3 and 4 of Y-Key's "Android
+   * Programming - Maze Game" 5 part Tutorial and modified to suit the needs of our project. Source:
+   * Part 3: https://www.youtube.com/watch?v=kiG1BUa34lc&t=1s Part 4:
+   * https://www.youtube.com/watch?v=IMan30VNi3A&t=1s
    */
   private void buildMaze() {
     // a stack to hold the current path being taken to navigate through the maze
@@ -140,13 +136,13 @@ class MazeBuilder {
    * Takes click the walls between the current MazeSection and the next MazeSection by setting the
    * relevant boolean variables to false.
    *
-   * @param currSection      The current MazeSection.
-   * @param nextSection      The next MazeSection.
+   * @param currSection The current MazeSection.
+   * @param nextSection The next MazeSection.
    * @param relativeLocation A RelativeLocation enum value that describes the location of
-   *                         nextSection with respect t currSection.
+   *     nextSection with respect t currSection.
    */
   private void modifyWalls(
-          MazeSection currSection, MazeSection nextSection, RelativeLocation relativeLocation) {
+      MazeSection currSection, MazeSection nextSection, RelativeLocation relativeLocation) {
 
     switch (relativeLocation) {
       case ABOVE: // nextSection is above currSection
@@ -179,7 +175,7 @@ class MazeBuilder {
    *
    * @param currSection The current MazeSection.
    * @return Null if there are no candidates left for the next MazeSection, or a MazeSection if
-   * there still exist non-modified MazeSections.
+   *     there still exist non-modified MazeSections.
    */
   private MazeSection getNextMazeSection(MazeSection currSection) {
     // local array list to hold the possible candidates for nextSection
@@ -188,7 +184,7 @@ class MazeBuilder {
     // check section above
     if (currSection.getRow() > 0) {
       MazeSection upSection =
-              this.maze.getMazeGrid()[currSection.getRow() - 1][currSection.getCol()];
+          this.maze.getMazeGrid()[currSection.getRow() - 1][currSection.getCol()];
       if (!upSection.isModified()) {
         candidates.add(upSection);
       }
@@ -197,7 +193,7 @@ class MazeBuilder {
     // check section below
     if (currSection.getRow() < this.maze.getRows() - 1) {
       MazeSection downSection =
-              this.maze.getMazeGrid()[currSection.getRow() + 1][currSection.getCol()];
+          this.maze.getMazeGrid()[currSection.getRow() + 1][currSection.getCol()];
       if (!downSection.isModified()) {
         candidates.add(downSection);
       }
@@ -206,7 +202,7 @@ class MazeBuilder {
     // check section to the left
     if (currSection.getCol() > 0) {
       MazeSection leftSection =
-              this.maze.getMazeGrid()[currSection.getRow()][currSection.getCol() - 1];
+          this.maze.getMazeGrid()[currSection.getRow()][currSection.getCol() - 1];
       if (!leftSection.isModified()) {
         candidates.add(leftSection);
       }
@@ -215,7 +211,7 @@ class MazeBuilder {
     // check section to the right
     if (currSection.getCol() < this.maze.getCols() - 1) {
       MazeSection rightSection =
-              this.maze.getMazeGrid()[currSection.getRow()][currSection.getCol() + 1];
+          this.maze.getMazeGrid()[currSection.getRow()][currSection.getCol() + 1];
       if (!rightSection.isModified()) {
         candidates.add(rightSection);
       }
@@ -255,9 +251,7 @@ class MazeBuilder {
     }
   }
 
-  /**
-   * Initializes the exitPoint attribute to last column and last row in the mazeGrid array.
-   */
+  /** Initializes the exitPoint attribute to last column and last row in the mazeGrid array. */
   private void setExitLocation() {
     int rows = this.maze.getRows() - 1, cols = this.maze.getCols() - 1;
     this.maze.setExitPoint(this.maze.getMazeGrid()[rows][cols]);

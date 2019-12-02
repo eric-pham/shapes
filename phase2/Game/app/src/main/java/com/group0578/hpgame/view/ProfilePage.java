@@ -14,16 +14,24 @@ public interface ProfilePage {
   /** Behaviour of the ProfilePageActivity. */
   interface View {
     void goToLevel1(Intent levelOne);
-    void goToCustomizePage(Intent createCustomizePage);
-    void resumePreviousLevel(Intent previousLevel);
-    void goToPlayerStatsPage(Intent playerStatsPage);
-    void displayToast(String message);
-    void onClickPlayGame(android.view.View view);
-    void onClickLogout(android.view.View view);
-    void onClickResumeGame(android.view.View view);
-    void onClickPlayerStats(android.view.View view);
-    void onClickCustomize(android.view.View view);
 
+    void goToCustomizePage(Intent createCustomizePage);
+
+    void resumePreviousLevel(Intent previousLevel);
+
+    void goToPlayerStatsPage(Intent playerStatsPage);
+
+    void displayToast(String message);
+
+    void onClickPlayGame(android.view.View view);
+
+    void onClickLogout(android.view.View view);
+
+    void onClickResumeGame(android.view.View view);
+
+    void onClickPlayerStats(android.view.View view);
+
+    void onClickCustomize(android.view.View view);
   }
 
   /** Behaviour of the ProfilePagePresenter. */

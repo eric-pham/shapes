@@ -4,27 +4,20 @@ import android.content.Intent;
 
 import com.group0578.hpgame.model.SQLiteHelper;
 
-/**
- * Methods responsible for communication between CreateUserPresenter and CreateUserActivity
- */
+/** Methods responsible for communication between CreateUserPresenter and CreateUserActivity */
 public interface CreateUser {
 
-    /**
-     * Methods implemented by CreateUserActivity
-     */
-    interface View {
-        void goToProfilePage(Intent profileIntent);
-    }
+  /** Methods implemented by CreateUserActivity */
+  interface View {
+    void goToProfilePage(Intent profileIntent);
+  }
 
-    /**
-     * Methods implemented by CreateUserPresenter
-     */
-    interface Presenter {
-        void createAccount(SQLiteHelper sqlHelper, String username, String password);
+  /** Methods implemented by CreateUserPresenter */
+  interface Presenter {
+    void createAccount(SQLiteHelper sqlHelper, String username, String password);
 
-        void createProfileScreen(String username);
+    void createProfileScreen(String username);
 
-        boolean checkDuplicates(SQLiteHelper sqlHelper, String username);
-    }
-
+    boolean checkDuplicates(SQLiteHelper sqlHelper, String username);
+  }
 }

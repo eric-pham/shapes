@@ -12,7 +12,6 @@ import com.group0578.hpgame.R;
 /** Helps facilitate transition to the next level */
 public class FlyingTransitionActivity extends AppCompatActivity {
 
-
   /** The username belonging to the user currently logged in and viewing the profile page. */
   private String username;
 
