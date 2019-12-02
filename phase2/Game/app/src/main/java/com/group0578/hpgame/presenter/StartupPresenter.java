@@ -44,25 +44,4 @@ public class StartupPresenter implements Startup.Presenter {
     System.out.println("Method reached 2");
     startupView.goToCreateUserScreen(createUserIntent);
   }
-
-  public void createNewStage1Screen() {
-    Intent createStage1Intent =
-        new Intent((StartupActivity) this.startupView, FlyingActivity.class);
-    System.out.println("Method reached 3");
-    startupView.goToStage1Screen(createStage1Intent);
-  }
-
-  public void createNewStage3Screen() {
-    Intent createStage3Intent =
-        new Intent((StartupActivity) this.startupView, Level3MainActivity.class);
-    System.out.println("Method reached 3");
-    startupView.goToStage3Screen(createStage3Intent);
-  }
-
-  // temporary ,method to make testing of level 2 (the maze) easier
-  public void createNewStage2Screen() {
-    Intent createStage2Intent = new Intent((StartupActivity) this.startupView, MazeActivity.class);
-    System.out.println("Method reached 3");
-    startupView.goToStage2Screen(createStage2Intent);
-  }
 }

@@ -28,7 +28,8 @@
         <activity android:name=".view.ProfilePageActivity" />
         <activity android:name=".view.CustomizeActivity" />
         <activity android:name=".view.GameOverActivity" />
-        <activity android:name=".view.StatsActivity" />
+        <activity android:name=".view.ScoreboardActivity" />
+        <activity android:name=".view.MyStatsActivity" />
     </application>
 
 </manifest>

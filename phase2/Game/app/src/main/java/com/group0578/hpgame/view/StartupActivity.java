@@ -57,33 +57,4 @@ public class StartupActivity extends AppCompatActivity implements Startup.View {
         System.out.println("Method reached 2");
         startActivity(createUserIntent);
     }
-
-    public void onClickStage1(View view){
-        startupPresenter.createNewStage1Screen();
-    }
-
-    public void goToStage1Screen(Intent stage1Intent) {
-        System.out.println("Method reached 2");
-        startActivity(stage1Intent);
-    }
-
-    public void onClickStage3(View view){
-        startupPresenter.createNewStage3Screen();
-    }
-
-    public void goToStage3Screen(Intent stage3Intent) {
-        System.out.println("Method reached 2");
-        startActivity(stage3Intent);
-    }
-
-    // temporary ,method to make testing of level 2 (the maze) easier
-    public void goToStage2Screen(Intent stage2Intent) {
-        System.out.println("Method reached 2");
-        startActivity(stage2Intent);
-    }
-
-    // temporary ,method to make testing of level 2 (the maze) easier
-    public void onClickStage2(View view) {
-        startupPresenter.createNewStage2Screen();
-    }
 }

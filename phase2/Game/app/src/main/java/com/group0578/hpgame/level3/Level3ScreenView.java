@@ -14,7 +14,7 @@ import android.view.SurfaceHolder;
 import com.group0578.hpgame.model.SQLiteHelper;
 import com.group0578.hpgame.model.Timer;
 import com.group0578.hpgame.view.GameOverActivity;
-import com.group0578.hpgame.view.StatsActivity;
+import com.group0578.hpgame.view.ScoreboardActivity;
 
 
 /**
@@ -104,15 +104,29 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
         scorePaint.setTextSize(70);
         scorePaint.setTypeface(Typeface.DEFAULT_BOLD);
     }
-
+    /**
+     * Getter for character width.
+     *
+     * @return The character width.
+     */
     public static float getCharWidth() {
         return charWidth;
     }
 
+    /**
+     * Getter for character height.
+     *
+     * @return The character height.
+     */
     public static float getCharHeight() {
         return charHeight;
     }
 
+    /**
+     * Getter for the Manager for this level.
+     *
+     * @return The Manager for this level.
+     */
     public static Manager getRoomManager() {
         return roomManager;
     }
@@ -246,15 +260,8 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
         sqLiteHelper.saveNewScore(username);
         sqLiteHelper.saveNewTotalTime(username);
         sqLiteHelper.saveNewAvgTime(username);
-        sqLiteHelper.saveNewBestLives(username);
 
-        String userOnScoreboard;
-        if (sqLiteHelper.userOnScoreboard(username)) {
-            userOnScoreboard = "true";
-        } else {
-            userOnScoreboard = "false";
-        }
-        goToPlayerStats(userOnScoreboard);
+        goToPlayerStats();
     }
 
     /**
@@ -268,14 +275,11 @@ public class Level3ScreenView extends SurfaceView implements SurfaceHolder.Callb
     }
 
     /**
-     * Go to the Stats activity when the user wins.
-     *
-     * @param userOnScoreboard the username that goes on the scoreboard.
+     * Go to the Scoreboard activity when the user wins.
      */
-    private void goToPlayerStats(String userOnScoreboard) {
-        Intent displayStats = new Intent(getContext(), StatsActivity.class);
+    private void goToPlayerStats() {
+        Intent displayStats = new Intent(getContext(), ScoreboardActivity.class);
         displayStats.putExtra("username", ((Level3MainActivity) getContext()).getUsername());
-        displayStats.putExtra("userOnScoreboard", userOnScoreboard);
         displayStats.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         getContext().startActivity(displayStats);
     }

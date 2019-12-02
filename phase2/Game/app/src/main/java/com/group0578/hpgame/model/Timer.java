@@ -5,8 +5,11 @@ import java.text.DecimalFormat;
 /** Timer class represents the amount of time used to complete a level in this game. */
 public class Timer {
 
+  /** long representing the starting time. */
   private long start;
-  DecimalFormat df = new DecimalFormat("0.000");
+
+  /** Decimal Format of the time. */
+  private DecimalFormat df = new DecimalFormat("0.000");
 
   /** Initialize a new Timer Object with the starting time equal to when it is initialized */
   public Timer() {

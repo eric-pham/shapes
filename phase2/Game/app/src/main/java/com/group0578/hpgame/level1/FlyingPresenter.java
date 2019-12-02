@@ -64,6 +64,14 @@ class FlyingPresenter {
           bonus = bonus + 1;
           item.setX(-100);
         }
+        if (collected == 10 || bonus == 1){
+          flyingView.setGameOver(true);
+          flyingView.goToTransition();
+        }
+        if (lives <= 0){
+          flyingView.setGameOver(true);
+          flyingView.goToGameOver();
+        }
       }
     }
   }
@@ -83,8 +91,8 @@ class FlyingPresenter {
    * Draws the legend
    *
    * @param canvas to draw to
-   * @param canvasHeight height of the canavas
-   * @param canvasWidth width of the canavas
+   * @param canvasHeight height of the canvas
+   * @param canvasWidth width of the canvas
    */
   void drawLegend(Canvas canvas, int canvasHeight, int canvasWidth) {
     String theme = flyingInteractor.getTheme();
@@ -205,12 +213,4 @@ class FlyingPresenter {
     return scorePaint;
   }
 
-  /**
-   * Returns the bonus
-   *
-   * @return bonus
-   */
-  int getBonus() {
-    return bonus;
-  }
 }

@@ -49,9 +49,8 @@ public class CreateUserPresenter implements CreateUser.Presenter {
     sqlManager.setProgress("none");
     sqlManager.setCharacter("Circle"); // A represents character A, B for character B
     sqlManager.setScore(0); // user hasn't played any games yet (no points earned)
-    sqlManager.setTotalTime(0);
-    sqlManager.setAvgTime(0);
-    sqlManager.setBestLives(-1); // user hasn't competed the game yet (no best yet)
+    sqlManager.setTotalTime(10000);
+    sqlManager.setAvgTime(10000);
 
     sqlHelper.insertUser(sqlManager);
     System.out.println("Inserted!");

@@ -20,7 +20,10 @@ class PlayerBall extends FlyingBall {
     else this.paint.setColor(Color.WHITE);
   }
 
-  /** Override parent function because player ball only goes up and down */
+  /** Override parent function because player ball only goes up and down
+   * @param width the width
+   * @param height the height
+   */
   public void update(int width, int height) {
     int minCharY = 200;
     int maxCharY = height - 140;

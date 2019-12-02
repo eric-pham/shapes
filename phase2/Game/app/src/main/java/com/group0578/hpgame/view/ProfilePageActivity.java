@@ -131,14 +131,14 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
   }
 
   /**
-   * Called when the user presses the 'UserLevel3 Stats' button. Displays the user's (currently playing)
+   * Called when the user presses the 'UserLevel3 Scoreboard' button. Displays the user's (currently playing)
    * statistics from previous games they have played.
    *
    * @param view the view displaying this activity.
    */
   public void onClickPlayerStats(View view) {
     System.out.println("onClickPlayerStats method reached");
-    profilePagePresenter.displayPlayerStats();
+    profilePagePresenter.displayScoreBoard();
   }
 
     /**
@@ -174,13 +174,13 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
     }
 
   /**
-   * Receiving the intent creating the Player Stats Page and starting the activity to move
+   * Receiving the intent creating the Player Scoreboard Page and starting the activity to move
    * to the new screen.
    *
-   * @param playerStatsPage the Intent starting the Player Stats Page.
+   * @param playerStatsPage the Intent starting the Player Scoreboard Page.
    */
   public void goToPlayerStatsPage(Intent playerStatsPage) {
-    System.out.println("Entering Player Stats Page!");
+    System.out.println("Entering Player Scoreboard Page!");
     playerStatsPage.putExtra("username", this.username);
       playerStatsPage.putExtra("userOnScoreboard", "N/A");
     startActivity(playerStatsPage);
