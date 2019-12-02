@@ -19,13 +19,6 @@ public interface Startup {
     }
 
     /**
-     * Not sure if needed yet.
-     */
-    interface Model {
-
-    }
-
-    /**
      * Behaviour of the StartupPresenter.
      */
     interface Presenter {

@@ -19,7 +19,7 @@ import com.group0578.hpgame.presenter.CustomizePresenter;
 /**
  * Responsible for handling user actions like button clicks on the Customization page
  */
-public class CustomizeActivity extends AppCompatActivity implements Customize.View {
+public class CustomizeActivity extends AppCompatActivity {
 
   /** The presenter associated with this View that handles the user's interactions with the UI. */
   CustomizePresenter customizePresenter;
@@ -47,7 +47,7 @@ public class CustomizeActivity extends AppCompatActivity implements Customize.Vi
     setContentView(R.layout.activity_customize);
     setTitle("Customization");
     // Presenter stores reference of this CustomizeActivity as its View (send 'this')
-    customizePresenter = new CustomizePresenter(this);
+    customizePresenter = new CustomizePresenter();
 
     // extracts the information that was passed from the previous activity
     Bundle extras = getIntent().getExtras();

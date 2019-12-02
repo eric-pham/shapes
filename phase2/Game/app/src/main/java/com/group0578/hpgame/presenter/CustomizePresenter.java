@@ -10,18 +10,9 @@ import com.group0578.hpgame.view.Customize;
 public class CustomizePresenter implements Customize.Presenter {
 
     /**
-     * Customize.View interface reference to refer to the CustomizeActivity file
-     */
-    private Customize.View customizeView;
-
-    /**
      * Constructs an instance of a Presenter responsible for updating the customization page.
-     *
-     * @param customizeView the View responsible for CustomizeActivity.
      */
-    public CustomizePresenter(Customize.View customizeView) {
-        // Initialized to instance of CustomizeActivity object
-        this.customizeView = customizeView;
+    public CustomizePresenter() {
     }
 
     /**
@@ -57,11 +48,7 @@ public class CustomizePresenter implements Customize.Presenter {
             sqlHelper.setDifficulty(username, difficulty);
             // Changing the difficulty causes the number of lives a user has to increase/decrease
             updatePlayerLives(sqlHelper, username, difficulty);
-            if (!sqlHelper.findProgress(username).equalsIgnoreCase("none")) {
-                return true;
-            } else {
-                return false;
-            }
+            return !sqlHelper.findProgress(username).equalsIgnoreCase("none");
         }
         return false;
     }
