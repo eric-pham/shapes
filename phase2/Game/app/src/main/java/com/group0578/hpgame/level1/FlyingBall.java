@@ -3,7 +3,7 @@ package com.group0578.hpgame.level1;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-public abstract class FlyingBall {
+abstract class FlyingBall {
 
   /** Integer storing the x position of the ball */
   int x;

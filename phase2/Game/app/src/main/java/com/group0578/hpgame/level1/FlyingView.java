@@ -12,6 +12,7 @@ import com.group0578.hpgame.model.Timer;
 import com.group0578.hpgame.view.GameOverActivity;
 
 /** Handles visual appearance of the Flying Game */
+@SuppressLint("ViewConstructor")
 class FlyingView extends View {
   /** Initialize a Timer for the level */
   private Timer timer = new Timer();
@@ -102,7 +103,7 @@ class FlyingView extends View {
   }
 
   /** Lost all lives, transition to GameOver */
-  public void goToGameOver() {
+  void goToGameOver() {
     // Update the database with default values
     flyingInteractor.updateDatabase(0, 0.0, "none");
 
@@ -113,7 +114,7 @@ class FlyingView extends View {
   }
 
   /** Goal reached transition to next level */
-  public void goToTransition() {
+  void goToTransition() {
     // Update the database with new data for lives and time
     flyingInteractor.updateDatabase(flyingPresenter.getLives(), timer.getSecondsPassed(), "one");
 
@@ -128,13 +129,12 @@ class FlyingView extends View {
    *
    * @return boolean representing if the game is over
    */
-  public boolean getGameOver() {
+  boolean getGameOver() {
     return this.gameOver;
   }
 
   /**
    * Sets the value to true if game is over
-   * @param value boolean representing if the game is over
    */
-  public void setGameOver(boolean value){this.gameOver = value;}
+  void setGameOver(){this.gameOver = true;}
 }

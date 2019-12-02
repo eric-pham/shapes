@@ -65,11 +65,11 @@ class FlyingPresenter {
           item.setX(-100);
         }
         if (collected == 10 || bonus == 1){
-          flyingView.setGameOver(true);
+          flyingView.setGameOver();
           flyingView.goToTransition();
         }
         if (lives <= 0){
-          flyingView.setGameOver(true);
+          flyingView.setGameOver();
           flyingView.goToGameOver();
         }
       }
