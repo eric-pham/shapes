@@ -38,7 +38,6 @@ public class StartupActivity extends AppCompatActivity implements Startup.View {
      * @param loginIntent an instance of the LoginActivity view.
      */
     public void goToLoginScreen(Intent loginIntent) {
-        System.out.println("Method reached");
         startActivity(loginIntent);
     }
 
@@ -54,7 +53,6 @@ public class StartupActivity extends AppCompatActivity implements Startup.View {
      * @param createUserIntent an instance of the CreateUserActivity view.
      */
     public void goToCreateUserScreen(Intent createUserIntent) {
-        System.out.println("Method reached 2");
         startActivity(createUserIntent);
     }
 }

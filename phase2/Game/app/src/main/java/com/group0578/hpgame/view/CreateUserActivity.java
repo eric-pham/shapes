@@ -73,7 +73,6 @@ public class CreateUserActivity extends AppCompatActivity implements CreateUser.
    */
   @Override
   public void goToProfilePage(Intent profileIntent) {
-    System.out.println("Testing: Reached method CreateUserActivity.goToProfilePage ");
     startActivity(profileIntent);
     finish();
   }

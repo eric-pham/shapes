@@ -2,9 +2,6 @@ package com.group0578.hpgame.presenter;
 
 import android.content.Intent;
 
-import com.group0578.hpgame.level1.FlyingActivity;
-import com.group0578.hpgame.level2.MazeActivity;
-import com.group0578.hpgame.level3.Level3MainActivity;
 import com.group0578.hpgame.view.CreateUserActivity;
 import com.group0578.hpgame.view.LoginActivity;
 import com.group0578.hpgame.view.Startup;
@@ -32,7 +29,6 @@ public class StartupPresenter implements Startup.Presenter {
   public void createLoginScreen() {
     // I think im violating dependency rule right here by casting
     Intent loginIntent = new Intent((StartupActivity) this.startupView, LoginActivity.class);
-    System.out.println("Method reached");
     startupView.goToLoginScreen(loginIntent);
   }
 
@@ -41,7 +37,6 @@ public class StartupPresenter implements Startup.Presenter {
     // I think im violating dependency rule right here by casting
     Intent createUserIntent =
         new Intent((StartupActivity) this.startupView, CreateUserActivity.class);
-    System.out.println("Method reached 2");
     startupView.goToCreateUserScreen(createUserIntent);
   }
 }

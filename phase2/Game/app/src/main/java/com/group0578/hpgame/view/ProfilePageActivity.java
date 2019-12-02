@@ -137,7 +137,6 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
    * @param view the view displaying this activity.
    */
   public void onClickPlayerStats(View view) {
-    System.out.println("onClickPlayerStats method reached");
     profilePagePresenter.displayScoreBoard();
   }
 
@@ -158,7 +157,6 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
      */
     public void goToLevel1(Intent levelOne) {
         levelOne.putExtra("username", this.username);
-//         toast.cancel();  // causes errors
         startActivity(levelOne);
     }
 
@@ -180,7 +178,6 @@ public class ProfilePageActivity extends AppCompatActivity implements ProfilePag
    * @param playerStatsPage the Intent starting the Player Scoreboard Page.
    */
   public void goToPlayerStatsPage(Intent playerStatsPage) {
-    System.out.println("Entering Player Scoreboard Page!");
     playerStatsPage.putExtra("username", this.username);
       playerStatsPage.putExtra("userOnScoreboard", "N/A");
     startActivity(playerStatsPage);

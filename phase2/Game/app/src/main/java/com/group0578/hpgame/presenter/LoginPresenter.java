@@ -49,7 +49,6 @@ public class LoginPresenter implements Login.Presenter {
   public void createProfileScreen(String username) {
     Intent profileIntent = new Intent((LoginActivity) this.loginView, ProfilePageActivity.class);
     profileIntent.putExtra("username", username);
-    System.out.println("createProfileScreen method reached.");
     loginView.goToProfilePage(profileIntent);
   }
 }
