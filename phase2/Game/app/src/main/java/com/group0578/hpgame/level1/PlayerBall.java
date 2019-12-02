@@ -24,7 +24,7 @@ class PlayerBall extends FlyingBall {
    * @param width the width
    * @param height the height
    */
-  public void update(int width, int height) {
+  void update(int width, int height) {
     int minCharY = 200;
     int maxCharY = height - 140;
 
@@ -44,7 +44,7 @@ class PlayerBall extends FlyingBall {
    * based on character option
    */
   @Override
-  public void draw(Canvas canvas) {
+  void draw(Canvas canvas) {
     if (this.character.equalsIgnoreCase("Circle")) canvas.drawCircle(radius, y, radius, paint);
     else canvas.drawRect(0, y + radius, 140, y - radius, paint);
   }

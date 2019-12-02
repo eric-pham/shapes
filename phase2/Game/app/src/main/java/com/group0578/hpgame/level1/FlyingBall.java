@@ -61,7 +61,7 @@ public abstract class FlyingBall {
   }
 
   /** Update the position of the ball */
-  public void update(int width, int height) {
+  void update(int width, int height) {
 
     int minCharY = 200;
     int maxCharY = height - 140;
@@ -75,7 +75,7 @@ public abstract class FlyingBall {
   }
 
   /** Draw the ball on the screen */
-  public void draw(Canvas canvas) {
+  void draw(Canvas canvas) {
     canvas.drawCircle(x, y, radius, paint);
   }
 }

@@ -18,7 +18,7 @@ class BonusBall extends FlyingBall {
    * Override parent function because bonus ball behaves differently Bonus ball is infrequent so X
    * position is much larger
    */
-  public void update(int width, int height) {
+  void update(int width, int height) {
 
     int minCharY = 200;
     int maxCharY = height - 70;
