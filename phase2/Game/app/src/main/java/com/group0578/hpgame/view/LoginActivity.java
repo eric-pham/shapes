@@ -12,6 +12,7 @@ import android.widget.EditText;
 import com.group0578.hpgame.R;
 import com.group0578.hpgame.model.SQLiteHelper;
 import com.group0578.hpgame.presenter.LoginPresenter;
+
 /** Displays the login screen. */
 public class LoginActivity extends AppCompatActivity implements Login.View {
 
@@ -27,9 +28,7 @@ public class LoginActivity extends AppCompatActivity implements Login.View {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_login);
     loginPresenter = new LoginPresenter(this);
-
   }
-
 
   /**
    * When login button is clicked, verify if password is valid with given username, launch level 1

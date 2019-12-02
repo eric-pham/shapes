@@ -1,5 +1,7 @@
 package com.group0578.hpgame.view;
 
+import android.view.View;
+
 import com.group0578.hpgame.model.SQLiteHelper;
 
 /**
@@ -12,11 +14,13 @@ public interface Customize {
      * Behaviour of the CustomizeActivity
      */
     interface View {
-
-    }
-
-    interface Model {
-
+        void onClickLightButton(android.view.View view);
+        void onClickDarkButton(android.view.View view);
+        void onClickEasyButton(android.view.View view);
+        void onClickHardButton(android.view.View view);
+        void onClickCharCircleButton(android.view.View view);
+        void onClickCharSquareButton(android.view.View view);
+        void displayToast(String message);
     }
 
     /**

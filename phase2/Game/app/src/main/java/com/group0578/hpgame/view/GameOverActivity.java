@@ -75,6 +75,7 @@ public class GameOverActivity extends AppCompatActivity {
         Intent level1 = new Intent(this, FlyingActivity.class);
         level1.putExtra("username", this.username);
         startActivity(level1);
+        finish();
     }
 
     /**
@@ -86,6 +87,7 @@ public class GameOverActivity extends AppCompatActivity {
         Intent profile = new Intent(this, ProfilePageActivity.class);
         profile.putExtra("username", this.username);
         startActivity(profile);
+        finish();
     }
 
 }

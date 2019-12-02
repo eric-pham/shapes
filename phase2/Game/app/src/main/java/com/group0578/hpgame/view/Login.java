@@ -2,6 +2,7 @@ package com.group0578.hpgame.view;
 
 import android.content.Intent;
 
+import com.group0578.hpgame.model.SQLiteHelper;
 import com.group0578.hpgame.presenter.LoginPresenter;
 
 /**
@@ -14,23 +15,14 @@ public interface Login {
      * Behaviour of the LoginActivity.
      */
     interface View {
-//        void goToStage1Screen(Intent createStage1Intent);
-
         void goToProfilePage(Intent profileIntent);
-
-    }
-
-    /**
-     * Not sure if needed yet.
-     */
-    interface Model {
-
     }
 
     /**
      * Behaviour of the LoginPresenter.
      */
     interface Presenter {
-
+        boolean checkLogin(SQLiteHelper sqlHelper, String username, String password);
+        void createProfileScreen(String username);
     }
 }

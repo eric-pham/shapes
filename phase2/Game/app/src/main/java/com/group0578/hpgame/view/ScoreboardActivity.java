@@ -233,9 +233,9 @@ public class ScoreboardActivity extends AppCompatActivity implements AdapterView
             for (int j = 0; j < row.getChildCount(); j++) {
                 TextView cell = (TextView) row.getChildAt(j);
                 if (j % 2 == 0) {
-                    cell.setText(usernames.get(i));
+                    cell.setText(usernames.get(i-1));
                 } else {
-                    cell.setText(values.get(i));
+                    cell.setText(values.get(i-1));
                 }
             }
         }

@@ -16,11 +16,6 @@ public interface CreateUser {
         void goToProfilePage(Intent profileIntent);
     }
 
-    // Haven't decided if we need this yet
-    interface Model {
-
-    }
-
     /**
      * Methods implemented by CreateUserPresenter
      */

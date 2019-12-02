@@ -2,6 +2,7 @@ package com.group0578.hpgame.view;
 
 import android.content.Intent;
 
+import com.group0578.hpgame.model.SQLiteHelper;
 import com.group0578.hpgame.presenter.ProfilePagePresenter;
 
 /**
@@ -10,7 +11,7 @@ import com.group0578.hpgame.presenter.ProfilePagePresenter;
  */
 public interface ProfilePage {
 
-  /** Behaviour of the StartupActivity. */
+  /** Behaviour of the ProfilePageActivity. */
   interface View {
     void goToLevel1(Intent levelOne);
 
@@ -23,10 +24,7 @@ public interface ProfilePage {
     void displayToast(String message);
   }
 
-  /** Not sure if needed yet. */
-  interface Model {}
-
-  /** Behaviour of the StartupPresenter. */
+  /** Behaviour of the ProfilePagePresenter. */
   interface Presenter {
     void createLevel1();
 
@@ -35,5 +33,7 @@ public interface ProfilePage {
     void displayScoreBoard();
 
     void changeUserCustomization();
+
+    void resetDefaults(SQLiteHelper sqlHelper, String username);
   }
 }

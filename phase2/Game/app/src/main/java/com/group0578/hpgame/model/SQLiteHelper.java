@@ -479,8 +479,6 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         return totalTime;
     }
 
-    // needs to be fixed
-
     /**
      * Finds the current best avg time for the user logged in.
      *
@@ -863,7 +861,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         double newAvg = (allTimes[0] + allTimes[1] + allTimes[2]) / 3f;
         double oldAvg = findAvgTime(username);
 
-        if (newAvg < oldAvg | oldAvg == -1) { // new avg time is better than the previous
+        if (newAvg < oldAvg) { // new avg time is better than the previous
             DecimalFormat df = new DecimalFormat("0.000");
             setAvgTime(username, Double.parseDouble(df.format(newAvg)));
         }
