@@ -1,5 +1,6 @@
 package com.group0578.hpgame.view;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -84,6 +85,18 @@ public class GameOverActivity extends AppCompatActivity {
      * @param view the view displaying this activity.
      */
     public void onClickProfilePageReturn(View view) {
+        Intent profile = new Intent(this, ProfilePageActivity.class);
+        profile.putExtra("username", this.username);
+        startActivity(profile);
+        finish();
+    }
+
+    /**
+     * Called when the user currently logged in hits their android device 'back' button. Returns
+     * user to profile page.
+     */
+    @Override
+    public void onBackPressed() {
         Intent profile = new Intent(this, ProfilePageActivity.class);
         profile.putExtra("username", this.username);
         startActivity(profile);
